@@ -1,5 +1,7 @@
 import React from 'react';
 import { ClipboardCheck, ShieldCheck, Award, HeadphonesIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { FadeUp, StaggerContainer, StaggerItem, AnimatedCounter } from './AnimatedSection';
 
 const WhyUs = () => {
   const features = [
@@ -35,45 +37,71 @@ const WhyUs = () => {
     <section id="why-us" className="py-20 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Why Us?</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-            ทำไมต้อง KB SOLAR
-          </h2>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Why Us?</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+              ทำไมต้อง KB SOLAR
+            </h2>
+          </div>
+        </FadeUp>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <StaggerContainer className="grid md:grid-cols-2 gap-8 mb-16" staggerDelay={0.15}>
           {features.map((feature, idx) => (
-            <div key={idx} className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-full bg-kb-orange/10 flex items-center justify-center">
-                  <feature.icon className="w-6 h-6 text-kb-orange" />
+            <StaggerItem key={idx}>
+              <motion.div 
+                className="flex gap-4"
+                whileHover={{ x: 5 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <div className="flex-shrink-0">
+                  <motion.div 
+                    className="w-12 h-12 rounded-full bg-kb-orange/10 flex items-center justify-center"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
+                    <feature.icon className="w-6 h-6 text-kb-orange" />
+                  </motion.div>
                 </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
-              </div>
-            </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                </div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* Warranty Bar */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <div className="grid grid-cols-3 divide-x divide-gray-200">
-            {warranties.map((item, idx) => (
-              <div key={idx} className="text-center px-4">
-                <div className="flex items-baseline justify-center gap-2">
-                  <span className={`text-5xl md:text-6xl font-bold ${item.color}`}>{item.years}</span>
-                  <span className="text-gray-500 text-sm uppercase tracking-wider">Years</span>
-                </div>
-                <p className="text-gray-700 font-medium mt-1">{item.label}</p>
-                <p className="text-gray-900 font-bold">{item.sublabel}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <FadeUp delay={0.3}>
+          <motion.div 
+            className="bg-white rounded-2xl shadow-lg p-8"
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <div className="grid grid-cols-3 divide-x divide-gray-200">
+              {warranties.map((item, idx) => (
+                <motion.div 
+                  key={idx} 
+                  className="text-center px-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <div className="flex items-baseline justify-center gap-2">
+                    <span className={`text-5xl md:text-6xl font-bold ${item.color}`}>
+                      <AnimatedCounter value={item.years} duration={1.5} />
+                    </span>
+                    <span className="text-gray-500 text-sm uppercase tracking-wider">Years</span>
+                  </div>
+                  <p className="text-gray-700 font-medium mt-1">{item.label}</p>
+                  <p className="text-gray-900 font-bold">{item.sublabel}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </FadeUp>
       </div>
     </section>
   );

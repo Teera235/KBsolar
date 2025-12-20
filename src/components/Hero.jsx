@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ArrowRight, Sun, Check, Zap, Users, Award } from 'lucide-react';
 
 const Hero = () => {
@@ -17,67 +18,127 @@ const Hero = () => {
     { icon: Award, value: '5+', label: 'ปีประสบการณ์' },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+  };
+
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      {/* Background Image with parallax effect */}
+      <motion.div 
+        className="absolute inset-0"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+      >
         <img 
           src={process.env.PUBLIC_URL + '/hero-bg.jpg'} 
           alt="Solar Panel Background" 
           className="w-full h-full object-cover"
         />
-        {/* Dark Overlay - เพิ่มความเข้มขึ้น */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
-      </div>
+      </motion.div>
 
-      {/* Teacher Image - Large on right */}
-      <div className="absolute right-[5%] bottom-0 hidden lg:block z-10">
+      {/* Teacher Image with slide animation */}
+      <motion.div 
+        className="absolute right-[5%] bottom-0 hidden lg:block z-10"
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
         <img
           src={process.env.PUBLIC_URL + '/teacher.png'}
           alt="KB Solar Expert"
           className="h-screen w-auto object-contain object-bottom"
         />
-      </div>
+      </motion.div>
 
       {/* Teacher Info Card */}
-      <div className="absolute bottom-[12%] right-[12%] hidden lg:block z-20">
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl px-6 py-5 border border-white/20 shadow-2xl">
+      <motion.div 
+        className="absolute bottom-[12%] right-[12%] hidden lg:block z-20"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+      >
+        <motion.div 
+          className="bg-white/10 backdrop-blur-xl rounded-2xl px-6 py-5 border border-white/20 shadow-2xl"
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
           <p className="text-kb-orange font-bold text-xl">ครูบอล โซล่าเซลล์</p>
           <p className="text-white/80 text-sm font-medium leading-relaxed mt-2 max-w-[320px]">
-            ผู้เชี่ยวชาญตัวจริง เจ้าของเพจ 'i am teacher' ที่เน้นให้ความรู้ควบคู่การลงมือทำจริง จนได้รับความไว้วางใจจากลูกค้าทั่วประเทศ
+            ผู้เชี่ยวชาญตัวจริง เจ้าของเพจ 'i am teacher' ที่เน้นให้ความรู้ควบคู่การลงมือทำจริง
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="min-h-screen flex items-center py-20 pt-28">
-          <div className="max-w-xl space-y-5">
-            
+          <motion.div 
+            className="max-w-xl space-y-5"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-kb-orange/20 backdrop-blur-sm px-4 py-2 rounded-full border border-kb-orange/30">
-              <Sun className="w-4 h-4 text-kb-orange" />
-              <span className="text-kb-orange text-sm font-semibold">KB Energy Solution</span>
-            </div>
+            <motion.div variants={itemVariants}>
+              <motion.div 
+                className="inline-flex items-center gap-2 bg-kb-orange/20 backdrop-blur-sm px-4 py-2 rounded-full border border-kb-orange/30"
+                whileHover={{ scale: 1.05 }}
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                >
+                  <Sun className="w-4 h-4 text-kb-orange" />
+                </motion.div>
+                <span className="text-kb-orange text-sm font-semibold">KB Energy Solution</span>
+              </motion.div>
+            </motion.div>
             
             {/* Headline */}
-            <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
-              <span className="bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent">
+            <motion.h1 
+              className="text-4xl lg:text-5xl font-bold text-white leading-tight"
+              variants={itemVariants}
+            >
+              <motion.span 
+                className="bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent inline-block"
+                animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
+                transition={{ duration: 5, repeat: Infinity }}
+              >
                 KB Energy Solution
-              </span>
+              </motion.span>
               <br />
               Solar Solution ครบวงจร
-            </h1>
+            </motion.h1>
             
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <motion.p 
+              className="text-gray-300 text-lg leading-relaxed"
+              variants={itemVariants}
+            >
               ออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร 
               ด้วยทีมวิศวกรมืออาชีพ พร้อมบริการหลังการขายที่ใส่ใจ
-            </p>
+            </motion.p>
 
-            {/* Stats - แถวแนวนอน */}
-            <div className="flex gap-6 py-2">
+            {/* Stats */}
+            <motion.div className="flex gap-6 py-2" variants={itemVariants}>
               {stats.map((stat, index) => (
-                <div key={index} className="flex items-center gap-3">
+                <motion.div 
+                  key={index} 
+                  className="flex items-center gap-3"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
                   <div className="w-10 h-10 bg-kb-orange/20 rounded-xl flex items-center justify-center">
                     <stat.icon className="w-5 h-5 text-kb-orange" />
                   </div>
@@ -85,56 +146,92 @@ const Hero = () => {
                     <p className="text-white font-bold text-xl">{stat.value}</p>
                     <p className="text-gray-400 text-xs">{stat.label}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Feature Checklist */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10">
+            <motion.div 
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10"
+              variants={itemVariants}
+            >
               <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                 {features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <div className="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                  <motion.div 
+                    key={index} 
+                    className="flex items-center gap-2"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8 + index * 0.1 }}
+                  >
+                    <motion.div 
+                      className="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.9 + index * 0.1, type: 'spring' }}
+                    >
                       <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                    </div>
+                    </motion.div>
                     <p className="text-white text-sm">{feature}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               
-              <div className="mt-4 pt-4 border-t border-white/10">
+              <motion.div 
+                className="mt-4 pt-4 border-t border-white/10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 }}
+              >
                 <p className="text-lg font-bold text-white">
                   ลงทุนวันนี้ <span className="text-kb-orange">คืนทุนไว 4-6 ปี</span>
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-3">
-              <a
+            <motion.div className="flex flex-wrap gap-3" variants={itemVariants}>
+              <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 bg-kb-orange hover:bg-kb-orange-dark text-white px-7 py-4 rounded-full font-semibold transition-all shadow-lg shadow-kb-orange/30 group"
+                className="inline-flex items-center gap-2 bg-kb-orange hover:bg-kb-orange-dark text-white px-7 py-4 rounded-full font-semibold transition-colors shadow-lg shadow-kb-orange/30 group"
+                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(249, 115, 22, 0.4)' }}
+                whileTap={{ scale: 0.98 }}
               >
                 ประเมินยอดประหยัดฟรี
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#projects"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-7 py-4 rounded-full font-semibold transition-all border border-white/20"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-7 py-4 rounded-full font-semibold transition-colors border border-white/20"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 ดูผลงานติดตั้ง
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce z-30">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-white/50 rounded-full" />
-        </div>
-      </div>
+      <motion.div 
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.5 }}
+      >
+        <motion.div 
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <motion.div 
+            className="w-1.5 h-3 bg-white/50 rounded-full"
+            animate={{ opacity: [0.5, 1, 0.5], y: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

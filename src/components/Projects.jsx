@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Zap, Clock, MapPin, Battery, Sun, Package } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FadeUp, StaggerContainer, StaggerItem, HoverScale } from './AnimatedSection';
 
 const Projects = () => {
   const projects = [
@@ -204,28 +206,33 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-kb-orange font-semibold text-sm uppercase tracking-wider">PORTFOLIO</span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-kb-dark mt-2 mb-4">
-            Projects & Case Studies
-          </h2>
-          <p className="text-kb-gray max-w-2xl mx-auto">
-            ผลงานติดตั้งจริงจากลูกค้าที่ไว้วางใจ พร้อมข้อมูลประสิทธิภาพระบบ
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-kb-orange font-semibold text-sm uppercase tracking-wider">PORTFOLIO</span>
+            <h2 className="text-3xl lg:text-4xl font-bold text-kb-dark mt-2 mb-4">
+              Projects & Case Studies
+            </h2>
+            <p className="text-kb-gray max-w-2xl mx-auto">
+              ผลงานติดตั้งจริงจากลูกค้าที่ไว้วางใจ พร้อมข้อมูลประสิทธิภาพระบบ
+            </p>
+          </div>
+        </FadeUp>
 
         {/* Project Selector - Horizontal Scroll */}
         {projects.length > 1 && (
-          <div className="relative mb-12">
-            <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
-              {projects.map((proj, idx) => (
-                <button
-                  key={proj.id}
-                  onClick={() => selectProject(idx)}
-                  className={`group flex-shrink-0 w-36 snap-start transition-all duration-300 ${
-                    idx === currentProject ? 'scale-105' : 'hover:scale-102'
-                  }`}
-                >
+          <FadeUp delay={0.1}>
+            <div className="relative mb-12">
+              <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+                {projects.map((proj, idx) => (
+                  <motion.button
+                    key={proj.id}
+                    onClick={() => selectProject(idx)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`group flex-shrink-0 w-36 snap-start transition-all duration-300 ${
+                      idx === currentProject ? 'scale-105' : ''
+                    }`}
+                  >
                   {/* Card */}
                   <div className={`relative rounded-2xl overflow-hidden shadow-md transition-all duration-300 ${
                     idx === currentProject 
@@ -263,23 +270,29 @@ const Projects = () => {
                       </div>
                     )}
                   </div>
-                  {/* Project Number */}
-                  <div className={`mt-2 text-center text-xs font-semibold transition-colors ${
-                    idx === currentProject ? 'text-kb-orange' : 'text-gray-400'
-                  }`}>
-                    #{idx + 1}
-                  </div>
-                </button>
-              ))}
+                    {/* Project Number */}
+                    <div className={`mt-2 text-center text-xs font-semibold transition-colors ${
+                      idx === currentProject ? 'text-kb-orange' : 'text-gray-400'
+                    }`}>
+                      #{idx + 1}
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+              {/* Scroll Hint */}
+              <div className="absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none hidden sm:block" />
             </div>
-            {/* Scroll Hint */}
-            <div className="absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none hidden sm:block" />
-          </div>
+          </FadeUp>
         )}
 
         <div className="grid lg:grid-cols-2 gap-10 items-start">
           {/* Image Gallery */}
-          <div>
+          <motion.div
+            key={currentProject + '-gallery'}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             {/* Main Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <img
@@ -314,9 +327,11 @@ const Projects = () => {
             {/* Thumbnails */}
             <div className="grid grid-cols-5 gap-2 mt-3">
               {project.images.map((img, idx) => (
-                <button
+                <motion.button
                   key={idx}
                   onClick={() => setCurrentImage(idx)}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`aspect-[4/3] rounded-lg overflow-hidden border-2 transition-all ${
                     idx === currentImage ? 'border-kb-orange ring-2 ring-kb-orange/30' : 'border-gray-200 hover:border-gray-300'
                   }`}
@@ -329,13 +344,18 @@ const Projects = () => {
                       e.target.src = 'https://via.placeholder.com/100x75/F97316/FFFFFF?text=' + (idx + 1);
                     }}
                   />
-                </button>
+                </motion.button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Project Details */}
-          <div>
+          <motion.div
+            key={currentProject + '-details'}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             {/* Location Badge */}
             <div className="inline-flex items-center gap-2 bg-kb-light text-kb-gray px-3 py-1.5 rounded-full text-sm mb-3">
               <MapPin className="w-4 h-4" />
@@ -412,7 +432,7 @@ const Projects = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

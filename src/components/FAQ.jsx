@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FadeUp, StaggerContainer, StaggerItem } from './AnimatedSection';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
@@ -43,58 +45,78 @@ const FAQ = () => {
     <section id="faq" className="py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">FAQ</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
-            คำถามที่พบบ่อย
-          </h2>
-          <p className="text-gray-600">
-            รวมคำตอบสำหรับข้อสงสัยเกี่ยวกับการติดตั้งโซลาร์เซลล์
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+              คำถามที่พบบ่อย
+            </h2>
+            <p className="text-gray-600">
+              รวมคำตอบสำหรับข้อสงสัยเกี่ยวกับการติดตั้งโซลาร์เซลล์
+            </p>
+          </div>
+        </FadeUp>
 
         {/* FAQ List */}
-        <div className="space-y-3">
+        <StaggerContainer className="space-y-3" staggerDelay={0.08}>
           {faqs.map((faq, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-xl overflow-hidden shadow-sm"
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+            <StaggerItem key={idx}>
+              <motion.div
+                className="bg-white rounded-xl overflow-hidden shadow-sm"
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: 'spring', stiffness: 400 }}
               >
-                <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
-                <ChevronDown
-                  className={`w-5 h-5 text-kb-orange flex-shrink-0 transition-transform ${
-                    openIndex === idx ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {openIndex === idx && (
-                <div className="px-6 pb-4">
-                  <p className="text-gray-600 leading-relaxed whitespace-pre-line">{faq.answer}</p>
-                </div>
-              )}
-            </div>
+                <button
+                  onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <motion.div
+                    animate={{ rotate: openIndex === idx ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-kb-orange flex-shrink-0" />
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {openIndex === idx && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-4">
+                        <p className="text-gray-600 leading-relaxed whitespace-pre-line">{faq.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* CTA */}
-        <div className="mt-10 text-center">
-          <div className="inline-flex items-center gap-2 text-gray-600 mb-4">
-            <HelpCircle className="w-5 h-5" />
-            <span>ยังมีคำถามอื่นอีกไหม?</span>
+        <FadeUp delay={0.3}>
+          <div className="mt-10 text-center">
+            <div className="inline-flex items-center gap-2 text-gray-600 mb-4">
+              <HelpCircle className="w-5 h-5" />
+              <span>ยังมีคำถามอื่นอีกไหม?</span>
+            </div>
+            <div>
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 bg-kb-orange hover:bg-kb-orange-dark text-white px-6 py-3 rounded-full font-semibold transition-all"
+              >
+                ติดต่อสอบถามเพิ่มเติม
+              </motion.a>
+            </div>
           </div>
-          <div>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 bg-kb-orange hover:bg-kb-orange-dark text-white px-6 py-3 rounded-full font-semibold transition-all"
-            >
-              ติดต่อสอบถามเพิ่มเติม
-            </a>
-          </div>
-        </div>
+        </FadeUp>
       </div>
     </section>
   );

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Check, X, Battery, ArrowRight, Star } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FadeUp, StaggerContainer, StaggerItem, HoverScale } from './AnimatedSection';
 
 const Packages = () => {
   const [activeTab, setActiveTab] = useState('hybrid');
@@ -250,56 +252,76 @@ const Packages = () => {
     <section id="packages" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Packages</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
-            เลือกแพ็คเกจที่เหมาะกับคุณ
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            แพ็คเกจโซลาร์เซลล์ครบชุด พร้อมติดตั้งและรับประกัน
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Packages</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+              เลือกแพ็คเกจที่เหมาะกับคุณ
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              แพ็คเกจโซลาร์เซลล์ครบชุด พร้อมติดตั้งและรับประกัน
+            </p>
+          </div>
+        </FadeUp>
 
         {/* Tabs */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex bg-white rounded-full p-1 shadow-sm">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-kb-orange text-white shadow-md'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
+        <FadeUp delay={0.1}>
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex bg-white rounded-full p-1 shadow-sm">
+              {tabs.map((tab) => (
+                <motion.button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
+                    activeTab === tab.id
+                      ? 'bg-kb-orange text-white shadow-md'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {tab.name}
+                </motion.button>
+              ))}
+            </div>
           </div>
-        </div>
+        </FadeUp>
 
         {/* Brand Logo */}
-        <div className="text-center mb-10">
-          <img 
-            src="/solis-logo.webp" 
-            alt="SOLIS" 
-            className="h-10 mx-auto mb-3 object-contain"
-          />
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm">{currentPackage.description}</p>
-        </div>
+        <FadeUp delay={0.15}>
+          <div className="text-center mb-10">
+            <img 
+              src="/solis-logo.webp" 
+              alt="SOLIS" 
+              className="h-10 mx-auto mb-3 object-contain"
+            />
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm">{currentPackage.description}</p>
+          </div>
+        </FadeUp>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {currentPackage.plans.map((plan, idx) => (
-            <div
-              key={idx}
-              className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
-                plan.popular 
-                  ? 'bg-gradient-to-b from-kb-orange to-kb-orange-dark text-white shadow-xl scale-105 z-10' 
-                  : 'bg-white border border-gray-200 shadow-sm hover:shadow-md'
-              }`}
-            >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {currentPackage.plans.map((plan, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                whileHover={{ y: -8 }}
+                className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
+                  plan.popular 
+                    ? 'bg-gradient-to-b from-kb-orange to-kb-orange-dark text-white shadow-xl scale-105 z-10' 
+                    : 'bg-white border border-gray-200 shadow-sm hover:shadow-md'
+                }`}
+              >
               {/* Popular Badge */}
               {plan.popular && (
                 <div className="bg-amber-400 text-gray-900 text-center py-2 font-bold text-sm flex items-center justify-center gap-1">
@@ -388,8 +410,10 @@ const Packages = () => {
 
               {/* CTA Button */}
               <div className="p-6 pt-2">
-                <a
+                <motion.a
                   href="#contact"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   className={`block w-full py-3 rounded-lg text-center font-semibold transition-all ${
                     plan.popular
                       ? 'bg-white text-kb-orange hover:bg-gray-100'
@@ -397,25 +421,29 @@ const Packages = () => {
                   }`}
                 >
                   เลือกแพ็คเกจนี้
-                </a>
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+      </AnimatePresence>
 
         {/* Footer Note */}
-        <div className="text-center mt-10">
-          <p className="text-sm text-gray-500 mb-4">
-            * ราคาอาจเปลี่ยนแปลงตามสภาพหน้างานจริง
-          </p>
-          <a 
-            href="#contact" 
-            className="inline-flex items-center gap-2 text-kb-orange hover:text-kb-orange-dark font-medium transition-colors"
-          >
-            ต้องการแพ็คเกจพิเศษ? ติดต่อเรา
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
+        <FadeUp delay={0.3}>
+          <div className="text-center mt-10">
+            <p className="text-sm text-gray-500 mb-4">
+              * ราคาอาจเปลี่ยนแปลงตามสภาพหน้างานจริง
+            </p>
+            <motion.a 
+              href="#contact" 
+              whileHover={{ x: 5 }}
+              className="inline-flex items-center gap-2 text-kb-orange hover:text-kb-orange-dark font-medium transition-colors"
+            >
+              ต้องการแพ็คเกจพิเศษ? ติดต่อเรา
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
