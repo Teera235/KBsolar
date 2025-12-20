@@ -91,13 +91,13 @@ const HowItWorks = () => {
               {/* Background Decoration */}
               <div className="absolute -inset-4 bg-gradient-to-br from-kb-orange/20 to-amber-500/20 rounded-[2rem] blur-2xl opacity-60" />
               
-              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/50">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/50">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeStep}
                     src={process.env.PUBLIC_URL + steps[activeStep].image}
                     alt={steps[activeStep].title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-gray-900"
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
