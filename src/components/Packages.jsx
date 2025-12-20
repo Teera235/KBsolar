@@ -287,18 +287,6 @@ const Packages = () => {
           </div>
         </FadeUp>
 
-        {/* Brand Logo */}
-        <FadeUp delay={0.15}>
-          <div className="text-center mb-10">
-            <img 
-              src="/solis-logo.webp" 
-              alt="SOLIS" 
-              className="h-10 mx-auto mb-3 object-contain"
-            />
-            <p className="text-gray-600 max-w-2xl mx-auto text-sm">{currentPackage.description}</p>
-          </div>
-        </FadeUp>
-
         {/* Cards */}
         <AnimatePresence mode="wait">
           <motion.div
