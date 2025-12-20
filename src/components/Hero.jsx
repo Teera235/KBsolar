@@ -108,18 +108,18 @@ const Hero = () => {
             
             {/* Headline */}
             <motion.h1 
-              className="text-4xl lg:text-5xl font-bold text-white leading-tight"
+              className="text-4xl lg:text-5xl font-bold text-white"
               variants={itemVariants}
             >
               <motion.span 
-                className="bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent inline-block"
+                className="bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent inline-block pb-2"
                 animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
                 KB Energy Solution
               </motion.span>
               <br />
-              <span className="mt-3 block">Solar Solution ครบวงจร</span>
+              <span className="mt-2 block">Solar Solution ครบวงจร</span>
             </motion.h1>
             
             <motion.p 
