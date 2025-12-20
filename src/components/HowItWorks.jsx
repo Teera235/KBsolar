@@ -1,198 +1,296 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Play } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 
 const HowItWorks = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
   const steps = [
     {
       step: '01',
       title: 'Survey',
       titleTh: 'สำรวจพื้นที่',
-      description: 'สำรวจหน้างานจริง วัดขนาดหลังคา ตรวจสอบโครงสร้าง และประเมินทิศทางแสงอาทิตย์',
-      image: '/process/servey.jpg'
+      shortDesc: 'ลงพื้นที่สำรวจหน้างานจริง',
+      description: 'ทีมงานลงพื้นที่สำรวจหน้างานจริง วัดขนาดหลังคา ตรวจสอบโครงสร้างความแข็งแรง ประเมินทิศทางและมุมรับแสงอาทิตย์ เพื่อออกแบบระบบที่เหมาะสมที่สุด',
+      image: '/process/servey.jpg',
+      highlights: ['ตรวจสอบโครงสร้างหลังคา', 'วัดพื้นที่ติดตั้ง', 'ประเมินทิศทางแสง']
     },
     {
       step: '02',
       title: 'Load Analysis',
       titleTh: 'วิเคราะห์โหลด',
-      description: 'วิเคราะห์พฤติกรรมการใช้ไฟฟ้า ศึกษาบิลค่าไฟย้อนหลัง เพื่อออกแบบระบบที่เหมาะสม',
-      image: '/process/Load Analysis.jpg'
+      shortDesc: 'วิเคราะห์การใช้ไฟฟ้า',
+      description: 'วิเคราะห์พฤติกรรมการใช้ไฟฟ้าของคุณอย่างละเอียด ศึกษาบิลค่าไฟย้อนหลัง ดูช่วงเวลาที่ใช้ไฟมากที่สุด เพื่อออกแบบระบบที่ตอบโจทย์การใช้งานจริง',
+      image: '/process/Load Analysis.jpg',
+      highlights: ['วิเคราะห์บิลค่าไฟ', 'ศึกษาพฤติกรรมการใช้ไฟ', 'คำนวณโหลดที่เหมาะสม']
     },
     {
       step: '03',
       title: 'System Simulation',
       titleTh: 'จำลองระบบ',
-      description: 'จำลองการผลิตไฟฟ้าด้วยซอฟต์แวร์ PVsyst คำนวณผลตอบแทน ROI และระยะเวลาคืนทุน',
-      image: '/process/System Simulation.png'
+      shortDesc: 'จำลองการผลิตไฟฟ้า',
+      description: 'ใช้ซอฟต์แวร์ PVsyst จำลองการผลิตไฟฟ้าตลอดทั้งปี คำนวณผลตอบแทนการลงทุน (ROI) ระยะเวลาคืนทุน และประมาณการประหยัดค่าไฟในแต่ละเดือน',
+      image: '/process/System Simulation.png',
+      highlights: ['จำลองด้วย PVsyst', 'คำนวณ ROI', 'ประมาณการคืนทุน']
     },
     {
       step: '04',
       title: 'Installation',
       titleTh: 'ติดตั้งระบบ',
-      description: 'ติดตั้งโดยทีมช่างมืออาชีพ ตามมาตรฐานความปลอดภัย พร้อมทดสอบระบบ',
-      image: '/process/Installation.jpg'
+      shortDesc: 'ติดตั้งโดยทีมมืออาชีพ',
+      description: 'ทีมช่างมืออาชีพดำเนินการติดตั้งตามมาตรฐานความปลอดภัย ใช้อุปกรณ์คุณภาพสูง พร้อมทดสอบระบบให้ทำงานได้เต็มประสิทธิภาพก่อนส่งมอบ',
+      image: '/process/Installation.jpg',
+      highlights: ['ทีมช่างมืออาชีพ', 'มาตรฐานความปลอดภัย', 'ทดสอบก่อนส่งมอบ']
     },
     {
       step: '05',
       title: 'Monitoring',
       titleTh: 'ติดตามผล',
-      description: 'ระบบ Monitoring ติดตามการผลิตไฟฟ้าแบบ Real-time พร้อมรายงานประจำเดือน',
-      image: '/process/Monitoring.png'
+      shortDesc: 'ติดตามผลแบบ Real-time',
+      description: 'ระบบ Monitoring ติดตามการผลิตไฟฟ้าแบบ Real-time ผ่านแอปพลิเคชัน พร้อมรายงานประจำเดือน และบริการดูแลรักษาตลอดอายุการใช้งาน',
+      image: '/process/Monitoring.png',
+      highlights: ['Monitoring Real-time', 'รายงานประจำเดือน', 'บริการหลังการขาย']
     }
   ];
 
-  return (
-    <section id="how-it-works" className="py-24 bg-gradient-to-b from-gray-900 via-kb-dark to-gray-900 relative overflow-hidden">
-      {/* Glow Effects */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-kb-orange/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+  const nextStep = () => setActiveStep((prev) => (prev + 1) % steps.length);
+  const prevStep = () => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  return (
+    <section id="how-it-works" className="py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block text-kb-orange font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            Process
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            How It <span className="text-kb-orange">Works</span>
+          <span className="inline-block text-kb-orange font-semibold text-sm uppercase tracking-widest mb-3">Process</span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
+            ขั้นตอนการทำงาน
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">
             กระบวนการทำงานแบบวิศวกรรม ทุกขั้นตอนมีข้อมูลรองรับ
           </p>
         </motion.div>
 
-        {/* Desktop Flow */}
-        <div className="hidden lg:block">
-          <div className="relative">
-            {/* Connection Line */}
-            <div className="absolute top-[140px] left-[8%] right-[8%] h-1 rounded-full overflow-hidden">
-              <div className="absolute inset-0 bg-gray-700/50" />
-              <motion.div 
-                className="h-full bg-gradient-to-r from-kb-orange via-amber-400 to-kb-orange rounded-full"
-                initial={{ width: 0 }}
-                whileInView={{ width: '100%' }}
-                viewport={{ once: true }}
-                transition={{ duration: 2, delay: 0.3 }}
-              />
-            </div>
-            
-            <div className="grid grid-cols-5 gap-6">
-              {steps.map((step, index) => (
-                <motion.div 
-                  key={index} 
-                  className="relative flex flex-col items-center text-center group"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                >
-                  {/* Image Container */}
-                  <motion.div 
-                    className="relative mb-8"
-                    whileHover={{ scale: 1.05 }}
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          
+          {/* Left - Image Showcase */}
+          <motion.div 
+            className="lg:col-span-7 relative"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Main Image Container */}
+            <div className="relative">
+              {/* Background Decoration */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-kb-orange/20 to-amber-500/20 rounded-[2rem] blur-2xl opacity-60" />
+              
+              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/50">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeStep}
+                    src={process.env.PUBLIC_URL + steps[activeStep].image}
+                    alt={steps[activeStep].title}
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </AnimatePresence>
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                
+                {/* Step Info Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeStep}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="bg-kb-orange text-white text-sm font-bold px-3 py-1 rounded-full">
+                          Step {steps[activeStep].step}
+                        </span>
+                        <span className="text-white/80 text-sm">{steps[activeStep].titleTh}</span>
+                      </div>
+                      <h3 className="text-white text-2xl lg:text-3xl font-bold mb-2">
+                        {steps[activeStep].title}
+                      </h3>
+                      <p className="text-white/80 text-sm lg:text-base max-w-lg hidden sm:block">
+                        {steps[activeStep].description}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Navigation */}
+                <div className="absolute top-6 right-6 flex gap-2">
+                  <button 
+                    onClick={prevStep}
+                    className="w-11 h-11 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-105"
                   >
-                    {/* Glow on hover */}
-                    <div className="absolute -inset-2 bg-gradient-to-br from-kb-orange to-amber-500 rounded-2xl opacity-0 group-hover:opacity-60 blur-lg transition-opacity duration-500" />
-                    
-                    {/* Image Box */}
-                    <div className="relative w-52 h-52 rounded-2xl overflow-hidden border-2 border-gray-700 group-hover:border-kb-orange transition-all duration-500 shadow-2xl">
-                      <img 
-                        src={process.env.PUBLIC_URL + step.image} 
-                        alt={step.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <ChevronLeft className="w-5 h-5 text-gray-800" />
+                  </button>
+                  <button 
+                    onClick={nextStep}
+                    className="w-11 h-11 bg-kb-orange hover:bg-orange-600 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-105"
+                  >
+                    <ChevronRight className="w-5 h-5 text-white" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Progress Indicator */}
+              <div className="flex items-center justify-center gap-3 mt-6">
+                {steps.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveStep(idx)}
+                    className="group relative"
+                  >
+                    <div className={`h-2 rounded-full transition-all duration-500 ${
+                      idx === activeStep 
+                        ? 'w-10 bg-kb-orange' 
+                        : 'w-2 bg-gray-300 group-hover:bg-gray-400'
+                    }`} />
+                  </button>
+                ))}
+                <span className="text-gray-400 text-sm ml-2">
+                  {activeStep + 1} / {steps.length}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right - Steps List */}
+          <motion.div
+            className="lg:col-span-5"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {/* Steps */}
+            <div className="space-y-3">
+              {steps.map((step, idx) => (
+                <motion.div
+                  key={idx}
+                  onClick={() => setActiveStep(idx)}
+                  className={`relative rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden ${
+                    idx === activeStep 
+                      ? 'bg-gray-900 shadow-xl' 
+                      : 'bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md'
+                  }`}
+                  whileHover={{ scale: idx === activeStep ? 1 : 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  <div className="p-5">
+                    <div className="flex items-center gap-4">
+                      {/* Step Number */}
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold flex-shrink-0 transition-colors ${
+                        idx === activeStep 
+                          ? 'bg-kb-orange text-white' 
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {step.step}
+                      </div>
                       
-                      {/* Step Badge */}
-                      <div className="absolute top-4 left-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-kb-orange to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
-                          <span className="text-white font-bold text-lg">{step.step}</span>
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className={`font-bold text-lg ${idx === activeStep ? 'text-white' : 'text-gray-900'}`}>
+                            {step.title}
+                          </h3>
+                          <span className={`text-sm ${idx === activeStep ? 'text-kb-orange' : 'text-gray-400'}`}>
+                            • {step.titleTh}
+                          </span>
                         </div>
+                        <p className={`text-sm mt-1 ${idx === activeStep ? 'text-gray-400' : 'text-gray-500'}`}>
+                          {step.shortDesc}
+                        </p>
                       </div>
 
-                      {/* Hover Icon */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                          <Play className="w-6 h-6 text-white fill-white ml-1" />
-                        </div>
+                      {/* Arrow/Check */}
+                      <div className={`flex-shrink-0 ${idx === activeStep ? 'text-kb-orange' : 'text-gray-300'}`}>
+                        {idx < activeStep ? (
+                          <CheckCircle2 className="w-6 h-6 text-green-500" />
+                        ) : (
+                          <ArrowRight className={`w-5 h-5 transition-transform ${idx === activeStep ? 'translate-x-0' : '-translate-x-1'}`} />
+                        )}
                       </div>
                     </div>
 
-                    {/* Connection Dot */}
-                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2">
-                      <motion.div 
-                        className="w-4 h-4 bg-kb-orange rounded-full border-4 border-gray-900 shadow-lg shadow-kb-orange/50"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                      />
-                    </div>
-                  </motion.div>
-                  
-                  <h3 className="text-white font-bold text-xl mb-1 group-hover:text-kb-orange transition-colors">{step.title}</h3>
-                  <p className="text-kb-orange/80 text-sm mb-4 font-medium">{step.titleTh}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed px-2">{step.description}</p>
+                    {/* Expanded Content */}
+                    <AnimatePresence>
+                      {idx === activeStep && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-4 mt-4 border-t border-gray-700">
+                            <div className="grid grid-cols-1 gap-2">
+                              {step.highlights.map((highlight, hIdx) => (
+                                <motion.div
+                                  key={hIdx}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: hIdx * 0.1 }}
+                                  className="flex items-center gap-2 text-gray-300 text-sm"
+                                >
+                                  <div className="w-1.5 h-1.5 bg-kb-orange rounded-full" />
+                                  {highlight}
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Active Indicator Line */}
+                  {idx === activeStep && (
+                    <motion.div 
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-kb-orange"
+                      layoutId="activeIndicator"
+                    />
+                  )}
                 </motion.div>
               ))}
             </div>
-          </div>
-        </div>
 
-        {/* Mobile Flow */}
-        <div className="lg:hidden space-y-4">
-          {steps.map((step, index) => (
+            {/* CTA */}
             <motion.div 
-              key={index}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="mt-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: 0.4 }}
             >
-              <div className="flex gap-4 items-start bg-gray-800/50 backdrop-blur-sm rounded-2xl p-4 border border-gray-700/50">
-                <div className="relative flex-shrink-0">
-                  <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-kb-orange/50 shadow-lg">
-                    <img 
-                      src={process.env.PUBLIC_URL + step.image} 
-                      alt={step.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-br from-kb-orange to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-xs">{step.step}</span>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{step.title}</h3>
-                  <p className="text-kb-orange text-sm font-medium">{step.titleTh}</p>
-                  <p className="text-gray-400 text-sm mt-2 leading-relaxed">{step.description}</p>
-                </div>
-              </div>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-3 bg-kb-orange hover:bg-orange-600 text-white px-8 py-4 rounded-full font-semibold transition-all group shadow-lg shadow-kb-orange/25 hover:shadow-xl hover:shadow-kb-orange/30"
+              >
+                เริ่มต้นกับเรา
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </motion.div>
-          ))}
+          </motion.div>
         </div>
-
-        {/* CTA */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-        >
-          <p className="text-gray-400 mb-6">พร้อมเริ่มต้นประหยัดค่าไฟกับเราแล้วหรือยัง?</p>
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-kb-orange to-amber-500 text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-kb-orange/30 group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            เริ่มต้นกับเรา
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );
