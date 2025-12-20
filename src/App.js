@@ -9,6 +9,7 @@ import WhyUs from './components/WhyUs';
 import Calculator from './components/Calculator';
 import Packages from './components/Packages';
 import Projects from './components/Projects';
+import YouTubeVideos from './components/YouTubeVideos';
 import Testimonials from './components/Testimonials';
 import AboutUs from './components/AboutUs';
 import FAQ from './components/FAQ';
@@ -30,6 +31,7 @@ function App() {
       <Calculator />
       <Packages />
       <Projects />
+      <YouTubeVideos />
       <Testimonials />
       <AboutUs />
       <FAQ />
