@@ -119,7 +119,7 @@ const Hero = () => {
                 KB Energy Solution
               </motion.span>
               <br />
-              Solar Solution ครบวงจร
+              <span className="mt-3 block">Solar Solution ครบวงจร</span>
             </motion.h1>
             
             <motion.p 
