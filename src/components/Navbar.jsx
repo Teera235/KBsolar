@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -11,14 +12,50 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = ['home', 'services', 'calculator', 'packages', 'projects', 'faq', 'contact'];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -80% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, []);
+
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Calculator', href: '#calculator' },
-    { name: 'Packages', href: '#packages' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '#home', id: 'home' },
+    { name: 'Services', href: '#services', id: 'services' },
+    { name: 'Calculator', href: '#calculator', id: 'calculator' },
+    { name: 'Packages', href: '#packages', id: 'packages' },
+    { name: 'Projects', href: '#projects', id: 'projects' },
+    { name: 'FAQ', href: '#faq', id: 'faq' },
+    { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   return (
@@ -46,11 +83,18 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className={`font-medium transition-colors hover:text-kb-orange ${
+                className={`font-medium transition-all duration-300 hover:text-kb-orange relative ${
                   scrolled ? 'text-kb-dark' : 'text-white'
+                } ${
+                  activeSection === link.id 
+                    ? 'text-kb-orange scale-110 font-bold' 
+                    : ''
                 }`}
               >
                 {link.name}
+                {activeSection === link.id && (
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-kb-orange rounded-full"></span>
+                )}
               </a>
             ))}
             <a
@@ -78,7 +122,11 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-3 px-4 text-kb-dark hover:bg-kb-light rounded-lg font-medium"
+                className={`block py-3 px-4 text-kb-dark hover:bg-kb-light rounded-lg font-medium transition-all duration-300 ${
+                  activeSection === link.id 
+                    ? 'bg-kb-orange text-white font-bold scale-105' 
+                    : ''
+                }`}
               >
                 {link.name}
               </a>
