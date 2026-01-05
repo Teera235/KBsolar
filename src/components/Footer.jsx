@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MessageCircle, Youtube, MapPin, Sun, Facebook } from 'lucide-react';
+import { Phone, MessageCircle, Youtube, MapPin, Facebook } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -7,7 +7,7 @@ const Footer = () => {
   const socialLinks = [
     {
       name: 'Facebook',
-      href: 'https://www.facebook.com/kbsolar',
+      href: 'https://www.facebook.com/kruBall1993',
       icon: Facebook,
       color: 'hover:bg-blue-600',
     },
@@ -115,7 +115,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://maps.google.com/?q=555/270+หมู่+3+ตำบลหนองจะบก+นครราชสีมา+30000"
+                  href="https://maps.google.com/?q=14.863002790983064,102.0466041207901"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-2 text-gray-400 hover:text-kb-orange transition-colors"

@@ -51,7 +51,7 @@ const Contact = () => {
       icon: MapPin,
       label: 'ที่อยู่',
       value: '555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา 30000',
-      href: 'https://maps.google.com/?q=555/270+หมู่+3+ตำบลหนองจะบก+นครราชสีมา+30000',
+      href: 'https://maps.google.com/?q=14.863002790983064,102.0466041207901',
       color: 'bg-kb-orange'
     }
   ];
@@ -103,21 +103,21 @@ const Contact = () => {
 
               {/* Google Map */}
               <motion.div 
-                className="rounded-2xl overflow-hidden h-64 lg:h-80"
+                className="rounded-2xl overflow-hidden h-64 lg:h-80 shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.5!2d102.1!3d14.97!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDU4JzEyLjAiTiAxMDLCsDA2JzAwLjAiRQ!5e0!3m2!1sth!2sth!4v1703088000000"
+                  src="https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=th&z=16&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="KB Solar Location - 555/270 หมู่ 3 ต.หนองจะบก นครราชสีมา"
+                  title="KB Solar Energy Location - 555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา 30000"
                 />
               </motion.div>
             </div>

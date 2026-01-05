@@ -84,27 +84,36 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              {/* Highlights - Enhanced */}
+              {/* Highlights - Enhanced with Gradient Background */}
               <motion.div 
-                className="bg-white rounded-2xl p-6 shadow-sm"
-                whileHover={{ y: -5 }}
+                className="relative bg-gradient-to-br from-white via-gray-50 to-kb-orange/5 rounded-3xl p-8 shadow-xl border border-gray-100 overflow-hidden"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
-                <h4 className="text-kb-dark font-bold mb-4 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  ทำไมต้องเลือกเรา
+                {/* Background Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-kb-orange/10 to-transparent rounded-full blur-2xl"></div>
+                
+                <h4 className="text-kb-dark font-bold text-xl mb-6 flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <CheckCircle className="w-6 h-6 text-white" />
+                  </div>
+                  <span className="bg-gradient-to-r from-kb-dark to-kb-orange bg-clip-text text-transparent">
+                    ทำไมต้องเลือกเรา
+                  </span>
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {highlights.map((item, idx) => (
                     <motion.li 
                       key={idx} 
-                      className="flex items-center gap-3 text-kb-gray"
+                      className="flex items-center gap-4 text-kb-gray text-lg group"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.1 }}
+                      whileHover={{ x: 5 }}
                     >
-                      <span className="w-1.5 h-1.5 bg-kb-orange rounded-full flex-shrink-0" />
-                      {item}
+                      <div className="w-3 h-3 bg-gradient-to-r from-kb-orange to-amber-500 rounded-full flex-shrink-0 shadow-md group-hover:scale-125 transition-transform" />
+                      <span className="group-hover:text-kb-dark transition-colors font-medium">{item}</span>
                     </motion.li>
                   ))}
                 </ul>

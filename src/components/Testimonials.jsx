@@ -43,7 +43,7 @@ const Testimonials = () => {
           <div className="text-center mb-12">
             <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Testimonials</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
-              ลูกค้าพูดถึงเรา
+              รีวิวจากลูกค้า
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               ความไว้วางใจจากลูกค้ากว่า 50 โปรเจกต์ คือความภูมิใจของเรา

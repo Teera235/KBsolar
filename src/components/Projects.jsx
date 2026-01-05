@@ -4,6 +4,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FadeUp, StaggerContainer, StaggerItem, HoverScale } from './AnimatedSection';
 
 const Projects = () => {
+  // Province colors mapping
+  const provinceColors = {
+    'ปทุมธานี': '#FF6B6B',
+    'นนทบุรี': '#4ECDC4', 
+    'อุดรธานี': '#45B7D1',
+    'ประเทศลาว': '#96CEB4',
+    'สมุทรปราการ': '#FFEAA7',
+    'นครราชสีมา': '#DDA0DD',
+    'ชลบุรี': '#98D8C8',
+    'กรุงเทพมหานคร': '#F7DC6F'
+  };
+
   const projects = [
     {
       id: 1,
@@ -184,6 +196,30 @@ const Projects = () => {
         'รับประกันแผง 12-30 ปี'
       ]
     },
+    {
+      id: 9,
+      title: 'บ้านอัจฉริยะ - Smart Energy Storage System',
+      location: 'นนทบุรี',
+      description: 'ระบบจัดเก็บพลังงานอัจฉริยะ SigEnergy พร้อมระบบควบคุมผ่านแอปพลิเคชันที่ทันสมัย ไม่ต้องกังวลเรื่องไฟดับ เพราะแบตเตอรี่ 9kWh จะสำรองไฟให้อย่างต่อเนื่อง ระบบนี้เหมาะสำหรับบ้านที่ต้องการความมั่นใจในการใช้ไฟฟ้าและต้องการประหยัดค่าไฟในระยะยาว พร้อมระบบ Smart Control ที่ควบคุมได้ผ่านมือถือ',
+      systemSize: '6.5',
+      annualEnergy: '9,750',
+      costSaving: '3,500',
+      payback: '5-6',
+      images: ['/projects/9/cover.jpg', '/projects/9/1.jpg', '/projects/9/2.jpg', '/projects/9/3.jpg', '/projects/9/4.jpg'],
+      equipment: [
+        { name: 'Inverter', detail: 'Sigenstor 6kW 1 phase' },
+        { name: 'Battery', detail: 'Sigenstor Battery 9kWh' },
+        { name: 'Gateway', detail: 'Sigen Energy Gateway 1 phase' },
+        { name: 'Solar Panel', detail: 'High Efficiency 650W x 10 แผง (6.5 kWp)' }
+      ],
+      warranty: [
+        'รับประกันงานติดตั้ง 3 ปี',
+        'รับประกัน Inverter 10 ปี',
+        'รับประกันแบตเตอรี่ 10 ปี',
+        'รับประกันแผง 12-30 ปี',
+        'รับประกัน Gateway 2 ปี'
+      ]
+    },
   ];
 
   const [currentProject, setCurrentProject] = useState(0);
@@ -236,9 +272,15 @@ const Projects = () => {
                   {/* Card */}
                   <div className={`relative rounded-2xl overflow-hidden shadow-md transition-all duration-300 ${
                     idx === currentProject 
-                      ? 'ring-4 ring-kb-orange shadow-xl shadow-kb-orange/20' 
+                      ? 'ring-4 shadow-xl' 
                       : 'hover:shadow-lg'
-                  }`}>
+                  }`}
+                       style={{
+                         ringColor: idx === currentProject ? provinceColors[proj.location] : 'transparent',
+                         boxShadow: idx === currentProject 
+                           ? `0 20px 40px ${provinceColors[proj.location]}30` 
+                           : undefined
+                       }}>
                     {/* Image */}
                     <div className="aspect-square bg-gray-100">
                       <img
@@ -250,14 +292,19 @@ const Projects = () => {
                       />
                     </div>
                     {/* Overlay */}
-                    <div className={`absolute inset-0 transition-all duration-300 ${
-                      idx === currentProject
-                        ? 'bg-gradient-to-t from-kb-orange via-kb-orange/40 to-transparent'
-                        : 'bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-kb-orange/90 group-hover:via-kb-orange/30'
-                    }`} />
+                    <div className={`absolute inset-0 transition-all duration-300`}
+                         style={{
+                           background: idx === currentProject
+                             ? `linear-gradient(to top, ${provinceColors[proj.location]}, ${provinceColors[proj.location]}66, transparent)`
+                             : `linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent)`
+                         }} />
                     {/* Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-3 text-left">
-                      <p className="text-white font-bold text-sm leading-tight truncate">{proj.location}</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-2 h-2 rounded-full" 
+                             style={{ backgroundColor: idx === currentProject ? 'white' : provinceColors[proj.location] }}></div>
+                        <p className="text-white font-bold text-sm leading-tight truncate">{proj.location}</p>
+                      </div>
                       <div className="flex items-center gap-1 mt-1">
                         <Sun className="w-3 h-3 text-white/80" />
                         <span className="text-white/90 text-xs font-medium">{proj.systemSize} kWp</span>
@@ -271,9 +318,10 @@ const Projects = () => {
                     )}
                   </div>
                     {/* Project Number */}
-                    <div className={`mt-2 text-center text-xs font-semibold transition-colors ${
-                      idx === currentProject ? 'text-kb-orange' : 'text-gray-400'
-                    }`}>
+                    <div className={`mt-2 text-center text-xs font-semibold transition-colors`}
+                         style={{ 
+                           color: idx === currentProject ? provinceColors[proj.location] : '#9CA3AF'
+                         }}>
                       #{idx + 1}
                     </div>
                   </motion.button>
@@ -356,13 +404,52 @@ const Projects = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* Location Badge */}
-            <div className="inline-flex items-center gap-2 bg-kb-light text-kb-gray px-3 py-1.5 rounded-full text-sm mb-3">
-              <MapPin className="w-4 h-4" />
-              <span>{project.location}</span>
+            {/* Location Badge with Province Color */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-3 shadow-sm" 
+                 style={{ 
+                   backgroundColor: provinceColors[project.location] + '20',
+                   border: `2px solid ${provinceColors[project.location]}40`
+                 }}>
+              <div className="w-3 h-3 rounded-full shadow-sm" 
+                   style={{ backgroundColor: provinceColors[project.location] }}></div>
+              <MapPin className="w-4 h-4" style={{ color: provinceColors[project.location] }} />
+              <span className="font-semibold" style={{ color: provinceColors[project.location] }}>
+                {project.location}
+              </span>
             </div>
             
             <h3 className="text-2xl lg:text-3xl font-bold text-kb-dark mb-3">{project.title}</h3>
+            
+            {/* Province Map Visualization */}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4 mb-4 border border-gray-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    {/* Thailand Map Icon */}
+                    <svg width="40" height="50" viewBox="0 0 40 50" className="text-gray-300">
+                      <path d="M20 5 C25 5, 35 10, 35 20 C35 25, 30 30, 25 35 L20 45 L15 35 C10 30, 5 25, 5 20 C5 10, 15 5, 20 5 Z" 
+                            fill="currentColor" stroke="#E5E7EB" strokeWidth="1"/>
+                    </svg>
+                    {/* Province Dot */}
+                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full animate-pulse"
+                         style={{ backgroundColor: provinceColors[project.location] }}></div>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">ตำแหน่งติดตั้ง</p>
+                    <p className="font-bold text-lg" style={{ color: provinceColors[project.location] }}>
+                      {project.location}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-gray-500">Project</p>
+                  <p className="text-2xl font-bold" style={{ color: provinceColors[project.location] }}>
+                    #{currentProject + 1}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
             <p className="text-kb-gray leading-relaxed mb-6">{project.description}</p>
 
             {/* KPIs Grid */}
