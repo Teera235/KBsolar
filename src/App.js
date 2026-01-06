@@ -8,7 +8,6 @@ import HowItWorks from './components/HowItWorks';
 import WhyUs from './components/WhyUs';
 import Calculator from './components/Calculator';
 import Packages from './components/Packages';
-import SolisBrand from './components/SolisBrand';
 import Projects from './components/Projects';
 import YouTubeVideos from './components/YouTubeVideos';
 import Testimonials from './components/Testimonials';
@@ -31,7 +30,6 @@ function App() {
       <WhyUs />
       <Calculator />
       <Packages />
-      <SolisBrand />
       <Projects />
       <YouTubeVideos />
       <Testimonials />
