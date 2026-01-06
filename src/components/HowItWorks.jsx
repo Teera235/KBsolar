@@ -12,7 +12,7 @@ const HowItWorks = () => {
       titleTh: 'สำรวจพื้นที่',
       shortDesc: 'ลงพื้นที่สำรวจหน้างานจริง',
       description: 'ทีมงานลงพื้นที่สำรวจหน้างานจริง วัดขนาดหลังคา ตรวจสอบโครงสร้างความแข็งแรง ประเมินทิศทางและมุมรับแสงอาทิตย์ เพื่อออกแบบระบบที่เหมาะสมที่สุด',
-      image: '/process/servey.jpg',
+      image: '/Process/Survey.webp',
       highlights: ['ตรวจสอบโครงสร้างหลังคา', 'วัดพื้นที่ติดตั้ง', 'ประเมินทิศทางแสง']
     },
     {
@@ -21,7 +21,7 @@ const HowItWorks = () => {
       titleTh: 'วิเคราะห์โหลด',
       shortDesc: 'วิเคราะห์การใช้ไฟฟ้า',
       description: 'วิเคราะห์พฤติกรรมการใช้ไฟฟ้าของคุณอย่างละเอียด ศึกษาบิลค่าไฟย้อนหลัง ดูช่วงเวลาที่ใช้ไฟมากที่สุด เพื่อออกแบบระบบที่ตอบโจทย์การใช้งานจริง',
-      image: '/process/Load Analysis.jpg',
+      image: '/Process/Load Analysis.webp',
       highlights: ['วิเคราะห์บิลค่าไฟ', 'ศึกษาพฤติกรรมการใช้ไฟ', 'คำนวณโหลดที่เหมาะสม']
     },
     {
@@ -30,7 +30,7 @@ const HowItWorks = () => {
       titleTh: 'จำลองระบบ',
       shortDesc: 'จำลองการผลิตไฟฟ้า',
       description: 'ใช้ซอฟต์แวร์ PVsyst จำลองการผลิตไฟฟ้าตลอดทั้งปี คำนวณผลตอบแทนการลงทุน (ROI) ระยะเวลาคืนทุน และประมาณการประหยัดค่าไฟในแต่ละเดือน',
-      image: '/process/System Simulation.png',
+      image: '/Process/System Simulation.webp',
       highlights: ['จำลองด้วย PVsyst', 'คำนวณ ROI', 'ประมาณการคืนทุน']
     },
     {
@@ -39,7 +39,7 @@ const HowItWorks = () => {
       titleTh: 'ติดตั้งระบบ',
       shortDesc: 'ติดตั้งโดยทีมมืออาชีพ',
       description: 'ทีมช่างมืออาชีพดำเนินการติดตั้งตามมาตรฐานความปลอดภัย ใช้อุปกรณ์คุณภาพสูง พร้อมทดสอบระบบให้ทำงานได้เต็มประสิทธิภาพก่อนส่งมอบ',
-      image: '/process/Installation.jpg',
+      image: '/Process/Installation.webp',
       highlights: ['ทีมช่างมืออาชีพ', 'มาตรฐานความปลอดภัย', 'ทดสอบก่อนส่งมอบ']
     },
     {
@@ -48,7 +48,7 @@ const HowItWorks = () => {
       titleTh: 'ติดตามผล',
       shortDesc: 'ติดตามผลแบบ Real-time',
       description: 'ระบบ Monitoring ติดตามการผลิตไฟฟ้าแบบ Real-time ผ่านแอปพลิเคชัน พร้อมรายงานประจำเดือน และบริการดูแลรักษาตลอดอายุการใช้งาน',
-      image: '/process/Monitoring.png',
+      image: '/Process/Monitoring.webp',
       highlights: ['Monitoring Real-time', 'รายงานประจำเดือน', 'บริการหลังการขาย']
     }
   ];
@@ -95,26 +95,19 @@ const HowItWorks = () => {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStep}
-                    className={`w-full h-full flex items-center justify-center p-6 ${
-                      [0, 1, 3].includes(activeStep) ? `process-image-step-${activeStep + 1}` : ''
-                    }`}
-                    initial={{ opacity: 0, scale: 1.1, rotateY: 15 }}
-                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, rotateY: -15 }}
+                    className="w-full h-full"
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ 
-                      duration: 0.6,
+                      duration: 0.5,
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
                   >
                     <img
                       src={process.env.PUBLIC_URL + steps[activeStep].image}
                       alt={steps[activeStep].title}
-                      className={`process-image ${
-                        activeStep === 2 ? 'process-image-step-3' : ''
-                      } rounded-lg shadow-lg`}
-                      style={{
-                        filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.3))'
-                      }}
+                      className="w-full h-full object-cover"
                     />
                   </motion.div>
                 </AnimatePresence>
