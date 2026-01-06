@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Zap, Shield, Award, CheckCircle, Sun, Factory, Home, Building } from 'lucide-react';
+import { X, Zap, Shield, Award, CheckCircle, Sun, Factory, Home, Building, ChevronLeft, ChevronRight, Package } from 'lucide-react';
 
 const Partners = () => {
   const [selectedPartner, setSelectedPartner] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const partners = [
     { 
@@ -14,6 +15,13 @@ const Partners = () => {
       description: 'Solis เป็นผู้ผลิตอินเวอร์เตอร์รายใหญ่ที่มีการติดตั้งทั่วโลก จุดแข็งคือความเสถียรของระบบไฟฟ้า การป้องกันครบ และความแม่นยำในการแปลงพลังงาน',
       icon: Zap,
       color: 'from-kb-orange to-orange-600',
+      products: [
+        '/BRAND/SOLIS/Solis 1.png',
+        '/BRAND/SOLIS/Solis 2.png',
+        '/BRAND/SOLIS/Solis 3.png',
+        '/BRAND/SOLIS/Solis 4.png',
+        '/BRAND/SOLIS/Solis 5.png',
+      ],
       technologies: [
         { title: 'High Efficiency Conversion', desc: 'ประสิทธิภาพสูงสุด (Max Efficiency) ≈ 98.7%' },
         { title: 'Multiple MPPT', desc: 'เพิ่มการดึงพลังงานสูงสุดจากแผงในสภาวะเงาบัง/ทิศทางต่างกัน' },
@@ -36,6 +44,14 @@ const Partners = () => {
       description: 'AIKO โดดเด่นด้านการพัฒนาเซลล์ที่ให้กำลังไฟต่อพื้นที่สูง ลดการเสื่อมสภาพในระยะยาว ประสิทธิภาพระดับแนวหน้า',
       icon: Sun,
       color: 'from-kb-orange to-orange-600',
+      products: [
+        '/BRAND/AIKO SOLAR/AIKO 1.png',
+        '/BRAND/AIKO SOLAR/AIKO 2.png',
+        '/BRAND/AIKO SOLAR/AIKO 3.png',
+        '/BRAND/AIKO SOLAR/AIKO 4.png',
+        '/BRAND/AIKO SOLAR/AIKO 5.png',
+        '/BRAND/AIKO SOLAR/AIKO 6.png',
+      ],
       technologies: [
         { title: 'N-Type ABC Cell', desc: 'All Back Contact - ไม่มี Busbar ด้านหน้า ลดการบังแสง' },
         { title: 'High Module Efficiency', desc: 'ประสิทธิภาพสูงกว่า 22–23%+' },
@@ -58,6 +74,12 @@ const Partners = () => {
       description: 'LVTOPSUN มุ่งเน้นการผลิตแผงที่ผ่านการทดสอบสภาพแวดล้อมหนัก เหมาะกับงานเชิงพาณิชย์และโรงงาน',
       icon: Factory,
       color: 'from-kb-orange to-orange-600',
+      products: [
+        '/BRAND/LVTOPSUN/LVTOPGUN 1.png',
+        '/BRAND/LVTOPSUN/TOPSUN 2.png',
+        '/BRAND/LVTOPSUN/TOPSUN 3.png',
+        '/BRAND/LVTOPSUN/TOPSUN 4.png',
+      ],
       technologies: [
         { title: 'Monocrystalline / Half-Cell', desc: 'ลดความสูญเสียจากความต้านทานภายใน' },
         { title: 'High Mechanical Strength', desc: 'ทนแรงลมและแรงกดหิมะตามมาตรฐานสากล' },
@@ -79,6 +101,13 @@ const Partners = () => {
       description: 'JA Solar ถูกจัดอยู่ในกลุ่ม Tier-1 Manufacturer ที่ใช้ในโครงการพลังงานแสงอาทิตย์ขนาดใหญ่ทั่วโลก',
       icon: Award,
       color: 'from-kb-orange to-orange-600',
+      products: [
+        '/BRAND/JASOLAR/JASOLAR 1.png',
+        '/BRAND/JASOLAR/JASOLAR 2.png',
+        '/BRAND/JASOLAR/JASOLAR 3.png',
+        '/BRAND/JASOLAR/JASOLAR 4.png',
+        '/BRAND/JASOLAR/JASOLAR 5.png',
+      ],
       technologies: [
         { title: 'PERC / TOPCon Technology', desc: 'เทคโนโลยีเซลล์ประสิทธิภาพสูง' },
         { title: 'High Power Output', desc: 'โมดูลระดับ 550–700W สำหรับ Utility Scale' },
@@ -94,6 +123,23 @@ const Partners = () => {
       whyChoose: 'แบรนด์ระดับสากล ใช้จริงในโครงการขนาดใหญ่ คุณภาพสม่ำเสมอ และความเสี่ยงต่ำ'
     },
   ];
+
+  const handleSelectPartner = (partner) => {
+    setSelectedPartner(partner);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedPartner) {
+      setCurrentImageIndex((prev) => (prev + 1) % selectedPartner.products.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedPartner) {
+      setCurrentImageIndex((prev) => (prev - 1 + selectedPartner.products.length) % selectedPartner.products.length);
+    }
+  };
 
   return (
     <>
@@ -124,7 +170,7 @@ const Partners = () => {
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setSelectedPartner(partner)}
+                onClick={() => handleSelectPartner(partner)}
                 className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center border border-gray-100 hover:border-kb-orange/30 cursor-pointer"
               >
                 <img
@@ -166,46 +212,118 @@ const Partners = () => {
               onClick={() => setSelectedPartner(null)}
             >
               <motion.div
-                className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Modal Header */}
-                <div className={`sticky top-0 bg-gradient-to-r ${selectedPartner.color} p-6 rounded-t-3xl`}>
+                <div className={`sticky top-0 bg-gradient-to-r ${selectedPartner.color} p-4 sm:p-6 rounded-t-3xl z-10`}>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-white rounded-xl p-3 shadow-lg">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg">
                         <img 
                           src={process.env.PUBLIC_URL + selectedPartner.logo} 
                           alt={selectedPartner.name} 
-                          className="h-10 w-auto object-contain" 
+                          className="h-8 sm:h-10 w-auto object-contain" 
                         />
                       </div>
                       <div className="text-white">
                         <div className="flex items-center gap-2">
-                          <selectedPartner.icon className="w-5 h-5" />
-                          <span className="text-sm opacity-90">{selectedPartner.type}</span>
+                          <selectedPartner.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <span className="text-xs sm:text-sm opacity-90">{selectedPartner.type}</span>
                         </div>
-                        <h3 className="text-2xl font-bold">{selectedPartner.name}</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold">{selectedPartner.name}</h3>
                       </div>
                     </div>
                     <button
                       onClick={() => setSelectedPartner(null)}
-                      className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+                      className="w-9 h-9 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
                     >
                       <X className="w-5 h-5 text-white" />
                     </button>
                   </div>
-                  <p className="text-white/90 mt-4 text-lg">{selectedPartner.tagline}</p>
+                  <p className="text-white/90 mt-3 sm:mt-4 text-sm sm:text-lg">{selectedPartner.tagline}</p>
                 </div>
 
                 {/* Modal Content */}
-                <div className="p-6 space-y-8">
+                <div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
+                  {/* Product Gallery */}
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                      <Package className="w-5 h-5 text-kb-orange" />
+                      สินค้าของเรา
+                    </h4>
+                    
+                    {/* Main Image */}
+                    <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden mb-4">
+                      <div className="aspect-[16/9] sm:aspect-[2/1] flex items-center justify-center p-4 sm:p-8">
+                        <AnimatePresence mode="wait">
+                          <motion.img
+                            key={currentImageIndex}
+                            src={process.env.PUBLIC_URL + selectedPartner.products[currentImageIndex]}
+                            alt={`${selectedPartner.name} Product ${currentImageIndex + 1}`}
+                            className="max-h-full max-w-full object-contain drop-shadow-xl"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        </AnimatePresence>
+                      </div>
+                      
+                      {/* Navigation Arrows */}
+                      {selectedPartner.products.length > 1 && (
+                        <>
+                          <button
+                            onClick={prevImage}
+                            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+                          >
+                            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
+                          </button>
+                          <button
+                            onClick={nextImage}
+                            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+                          >
+                            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
+                          </button>
+                        </>
+                      )}
+                      
+                      {/* Image Counter */}
+                      <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-xs sm:text-sm">
+                        {currentImageIndex + 1} / {selectedPartner.products.length}
+                      </div>
+                    </div>
+                    
+                    {/* Thumbnail Gallery */}
+                    <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                      {selectedPartner.products.map((img, idx) => (
+                        <motion.button
+                          key={idx}
+                          onClick={() => setCurrentImageIndex(idx)}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all ${
+                            currentImageIndex === idx 
+                              ? 'border-kb-orange shadow-lg' 
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <img
+                            src={process.env.PUBLIC_URL + img}
+                            alt={`Thumbnail ${idx + 1}`}
+                            className="w-full h-full object-contain bg-gray-50 p-1"
+                          />
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Description */}
                   <div>
-                    <p className="text-gray-600 text-lg leading-relaxed">{selectedPartner.description}</p>
+                    <p className="text-gray-600 text-sm sm:text-lg leading-relaxed">{selectedPartner.description}</p>
                   </div>
 
                   {/* Technologies */}
@@ -214,11 +332,11 @@ const Partners = () => {
                       <Zap className="w-5 h-5 text-kb-orange" />
                       เทคโนโลยีหลัก
                     </h4>
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                       {selectedPartner.technologies.map((tech, idx) => (
-                        <div key={idx} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                          <h5 className="font-semibold text-gray-800 mb-1">{tech.title}</h5>
-                          <p className="text-gray-600 text-sm">{tech.desc}</p>
+                        <div key={idx} className="bg-gray-50 rounded-xl p-3 sm:p-4 border border-gray-100">
+                          <h5 className="font-semibold text-gray-800 mb-1 text-sm sm:text-base">{tech.title}</h5>
+                          <p className="text-gray-600 text-xs sm:text-sm">{tech.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -234,7 +352,7 @@ const Partners = () => {
                       {selectedPartner.standards.map((std, idx) => (
                         <span 
                           key={idx} 
-                          className="bg-kb-orange/10 text-kb-orange px-4 py-2 rounded-full text-sm font-medium"
+                          className="bg-kb-orange/10 text-kb-orange px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium"
                         >
                           {std}
                         </span>
@@ -248,35 +366,35 @@ const Partners = () => {
                       <CheckCircle className="w-5 h-5 text-kb-orange" />
                       เหมาะกับงานแบบไหน
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {selectedPartner.suitable.map((item, idx) => (
                         <div key={idx} className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                            <item.icon className="w-5 h-5 text-green-600" />
+                          <div className="w-9 h-9 sm:w-10 sm:h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                           </div>
-                          <span className="text-gray-700">{item.text}</span>
+                          <span className="text-gray-700 text-sm sm:text-base">{item.text}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Why We Choose */}
-                  <div className={`bg-gradient-to-r ${selectedPartner.color} rounded-2xl p-6 text-white`}>
-                    <h4 className="text-lg font-bold mb-2 flex items-center gap-2">
+                  <div className={`bg-gradient-to-r ${selectedPartner.color} rounded-2xl p-4 sm:p-6 text-white`}>
+                    <h4 className="text-base sm:text-lg font-bold mb-2 flex items-center gap-2">
                       <Shield className="w-5 h-5" />
                       เหตุผลที่เราเลือกใช้
                     </h4>
-                    <p className="text-white/90 text-lg">{selectedPartner.whyChoose}</p>
+                    <p className="text-white/90 text-sm sm:text-lg">{selectedPartner.whyChoose}</p>
                   </div>
 
                   {/* CTA */}
-                  <div className="text-center pt-4">
+                  <div className="text-center pt-2 sm:pt-4">
                     <button
                       onClick={() => {
                         setSelectedPartner(null);
                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="bg-kb-orange hover:bg-kb-orange-dark text-white px-8 py-3 rounded-full font-semibold transition-colors inline-flex items-center gap-2"
+                      className="bg-kb-orange hover:bg-kb-orange-dark text-white px-6 sm:px-8 py-3 rounded-full font-semibold transition-colors inline-flex items-center gap-2 text-sm sm:text-base"
                     >
                       <Sun className="w-5 h-5" />
                       สนใจติดตั้งระบบโซลาร์เซลล์
