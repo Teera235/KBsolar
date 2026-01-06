@@ -12,7 +12,7 @@ const HowItWorks = () => {
       titleTh: 'สำรวจพื้นที่',
       shortDesc: 'ลงพื้นที่สำรวจหน้างานจริง',
       description: 'ทีมงานลงพื้นที่สำรวจหน้างานจริง วัดขนาดหลังคา ตรวจสอบโครงสร้างความแข็งแรง ประเมินทิศทางและมุมรับแสงอาทิตย์ เพื่อออกแบบระบบที่เหมาะสมที่สุด',
-      image: '/Process/Survey.png',
+      image: '/process/Survey.png',
       highlights: ['ตรวจสอบโครงสร้างหลังคา', 'วัดพื้นที่ติดตั้ง', 'ประเมินทิศทางแสง']
     },
     {
@@ -21,7 +21,7 @@ const HowItWorks = () => {
       titleTh: 'วิเคราะห์โหลด',
       shortDesc: 'วิเคราะห์การใช้ไฟฟ้า',
       description: 'วิเคราะห์พฤติกรรมการใช้ไฟฟ้าของคุณอย่างละเอียด ศึกษาบิลค่าไฟย้อนหลัง ดูช่วงเวลาที่ใช้ไฟมากที่สุด เพื่อออกแบบระบบที่ตอบโจทย์การใช้งานจริง',
-      image: '/Process/Load Analysis.png',
+      image: '/process/Load Analysis.png',
       highlights: ['วิเคราะห์บิลค่าไฟ', 'ศึกษาพฤติกรรมการใช้ไฟ', 'คำนวณโหลดที่เหมาะสม']
     },
     {
@@ -30,7 +30,7 @@ const HowItWorks = () => {
       titleTh: 'จำลองระบบ',
       shortDesc: 'จำลองการผลิตไฟฟ้า',
       description: 'ใช้ซอฟต์แวร์ PVsyst จำลองการผลิตไฟฟ้าตลอดทั้งปี คำนวณผลตอบแทนการลงทุน (ROI) ระยะเวลาคืนทุน และประมาณการประหยัดค่าไฟในแต่ละเดือน',
-      image: '/Process/System Simulation.png',
+      image: '/process/System Simulation.png',
       highlights: ['จำลองด้วย PVsyst', 'คำนวณ ROI', 'ประมาณการคืนทุน']
     },
     {
@@ -39,7 +39,7 @@ const HowItWorks = () => {
       titleTh: 'ติดตั้งระบบ',
       shortDesc: 'ติดตั้งโดยทีมมืออาชีพ',
       description: 'ทีมช่างมืออาชีพดำเนินการติดตั้งตามมาตรฐานความปลอดภัย ใช้อุปกรณ์คุณภาพสูง พร้อมทดสอบระบบให้ทำงานได้เต็มประสิทธิภาพก่อนส่งมอบ',
-      image: '/Process/Installation.png',
+      image: '/process/Installation.png',
       highlights: ['ทีมช่างมืออาชีพ', 'มาตรฐานความปลอดภัย', 'ทดสอบก่อนส่งมอบ']
     },
     {
@@ -48,7 +48,7 @@ const HowItWorks = () => {
       titleTh: 'ติดตามผล',
       shortDesc: 'ติดตามผลแบบ Real-time',
       description: 'ระบบ Monitoring ติดตามการผลิตไฟฟ้าแบบ Real-time ผ่านแอปพลิเคชัน พร้อมรายงานประจำเดือน และบริการดูแลรักษาตลอดอายุการใช้งาน',
-      image: '/Process/Monitoring.png',
+      image: '/process/Monitoring.png',
       highlights: ['Monitoring Real-time', 'รายงานประจำเดือน', 'บริการหลังการขาย']
     }
   ];
