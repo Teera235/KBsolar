@@ -266,15 +266,15 @@ const Packages = () => {
 
         {/* Tabs */}
         <FadeUp delay={0.1}>
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex bg-white rounded-full p-1 shadow-sm">
+          <div className="flex justify-center mb-10 px-2">
+            <div className="inline-flex bg-white rounded-full p-1 shadow-sm overflow-x-auto">
               {tabs.map((tab) => (
                 <motion.button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
+                  className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'bg-kb-orange text-white shadow-md'
                       : 'text-gray-600 hover:text-gray-900'
@@ -295,7 +295,7 @@ const Packages = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {currentPackage.plans.map((plan, idx) => (
               <motion.div

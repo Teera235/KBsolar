@@ -108,7 +108,7 @@ const Hero = () => {
             
             {/* Headline */}
             <motion.h1 
-              className="text-4xl lg:text-5xl font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               variants={itemVariants}
             >
               <motion.span 
@@ -131,19 +131,19 @@ const Hero = () => {
             </motion.p>
 
             {/* Stats */}
-            <motion.div className="flex gap-6 py-2" variants={itemVariants}>
+            <motion.div className="flex flex-wrap gap-4 sm:gap-6 py-2" variants={itemVariants}>
               {stats.map((stat, index) => (
                 <motion.div 
                   key={index} 
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-2 sm:gap-3"
                   whileHover={{ scale: 1.05, y: -3 }}
                   transition={{ type: 'spring', stiffness: 400 }}
                 >
-                  <div className="w-10 h-10 bg-kb-orange/20 rounded-xl flex items-center justify-center">
-                    <stat.icon className="w-5 h-5 text-kb-orange" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-kb-orange/20 rounded-xl flex items-center justify-center">
+                    <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-kb-orange" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-xl">{stat.value}</p>
+                    <p className="text-white font-bold text-lg sm:text-xl">{stat.value}</p>
                     <p className="text-gray-400 text-xs">{stat.label}</p>
                   </div>
                 </motion.div>
@@ -152,10 +152,10 @@ const Hero = () => {
 
             {/* Feature Checklist */}
             <motion.div 
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10"
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-white/10"
               variants={itemVariants}
             >
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 sm:gap-y-3">
                 {features.map((feature, index) => (
                   <motion.div 
                     key={index} 
@@ -190,10 +190,10 @@ const Hero = () => {
             </motion.div>
 
             {/* CTA Buttons */}
-            <motion.div className="flex flex-wrap gap-3" variants={itemVariants}>
+            <motion.div className="flex flex-col sm:flex-row gap-3" variants={itemVariants}>
               <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 bg-kb-orange hover:bg-kb-orange-dark text-white px-7 py-4 rounded-full font-semibold transition-colors shadow-lg shadow-kb-orange/30 group"
+                className="inline-flex items-center justify-center gap-2 bg-kb-orange hover:bg-kb-orange-dark text-white px-6 sm:px-7 py-3 sm:py-4 rounded-full font-semibold transition-colors shadow-lg shadow-kb-orange/30 group"
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(249, 115, 22, 0.4)' }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -202,7 +202,7 @@ const Hero = () => {
               </motion.a>
               <motion.a
                 href="#projects"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-7 py-4 rounded-full font-semibold transition-colors border border-white/20"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 sm:px-7 py-3 sm:py-4 rounded-full font-semibold transition-colors border border-white/20"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

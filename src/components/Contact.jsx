@@ -75,25 +75,25 @@ const Contact = () => {
           {/* Contact Info & Map */}
           <SlideLeft>
             <div>
-              <StaggerContainer className="grid grid-cols-2 gap-4 mb-8" staggerDelay={0.1}>
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8" staggerDelay={0.1}>
                 {contactInfo.map((item, index) => (
                   <StaggerItem key={index}>
                     <motion.a
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-kb-light hover:bg-gray-100 rounded-xl p-4 transition-colors group block"
+                      className="bg-kb-light hover:bg-gray-100 rounded-xl p-3 sm:p-4 transition-colors group block"
                       whileHover={{ scale: 1.03, y: -3 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <motion.div 
-                        className={`w-10 h-10 ${item.color} rounded-lg flex items-center justify-center mb-3`}
+                        className={`w-9 h-9 sm:w-10 sm:h-10 ${item.color} rounded-lg flex items-center justify-center mb-2 sm:mb-3`}
                         whileHover={{ rotate: 10 }}
                       >
-                        <item.icon className="w-5 h-5 text-white" />
+                        <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </motion.div>
-                      <p className="text-sm text-kb-gray">{item.label}</p>
-                      <p className="text-kb-dark font-semibold group-hover:text-kb-orange transition-colors">
+                      <p className="text-xs sm:text-sm text-kb-gray">{item.label}</p>
+                      <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-all">
                         {item.value}
                       </p>
                     </motion.a>
@@ -110,7 +110,7 @@ const Contact = () => {
                 transition={{ delay: 0.3 }}
               >
                 <iframe
-                  src="https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=th&z=16&output=embed"
+                  src="https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=th&z=18&t=k&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -126,7 +126,7 @@ const Contact = () => {
           {/* Contact Form */}
           <SlideRight>
             <motion.div 
-              className="bg-kb-light rounded-2xl p-8"
+              className="bg-kb-light rounded-2xl p-5 sm:p-8"
               whileHover={{ boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
             >
               <h3 className="text-xl font-bold text-kb-dark mb-6">Request Solar Assessment</h3>

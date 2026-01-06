@@ -58,15 +58,15 @@ const Calculator = () => {
       let costPerKW, batteryCost = 0, batterySize = 0;
       
       if (formData.systemType === 'ongrid') {
-        costPerKW = recommendedSize <= 5 ? 28000 : 25000;
+        costPerKW = recommendedSize <= 5 ? 23000 : 21000;
       } else if (formData.systemType === 'hybrid') {
-        costPerKW = recommendedSize <= 5 ? 32000 : 30000;
+        costPerKW = recommendedSize <= 5 ? 27000 : 25000;
         batterySize = Math.ceil(recommendedSize * 1.5);
-        batteryCost = batterySize * 12000;
+        batteryCost = batterySize * 10000;
       } else {
-        costPerKW = 35000;
+        costPerKW = 30000;
         batterySize = Math.ceil(recommendedSize * 3);
-        batteryCost = batterySize * 12000;
+        batteryCost = batterySize * 10000;
       }
       
       const systemCost = (recommendedSize * costPerKW) + batteryCost;

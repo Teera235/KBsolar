@@ -63,7 +63,7 @@ const Services = () => {
           <p className="text-kb-gray max-w-2xl mx-auto">เราให้บริการออกแบบ ติดตั้ง และดูแลระบบโซลาร์เซลล์แบบครบวงจร</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -72,7 +72,7 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-[420px]"
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-[380px] sm:h-[420px]"
             >
               {/* Background Image */}
               <div className="absolute inset-0">
@@ -86,21 +86,21 @@ const Services = () => {
               </div>
 
               {/* Content */}
-              <div className="relative h-full flex flex-col justify-end p-6 z-10">
+              <div className="relative h-full flex flex-col justify-end p-4 sm:p-6 z-10">
                 {/* Icon */}
                 <motion.div 
-                  className="w-14 h-14 bg-kb-orange rounded-xl flex items-center justify-center mb-4 shadow-lg"
+                  className="w-12 h-12 sm:w-14 sm:h-14 bg-kb-orange rounded-xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg"
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <service.icon className="w-7 h-7 text-white" />
+                  <service.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{service.title}</h3>
                 
                 {/* Description */}
-                <p className="text-gray-300 mb-4 text-sm leading-relaxed">{service.description}</p>
+                <p className="text-gray-300 mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">{service.description}</p>
                 
                 {/* Features */}
                 <ul className="space-y-1.5">
