@@ -110,7 +110,7 @@ const Contact = () => {
                 transition={{ delay: 0.3 }}
               >
                 <iframe
-                  src="https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=th&z=18&t=k&output=embed"
+                  src="https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=th&z=18&t=k&output=embed&markers=14.863002790983064,102.0466041207901"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
