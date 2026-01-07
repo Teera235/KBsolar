@@ -21,14 +21,14 @@ const Packages = () => {
           name: 'Starter',
           size: '3 kW',
           phase: '1 เฟส',
-          price: '89,000',
+          price: '65,000',
           popular: false,
           specs: {
             saving: '1,200 - 1,800',
             panels: '5 แผง',
             area: '12-15 ตร.ม.',
             production: '~400 หน่วย/เดือน',
-            payback: '4-5 ปี',
+            payback: '3-4 ปี',
           },
           features: [
             { name: 'Inverter SOLIS 3kW', included: true },
@@ -43,7 +43,7 @@ const Packages = () => {
           name: 'Home',
           size: '5 kW',
           phase: '1 เฟส',
-          price: '125,000',
+          price: '95,000',
           popular: true,
           popularLabel: 'ขายดีที่สุด',
           specs: {
@@ -51,7 +51,7 @@ const Packages = () => {
             panels: '8 แผง',
             area: '20-24 ตร.ม.',
             production: '~700 หน่วย/เดือน',
-            payback: '4-5 ปี',
+            payback: '3-4 ปี',
           },
           features: [
             { name: 'Inverter SOLIS 5kW', included: true },
@@ -66,14 +66,14 @@ const Packages = () => {
           name: 'Plus',
           size: '8 kW',
           phase: '1 เฟส',
-          price: '175,000',
+          price: '135,000',
           popular: false,
           specs: {
             saving: '3,500 - 5,500',
             panels: '12 แผง',
             area: '30-36 ตร.ม.',
             production: '~1,100 หน่วย/เดือน',
-            payback: '4-5 ปี',
+            payback: '3-4 ปี',
           },
           features: [
             { name: 'Inverter SOLIS 8kW', included: true },
@@ -94,7 +94,7 @@ const Packages = () => {
           name: 'Essential',
           size: '5 kW',
           phase: '1 เฟส',
-          price: '185,000',
+          price: '135,000',
           battery: '5 kWh',
           popular: false,
           specs: {
@@ -102,7 +102,7 @@ const Packages = () => {
             panels: '8 แผง',
             area: '20-24 ตร.ม.',
             production: '~700 หน่วย/เดือน',
-            payback: '5-6 ปี',
+            payback: '4-5 ปี',
             backup: '3-4 ชม.',
           },
           features: [
@@ -118,7 +118,7 @@ const Packages = () => {
           name: 'Family',
           size: '6 kW',
           phase: '1 เฟส',
-          price: '245,000',
+          price: '165,000',
           battery: '10 kWh',
           popular: true,
           popularLabel: 'คุ้มค่าที่สุด',
@@ -127,7 +127,7 @@ const Packages = () => {
             panels: '10 แผง',
             area: '25-30 ตร.ม.',
             production: '~900 หน่วย/เดือน',
-            payback: '5-6 ปี',
+            payback: '4-5 ปี',
             backup: '6-8 ชม.',
           },
           features: [
@@ -143,7 +143,7 @@ const Packages = () => {
           name: 'Premium',
           size: '8 kW',
           phase: '1 เฟส',
-          price: '320,000',
+          price: '195,000',
           battery: '16 kWh',
           popular: false,
           specs: {
@@ -151,7 +151,7 @@ const Packages = () => {
             panels: '12 แผง',
             area: '30-36 ตร.ม.',
             production: '~1,100 หน่วย/เดือน',
-            payback: '5-6 ปี',
+            payback: '4-5 ปี',
             backup: '10-12 ชม.',
           },
           features: [
