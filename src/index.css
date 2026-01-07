@@ -6,6 +6,29 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar for whole page */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F97316, #FB923C);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #EA580C, #F97316);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #F97316 #1f2937;
+}
+
 body {
   font-family: 'IBM Plex Sans Thai', 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -169,4 +192,29 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Custom Scrollbar for Modals */
+.modal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.3);
+  border-radius: 3px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.5);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 115, 22, 0.3) transparent;
 }
