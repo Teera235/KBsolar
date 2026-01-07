@@ -102,7 +102,7 @@ const Hero = () => {
                 >
                   <Sun className="w-4 h-4 text-kb-orange" />
                 </motion.div>
-                <span className="text-kb-orange text-sm font-semibold">KB Energy Solution</span>
+                <span className="text-kb-orange text-sm font-semibold">KB Solar Energy</span>
               </motion.div>
             </motion.div>
             
@@ -116,7 +116,7 @@ const Hero = () => {
                 animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
-                KB Energy Solution
+                KB Solar Energy
               </motion.span>
               <br />
               <span className="mt-2 block">Solar Solution ครบวงจร</span>

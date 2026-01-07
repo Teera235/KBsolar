@@ -48,7 +48,7 @@ const AboutUs = () => {
                 About Us
               </span>
               <h2 className="text-3xl lg:text-4xl font-bold text-kb-dark mt-2 mb-8">
-                KB Energy Solution
+                KB Solar Energy
               </h2>
               
               {/* Quote Section - Enhanced */}
@@ -72,7 +72,7 @@ const AboutUs = () => {
               {/* Description - Enhanced Line Spacing */}
               <div className="space-y-6 mb-10">
                 <p className="text-kb-gray leading-loose text-base">
-                  KB Energy Solution เป็นบริษัทที่ให้บริการออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร 
+                  KB Solar Energy เป็นบริษัทที่ให้บริการออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร 
                   เราทำหน้าที่เป็น <span className="text-kb-dark font-medium">"Energy Educator"</span> ที่ช่วยให้ลูกค้าเข้าใจระบบพลังงานแสงอาทิตย์อย่างแท้จริง 
                   ก่อนตัดสินใจลงทุน
                 </p>

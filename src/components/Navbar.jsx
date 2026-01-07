@@ -72,7 +72,7 @@ const Navbar = () => {
             />
             <div className="hidden sm:block">
               <span className={`font-bold text-xl ${scrolled ? 'text-kb-dark' : 'text-white'}`}>
-                KB Energy Solution
+                KB Solar Energy
               </span>
             </div>
           </a>

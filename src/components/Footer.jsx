@@ -51,7 +51,7 @@ const Footer = () => {
                 alt="KB Solar Logo" 
                 className="h-12 w-auto rounded-lg"
               />
-              <span className="font-bold text-xl">KB Energy Solution</span>
+              <span className="font-bold text-xl">KB Solar Energy</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Solar Energy Solutions Designed by Data, Not Assumptions. 
@@ -139,7 +139,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © {currentYear} KB Energy Solution. All rights reserved.
+            © {currentYear} KB Solar Energy. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-gray-500 text-sm">
             <span>#KBSOLAR</span>
