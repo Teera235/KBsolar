@@ -58,21 +58,22 @@ const Calculator = () => {
       let costPerKW, batteryCost = 0, batterySize = 0;
       
       if (formData.systemType === 'ongrid') {
-        costPerKW = recommendedSize <= 5 ? 23000 : 21000;
+        costPerKW = recommendedSize <= 5 ? 18000 : 16000; // ลดจาก 23000/21000
       } else if (formData.systemType === 'hybrid') {
-        costPerKW = recommendedSize <= 5 ? 27000 : 25000;
-        batterySize = Math.ceil(recommendedSize * 1.5);
-        batteryCost = batterySize * 10000;
+        costPerKW = recommendedSize <= 5 ? 22000 : 20000; // ลดจาก 27000/25000
+        batterySize = Math.ceil(recommendedSize * 1.2); // ลดจาก 1.5
+        batteryCost = batterySize * 8000; // ลดจาก 10000
       } else {
-        costPerKW = 30000;
-        batterySize = Math.ceil(recommendedSize * 3);
-        batteryCost = batterySize * 10000;
+        costPerKW = 25000; // ลดจาก 30000
+        batterySize = Math.ceil(recommendedSize * 2.5); // ลดจาก 3
+        batteryCost = batterySize * 8000; // ลดจาก 10000
       }
       
       const systemCost = (recommendedSize * costPerKW) + batteryCost;
       const annualProduction = recommendedSize * peakSunHours * 365 * systemEfficiency;
-      const selfConsumptionRate = formData.systemType === 'ongrid' ? 0.7 : 0.9;
-      const annualSavings = Math.min(annualProduction * selfConsumptionRate, annualConsumption) * electricityRate;
+      const selfConsumptionRate = formData.systemType === 'ongrid' ? 0.75 : 0.95; // เพิ่มจาก 0.7/0.9
+      const electricityRateAdjusted = 4.8; // เพิ่มจาก 4.5 (ราคาไฟแพงขึ้น)
+      const annualSavings = Math.min(annualProduction * selfConsumptionRate, annualConsumption) * electricityRateAdjusted;
       const monthlySavings = annualSavings / 12;
       const paybackYears = systemCost / annualSavings;
       
@@ -83,7 +84,7 @@ const Calculator = () => {
       
       for (let year = 0; year <= 25; year++) {
         const yearProduction = year === 0 ? 0 : annualProduction * Math.pow(1 - degradationRate, year - 1);
-        const yearSavings = year === 0 ? -systemCost : Math.min(yearProduction * selfConsumptionRate, annualConsumption) * electricityRate * Math.pow(1.03, year);
+        const yearSavings = year === 0 ? -systemCost : Math.min(yearProduction * selfConsumptionRate, annualConsumption) * electricityRateAdjusted * Math.pow(1.03, year);
         cumulativeSavings += year === 0 ? 0 : yearSavings;
         totalSavings25Years += year === 0 ? 0 : yearSavings;
         
