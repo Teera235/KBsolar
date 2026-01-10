@@ -174,72 +174,7 @@ const Projects = () => {
       warranty: ['งานติดตั้ง 3 ปี', 'Inverter 5 ปี', 'แบตเตอรี่ 7 ปี', 'แผง 12-30 ปี']
     },
     {
-      id: 13, category: 'hotel', tags: ['Hybrid', 'Battery', 'Solis', 'LVTOPSUN', 'AIKO', 'High Volt', '3 Phase'],
-      title: 'โรงแรมทับทิมสยามสุวรรณภูมิ (เพิ่มเติม)', location: 'สมุทรปราการ',
-      description: 'ระบบ Hybrid On-Off Grid Solis High Volt 50kW พร้อมแบตเตอรี่ 52.2 kWh',
-      systemSize: '42.9', annualEnergy: '64,350', costSaving: '16,000 - 21,000', payback: '4-5',
-      images: ['/projects/13/1.jpg', '/projects/13/2.jpg', '/projects/13/3.jpg', '/projects/13/4.jpg', '/projects/13/5.jpg'],
-      equipment: [
-        { name: 'Inverter', detail: 'Hybrid On-Off Grid Solis High Volt 50kW 3 phase' },
-        { name: 'Battery', detail: 'LVTOPSUN Battery High Volt 5kWh x 10 ลูก (52.2 kWh)' },
-        { name: 'Solar Panel', detail: 'AIKO 650W x 66 แผง (42.9 kWp)' }
-      ],
-      warranty: ['งานติดตั้ง 3 ปี', 'แบตเตอรี่ 7 ปี', 'Inverter 10 ปี', 'แผง 12-30 ปี']
-    },
-    {
-      id: 14, category: 'commercial', tags: ['Micro Inverter', 'On-Grid', 'Atmoce', 'AIKO', 'ต่างประเทศ'],
-      title: '7-Eleven Laos - Micro Inverter (เพิ่มเติม)', location: 'ประเทศลาว',
-      description: 'งานติดตั้งระบบโซลาร์เซลล์ให้เซเว่นที่ประเทศลาว ด้วยเทคโนโลยี Micro Inverter',
-      systemSize: '39', annualEnergy: '58,500', costSaving: '15,000 - 20,000', payback: '4-5',
-      images: ['/projects/14/1.jpg', '/projects/14/2.jpg', '/projects/14/3.jpg', '/projects/14/4.jpg', '/projects/14/5.jpg'],
-      equipment: [
-        { name: 'Micro Inverter', detail: 'Atmoce MI-500 x 60 ตัว' },
-        { name: 'M-Combiner', detail: 'MC100-T' },
-        { name: 'Solar Panel', detail: 'AIKO 650W x 60 แผง (39 kWp)' }
-      ],
-      warranty: ['งานติดตั้ง 3 ปี', 'Micro Inverter 25 ปี', 'แผง 12-30 ปี']
-    },
-    {
-      id: 15, category: 'residential', tags: ['Hybrid', 'Battery', 'Solis', 'LVTOPSUN', 'AIKO', 'Full Backup'],
-      title: 'บ้านมีไฟตลอดเวลา - Backup ทั้งหลัง', location: 'อุดรธานี',
-      description: 'ระบบ Hybrid On-Off Grid Solis 8kW พร้อมแบตเตอรี่ 32 kWh ระบบ Backup ทั้งหลัง',
-      systemSize: '10.4', annualEnergy: '15,600', costSaving: '4,000 - 5,000', payback: '5-6',
-      images: ['/projects/15/1.jpg', '/projects/15/2.jpg', '/projects/15/3.jpg', '/projects/15/4.jpg', '/projects/15/5.jpg'],
-      equipment: [
-        { name: 'Inverter', detail: 'Hybrid On-Off Grid Solis 8kW 1 phase' },
-        { name: 'Battery', detail: 'LVTOPSUN Battery 16 kWh x 2 ลูก (32 kWh)' },
-        { name: 'Solar Panel', detail: 'AIKO 650W x 16 แผง (10.4 kWp)' }
-      ],
-      warranty: ['งานติดตั้ง 3 ปี', 'Inverter 5 ปี', 'แบตเตอรี่ 7 ปี', 'แผง 12-30 ปี']
-    },
-    {
-      id: 16, category: 'residential', tags: ['Hybrid', 'Battery', 'Solis', 'BYD', 'AIKO'],
-      title: 'บ้านประหยัดกว่าเดิม - Hybrid On-Off Grid', location: 'นนทบุรี',
-      description: 'ระบบ Hybrid On-Off Grid Solis 8kW พร้อมแบตเตอรี่ BYD 10 kWh ประหยัดทั้งกลางวัน-กลางคืน',
-      systemSize: '9.1', annualEnergy: '13,650', costSaving: '3,800 - 4,200', payback: '4-5',
-      images: ['/projects/16/1.jpg', '/projects/16/2.jpg', '/projects/16/3.jpg', '/projects/16/4.jpg', '/projects/16/5.jpg'],
-      equipment: [
-        { name: 'Inverter', detail: 'Hybrid On-Off Grid Solis 8kW 1 phase' },
-        { name: 'Battery', detail: 'BYD Battery 5 kWh x 2 ลูก (10 kWh)' },
-        { name: 'Solar Panel', detail: 'AIKO 650W x 14 แผง (9.1 kWp)' }
-      ],
-      warranty: ['งานติดตั้ง 3 ปี', 'Inverter 5 ปี', 'แบตเตอรี่ 7 ปี', 'แผง 12-30 ปี']
-    },
-    {
-      id: 17, category: 'residential', tags: ['Hybrid', 'Battery', 'Solis', 'BYD', 'AIKO'],
-      title: 'บ้านอุ่นใจ - ใช้ไฟได้ 24 ชม.', location: 'ปทุมธานี',
-      description: 'ระบบโซลาร์เซลล์พร้อมแบตเตอรี่ ใช้ไฟได้ตลอด 24 ชม. แม้ไฟดับก็ไม่สะดุด',
-      systemSize: '7.8', annualEnergy: '11,700', costSaving: '3,500 - 4,500', payback: '4-5',
-      images: ['/projects/17/1.jpg', '/projects/17/2.jpg', '/projects/17/3.jpg', '/projects/17/4.jpg', '/projects/17/5.jpg'],
-      equipment: [
-        { name: 'Inverter', detail: 'Hybrid On-Off Grid Solis 8kW 1 phase' },
-        { name: 'Battery', detail: 'BYD Battery 16 kWh' },
-        { name: 'Solar Panel', detail: 'AIKO 650W x 12 แผง (7.8 kWp)' }
-      ],
-      warranty: ['งานติดตั้ง 3 ปี', 'Inverter 5 ปี', 'แบตเตอรี่ 7 ปี', 'แผง 12-30 ปี']
-    },
-    {
-      id: 18, category: 'industrial', tags: ['Hybrid', 'Battery', 'Sigenergy', 'AIKO', 'EV Charger', '3 Phase'],
+      id: 13, category: 'industrial', tags: ['Hybrid', 'Battery', 'Sigenergy', 'AIKO', 'EV Charger', '3 Phase'],
       title: 'โรงงานพลังงานอัจฉริยะ - SIGEN ENERGY', location: 'ชลบุรี',
       description: 'ระบบ Hybrid SIGEN ENERGY Three Phase สำหรับโรงงาน พร้อม EV Charger DC 25kW',
       systemSize: '14.3', annualEnergy: '21,450', costSaving: '6,000 - 10,000', payback: '4-5',
@@ -254,7 +189,7 @@ const Projects = () => {
       warranty: ['งานติดตั้ง 3 ปี', 'Controller 10 ปี', 'แบตเตอรี่ 10 ปี', 'แผง 12-30 ปี']
     },
     {
-      id: 19, category: 'residential', tags: ['Hybrid', 'Battery', 'Sigenergy', 'EV Charger', 'Full Backup'],
+      id: 14, category: 'residential', tags: ['Hybrid', 'Battery', 'Sigenergy', 'EV Charger', 'Full Backup'],
       title: 'บ้านศูนย์กลางพลังงาน - SIGENERGY + EV', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid Solar จาก SIGENERGY รองรับทั้งการใช้ไฟภายในบ้านและชาร์จรถยนต์ไฟฟ้า',
       systemSize: '10', annualEnergy: '15,000', costSaving: '4,000 - 6,000', payback: '5-6',
