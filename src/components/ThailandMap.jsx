@@ -209,25 +209,25 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full min-h-[700px] lg:min-h-[950px] flex items-center justify-center p-4"
+      className="relative w-full min-h-[450px] sm:min-h-[550px] lg:min-h-[950px] flex items-center justify-center p-2 lg:p-4"
     >
       {/* SVG Map */}
       <div 
         ref={svgContainerRef}
-        className="w-full h-auto flex items-center justify-center [&>svg]:w-[120%] [&>svg]:h-auto [&>svg]:max-h-[1000px] [&>svg]:scale-110"
+        className="w-full h-auto flex items-center justify-center [&>svg]:w-[110%] sm:[&>svg]:w-[115%] lg:[&>svg]:w-[120%] [&>svg]:h-auto [&>svg]:max-h-[400px] sm:[&>svg]:max-h-[500px] lg:[&>svg]:max-h-[1000px] [&>svg]:scale-105 lg:[&>svg]:scale-110"
         dangerouslySetInnerHTML={{ __html: svgContent || '' }}
       />
 
       {/* Loading */}
       {!svgContent && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-kb-orange border-t-transparent"></div>
+          <div className="animate-spin rounded-full h-8 w-8 lg:h-12 lg:w-12 border-4 border-kb-orange border-t-transparent"></div>
         </div>
       )}
 
-      {/* Hover Info */}
+      {/* Hover Info - Hidden on mobile (touch devices) */}
       {hoveredProvince && (
-        <div className="absolute top-4 left-4 bg-white rounded-xl px-5 py-4 shadow-xl border-2 border-kb-orange">
+        <div className="hidden lg:block absolute top-4 left-4 bg-white rounded-xl px-5 py-4 shadow-xl border-2 border-kb-orange">
           <p className="font-bold text-kb-dark text-lg">{hoveredProvince.name}</p>
           {hoveredProvince.hasProjects ? (
             <>
@@ -240,28 +240,28 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
         </div>
       )}
 
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-orange-200">
-        <p className="text-sm font-bold text-kb-dark mb-3">พื้นที่ให้บริการ</p>
-        <div className="flex items-center gap-2 text-sm text-kb-gray mb-2">
-          <span className="w-4 h-4 rounded bg-orange-700"></span>
-          <span>มีโปรเจกต์ (คลิกได้)</span>
+      {/* Legend - Compact on mobile */}
+      <div className="absolute bottom-2 left-2 lg:bottom-4 lg:left-4 bg-white/95 backdrop-blur-sm rounded-lg lg:rounded-xl p-2 lg:p-4 shadow-lg border border-orange-200">
+        <p className="text-xs lg:text-sm font-bold text-kb-dark mb-1.5 lg:mb-3">พื้นที่ให้บริการ</p>
+        <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-sm text-kb-gray mb-1 lg:mb-2">
+          <span className="w-3 h-3 lg:w-4 lg:h-4 rounded bg-orange-700"></span>
+          <span>มีโปรเจกต์</span>
         </div>
-        <div className="flex items-center gap-2 text-sm text-kb-gray">
-          <span className="w-4 h-4 rounded bg-orange-400"></span>
+        <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-sm text-kb-gray">
+          <span className="w-3 h-3 lg:w-4 lg:h-4 rounded bg-orange-400"></span>
           <span>พื้นที่อื่นๆ</span>
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-orange-200">
+      {/* Stats - Compact on mobile */}
+      <div className="absolute top-2 right-2 lg:top-4 lg:right-4 bg-white/95 backdrop-blur-sm rounded-lg lg:rounded-xl p-2 lg:p-4 shadow-lg border border-orange-200">
         <div className="text-center">
-          <p className="text-3xl font-bold text-kb-orange">{projects.length}+</p>
-          <p className="text-sm text-kb-gray">โปรเจกต์สำเร็จ</p>
+          <p className="text-xl lg:text-3xl font-bold text-kb-orange">{projects.length}+</p>
+          <p className="text-[10px] lg:text-sm text-kb-gray">โปรเจกต์</p>
         </div>
-        <div className="border-t border-gray-200 mt-3 pt-3 text-center">
-          <p className="text-2xl font-bold text-kb-dark">{provincesWithProjects.length}</p>
-          <p className="text-sm text-kb-gray">จังหวัด</p>
+        <div className="border-t border-gray-200 mt-1.5 lg:mt-3 pt-1.5 lg:pt-3 text-center">
+          <p className="text-lg lg:text-2xl font-bold text-kb-dark">{provincesWithProjects.length}</p>
+          <p className="text-[10px] lg:text-sm text-kb-gray">จังหวัด</p>
         </div>
       </div>
     </div>

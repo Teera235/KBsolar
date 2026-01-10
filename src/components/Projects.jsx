@@ -348,39 +348,39 @@ const Projects = () => {
         </FadeUp>
 
         {/* Main Content - Map + Projects */}
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-start">
           {/* Left Side - Thailand Map - 3 columns */}
-          <FadeUp delay={0.1} className="lg:col-span-3">
-            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-              <div className="bg-gradient-to-r from-kb-orange to-orange-500 px-6 py-4">
-                <h3 className="text-white font-bold text-lg flex items-center gap-2">
-                  <MapPin className="w-5 h-5" />
+          <FadeUp delay={0.1} className="lg:col-span-3 order-2 lg:order-1">
+            <div className="bg-white rounded-2xl lg:rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-kb-orange to-orange-500 px-4 lg:px-6 py-3 lg:py-4">
+                <h3 className="text-white font-bold text-base lg:text-lg flex items-center gap-2">
+                  <MapPin className="w-4 h-4 lg:w-5 lg:h-5" />
                   พื้นที่ติดตั้งทั่วประเทศ
                 </h3>
-                <p className="text-white/80 text-sm">คลิกที่จังหวัดเพื่อดูโปรเจกต์</p>
+                <p className="text-white/80 text-xs lg:text-sm">คลิกที่จังหวัดเพื่อดูโปรเจกต์</p>
               </div>
               <ThailandMap projects={projects} onProvinceClick={handleLocationClick} />
             </div>
           </FadeUp>
 
           {/* Right Side - Project Cards - 2 columns */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-3 lg:space-y-4 order-1 lg:order-2">
             {/* Category Filter - Compact */}
             <FadeUp delay={0.15}>
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-1.5 lg:gap-2 mb-3 lg:mb-4">
                 {categories.map((cat) => {
                   const Icon = cat.icon;
                   return (
                     <button
                       key={cat.id}
                       onClick={() => { setActiveCategory(cat.id); setShowAllProjects(false); }}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-all ${
+                      className={`flex items-center gap-1 lg:gap-1.5 px-2.5 lg:px-3 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-all ${
                         activeCategory === cat.id
                           ? 'bg-kb-orange text-white shadow-md'
                           : 'bg-white text-kb-gray hover:bg-gray-100 border border-gray-200'
                       }`}
                     >
-                      <Icon className="w-4 h-4" />
+                      <Icon className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                       <span>{cat.name}</span>
                     </button>
                   );
@@ -389,7 +389,7 @@ const Projects = () => {
             </FadeUp>
 
             {/* Project Cards - Compact Grid */}
-            <div className="grid gap-4">
+            <div className="grid gap-3 lg:gap-4">
               <AnimatePresence mode="popLayout">
                 {displayedProjects.map((project, idx) => {
                   const CategoryIcon = getCategoryIcon(project.category);
@@ -404,9 +404,9 @@ const Projects = () => {
                       onClick={() => openProject(project)}
                       className="group cursor-pointer"
                     >
-                      <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex">
+                      <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex">
                         {/* Thumbnail */}
-                        <div className="w-32 h-32 flex-shrink-0 relative overflow-hidden">
+                        <div className="w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0 relative overflow-hidden">
                           <img
                             src={process.env.PUBLIC_URL + project.images[0]}
                             alt={project.title}
@@ -415,38 +415,38 @@ const Projects = () => {
                         </div>
                         
                         {/* Content */}
-                        <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
+                        <div className="flex-1 p-2.5 lg:p-3 flex flex-col justify-between min-w-0">
                           <div>
-                            <div className="flex items-center gap-1.5 text-xs text-kb-gray mb-1">
-                              <CategoryIcon className="w-3.5 h-3.5 text-kb-orange flex-shrink-0" />
+                            <div className="flex items-center gap-1 lg:gap-1.5 text-[10px] lg:text-xs text-kb-gray mb-1">
+                              <CategoryIcon className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-kb-orange flex-shrink-0" />
                               <span className="truncate">{getCategoryName(project.category)}</span>
                               <span>•</span>
-                              <MapPin className="w-3 h-3 flex-shrink-0" />
+                              <MapPin className="w-2.5 h-2.5 lg:w-3 lg:h-3 flex-shrink-0" />
                               <span className="truncate">{project.location}</span>
                             </div>
                             {/* Title */}
-                            <h4 className="font-bold text-kb-dark text-sm line-clamp-1 group-hover:text-kb-orange transition-colors">
+                            <h4 className="font-bold text-kb-dark text-xs lg:text-sm line-clamp-2 group-hover:text-kb-orange transition-colors">
                               {project.title}
                             </h4>
                           </div>
                           
                           {/* Quick Stats */}
-                          <div className="flex items-center gap-2 mt-2 flex-wrap">
-                            <span className="bg-kb-orange text-white text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
+                          <div className="flex items-center gap-1.5 lg:gap-2 mt-1.5 lg:mt-2 flex-wrap">
+                            <span className="bg-kb-orange text-white text-[9px] lg:text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
                               {project.systemSize} kWp
                             </span>
-                            <span className="text-[10px] text-kb-gray whitespace-nowrap">
+                            <span className="text-[9px] lg:text-[10px] text-kb-gray whitespace-nowrap">
                               {project.annualEnergy} kWh/ปี
                             </span>
-                            <span className="text-[10px] text-green-600 font-medium whitespace-nowrap">
+                            <span className="text-[9px] lg:text-[10px] text-green-600 font-medium whitespace-nowrap">
                               ฿ {project.costSaving.split(' - ')[0]}/เดือน
                             </span>
                           </div>
                         </div>
 
                         {/* Arrow */}
-                        <div className="flex items-center pr-4">
-                          <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-kb-orange group-hover:translate-x-1 transition-all" />
+                        <div className="flex items-center pr-2 lg:pr-4">
+                          <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5 text-gray-300 group-hover:text-kb-orange group-hover:translate-x-1 transition-all" />
                         </div>
                       </div>
                     </motion.div>
@@ -462,14 +462,14 @@ const Projects = () => {
                   onClick={() => setShowAllProjects(!showAllProjects)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 bg-gradient-to-r from-kb-orange to-orange-500 text-white rounded-2xl font-semibold shadow-lg shadow-kb-orange/30 hover:shadow-xl hover:shadow-kb-orange/40 transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 lg:py-4 bg-gradient-to-r from-kb-orange to-orange-500 text-white rounded-xl lg:rounded-2xl font-semibold shadow-lg shadow-kb-orange/30 hover:shadow-xl hover:shadow-kb-orange/40 transition-all flex items-center justify-center gap-2 text-sm lg:text-base"
                 >
                   {showAllProjects ? (
                     <>แสดงน้อยลง</>
                   ) : (
                     <>
                       ดูผลงานทั้งหมด ({filteredProjects.length} โปรเจกต์)
-                      <ChevronDown className="w-5 h-5" />
+                      <ChevronDown className="w-4 h-4 lg:w-5 lg:h-5" />
                     </>
                   )}
                 </motion.button>
@@ -647,7 +647,7 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 z-50 flex items-center justify-center p-2 lg:p-4"
               onClick={closeProvinceModal}
             >
               {/* Dark overlay */}
@@ -663,26 +663,34 @@ const Projects = () => {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[85vh] overflow-hidden flex"
+                className="relative bg-white rounded-2xl lg:rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] lg:max-h-[85vh] overflow-hidden flex flex-col lg:flex-row"
                 onClick={(e) => e.stopPropagation()}
               >
+                {/* Close button - Mobile */}
+                <button
+                  onClick={closeProvinceModal}
+                  className="absolute top-3 right-3 z-10 w-8 h-8 lg:hidden bg-white/90 rounded-full shadow-lg flex items-center justify-center"
+                >
+                  <X className="w-4 h-4 text-kb-dark" />
+                </button>
+
                 {/* Left Side - Project List */}
-                <div className="w-[380px] bg-gradient-to-br from-kb-orange via-orange-500 to-orange-600 flex flex-col">
+                <div className="w-full lg:w-[380px] bg-gradient-to-br from-kb-orange via-orange-500 to-orange-600 flex flex-col max-h-[50vh] lg:max-h-none">
                   {/* Header */}
-                  <div className="p-5 border-b border-white/10">
-                    <div className="flex items-center gap-3">
+                  <div className="p-3 lg:p-5 border-b border-white/10">
+                    <div className="flex items-center gap-2 lg:gap-3">
                       <button
                         onClick={closeProvinceModal}
-                        className="w-9 h-9 bg-white/20 hover:bg-white/30 rounded-xl flex items-center justify-center transition-all"
+                        className="hidden lg:flex w-9 h-9 bg-white/20 hover:bg-white/30 rounded-xl items-center justify-center transition-all"
                       >
                         <ChevronLeft className="w-5 h-5 text-white" />
                       </button>
                       <div className="flex-1">
-                        <h3 className="text-white font-bold text-xl">{selectedProvince.name}</h3>
-                        <p className="text-white/70 text-sm">{provinceProjects.length} โปรเจกต์ในพื้นที่นี้</p>
+                        <h3 className="text-white font-bold text-base lg:text-xl">{selectedProvince.name}</h3>
+                        <p className="text-white/70 text-xs lg:text-sm">{provinceProjects.length} โปรเจกต์ในพื้นที่นี้</p>
                       </div>
                       {/* Province mini shape */}
-                      <div className="w-12 h-12 bg-white/10 rounded-xl p-2">
+                      <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white/10 rounded-xl p-1.5 lg:p-2">
                         <svg viewBox={selectedProvince.path.viewBox} className="w-full h-full">
                           <path d={selectedProvince.path.d} fill="white" fillOpacity="0.8" />
                         </svg>
@@ -690,16 +698,8 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Search/Filter placeholder */}
-                  <div className="px-5 py-3">
-                    <div className="bg-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2">
-                      <Eye className="w-4 h-4 text-white/50" />
-                      <span className="text-white/50 text-sm">ดูโปรเจกต์ทั้งหมด</span>
-                    </div>
-                  </div>
-
                   {/* Project List */}
-                  <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-2">
+                  <div className="flex-1 overflow-y-auto px-3 lg:px-4 py-2 lg:pb-4 space-y-2">
                     {provinceProjects.map((project, idx) => {
                       const CategoryIcon = getCategoryIcon(project.category);
                       return (
@@ -712,15 +712,15 @@ const Projects = () => {
                             closeProvinceModal();
                             openProject(project);
                           }}
-                          className="w-full flex items-start gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all group text-left backdrop-blur-sm"
+                          className="w-full flex items-start gap-2 lg:gap-3 p-2 lg:p-3 bg-white/10 hover:bg-white/20 rounded-xl lg:rounded-2xl transition-all group text-left backdrop-blur-sm"
                         >
                           {/* Number Badge */}
-                          <div className="w-8 h-8 bg-kb-dark text-white rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-lg">
+                          <div className="w-6 h-6 lg:w-8 lg:h-8 bg-kb-dark text-white rounded-lg flex items-center justify-center font-bold text-xs lg:text-sm flex-shrink-0 shadow-lg">
                             {idx + 1}
                           </div>
                           
                           {/* Thumbnail */}
-                          <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-lg ring-2 ring-white/20">
+                          <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-lg lg:rounded-xl overflow-hidden flex-shrink-0 shadow-lg ring-2 ring-white/20">
                             <img
                               src={process.env.PUBLIC_URL + project.images[0]}
                               alt={project.title}
@@ -730,25 +730,22 @@ const Projects = () => {
                           
                           {/* Info */}
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-1.5 mb-1">
-                              <CategoryIcon className="w-3 h-3 text-white/60" />
-                              <span className="text-white/60 text-xs">{getCategoryName(project.category)}</span>
+                            <div className="flex items-center gap-1 lg:gap-1.5 mb-0.5 lg:mb-1">
+                              <CategoryIcon className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-white/60" />
+                              <span className="text-white/60 text-[10px] lg:text-xs">{getCategoryName(project.category)}</span>
                             </div>
-                            <p className="text-white font-semibold text-sm leading-tight group-hover:text-yellow-200 transition-colors line-clamp-2">
+                            <p className="text-white font-semibold text-xs lg:text-sm leading-tight group-hover:text-yellow-200 transition-colors line-clamp-2">
                               {project.title}
                             </p>
-                            <div className="flex items-center gap-2 mt-1.5">
-                              <span className="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full">
+                            <div className="flex items-center gap-1.5 lg:gap-2 mt-1 lg:mt-1.5">
+                              <span className="bg-white/20 text-white text-[10px] lg:text-xs px-1.5 lg:px-2 py-0.5 rounded-full">
                                 {project.systemSize} kWp
-                              </span>
-                              <span className="text-white/50 text-xs">
-                                {project.annualEnergy} kWh/ปี
                               </span>
                             </div>
                           </div>
                           
                           {/* Arrow */}
-                          <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all flex-shrink-0 mt-5" />
+                          <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all flex-shrink-0 mt-3 lg:mt-5" />
                         </motion.button>
                       );
                     })}
@@ -756,17 +753,17 @@ const Projects = () => {
                 </div>
 
                 {/* Right Side - Province Map */}
-                <div className="flex-1 bg-gradient-to-br from-orange-50 to-amber-50 p-8 flex flex-col items-center justify-center relative">
-                  {/* Close button */}
+                <div className="flex-1 bg-gradient-to-br from-orange-50 to-amber-50 p-4 lg:p-8 flex flex-col items-center justify-center relative min-h-[200px] lg:min-h-0">
+                  {/* Close button - Desktop */}
                   <button
                     onClick={closeProvinceModal}
-                    className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors group"
+                    className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl shadow-lg hidden lg:flex items-center justify-center hover:bg-gray-50 transition-colors group"
                   >
                     <X className="w-5 h-5 text-kb-gray group-hover:text-kb-dark transition-colors" />
                   </button>
 
                   {/* Province Shape with Pins */}
-                  <div className="relative w-full max-w-md h-[400px]">
+                  <div className="relative w-full max-w-[200px] lg:max-w-md h-[180px] lg:h-[400px]">
                     <svg viewBox={selectedProvince.path.viewBox} className="w-full h-full drop-shadow-lg">
                       <defs>
                         <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -807,15 +804,8 @@ const Projects = () => {
                           className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
                         >
                           <div className="relative">
-                            <div className="w-11 h-11 bg-kb-dark text-white rounded-full shadow-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-kb-orange transition-all cursor-pointer font-bold text-lg ring-4 ring-white">
+                            <div className="w-8 h-8 lg:w-11 lg:h-11 bg-kb-dark text-white rounded-full shadow-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-kb-orange transition-all cursor-pointer font-bold text-sm lg:text-lg ring-2 lg:ring-4 ring-white">
                               {idx + 1}
-                            </div>
-                            {/* Hover tooltip */}
-                            <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all pointer-events-none">
-                              <div className="bg-kb-dark text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl">
-                                {project.title.length > 20 ? project.title.substring(0, 20) + '...' : project.title}
-                              </div>
-                              <div className="w-2 h-2 bg-kb-dark rotate-45 absolute -bottom-1 left-1/2 -translate-x-1/2" />
                             </div>
                           </div>
                         </motion.button>
@@ -828,9 +818,9 @@ const Projects = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="mt-6 text-center"
+                    className="mt-3 lg:mt-6 text-center"
                   >
-                    <p className="text-kb-gray text-sm">คลิกที่จุดหรือรายการด้านซ้ายเพื่อดูรายละเอียดโปรเจกต์</p>
+                    <p className="text-kb-gray text-xs lg:text-sm">คลิกที่จุดหรือรายการเพื่อดูรายละเอียด</p>
                   </motion.div>
                 </div>
               </motion.div>
