@@ -232,7 +232,7 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
           {hoveredProvince.hasProjects ? (
             <>
               <p className="text-kb-orange font-semibold">{hoveredProvince.count} โปรเจกต์</p>
-              <p className="text-kb-gray text-sm mt-1">👆 คลิกเพื่อดูรายละเอียด</p>
+              <p className="text-kb-gray text-sm mt-1">คลิกเพื่อดูรายละเอียด</p>
             </>
           ) : (
             <p className="text-kb-gray text-sm">ยังไม่มีโปรเจกต์ในพื้นที่นี้</p>

@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, Youtube, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Phone, MessageCircle, Youtube, MapPin, Send, CheckCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem } from './AnimatedSection';
+import emailjs from '@emailjs/browser';
+
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_wq7tzqn';
+const EMAILJS_TEMPLATE_ID = 'template_x8l6ksm';
+const EMAILJS_PUBLIC_KEY = 'y2FtE_VnYEDX04vbG';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,14 +17,36 @@ const Contact = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to a server
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: '', phone: '', email: '', message: '' });
+    setLoading(true);
+    setError('');
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_phone: formData.phone,
+          from_email: formData.email || 'ไม่ได้ระบุ',
+          message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000);
+      setFormData({ name: '', phone: '', email: '', message: '' });
+    } catch (err) {
+      console.error('EmailJS Error:', err);
+      setError('ส่งข้อความไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -218,13 +246,30 @@ const Contact = () => {
                   </motion.div>
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-kb-orange hover:bg-kb-orange-dark text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all"
+                    disabled={loading}
+                    whileHover={{ scale: loading ? 1 : 1.02 }}
+                    whileTap={{ scale: loading ? 1 : 0.98 }}
+                    className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
+                      loading 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-kb-orange hover:bg-kb-orange-dark text-white'
+                    }`}
                   >
-                    <Send className="w-5 h-5" />
-                    ส่งข้อความ
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        กำลังส่ง...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        ส่งข้อความ
+                      </>
+                    )}
                   </motion.button>
+                  {error && (
+                    <p className="text-red-500 text-sm text-center mt-2">{error}</p>
+                  )}
                 </form>
               )}
             </motion.div>
