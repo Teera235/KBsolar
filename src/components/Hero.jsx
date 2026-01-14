@@ -41,7 +41,7 @@ const Hero = () => {
         transition={{ duration: 1.5, ease: 'easeOut' }}
       >
         <img 
-          src={process.env.PUBLIC_URL + '/hero-bg.jpg'} 
+          src={process.env.PUBLIC_URL + '/hero-bg.webp'} 
           alt="Solar Panel Background" 
           className="w-full h-full object-cover"
         />
@@ -56,7 +56,7 @@ const Hero = () => {
         transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <img
-          src={process.env.PUBLIC_URL + '/teacher.png'}
+          src={process.env.PUBLIC_URL + '/teacher.webp'}
           alt="KB Solar Expert"
           className="h-screen w-auto object-contain object-bottom"
         />

@@ -9,42 +9,42 @@ const Services = () => {
       title: 'Solar Rooftop - Residential', 
       description: 'ระบบโซลาร์เซลล์สำหรับบ้านพักอาศัย ออกแบบให้เหมาะกับการใช้งานของครอบครัว ประหยัดค่าไฟได้ทั้งกลางวันและกลางคืน', 
       features: ['On-Grid / Hybrid System', 'Battery Storage Option', '3-5 kWp Typical Size'],
-      image: '/services/Solar Rooftop - Residential.jpg'
+      image: '/services/Solar Rooftop - Residential.webp'
     },
     { 
       icon: Building2, 
       title: 'Solar Rooftop - Commercial', 
       description: 'ระบบโซลาร์เซลล์สำหรับอาคารพาณิชย์ ร้านค้า สำนักงาน ลดต้นทุนค่าไฟฟ้าอย่างมีประสิทธิภาพ', 
       features: ['Peak Shaving', 'Demand Charge Reduction', '10-100 kWp Systems'],
-      image: '/services/Solar Rooftop - Commercial.jpg'
+      image: '/services/Solar Rooftop - Commercial.webp'
     },
     { 
       icon: Factory, 
       title: 'Solar Rooftop - Industrial', 
       description: 'ระบบโซลาร์เซลล์ขนาดใหญ่สำหรับโรงงานอุตสาหกรรม ออกแบบตามโหลดการใช้งานจริง', 
       features: ['Large Scale Systems', 'Grid-Tied Solutions', '100+ kWp Capacity'],
-      image: '/services/Solar Rooftop - Industrial.jpg'
+      image: '/services/Solar Rooftop - Industrial.webp'
     },
     { 
       icon: BarChart3, 
       title: 'Energy Analysis & System Design', 
       description: 'วิเคราะห์การใช้พลังงานและออกแบบระบบที่เหมาะสมที่สุด ใช้ข้อมูลจริงในการคำนวณ', 
       features: ['Load Profile Analysis', 'ROI Calculation', 'System Simulation'],
-      image: '/services/Energy Analysis & System Design.jpg'
+      image: '/services/Energy Analysis & System Design.webp'
     },
     { 
       icon: Wrench, 
       title: 'Installation & Commissioning', 
       description: 'ติดตั้งโดยทีมช่างมืออาชีพ พร้อมทดสอบระบบให้ทำงานได้เต็มประสิทธิภาพ', 
       features: ['Professional Team', 'Safety Standards', 'Quality Assurance'],
-      image: '/services/Installation & Commissioning.jpg'
+      image: '/services/Installation & Commissioning.webp'
     },
     { 
       icon: Monitor, 
       title: 'Monitoring & Maintenance', 
       description: 'ระบบติดตามการผลิตไฟฟ้าแบบ Real-time พร้อมบริการดูแลรักษาตลอดอายุการใช้งาน', 
       features: ['24/7 Monitoring', 'Preventive Maintenance', 'Performance Reports'],
-      image: '/services/Monitoring & Maintenance.jpg'
+      image: '/services/Monitoring & Maintenance.webp'
     }
   ];
 

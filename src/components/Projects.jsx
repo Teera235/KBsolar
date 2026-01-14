@@ -20,7 +20,7 @@ const Projects = () => {
       title: 'Hybrid 5kW + Smart Optimizer', location: 'อุตรดิตถ์',
       description: 'ระบบ Hybrid 5kW On-Off Grid พร้อม Smart Optimizer ดูการทำงานรายแผงได้ มีระบบ Rapid Shutdown และสำรองไฟขณะไฟดับ',
       systemSize: '7', annualEnergy: '10,500', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/21-02-2025/1.jpg', '/projects/21-02-2025/2.jpg', '/projects/21-02-2025/3.jpg', '/projects/21-02-2025/4.jpg', '/projects/21-02-2025/5.jpg'],
+      images: ['/projects/21-02-2025/1.webp', '/projects/21-02-2025/2.webp', '/projects/21-02-2025/3.webp', '/projects/21-02-2025/4.webp', '/projects/21-02-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Hybrid On-Off Grid 5kW' },
         { name: 'Battery', detail: 'LFP 15 kWh' },
@@ -33,7 +33,7 @@ const Projects = () => {
       title: 'On-Grid 5kW Huawei', location: 'นนทบุรี',
       description: 'ระบบ On-Grid 5kW ติดตั้งบนหลังคาบ้าน ลดค่าไฟกลางวันได้ 3,000-3,500 บาท/เดือน',
       systemSize: '5', annualEnergy: '7,500', costSaving: '3,000 - 3,500', payback: '4',
-      images: ['/projects/26-4-2025/1.jpg', '/projects/26-4-2025/2.jpg', '/projects/26-4-2025/3.jpg', '/projects/26-4-2025/4.jpg', '/projects/26-4-2025/5.jpg'],
+      images: ['/projects/26-4-2025/1.webp', '/projects/26-4-2025/2.webp', '/projects/26-4-2025/3.webp', '/projects/26-4-2025/4.webp', '/projects/26-4-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Huawei 5kW' },
         { name: 'Solar Panel', detail: 'Longi 580W' }
@@ -45,7 +45,7 @@ const Projects = () => {
       title: 'Hybrid 10kW 3 Phase + Optimizer', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid 10kW 3 Phase พร้อม Optimizer และแบตเตอรี่ 16kWh ลดค่าไฟได้ 7,000-7,500 บาท/เดือน',
       systemSize: '10', annualEnergy: '15,000', costSaving: '7,000 - 7,500', payback: '4-5',
-      images: ['/projects/28-4-2025/1.jpg', '/projects/28-4-2025/2.jpg', '/projects/28-4-2025/3.jpg', '/projects/28-4-2025/4.jpg', '/projects/28-4-2025/5.jpg'],
+      images: ['/projects/28-4-2025/1.webp', '/projects/28-4-2025/2.webp', '/projects/28-4-2025/3.webp', '/projects/28-4-2025/4.webp', '/projects/28-4-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 10kW 3 Phase' },
         { name: 'Battery', detail: 'KB Energy Storage 16kWh' },
@@ -59,7 +59,7 @@ const Projects = () => {
       title: 'On-Grid 5kW Deye', location: 'นครราชสีมา',
       description: 'ระบบ On-Grid 5kW สำหรับบ้านพักอาศัย ลดค่าไฟกลางวันได้ 3,000-3,500 บาท/เดือน',
       systemSize: '5', annualEnergy: '7,500', costSaving: '3,000 - 3,500', payback: '4',
-      images: ['/projects/30-04-2025/1.jpg', '/projects/30-04-2025/2.jpg', '/projects/30-04-2025/3.jpg', '/projects/30-04-2025/4.jpg', '/projects/30-04-2025/5.jpg'],
+      images: ['/projects/30-04-2025/1.webp', '/projects/30-04-2025/2.webp', '/projects/30-04-2025/3.webp', '/projects/30-04-2025/4.webp', '/projects/30-04-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Solar Panel', detail: 'Longi 625W' }
@@ -71,7 +71,7 @@ const Projects = () => {
       title: 'Hybrid 5kW + Battery 16kWh', location: 'ขอนแก่น',
       description: 'ระบบ Hybrid 5kW พร้อมแบตเตอรี่ 16kWh สำหรับบ้านพักอาศัย ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '5', annualEnergy: '7,500', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/2-05-2025/1.jpg', '/projects/2-05-2025/2.jpg', '/projects/2-05-2025/3.jpg', '/projects/2-05-2025/4.jpg', '/projects/2-05-2025/5.jpg'],
+      images: ['/projects/2-05-2025/1.webp', '/projects/2-05-2025/2.webp', '/projects/2-05-2025/3.webp', '/projects/2-05-2025/4.webp', '/projects/2-05-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'KB Energy Storage 16kWh' },
@@ -84,7 +84,7 @@ const Projects = () => {
       title: 'Hybrid 100kW โรงงาน', location: 'สมุทรปราการ',
       description: 'ระบบ Hybrid 100kW สำหรับโรงงาน พร้อมระบบ Peak Shaving ลดค่าไฟได้ 90,000-100,000 บาท/เดือน',
       systemSize: '100', annualEnergy: '150,000', costSaving: '90,000 - 100,000', payback: '4-5',
-      images: ['/projects/5-05-2025/1.jpg', '/projects/5-05-2025/2.jpg', '/projects/5-05-2025/3.jpg', '/projects/5-05-2025/4.jpg', '/projects/5-05-2025/5.jpg'],
+      images: ['/projects/5-05-2025/1.webp', '/projects/5-05-2025/2.webp', '/projects/5-05-2025/3.webp', '/projects/5-05-2025/4.webp', '/projects/5-05-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 20kW 3 Phase x 5 เครื่อง' },
         { name: 'Battery', detail: 'KB Energy Storage 16kWh x 16 ลูก' },
@@ -97,7 +97,7 @@ const Projects = () => {
       title: 'Hybrid 5kW วัด', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid 5kW สำหรับวัด พร้อมแบตเตอรี่ 16kWh ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '5', annualEnergy: '7,500', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/7-05-2025/1.jpg', '/projects/7-05-2025/2.jpg', '/projects/7-05-2025/3.jpg', '/projects/7-05-2025/4.jpg', '/projects/7-05-2025/5.jpg'],
+      images: ['/projects/7-05-2025/1.webp', '/projects/7-05-2025/2.webp', '/projects/7-05-2025/3.webp', '/projects/7-05-2025/4.webp', '/projects/7-05-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'KB Energy Storage 16kWh' },
@@ -110,7 +110,7 @@ const Projects = () => {
       title: 'Hybrid 10kW + Battery 20kWh', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid 10kW พร้อมแบตเตอรี่ 20kWh และระบบ Backup ลดค่าไฟได้ 7,000-7,500 บาท/เดือน',
       systemSize: '11.25', annualEnergy: '16,875', costSaving: '7,000 - 7,500', payback: '4-5',
-      images: ['/projects/9-05-2025/1.jpg', '/projects/9-05-2025/2.jpg', '/projects/9-05-2025/3.jpg', '/projects/9-05-2025/4.jpg', '/projects/9-05-2025/5.jpg'],
+      images: ['/projects/9-05-2025/1.webp', '/projects/9-05-2025/2.webp', '/projects/9-05-2025/3.webp', '/projects/9-05-2025/4.webp', '/projects/9-05-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 10kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 20kWh' },
@@ -123,7 +123,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 20kWh', location: 'กรุงเทพมหานคร',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 20kWh และระบบ Full Backup',
       systemSize: '8', annualEnergy: '12,000', costSaving: '4,000 - 5,000', payback: '4-5',
-      images: ['/projects/12-05-2025/1.jpg', '/projects/12-05-2025/2.jpg', '/projects/12-05-2025/3.jpg', '/projects/12-05-2025/4.jpg', '/projects/12-05-2025/5.jpg'],
+      images: ['/projects/12-05-2025/1.webp', '/projects/12-05-2025/2.webp', '/projects/12-05-2025/3.webp', '/projects/12-05-2025/4.webp', '/projects/12-05-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 10kWh x 2 ลูก' },
@@ -136,7 +136,7 @@ const Projects = () => {
       title: 'Hybrid 6kW + Battery 15kWh', location: 'นนทบุรี',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 15kWh และระบบ Full Backup',
       systemSize: '6', annualEnergy: '9,000', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/14-05-2025/1.jpg', '/projects/14-05-2025/2.jpg', '/projects/14-05-2025/3.jpg', '/projects/14-05-2025/4.jpg', '/projects/14-05-2025/5.jpg'],
+      images: ['/projects/14-05-2025/1.webp', '/projects/14-05-2025/2.webp', '/projects/14-05-2025/3.webp', '/projects/14-05-2025/4.webp', '/projects/14-05-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -149,7 +149,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 20kWh', location: 'นครปฐม',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 20kWh และระบบสำรองไฟทั้งระบบ',
       systemSize: '8.82', annualEnergy: '13,230', costSaving: '4,000 - 4,500', payback: '4-5',
-      images: ['/projects/2-06-2025/1.jpg', '/projects/2-06-2025/2.jpg', '/projects/2-06-2025/3.jpg', '/projects/2-06-2025/4.jpg', '/projects/2-06-2025/5.jpg'],
+      images: ['/projects/2-06-2025/1.webp', '/projects/2-06-2025/2.webp', '/projects/2-06-2025/3.webp', '/projects/2-06-2025/4.webp', '/projects/2-06-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 10kWh x 2 ลูก' },
@@ -162,7 +162,7 @@ const Projects = () => {
       title: 'Hybrid 6kW + Battery 15kWh', location: 'สิงห์บุรี',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 15kWh และระบบ Backup ลดค่าไฟได้ 3,500-4,000 บาท/เดือน',
       systemSize: '6.765', annualEnergy: '10,148', costSaving: '3,500 - 4,000', payback: '4-5',
-      images: ['/projects/9-06-2025/1.jpg', '/projects/9-06-2025/2.jpg', '/projects/9-06-2025/3.jpg', '/projects/9-06-2025/4.jpg', '/projects/9-06-2025/5.jpg'],
+      images: ['/projects/9-06-2025/1.webp', '/projects/9-06-2025/2.webp', '/projects/9-06-2025/3.webp', '/projects/9-06-2025/4.webp', '/projects/9-06-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -175,7 +175,7 @@ const Projects = () => {
       title: 'Hybrid 5kW Deye', location: 'ลพบุรี',
       description: 'ระบบ Hybrid 5kW พร้อมแบตเตอรี่ 10kWh และระบบสำรองไฟ ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '6.25', annualEnergy: '9,375', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/23-06-2025/1.jpg', '/projects/23-06-2025/2.jpg', '/projects/23-06-2025/3.jpg', '/projects/23-06-2025/4.jpg', '/projects/23-06-2025/5.jpg'],
+      images: ['/projects/23-06-2025/1.webp', '/projects/23-06-2025/2.webp', '/projects/23-06-2025/3.webp', '/projects/23-06-2025/4.webp', '/projects/23-06-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 10kWh' },
@@ -188,7 +188,7 @@ const Projects = () => {
       title: 'Hybrid 5kW บ้านสวน', location: 'มหาสารคาม',
       description: 'ระบบ Hybrid 5kW สำหรับบ้านสวน ใช้ไฟได้ทั้งกลางวันและกลางคืน เปิดแอร์ได้ 2-3 เครื่อง',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/25-06-2025/1.jpg', '/projects/25-06-2025/2.jpg', '/projects/25-06-2025/3.jpg', '/projects/25-06-2025/4.jpg', '/projects/25-06-2025/5.jpg'],
+      images: ['/projects/25-06-2025/1.webp', '/projects/25-06-2025/2.webp', '/projects/25-06-2025/3.webp', '/projects/25-06-2025/4.webp', '/projects/25-06-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -201,7 +201,7 @@ const Projects = () => {
       title: 'Hybrid 6kW Solis', location: 'ขอนแก่น',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 15kWh และระบบ Backup ลดค่าไฟได้ 3,500-4,000 บาท/เดือน',
       systemSize: '6.765', annualEnergy: '10,148', costSaving: '3,500 - 4,000', payback: '4-5',
-      images: ['/projects/30-06-2025/1.jpg', '/projects/30-06-2025/2.jpg', '/projects/30-06-2025/3.jpg', '/projects/30-06-2025/4.jpg', '/projects/30-06-2025/5.jpg'],
+      images: ['/projects/30-06-2025/1.webp', '/projects/30-06-2025/2.webp', '/projects/30-06-2025/3.webp', '/projects/30-06-2025/4.webp', '/projects/30-06-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -214,7 +214,7 @@ const Projects = () => {
       title: 'Hybrid 10kW + Battery 30kWh', location: 'นครปฐม',
       description: 'ระบบ Hybrid 10kW พร้อมแบตเตอรี่ 30kWh ลดค่าไฟทั้งกลางวันและกลางคืนได้ 5,500-6,500 บาท/เดือน',
       systemSize: '11.07', annualEnergy: '16,605', costSaving: '5,500 - 6,500', payback: '4-5',
-      images: ['/projects/2-07-2025/1.jpg', '/projects/2-07-2025/2.jpg', '/projects/2-07-2025/3.jpg', '/projects/2-07-2025/4.jpg', '/projects/2-07-2025/5.jpg'],
+      images: ['/projects/2-07-2025/1.webp', '/projects/2-07-2025/2.webp', '/projects/2-07-2025/3.webp', '/projects/2-07-2025/4.webp', '/projects/2-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 10kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh x 2 ลูก' },
@@ -227,7 +227,7 @@ const Projects = () => {
       title: 'Hybrid 6kW Luxpower', location: 'ขอนแก่น',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 10kWh ใช้ไฟได้ทั้งกลางวันและกลางคืน',
       systemSize: '3.075', annualEnergy: '4,613', costSaving: '2,000 - 2,500', payback: '4-5',
-      images: ['/projects/7-07-2025/1.jpg', '/projects/7-07-2025/2.jpg', '/projects/7-07-2025/3.jpg', '/projects/7-07-2025/4.jpg', '/projects/7-07-2025/5.jpg'],
+      images: ['/projects/7-07-2025/1.webp', '/projects/7-07-2025/2.webp', '/projects/7-07-2025/3.webp', '/projects/7-07-2025/4.webp', '/projects/7-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Luxpower 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 10kWh' },
@@ -240,7 +240,7 @@ const Projects = () => {
       title: 'Hybrid 5kW Deye', location: 'นนทบุรี',
       description: 'ระบบ Hybrid 5kW พร้อมแบตเตอรี่ 15kWh ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/9-07-2025/1.jpg', '/projects/9-07-2025/2.jpg', '/projects/9-07-2025/3.jpg', '/projects/9-07-2025/4.jpg', '/projects/9-07-2025/5.jpg'],
+      images: ['/projects/9-07-2025/1.webp', '/projects/9-07-2025/2.webp', '/projects/9-07-2025/3.webp', '/projects/9-07-2025/4.webp', '/projects/9-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -253,7 +253,7 @@ const Projects = () => {
       title: 'Off-Grid 5kW Deye', location: 'ขอนแก่น',
       description: 'ระบบ Off-Grid 5kW สำหรับบ้านที่ไฟไม่ถึง ใช้แอร์ได้ 3-4 ตัวกลางวัน 2 ตัวกลางคืน',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/14-07-2025/1.jpg', '/projects/14-07-2025/2.jpg', '/projects/14-07-2025/3.jpg', '/projects/14-07-2025/4.jpg', '/projects/14-07-2025/5.jpg'],
+      images: ['/projects/14-07-2025/1.webp', '/projects/14-07-2025/2.webp', '/projects/14-07-2025/3.webp', '/projects/14-07-2025/4.webp', '/projects/14-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -266,7 +266,7 @@ const Projects = () => {
       title: 'Hybrid 5kW + Battery 20kWh', location: 'สมุทรปราการ',
       description: 'ระบบ Hybrid 5kW พร้อมแบตเตอรี่ 20kWh ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/16-07-2025/1.jpg', '/projects/16-07-2025/2.jpg', '/projects/16-07-2025/3.jpg', '/projects/16-07-2025/4.jpg', '/projects/16-07-2025/5.jpg'],
+      images: ['/projects/16-07-2025/1.webp', '/projects/16-07-2025/2.webp', '/projects/16-07-2025/3.webp', '/projects/16-07-2025/4.webp', '/projects/16-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Deye 5kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 10kWh x 2 ลูก' },
@@ -279,7 +279,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 30kWh + AVR', location: 'ลพบุรี',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 30kWh และ AVR ป้องกันไฟตก ลดค่าไฟได้ 4,500-5,500 บาท/เดือน',
       systemSize: '9.84', annualEnergy: '14,760', costSaving: '4,500 - 5,500', payback: '4-5',
-      images: ['/projects/18-07-2025/1.jpg', '/projects/18-07-2025/2.jpg', '/projects/18-07-2025/3.jpg', '/projects/18-07-2025/4.jpg', '/projects/18-07-2025/5.jpg'],
+      images: ['/projects/18-07-2025/1.webp', '/projects/18-07-2025/2.webp', '/projects/18-07-2025/3.webp', '/projects/18-07-2025/4.webp', '/projects/18-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh x 2 ลูก' },
@@ -293,7 +293,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 20kWh', location: 'สมุทรปราการ',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 20kWh สำหรับบ้านสวน ลดค่าไฟได้ 4,500-5,500 บาท/เดือน',
       systemSize: '8.61', annualEnergy: '12,915', costSaving: '4,500 - 5,500', payback: '4-5',
-      images: ['/projects/25-07-2025/1.jpg', '/projects/25-07-2025/2.jpg', '/projects/25-07-2025/3.jpg', '/projects/25-07-2025/4.jpg', '/projects/25-07-2025/5.jpg'],
+      images: ['/projects/25-07-2025/1.webp', '/projects/25-07-2025/2.webp', '/projects/25-07-2025/3.webp', '/projects/25-07-2025/4.webp', '/projects/25-07-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 10kWh x 2 ลูก' },
@@ -306,7 +306,7 @@ const Projects = () => {
       title: 'Micro Inverter + AC Couple Battery', location: 'กรุงเทพมหานคร',
       description: 'ระบบ Micro Inverter 6kW พร้อม Battery AC Couple 14kWh ลดค่าไฟได้ 3,500-4,000 บาท/เดือน',
       systemSize: '7.38', annualEnergy: '11,070', costSaving: '3,500 - 4,000', payback: '4-5',
-      images: ['/projects/28-07-2025/1.jpg', '/projects/28-07-2025/2.jpg', '/projects/28-07-2025/3.jpg', '/projects/28-07-2025/4.jpg', '/projects/28-07-2025/5.jpg'],
+      images: ['/projects/28-07-2025/1.webp', '/projects/28-07-2025/2.webp', '/projects/28-07-2025/3.webp', '/projects/28-07-2025/4.webp', '/projects/28-07-2025/5.webp'],
       equipment: [
         { name: 'Micro Inverter', detail: 'Atmoce MI-500W x 12 ตัว' },
         { name: 'M-Combiner', detail: 'MC100-T' },
@@ -320,7 +320,7 @@ const Projects = () => {
       title: 'Hybrid 6kW Solis', location: 'นครพนม',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 15kWh และระบบ Full Backup',
       systemSize: '6.5', annualEnergy: '9,750', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/1-08-2025/1.jpg', '/projects/1-08-2025/2.jpg', '/projects/1-08-2025/3.jpg', '/projects/1-08-2025/4.jpg', '/projects/1-08-2025/5.jpg'],
+      images: ['/projects/1-08-2025/1.webp', '/projects/1-08-2025/2.webp', '/projects/1-08-2025/3.webp', '/projects/1-08-2025/4.webp', '/projects/1-08-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -333,7 +333,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 30kWh', location: 'ราชบุรี',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 30kWh และระบบ Full Backup ลดค่าไฟได้ 4,500-5,500 บาท/เดือน',
       systemSize: '8.61', annualEnergy: '12,915', costSaving: '4,500 - 5,500', payback: '5-6',
-      images: ['/projects/6-08-2025/1.jpg', '/projects/6-08-2025/2.jpg', '/projects/6-08-2025/3.jpg', '/projects/6-08-2025/4.jpg', '/projects/6-08-2025/5.jpg'],
+      images: ['/projects/6-08-2025/1.webp', '/projects/6-08-2025/2.webp', '/projects/6-08-2025/3.webp', '/projects/6-08-2025/4.webp', '/projects/6-08-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh x 2 ลูก' },
@@ -346,7 +346,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 16kWh', location: 'ปทุมธานี',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 16kWh และระบบ Full Backup ลดค่าไฟได้ 4,500-5,500 บาท/เดือน',
       systemSize: '8.61', annualEnergy: '12,915', costSaving: '4,500 - 5,500', payback: '4-5',
-      images: ['/projects/13-08-2025/1.jpg', '/projects/13-08-2025/2.jpg', '/projects/13-08-2025/3.jpg', '/projects/13-08-2025/4.jpg', '/projects/13-08-2025/5.jpg'],
+      images: ['/projects/13-08-2025/1.webp', '/projects/13-08-2025/2.webp', '/projects/13-08-2025/3.webp', '/projects/13-08-2025/4.webp', '/projects/13-08-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 16kWh' },
@@ -359,7 +359,7 @@ const Projects = () => {
       title: 'Hybrid 6kW + Battery 45kWh', location: 'ตรัง',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 45kWh และระบบ Full Backup ลดค่าไฟได้ 9,000-10,500 บาท/เดือน',
       systemSize: '18.4', annualEnergy: '27,600', costSaving: '9,000 - 10,500', payback: '4-5',
-      images: ['/projects/22-08-2025/1.jpg', '/projects/22-08-2025/2.jpg', '/projects/22-08-2025/3.jpg', '/projects/22-08-2025/4.jpg', '/projects/22-08-2025/5.jpg'],
+      images: ['/projects/22-08-2025/1.webp', '/projects/22-08-2025/2.webp', '/projects/22-08-2025/3.webp', '/projects/22-08-2025/4.webp', '/projects/22-08-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh x 3 ลูก' },
@@ -372,7 +372,7 @@ const Projects = () => {
       title: 'Micro Inverter 5kW', location: 'กรุงเทพมหานคร',
       description: 'ระบบ Micro Inverter 5kW เปลี่ยนหลังคาให้เป็นแหล่งพลังงานสะอาด ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/27-08-2025/1.jpg', '/projects/27-08-2025/2.jpg', '/projects/27-08-2025/3.jpg', '/projects/27-08-2025/4.jpg', '/projects/27-08-2025/5.jpg'],
+      images: ['/projects/27-08-2025/1.webp', '/projects/27-08-2025/2.webp', '/projects/27-08-2025/3.webp', '/projects/27-08-2025/4.webp', '/projects/27-08-2025/5.webp'],
       equipment: [
         { name: 'Micro Inverter', detail: 'Atmoce MI-500' },
         { name: 'M-Combiner', detail: 'MC100L' },
@@ -385,7 +385,7 @@ const Projects = () => {
       title: 'Smart Solution Sigenergy + EV Charger', location: 'นนทบุรี',
       description: 'Smart Solution ครบวงจรจาก Sigenergy พร้อม DC EV Charger 25kW รองรับ V2H สลับไฟ 0ms',
       systemSize: '29.9', annualEnergy: '44,850', costSaving: '10,000 - 15,000', payback: '4-5',
-      images: ['/projects/9-09-2025/1.jpg', '/projects/9-09-2025/2.jpg', '/projects/9-09-2025/3.jpg', '/projects/9-09-2025/4.jpg', '/projects/9-09-2025/5.jpg'],
+      images: ['/projects/9-09-2025/1.webp', '/projects/9-09-2025/2.webp', '/projects/9-09-2025/3.webp', '/projects/9-09-2025/4.webp', '/projects/9-09-2025/5.webp'],
       equipment: [
         { name: 'Controller', detail: 'Sigen EC 25kW' },
         { name: 'EV Charger', detail: 'Sigen DC EV Charger 25kW (V2H)' },
@@ -399,7 +399,7 @@ const Projects = () => {
       title: 'Hybrid 6kW + Battery 15kWh', location: 'นครปฐม',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 15kWh และระบบ Full Backup ลดค่าไฟได้ 3,000-3,500 บาท/เดือน',
       systemSize: '6.5', annualEnergy: '9,750', costSaving: '3,000 - 3,500', payback: '4-5',
-      images: ['/projects/26-09-2025/1.jpg', '/projects/26-09-2025/2.jpg', '/projects/26-09-2025/3.jpg', '/projects/26-09-2025/4.jpg', '/projects/26-09-2025/5.jpg'],
+      images: ['/projects/26-09-2025/1.webp', '/projects/26-09-2025/2.webp', '/projects/26-09-2025/3.webp', '/projects/26-09-2025/4.webp', '/projects/26-09-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -412,7 +412,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 15kWh', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 15kWh และระบบ Full Backup ลดค่าไฟได้ 4,000-5,000 บาท/เดือน',
       systemSize: '7.5', annualEnergy: '11,250', costSaving: '4,000 - 5,000', payback: '4-5',
-      images: ['/projects/29-09-2025/1.jpg', '/projects/29-09-2025/2.jpg', '/projects/29-09-2025/3.jpg', '/projects/29-09-2025/4.jpg', '/projects/29-09-2025/5.jpg'],
+      images: ['/projects/29-09-2025/1.webp', '/projects/29-09-2025/2.webp', '/projects/29-09-2025/3.webp', '/projects/29-09-2025/4.webp', '/projects/29-09-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh' },
@@ -425,7 +425,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 32kWh', location: 'กรุงเทพมหานคร',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 32kWh และระบบ Full Backup ลดค่าไฟได้ 4,000-5,000 บาท/เดือน',
       systemSize: '9.1', annualEnergy: '13,650', costSaving: '4,000 - 5,000', payback: '4-5',
-      images: ['/projects/10-10-2025/1.jpg', '/projects/10-10-2025/2.jpg', '/projects/10-10-2025/3.jpg', '/projects/10-10-2025/4.jpg', '/projects/10-10-2025/5.jpg'],
+      images: ['/projects/10-10-2025/1.webp', '/projects/10-10-2025/2.webp', '/projects/10-10-2025/3.webp', '/projects/10-10-2025/4.webp', '/projects/10-10-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 16kWh x 2 ลูก' },
@@ -438,7 +438,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 30kWh', location: 'กรุงเทพมหานคร',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 30kWh และระบบ Full Backup ลดค่าไฟได้ 4,500-5,500 บาท/เดือน',
       systemSize: '13', annualEnergy: '19,500', costSaving: '4,500 - 5,500', payback: '4-5',
-      images: ['/projects/15-10-2025/1.jpg', '/projects/15-10-2025/2.jpg', '/projects/15-10-2025/3.jpg', '/projects/15-10-2025/4.jpg', '/projects/15-10-2025/5.jpg'],
+      images: ['/projects/15-10-2025/1.webp', '/projects/15-10-2025/2.webp', '/projects/15-10-2025/3.webp', '/projects/15-10-2025/4.webp', '/projects/15-10-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 15kWh x 2 ลูก' },
@@ -451,7 +451,7 @@ const Projects = () => {
       title: 'Hybrid 6kW + Battery 16kWh', location: 'กรุงเทพมหานคร',
       description: 'ระบบ Hybrid 6kW พร้อมแบตเตอรี่ 16kWh และระบบ Full Backup ลดค่าไฟได้ 3,500-4,000 บาท/เดือน',
       systemSize: '7.8', annualEnergy: '11,700', costSaving: '3,500 - 4,000', payback: '4-5',
-      images: ['/projects/20-10-2025/1.jpg', '/projects/20-10-2025/2.jpg', '/projects/20-10-2025/3.jpg', '/projects/20-10-2025/4.jpg', '/projects/20-10-2025/5.jpg'],
+      images: ['/projects/20-10-2025/1.webp', '/projects/20-10-2025/2.webp', '/projects/20-10-2025/3.webp', '/projects/20-10-2025/4.webp', '/projects/20-10-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 16kWh' },
@@ -464,7 +464,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 15kWh', location: 'ชลบุรี',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 15kWh และระบบ Full Backup ลดค่าไฟได้ 4,500-5,500 บาท/เดือน',
       systemSize: '9.1', annualEnergy: '13,650', costSaving: '4,500 - 5,500', payback: '4-5',
-      images: ['/projects/27-10-2025/1.jpg', '/projects/27-10-2025/2.jpg', '/projects/27-10-2025/3.jpg', '/projects/27-10-2025/4.jpg', '/projects/27-10-2025/5.jpg'],
+      images: ['/projects/27-10-2025/1.webp', '/projects/27-10-2025/2.webp', '/projects/27-10-2025/3.webp', '/projects/27-10-2025/4.webp', '/projects/27-10-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 5kWh x 3 ลูก' },
@@ -477,7 +477,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 20kWh + Optimizer', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ BYD 20kWh และ Optimizer สำหรับบ้านสวน',
       systemSize: '8.61', annualEnergy: '12,915', costSaving: '4,000 - 5,000', payback: '4-5',
-      images: ['/projects/3-11-2025/1.jpg', '/projects/3-11-2025/2.jpg', '/projects/3-11-2025/3.jpg', '/projects/3-11-2025/4.jpg', '/projects/3-11-2025/5.jpg'],
+      images: ['/projects/3-11-2025/1.webp', '/projects/3-11-2025/2.webp', '/projects/3-11-2025/3.webp', '/projects/3-11-2025/4.webp', '/projects/3-11-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'BYD 5kWh x 4 ลูก' },
@@ -491,7 +491,7 @@ const Projects = () => {
       title: 'Hybrid 50kW 3 Phase โรงแรม', location: 'สมุทรปราการ',
       description: 'ระบบ Hybrid 50kW 3 Phase สำหรับโรงแรมทับทิมสยาม พร้อมแบตเตอรี่ 52.2kWh และระบบ Backup ชั้น 1',
       systemSize: '42.9', annualEnergy: '64,350', costSaving: '20,000 - 25,000', payback: '4-5',
-      images: ['/projects/10-11-2025/1.jpg', '/projects/10-11-2025/2.jpg', '/projects/10-11-2025/3.jpg', '/projects/10-11-2025/4.jpg', '/projects/10-11-2025/5.jpg'],
+      images: ['/projects/10-11-2025/1.webp', '/projects/10-11-2025/2.webp', '/projects/10-11-2025/3.webp', '/projects/10-11-2025/4.webp', '/projects/10-11-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis High Volt 50kW 3 Phase' },
         { name: 'Battery', detail: 'LVTOPSUN High Volt 5kWh x 10 ลูก' },
@@ -504,7 +504,7 @@ const Projects = () => {
       title: 'Micro Inverter 39kW 7-Eleven Laos', location: 'ประเทศลาว',
       description: 'ระบบ Micro Inverter 39kW สำหรับ 7-Eleven ที่ประเทศลาว ตรวจสอบการทำงานรายแผงได้',
       systemSize: '39', annualEnergy: '58,500', costSaving: '15,000 - 20,000', payback: '4-5',
-      images: ['/projects/24-11-2025/1.jpg', '/projects/24-11-2025/2.jpg', '/projects/24-11-2025/3.jpg', '/projects/24-11-2025/4.jpg', '/projects/24-11-2025/5.jpg'],
+      images: ['/projects/24-11-2025/1.webp', '/projects/24-11-2025/2.webp', '/projects/24-11-2025/3.webp', '/projects/24-11-2025/4.webp', '/projects/24-11-2025/5.webp'],
       equipment: [
         { name: 'Micro Inverter', detail: 'Atmoce MI-500 x 60 ตัว' },
         { name: 'M-Combiner', detail: 'MC100-T' },
@@ -517,7 +517,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 32kWh', location: 'อุดรธานี',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 32kWh และระบบ Backup ทั้งหลัง ลดค่าไฟได้ 4,000-5,000 บาท/เดือน',
       systemSize: '10.4', annualEnergy: '15,600', costSaving: '4,000 - 5,000', payback: '5-6',
-      images: ['/projects/27-11-2025/1.jpg', '/projects/27-11-2025/2.jpg', '/projects/27-11-2025/3.jpg', '/projects/27-11-2025/4.jpg', '/projects/27-11-2025/5.jpg'],
+      images: ['/projects/27-11-2025/1.webp', '/projects/27-11-2025/2.webp', '/projects/27-11-2025/3.webp', '/projects/27-11-2025/4.webp', '/projects/27-11-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 8kW 1 Phase' },
         { name: 'Battery', detail: 'LVTOPSUN 16kWh x 2 ลูก' },
@@ -530,7 +530,7 @@ const Projects = () => {
       title: 'Hybrid 8kW + Battery 16kWh', location: 'นนทบุรี',
       description: 'ระบบ Hybrid 8kW พร้อมแบตเตอรี่ 16kWh และระบบ Full Backup ลดค่าไฟได้ 3,800-4,200 บาท/เดือน',
       systemSize: '7.8', annualEnergy: '11,700', costSaving: '3,800 - 4,200', payback: '4-5',
-      images: ['/projects/12-12-2025/1.jpg', '/projects/12-12-2025/2.jpg', '/projects/12-12-2025/3.jpg', '/projects/12-12-2025/4.jpg', '/projects/12-12-2025/5.jpg'],
+      images: ['/projects/12-12-2025/1.webp', '/projects/12-12-2025/2.webp', '/projects/12-12-2025/3.webp', '/projects/12-12-2025/4.webp', '/projects/12-12-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Solis 6kW 1 Phase' },
         { name: 'Battery', detail: 'LVtopsun 16kWh' },
@@ -543,7 +543,7 @@ const Projects = () => {
       title: 'Sigenergy 5kW + Battery 18kWh', location: 'ปทุมธานี',
       description: 'ระบบ Sigenergy 5kW พร้อมแบตเตอรี่ 18kWh ระบบ Full Backup สลับไฟ 0ms',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,200 - 3,800', payback: '4-5',
-      images: ['/projects/17-12-2025/1.jpg', '/projects/17-12-2025/2.jpg', '/projects/17-12-2025/3.jpg', '/projects/17-12-2025/4.jpg', '/projects/17-12-2025/5.jpg'],
+      images: ['/projects/17-12-2025/1.webp', '/projects/17-12-2025/2.webp', '/projects/17-12-2025/3.webp', '/projects/17-12-2025/4.webp', '/projects/17-12-2025/5.webp'],
       equipment: [
         { name: 'Inverter', detail: 'Sigenstor 5kW 1 Phase' },
         { name: 'Gateway', detail: 'Sigen Energy Gateway 1 Phase' },
@@ -557,7 +557,7 @@ const Projects = () => {
       title: 'SIGENERGY 25kW 3 Phase + EV Charger', location: 'ชลบุรี',
       description: 'ระบบ Hybrid SIGENERGY 25kW 3 Phase พร้อม EV Charger DC 25kW และ AC 11kW ลดค่าไฟได้ 6,000-10,000 บาท/เดือน',
       systemSize: '14.3', annualEnergy: '21,450', costSaving: '6,000 - 10,000', payback: '4-5',
-      images: ['/projects/24-12-2025/1.jpg', '/projects/24-12-2025/2.jpg', '/projects/24-12-2025/3.jpg', '/projects/24-12-2025/4.jpg', '/projects/24-12-2025/5.jpg'],
+      images: ['/projects/24-12-2025/1.webp', '/projects/24-12-2025/2.webp', '/projects/24-12-2025/3.webp', '/projects/24-12-2025/4.webp', '/projects/24-12-2025/5.webp'],
       equipment: [
         { name: 'Controller', detail: 'SIGEN 25kW 3 Phase' },
         { name: 'Gateway', detail: 'C60-2' },
@@ -573,7 +573,7 @@ const Projects = () => {
       title: 'SIGENERGY 10kW + EV Charger', location: 'นครราชสีมา',
       description: 'ระบบ Hybrid SIGENERGY 10kW พร้อม EV DC Charger 25kW รองรับทั้งการใช้ไฟในบ้านและชาร์จรถยนต์ไฟฟ้า',
       systemSize: '10', annualEnergy: '15,000', costSaving: '4,000 - 6,000', payback: '5-6',
-      images: ['/projects/30-12-2025/1.jpg', '/projects/30-12-2025/2.jpg', '/projects/30-12-2025/3.jpg', '/projects/30-12-2025/4.jpg', '/projects/30-12-2025/5.jpg'],
+      images: ['/projects/30-12-2025/1.webp', '/projects/30-12-2025/2.webp', '/projects/30-12-2025/3.webp', '/projects/30-12-2025/4.webp', '/projects/30-12-2025/5.webp'],
       equipment: [
         { name: 'Controller', detail: 'SIGEN 10kW Single Phase' },
         { name: 'Gateway', detail: 'Home Single Phase 12k sp' },
