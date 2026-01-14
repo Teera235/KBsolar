@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { ChevronLeft, ChevronRight, Zap, MapPin, Sun, X, Building2, Home, Factory, Hotel, Eye, ChevronDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Zap, MapPin, Sun, X, Building2, Home, Factory, Hotel, Eye, ChevronDown, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeUp } from './AnimatedSection';
 import ThailandMap from './ThailandMap';
@@ -11,6 +11,7 @@ const Projects = () => {
     { id: 'commercial', name: 'อาคารพาณิชย์', icon: Building2 },
     { id: 'hotel', name: 'โรงแรม', icon: Hotel },
     { id: 'industrial', name: 'โรงงาน', icon: Factory },
+    { id: 'international', name: 'ต่างประเทศ', icon: Globe },
   ];
 
   const projects = [
@@ -499,7 +500,7 @@ const Projects = () => {
       warranty: ['งานติดตั้ง 3 ปี', 'Inverter 10 ปี', 'แบตเตอรี่ 7 ปี', 'Mounting 10 ปี', 'แผง 12-30 ปี']
     },
     {
-      id: 38, category: 'commercial', date: '24-11-2025',
+      id: 38, category: 'international', date: '24-11-2025',
       title: 'Micro Inverter 39kW 7-Eleven Laos', location: 'ประเทศลาว',
       description: 'ระบบ Micro Inverter 39kW สำหรับ 7-Eleven ที่ประเทศลาว ตรวจสอบการทำงานรายแผงได้',
       systemSize: '39', annualEnergy: '58,500', costSaving: '15,000 - 20,000', payback: '4-5',
