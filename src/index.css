@@ -6,18 +6,20 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar for whole page */
+/* Custom Scrollbar for whole page - Clean White Theme */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: #f8fafc;
+  border-left: 1px solid #e2e8f0;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #F97316, #FB923C);
-  border-radius: 4px;
+  border-radius: 10px;
+  border: 2px solid #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -26,7 +28,7 @@ html {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #F97316 #1f2937;
+  scrollbar-color: #F97316 #f8fafc;
 }
 
 body {
@@ -195,26 +197,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* Custom Scrollbar for Modals */
+/* Custom Scrollbar for Modals - Clean White Theme */
 .modal-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .modal-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+  background: #ffffff;
+  border-radius: 10px;
 }
 
 .modal-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(249, 115, 22, 0.3);
-  border-radius: 3px;
+  background: linear-gradient(180deg, #fdba74, #F97316);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
 }
 
 .modal-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(249, 115, 22, 0.5);
+  background: linear-gradient(180deg, #F97316, #EA580C);
 }
 
 /* Hide scrollbar but keep functionality */
 .scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: rgba(249, 115, 22, 0.3) transparent;
+  scrollbar-color: #fdba74 #ffffff;
+}
+
+/* Clean scrollbar for overflow containers */
+.clean-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.clean-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.clean-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+.clean-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
 }
