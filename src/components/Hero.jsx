@@ -32,8 +32,6 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      {/* Mobile overflow prevention */}
-      <div className="block sm:hidden fixed inset-0 overflow-x-hidden max-w-full" style={{maxWidth: '100vw'}}></div>
       {/* Background Image with parallax effect */}
       <motion.div 
         className="absolute inset-0"
