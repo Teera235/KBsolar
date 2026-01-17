@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Check, X, Battery, ArrowRight, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FadeUp, StaggerContainer, StaggerItem, HoverScale } from './AnimatedSection';
+import { FadeUp } from './AnimatedSection';
 
 const Packages = () => {
   const [activeTab, setActiveTab] = useState('hybrid');

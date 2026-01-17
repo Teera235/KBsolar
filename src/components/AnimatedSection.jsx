@@ -166,4 +166,6 @@ export const Pulse = ({ children, className = '' }) => (
   </motion.div>
 );
 
-export default { FadeUp, FadeIn, ScaleUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem, AnimatedCounter, HoverScale, Float, Pulse };
+const AnimatedSectionComponents = { FadeUp, FadeIn, ScaleUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem, AnimatedCounter, HoverScale, Float, Pulse };
+
+export default AnimatedSectionComponents;

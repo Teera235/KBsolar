@@ -1,4 +1,3 @@
-import React from 'react';
 import { BarChart3, Cpu, Layers, Award, CheckCircle, TrendingUp, Database, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem, AnimatedCounter } from './AnimatedSection';

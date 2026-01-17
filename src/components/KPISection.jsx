@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Percent, Clock, Leaf, TrendingUp, Shield, Award, Users, Sun, Battery, Wrench, CheckCircle } from 'lucide-react';
+import { Zap, Percent, Clock, Leaf, TrendingUp, Shield, Award, Sun, Battery, Wrench, CheckCircle } from 'lucide-react';
 
 const AnimatedNumber = ({ value, suffix = '' }) => {
   const [count, setCount] = useState(0);
