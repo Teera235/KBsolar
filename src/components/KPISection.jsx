@@ -46,19 +46,19 @@ const KPISection = () => {
   ];
 
   const features = [
-    { icon: Sun, text: 'ใช้พลังงานสะอาด 100%' },
+    { icon: Sun, text: 'ใช้พลังงานสะอาด 100%', mobileText: 'พลังงานสะอาด 100%' },
     { icon: Battery, text: 'สำรองไฟเมื่อไฟดับ' },
-    { icon: TrendingUp, text: 'ค่าไฟลดทันทีที่ติดตั้ง' },
-    { icon: Shield, text: 'รับประกันยาวนาน 25 ปี' },
-    { icon: Wrench, text: 'บริการหลังการขายตลอดชีพ' },
-    { icon: Award, text: 'อุปกรณ์มาตรฐานสากล' },
+    { icon: TrendingUp, text: 'ค่าไฟลดทันทีที่ติดตั้ง', mobileText: 'ค่าไฟลดทันที' },
+    { icon: Shield, text: 'รับประกันยาวนาน 25 ปี', mobileText: 'รับประกัน 25 ปี' },
+    { icon: Wrench, text: 'บริการหลังการขายตลอดชีพ', mobileText: 'บริการหลังการขาย' },
+    { icon: Award, text: 'อุปกรณ์มาตรฐานสากล', mobileText: 'อุปกรณ์มาตรฐาน' },
   ];
 
   const achievements = [
-    { number: '50+', label: 'โปรเจกต์สำเร็จ' },
-    { number: '100%', label: 'ลูกค้าพึงพอใจ' },
+    { number: '50+', label: 'โปรเจกต์สำเร็จ', mobileLabel: 'โปรเจกต์' },
+    { number: '100%', label: 'ลูกค้าพึงพอใจ', mobileLabel: 'พึงพอใจ' },
     { number: '5+', label: 'ปีประสบการณ์' },
-    { number: '500kW+', label: 'กำลังติดตั้งรวม' },
+    { number: '500kW+', label: 'กำลังติดตั้งรวม', mobileLabel: 'กำลังรวม' },
   ];
 
   return (
@@ -133,39 +133,45 @@ const KPISection = () => {
               <p className="text-gray-400 mb-6">
                 การลงทุนที่คุ้มค่าที่สุดสำหรับบ้านและธุรกิจ ประหยัดค่าไฟได้ทันที และยังช่วยรักษาสิ่งแวดล้อม
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-4 features-mobile">
                 {features.map((feature, idx) => (
                   <motion.div
                     key={idx}
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-2 sm:gap-3 feature-item-mobile"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
                   >
-                    <div className="w-10 h-10 bg-kb-orange/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="w-5 h-5 text-kb-orange" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-kb-orange/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <feature.icon className="w-4 h-4 sm:w-5 sm:h-5 text-kb-orange" />
                     </div>
-                    <span className="text-gray-300 text-sm">{feature.text}</span>
+                    <span className="text-gray-300 text-xs sm:text-sm break-words leading-tight feature-text-mobile mobile-card-text">
+                      <span className="block sm:hidden">{feature.mobileText || feature.text}</span>
+                      <span className="hidden sm:block">{feature.text}</span>
+                    </span>
                   </motion.div>
                 ))}
               </div>
             </div>
 
             {/* Right - Stats */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 achievements-mobile">
               {achievements.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10"
+                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-3 sm:p-4 lg:p-6 text-center border border-white/10 achievement-card-mobile"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                   whileHover={{ scale: 1.05, backgroundColor: 'rgba(249, 115, 22, 0.1)' }}
                 >
-                  <p className="text-3xl lg:text-4xl font-bold text-kb-orange mb-1">{item.number}</p>
-                  <p className="text-gray-400 text-sm">{item.label}</p>
+                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-kb-orange mb-1 achievement-number-mobile">{item.number}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm break-words leading-tight achievement-label-mobile mobile-card-text">
+                    <span className="block sm:hidden">{item.mobileLabel || item.label}</span>
+                    <span className="hidden sm:block">{item.label}</span>
+                  </p>
                 </motion.div>
               ))}
             </div>
