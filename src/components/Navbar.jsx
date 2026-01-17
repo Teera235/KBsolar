@@ -64,7 +64,7 @@ const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <a href="#home" className="flex items-center space-x-3">
+          <a href="#home" className="hidden sm:flex items-center space-x-3">
             <img 
               src={process.env.PUBLIC_URL + '/logo.webp'} 
               alt="KB Solar Logo" 
