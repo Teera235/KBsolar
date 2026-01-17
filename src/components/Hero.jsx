@@ -31,7 +31,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden">
+    <section id="home" className="relative min-h-screen overflow-hidden mobile-full-width bg-section-mobile">
       {/* Background Image with parallax effect */}
       <motion.div 
         className="absolute inset-0"
@@ -81,10 +81,10 @@ const Hero = () => {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 overflow-x-hidden">
-        <div className="min-h-screen flex items-center py-16 sm:py-20 pt-24 sm:pt-28 overflow-x-hidden">
+      <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
+        <div className="min-h-screen flex items-center py-16 sm:py-20 pt-24 sm:pt-28">
           <motion.div 
-            className="max-w-xl lg:max-w-2xl space-y-4 sm:space-y-5 overflow-x-hidden"
+            className="max-w-xl lg:max-w-2xl space-y-4 sm:space-y-5"
             variants={containerVariants}
             initial="hidden"
             animate="visible"

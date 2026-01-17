@@ -36,8 +36,8 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-kb-light to-white">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-kb-light to-white mobile-full-width bg-section-mobile">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Content */}
           <SlideLeft>

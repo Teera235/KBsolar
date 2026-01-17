@@ -42,8 +42,8 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 sm:py-20 bg-gray-50">
-      <div className="max-w-3xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+    <section id="faq" className="py-16 sm:py-20 bg-gray-50 mobile-full-width bg-section-mobile">
+      <div className="max-w-3xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
         {/* Header */}
         <FadeUp>
           <div className="text-center mb-12">

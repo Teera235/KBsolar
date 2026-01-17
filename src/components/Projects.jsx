@@ -644,8 +644,8 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+    <section id="projects" className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white mobile-full-width bg-section-mobile">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
         <FadeUp>
           <div className="text-center mb-12">
             <span className="inline-block bg-kb-orange/10 text-kb-orange font-semibold text-sm uppercase tracking-wider px-4 py-2 rounded-full mb-4">

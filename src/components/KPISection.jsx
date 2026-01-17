@@ -62,12 +62,12 @@ const KPISection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden mobile-full-width bg-section-mobile">
       {/* Background Decoration */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-kb-orange/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mobile-container-fix">
         {/* Header */}
         <motion.div 
           className="text-center mb-12"

@@ -162,8 +162,8 @@ const Calculator = () => {
   };
 
   return (
-    <section id="calculator" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="calculator" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 mobile-full-width bg-section-mobile">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-fix">
         <div className="text-center mb-12">
           <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Solar Calculator</span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-4 px-2 sm:px-0">
