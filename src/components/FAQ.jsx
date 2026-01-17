@@ -42,8 +42,8 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-16 sm:py-20 bg-gray-50">
+      <div className="max-w-3xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         {/* Header */}
         <FadeUp>
           <div className="text-center mb-12">
@@ -68,14 +68,15 @@ const FAQ = () => {
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  className="w-full px-3 sm:px-4 lg:px-6 py-3 sm:py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-semibold text-gray-900 pr-4 text-sm sm:text-base">{faq.question}</span>
+                  <span className="font-semibold text-gray-900 pr-3 sm:pr-4 text-sm sm:text-base leading-tight">{faq.question}</span>
                   <motion.div
                     animate={{ rotate: openIndex === idx ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
+                    className="flex-shrink-0"
                   >
-                    <ChevronDown className="w-5 h-5 text-kb-orange flex-shrink-0" />
+                    <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-kb-orange" />
                   </motion.div>
                 </button>
                 <AnimatePresence>
@@ -87,8 +88,8 @@ const FAQ = () => {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-4 sm:px-6 pb-4">
-                        <p className="text-gray-600 leading-relaxed whitespace-pre-line text-sm sm:text-base">{faq.answer}</p>
+                      <div className="px-3 sm:px-4 lg:px-6 pb-3 sm:pb-4">
+                        <p className="text-gray-600 leading-relaxed whitespace-pre-line text-sm sm:text-base break-words">{faq.answer}</p>
                       </div>
                     </motion.div>
                   )}

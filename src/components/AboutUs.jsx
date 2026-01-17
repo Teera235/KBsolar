@@ -37,8 +37,8 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-gradient-to-b from-kb-light to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-kb-light to-white">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Content */}
           <SlideLeft>
@@ -65,22 +65,28 @@ const AboutUs = () => {
                 </p>
                 <p className="text-kb-gray mt-4 leading-relaxed">
                   เราเชื่อว่าการติดตั้งโซลาร์เซลล์ที่ดี ต้องเริ่มจากความเข้าใจ 
-                  ไม่ใช่แค่ขายแผงแล้วจบ
+                  ไม่ใช่แค่ขายแผงแล้วจบ!
                 </p>
               </motion.div>
 
-              {/* Description - Enhanced Line Spacing */}
-              <div className="space-y-6 mb-10">
-                <p className="text-kb-gray leading-loose text-base">
-                  KB Solar Energy เป็นบริษัทที่ให้บริการออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร 
-                  เราทำหน้าที่เป็น <span className="text-kb-dark font-medium">"Energy Educator"</span> ที่ช่วยให้ลูกค้าเข้าใจระบบพลังงานแสงอาทิตย์อย่างแท้จริง 
-                  ก่อนตัดสินใจลงทุน
+              {/* Description - Enhanced Line Spacing - Mobile Responsive */}
+              <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-10 px-1 sm:px-0">
+                <p className="text-kb-gray leading-loose text-sm sm:text-base break-words">
+                  KB Solar Energy คือพันธมิตรด้านพลังงานแสงอาทิตย์ที่พร้อมดูแลคุณอย่างมืออาชีพ 
+                  เรามุ่งมั่นทำงานบนพื้นฐานของข้อมูลจริง ข้อเท็จจริงที่ตรวจสอบได้ และมาตรฐานทางวิศวกรรมระดับสากล 
+                  เพื่อให้ระบบโซลาร์เซลล์ที่คุณเลือกติดตั้งสร้างคุณค่าและประโยชน์สูงสุดให้กับคุณอย่างแท้จริง
                 </p>
 
-                <p className="text-kb-gray leading-loose text-base">
-                  ทุกโปรเจกต์ของเราเริ่มต้นจากการ<span className="text-kb-dark font-medium">วิเคราะห์ข้อมูลจริง</span> ไม่ใช่การคาดเดา 
-                  เราใช้<span className="text-kb-dark font-medium">ซอฟต์แวร์จำลองระบบ</span> วิเคราะห์พฤติกรรมการใช้ไฟฟ้า 
-                  และออกแบบระบบที่เหมาะสมกับความต้องการของลูกค้าแต่ละราย
+                <p className="text-kb-gray leading-loose text-sm sm:text-base break-words">
+                  เราพร้อมดูแลคุณแบบครบวงจร ตั้งแต่การลงพื้นที่สำรวจหน้างานจริง วิเคราะห์ความเหมาะสมของระบบให้สอดคล้องกับบ้านหรือธุรกิจของคุณ 
+                  ออกแบบระบบผลิตไฟฟ้าจากพลังงานแสงอาทิตย์ที่ตอบโจทย์การใช้งานของคุณ ไปจนถึงการติดตั้งโดยทีมงานผู้เชี่ยวชาญ 
+                  พร้อมให้คำแนะนำการใช้งานอย่างละเอียด โดยให้ความสำคัญกับความคุ้มค่า ความปลอดภัย และความยั่งยืนที่คุณจะได้รับในระยะยาว
+                </p>
+
+                <p className="text-kb-gray leading-loose text-sm sm:text-base break-words">
+                  สิ่งที่ทำให้ KB Solar Energy แตกต่าง คือเราออกแบบระบบให้คุณจากข้อมูลการใช้พลังงานจริงของคุณ 
+                  ไม่อาศัยการคาดเดาหรือประมาณการลอย ๆ เพื่อให้ระบบที่ติดตั้งสามารถรองรับการใช้งานของคุณได้อย่างเหมาะสม 
+                  ช่วยลดค่าไฟฟ้า เพิ่มประสิทธิภาพการใช้พลังงาน และสร้างความคุ้มค่าในทุกบาทที่คุณลงทุน
                 </p>
               </div>
 
@@ -154,43 +160,43 @@ const AboutUs = () => {
               ))}
             </StaggerContainer>
 
-            {/* Stats - Glassmorphism Style */}
+            {/* Stats - Glassmorphism Style - Mobile Responsive */}
             <FadeUp delay={0.3}>
-              <div className="grid grid-cols-3 gap-4 mt-8">
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 lg:gap-4 mt-6 sm:mt-8">
                 <motion.div 
-                  className="relative overflow-hidden rounded-2xl p-5 text-center bg-gradient-to-br from-kb-dark/95 to-kb-dark backdrop-blur-sm border border-white/10"
+                  className="relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl p-2.5 sm:p-3 lg:p-5 text-center bg-gradient-to-br from-kb-dark/95 to-kb-dark backdrop-blur-sm border border-white/10"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-kb-orange/10 to-transparent" />
                   <div className="relative">
-                    <p className="text-4xl font-bold bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent">
                       <AnimatedCounter value={50} suffix="+" />
                     </p>
-                    <p className="text-gray-400 text-sm mt-1 font-medium">Projects</p>
+                    <p className="text-gray-400 text-[10px] sm:text-xs lg:text-sm mt-0.5 sm:mt-1 font-medium">Projects</p>
                   </div>
                 </motion.div>
                 <motion.div 
-                  className="relative overflow-hidden rounded-2xl p-5 text-center bg-gradient-to-br from-kb-dark/95 to-kb-dark backdrop-blur-sm border border-white/10"
+                  className="relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl p-2.5 sm:p-3 lg:p-5 text-center bg-gradient-to-br from-kb-dark/95 to-kb-dark backdrop-blur-sm border border-white/10"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent" />
                   <div className="relative">
-                    <p className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                       <AnimatedCounter value={100} suffix="%" />
                     </p>
-                    <p className="text-gray-400 text-sm mt-1 font-medium">Satisfaction</p>
+                    <p className="text-gray-400 text-[10px] sm:text-xs lg:text-sm mt-0.5 sm:mt-1 font-medium">Satisfaction</p>
                   </div>
                 </motion.div>
                 <motion.div 
-                  className="relative overflow-hidden rounded-2xl p-5 text-center bg-gradient-to-br from-kb-dark/95 to-kb-dark backdrop-blur-sm border border-white/10"
+                  className="relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl p-2.5 sm:p-3 lg:p-5 text-center bg-gradient-to-br from-kb-dark/95 to-kb-dark backdrop-blur-sm border border-white/10"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent" />
                   <div className="relative">
-                    <p className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                       <AnimatedCounter value={5} suffix="+" />
                     </p>
-                    <p className="text-gray-400 text-sm mt-1 font-medium">Years Exp.</p>
+                    <p className="text-gray-400 text-[10px] sm:text-xs lg:text-sm mt-0.5 sm:mt-1 font-medium">Years Exp.</p>
                   </div>
                 </motion.div>
               </div>

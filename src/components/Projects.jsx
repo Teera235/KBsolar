@@ -644,8 +644,8 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <FadeUp>
           <div className="text-center mb-12">
             <span className="inline-block bg-kb-orange/10 text-kb-orange font-semibold text-sm uppercase tracking-wider px-4 py-2 rounded-full mb-4">
@@ -676,21 +676,21 @@ const Projects = () => {
 
           <div className="lg:col-span-2 space-y-3 lg:space-y-4 order-1 lg:order-2">
             <FadeUp delay={0.15}>
-              <div className="flex flex-wrap gap-1.5 lg:gap-2 mb-3 lg:mb-4">
+              <div className="flex flex-wrap gap-1 sm:gap-1.5 lg:gap-2 mb-3 lg:mb-4">
                 {categories.map((cat) => {
                   const Icon = cat.icon;
                   return (
                     <button
                       key={cat.id}
                       onClick={() => { setActiveCategory(cat.id); setShowAllProjects(false); }}
-                      className={`flex items-center gap-1 lg:gap-1.5 px-2.5 lg:px-3 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-all ${
+                      className={`flex items-center gap-1 lg:gap-1.5 px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 lg:py-2 rounded-full text-[10px] sm:text-xs lg:text-sm font-medium transition-all ${
                         activeCategory === cat.id
                           ? 'bg-kb-orange text-white shadow-md'
                           : 'bg-white text-kb-gray hover:bg-gray-100 border border-gray-200'
                       }`}
                     >
-                      <Icon className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
-                      <span>{cat.name}</span>
+                      <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                      <span className="whitespace-nowrap">{cat.name}</span>
                     </button>
                   );
                 })}
@@ -713,7 +713,7 @@ const Projects = () => {
                       className="group cursor-pointer"
                     >
                       <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex">
-                        <div className="w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0 relative overflow-hidden">
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 flex-shrink-0 relative overflow-hidden">
                           <img
                             src={process.env.PUBLIC_URL + project.images[0]}
                             alt={project.title}
@@ -721,35 +721,35 @@ const Projects = () => {
                           />
                         </div>
                         
-                        <div className="flex-1 p-2.5 lg:p-3 flex flex-col justify-between min-w-0">
+                        <div className="flex-1 p-2 sm:p-2.5 lg:p-3 flex flex-col justify-between min-w-0">
                           <div>
-                            <div className="flex items-center gap-1 lg:gap-1.5 text-[10px] lg:text-xs text-kb-gray mb-1">
-                              <CategoryIcon className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-kb-orange flex-shrink-0" />
+                            <div className="flex items-center gap-1 lg:gap-1.5 text-[9px] sm:text-[10px] lg:text-xs text-kb-gray mb-1">
+                              <CategoryIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 text-kb-orange flex-shrink-0" />
                               <span className="truncate">{getCategoryName(project.category)}</span>
                               <span>•</span>
-                              <MapPin className="w-2.5 h-2.5 lg:w-3 lg:h-3 flex-shrink-0" />
+                              <MapPin className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 flex-shrink-0" />
                               <span className="truncate">{project.location}</span>
                             </div>
-                            <h4 className="font-bold text-kb-dark text-xs lg:text-sm line-clamp-2 group-hover:text-kb-orange transition-colors">
+                            <h4 className="font-bold text-kb-dark text-xs sm:text-sm line-clamp-2 group-hover:text-kb-orange transition-colors leading-tight">
                               {project.title}
                             </h4>
                           </div>
                           
-                          <div className="flex items-center gap-1.5 lg:gap-2 mt-1.5 lg:mt-2 flex-wrap">
-                            <span className="bg-kb-orange text-white text-[9px] lg:text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
+                          <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 mt-1.5 lg:mt-2 flex-wrap">
+                            <span className="bg-kb-orange text-white text-[8px] sm:text-[9px] lg:text-[10px] px-1 sm:px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
                               {project.systemSize} kWp
                             </span>
-                            <span className="text-[9px] lg:text-[10px] text-kb-gray whitespace-nowrap">
+                            <span className="text-[8px] sm:text-[9px] lg:text-[10px] text-kb-gray whitespace-nowrap">
                               {project.annualEnergy} kWh/ปี
                             </span>
-                            <span className="text-[9px] lg:text-[10px] text-green-600 font-medium whitespace-nowrap">
+                            <span className="text-[8px] sm:text-[9px] lg:text-[10px] text-green-600 font-medium whitespace-nowrap">
                               ฿ {project.costSaving.split(' - ')[0]}/เดือน
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex items-center pr-2 lg:pr-4">
-                          <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5 text-gray-300 group-hover:text-kb-orange group-hover:translate-x-1 transition-all" />
+                        <div className="flex items-center pr-1 sm:pr-2 lg:pr-4">
+                          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-gray-300 group-hover:text-kb-orange group-hover:translate-x-1 transition-all" />
                         </div>
                       </div>
                     </motion.div>

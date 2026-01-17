@@ -85,8 +85,8 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-16 sm:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <FadeUp>
           <div className="text-center mb-16">
             <span className="text-kb-orange font-semibold text-sm uppercase tracking-wider">Contact Us</span>
@@ -103,7 +103,7 @@ const Contact = () => {
           {/* Contact Info & Map */}
           <SlideLeft>
             <div>
-              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8" staggerDelay={0.1}>
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-6 sm:mb-8" staggerDelay={0.1}>
                 {contactInfo.map((item, index) => (
                   <StaggerItem key={index}>
                     <motion.a
@@ -115,13 +115,13 @@ const Contact = () => {
                       whileTap={{ scale: 0.98 }}
                     >
                       <motion.div 
-                        className={`w-9 h-9 sm:w-10 sm:h-10 ${item.color} rounded-lg flex items-center justify-center mb-2 sm:mb-3`}
+                        className={`w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 ${item.color} rounded-lg flex items-center justify-center mb-2 sm:mb-3`}
                         whileHover={{ rotate: 10 }}
                       >
                         <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </motion.div>
                       <p className="text-xs sm:text-sm text-kb-gray">{item.label}</p>
-                      <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-all">
+                      <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-all leading-tight">
                         {item.value}
                       </p>
                     </motion.a>
@@ -129,9 +129,9 @@ const Contact = () => {
                 ))}
               </StaggerContainer>
 
-              {/* Google Map */}
+              {/* Google Map - Mobile Responsive */}
               <motion.div 
-                className="rounded-2xl overflow-hidden h-64 lg:h-80 shadow-lg"
+                className="rounded-2xl overflow-hidden h-48 sm:h-64 lg:h-80 shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -154,10 +154,10 @@ const Contact = () => {
           {/* Contact Form */}
           <SlideRight>
             <motion.div 
-              className="bg-kb-light rounded-2xl p-5 sm:p-8"
+              className="bg-kb-light rounded-2xl p-4 sm:p-5 lg:p-8"
               whileHover={{ boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
             >
-              <h3 className="text-xl font-bold text-kb-dark mb-6">Request Solar Assessment</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-kb-dark mb-4 sm:mb-6">Request Solar Assessment</h3>
               
               {submitted ? (
                 <motion.div 
