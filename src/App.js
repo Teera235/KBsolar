@@ -20,7 +20,7 @@ import BackToTop from './components/BackToTop';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white m-0 p-0 overflow-x-hidden">
       <Navbar />
       <Hero />
       <Partners />

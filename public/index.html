@@ -151,7 +151,30 @@
       #loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
       }
+      
+      /* Mobile specific loading screen fixes */
+      @media (max-width: 640px) {
+        #loading-screen {
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+        }
+        
+        body {
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow-x: hidden !important;
+        }
+        
+        html {
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow-x: hidden !important;
+        }
+      }
+      
       .loader-logo {
         width: 120px;
         height: 120px;
@@ -214,9 +237,35 @@
     <!-- Hide loading screen when app loads -->
     <script>
       window.addEventListener('load', function() {
+        // Faster loading screen hide for mobile
+        const isMobile = window.innerWidth <= 640;
+        const delay = isMobile ? 500 : 1000;
+        
         setTimeout(function() {
-          document.getElementById('loading-screen').classList.add('hidden');
-        }, 1000);
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            // Remove from DOM after animation
+            setTimeout(function() {
+              if (loadingScreen.parentNode) {
+                loadingScreen.parentNode.removeChild(loadingScreen);
+              }
+            }, 500);
+          }
+        }, delay);
+      });
+      
+      // Also hide on DOMContentLoaded for faster response
+      document.addEventListener('DOMContentLoaded', function() {
+        const isMobile = window.innerWidth <= 640;
+        if (isMobile) {
+          setTimeout(function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+              loadingScreen.classList.add('hidden');
+            }
+          }, 300);
+        }
       });
     </script>
   </body>
