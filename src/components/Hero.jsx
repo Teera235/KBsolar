@@ -42,7 +42,7 @@ const Hero = () => {
         <img 
           src={process.env.PUBLIC_URL + '/hero-bg.webp'} 
           alt="Solar Panel Background" 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover sm:object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
       </motion.div>
