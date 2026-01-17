@@ -166,8 +166,14 @@ const Calculator = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Solar Calculator</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">คำนวณความคุ้มค่าโซลาร์เซลล์</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-4 px-2 sm:px-0">
+            <span className="block sm:hidden">คำนวณความคุ้มค่า<br />โซลาร์เซลล์</span>
+            <span className="hidden sm:block">คำนวณความคุ้มค่าโซลาร์เซลล์</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4 sm:px-0 leading-relaxed">
+            <span className="block sm:hidden">กรอกข้อมูลการใช้ไฟฟ้าของคุณ<br />เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน</span>
+            <span className="hidden sm:block">กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน</span>
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">

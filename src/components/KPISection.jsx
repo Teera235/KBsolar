@@ -39,10 +39,10 @@ const AnimatedNumber = ({ value, suffix = '' }) => {
 
 const KPISection = () => {
   const kpis = [
-    { icon: Zap, value: 150000, suffix: '+', unit: 'kWh/year', label: 'พลังงานที่ผลิตได้ต่อปี', description: 'Total Energy Generated' },
+    { icon: Zap, value: 150000, suffix: '+', unit: 'kWh/year', label: 'พลังงานที่ผลิต', mobileLabel: 'พลังงานที่ผลิตได้ต่อปี', description: 'Total Energy Generated' },
     { icon: Percent, value: 70, suffix: '', unit: '%', label: 'ลดค่าไฟฟ้า', description: 'Electricity Cost Reduction' },
     { icon: Clock, value: '4-6', suffix: '', unit: 'ปี', label: 'ระยะเวลาคืนทุน', description: 'Payback Period', isText: true },
-    { icon: Leaf, value: 85, suffix: '', unit: 'Tons', label: 'ลด CO₂ ต่อปี', description: 'Carbon Reduction' }
+    { icon: Leaf, value: 85, suffix: '', unit: 'Tons', label: 'ลด CO₂ ต่อปี', mobileLabel: 'ลด CO₂', description: 'Carbon Reduction' }
   ];
 
   const features = [
@@ -79,13 +79,14 @@ const KPISection = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-2">
             ทำไมต้องติดตั้งโซลาร์เซลล์?
           </h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
-            ประหยัดค่าไฟ สร้างพลังงานสะอาด และคืนทุนได้จริงภายใน 4-6 ปี
+          <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base px-4 sm:px-0 leading-relaxed">
+            <span className="block sm:hidden">ประหยัดค่าไฟ สร้างพลังงานสะอาด<br />และคืนทุนได้จริงภายใน 4-6 ปี</span>
+            <span className="hidden sm:block">ประหยัดค่าไฟ สร้างพลังงานสะอาด และคืนทุนได้จริงภายใน 4-6 ปี</span>
           </p>
         </motion.div>
 
         {/* Main KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 mb-16 kpi-grid-mobile">
           {kpis.map((kpi, index) => (
             <motion.div
               key={index}
@@ -94,21 +95,24 @@ const KPISection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(249, 115, 22, 0.15)' }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 cursor-default group"
+              className="bg-white rounded-2xl p-3 sm:p-4 lg:p-6 shadow-lg border border-gray-100 cursor-default group kpi-card-mobile mobile-text-container"
             >
               <motion.div 
-                className="w-14 h-14 bg-gradient-to-br from-kb-orange to-amber-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-kb-orange/20 group-hover:scale-110 transition-transform"
+                className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-kb-orange to-amber-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg shadow-kb-orange/20 group-hover:scale-110 transition-transform"
               >
-                <kpi.icon className="w-7 h-7 text-white" />
+                <kpi.icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" />
               </motion.div>
               <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-3xl lg:text-4xl font-bold text-gray-900">
+                <span className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 leading-none">
                   {kpi.isText ? kpi.value : <AnimatedNumber value={kpi.value} suffix={kpi.suffix} />}
                 </span>
-                <span className="text-lg text-gray-500 font-medium">{kpi.unit}</span>
+                <span className="text-sm sm:text-base lg:text-lg text-gray-500 font-medium">{kpi.unit}</span>
               </div>
-              <p className="text-gray-900 font-semibold">{kpi.label}</p>
-              <p className="text-sm text-gray-400">{kpi.description}</p>
+              <p className="text-gray-900 font-semibold text-sm sm:text-base break-words leading-tight kpi-label-mobile mobile-break-text">
+                <span className="block sm:hidden">{kpi.mobileLabel || kpi.label}</span>
+                <span className="hidden sm:block">{kpi.label}</span>
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400 break-words kpi-description-mobile mobile-break-text">{kpi.description}</p>
             </motion.div>
           ))}
         </div>

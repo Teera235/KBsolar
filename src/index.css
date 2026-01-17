@@ -341,3 +341,47 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0.75rem;
   }
 }
+/* Mobile Text Overflow Fixes - Specific for KPI Section */
+@media (max-width: 640px) {
+  /* KPI Cards Mobile Optimization */
+  .kpi-card-mobile {
+    padding: 0.75rem !important;
+    min-height: auto;
+  }
+  
+  .kpi-label-mobile {
+    font-size: 0.875rem !important;
+    line-height: 1.2 !important;
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+  
+  .kpi-description-mobile {
+    font-size: 0.75rem !important;
+    line-height: 1.1 !important;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Prevent text overflow in mobile KPI cards */
+  .mobile-text-container {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Better spacing for mobile KPI grid */
+  .kpi-grid-mobile {
+    gap: 0.5rem !important;
+  }
+  
+  /* Mobile-specific text wrapping */
+  .mobile-break-text {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+  }
+}
