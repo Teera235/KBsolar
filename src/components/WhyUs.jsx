@@ -75,28 +75,31 @@ const WhyUs = () => {
         {/* Warranty Bar */}
         <FadeUp delay={0.3}>
           <motion.div 
-            className="bg-white rounded-2xl shadow-lg p-8"
+            className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 warranty-mobile"
             whileHover={{ scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <div className="grid grid-cols-3 divide-x divide-gray-200">
+            <div className="grid grid-cols-3 divide-x divide-gray-200 warranty-grid-mobile">
               {warranties.map((item, idx) => (
                 <motion.div 
                   key={idx} 
-                  className="text-center px-4"
+                  className="text-center px-2 sm:px-4 warranty-item-mobile"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className={`text-5xl md:text-6xl font-bold ${item.color}`}>
+                  <div className="flex items-baseline justify-center gap-1 sm:gap-2">
+                    <span className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${item.color} warranty-number-mobile`}>
                       <AnimatedCounter value={item.years} duration={1.5} />
                     </span>
-                    <span className="text-gray-500 text-sm uppercase tracking-wider">Years</span>
+                    <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider warranty-years-mobile">
+                      <span className="block sm:hidden">YR</span>
+                      <span className="hidden sm:block">Years</span>
+                    </span>
                   </div>
-                  <p className="text-gray-700 font-medium mt-1">{item.label}</p>
-                  <p className="text-gray-900 font-bold">{item.sublabel}</p>
+                  <p className="text-gray-700 font-medium mt-1 text-xs sm:text-sm warranty-label-mobile">{item.label}</p>
+                  <p className="text-gray-900 font-bold text-xs sm:text-sm warranty-sublabel-mobile">{item.sublabel}</p>
                 </motion.div>
               ))}
             </div>

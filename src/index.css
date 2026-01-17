@@ -434,3 +434,40 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 100%;
   }
 }
+/* Mobile Warranty Section Optimization */
+@media (max-width: 640px) {
+  /* Warranty section mobile optimization */
+  .warranty-mobile {
+    padding: 1rem !important;
+  }
+  
+  .warranty-item-mobile {
+    padding: 0.5rem !important;
+  }
+  
+  .warranty-number-mobile {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .warranty-years-mobile {
+    font-size: 0.75rem !important;
+    line-height: 1 !important;
+  }
+  
+  .warranty-label-mobile {
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+    margin-top: 0.25rem !important;
+  }
+  
+  .warranty-sublabel-mobile {
+    font-size: 0.75rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  /* Better spacing for warranty grid */
+  .warranty-grid-mobile {
+    gap: 0.5rem;
+  }
+}
