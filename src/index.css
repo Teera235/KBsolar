@@ -546,10 +546,10 @@ h1, h2, h3, h4, h5, h6 {
   /* Mobile Hero Background Image Fix */
   #home .absolute.inset-0 img {
     width: 100vw !important;
-    height: 100vh !important;
+    height: 120vh !important;
     object-fit: cover !important;
-    object-position: center !important;
-    min-height: 100vh !important;
+    object-position: center top !important;
+    min-height: 120vh !important;
     max-width: none !important;
   }
   
