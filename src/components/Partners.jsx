@@ -239,9 +239,9 @@ const Partners = () => {
                     </div>
                     <button
                       onClick={() => setSelectedPartner(null)}
-                      className="w-12 h-12 sm:w-10 sm:h-10 bg-kb-orange hover:bg-kb-orange-dark sm:bg-white/20 sm:hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+                      className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors mobile-close-button"
                     >
-                      <X className="w-6 h-6 sm:w-5 sm:h-5 text-white" />
+                      <X className="w-5 h-5 text-white mobile-close-icon" />
                     </button>
                   </div>
                   <p className="text-white/90 mt-3 sm:mt-4 text-sm sm:text-lg">{selectedPartner.tagline}</p>

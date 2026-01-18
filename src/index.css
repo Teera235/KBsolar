@@ -551,4 +551,20 @@ h1, h2, h3, h4, h5, h6 {
     object-position: center !important;
     min-height: 100vh !important;
   }
+  
+  /* Mobile Modal Close Button Fix */
+  .mobile-close-button {
+    width: 3rem !important; /* 48px */
+    height: 3rem !important; /* 48px */
+    background-color: #F97316 !important; /* KB Orange */
+  }
+  
+  .mobile-close-button:hover {
+    background-color: #EA580C !important; /* KB Orange Dark */
+  }
+  
+  .mobile-close-icon {
+    width: 1.5rem !important; /* 24px */
+    height: 1.5rem !important; /* 24px */
+  }
 }
