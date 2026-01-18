@@ -219,8 +219,9 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
       >
+        {/* Desktop - Mouse Scroll Indicator */}
         <motion.div 
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+          className="hidden sm:flex w-6 h-10 border-2 border-white/30 rounded-full justify-center pt-2"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
@@ -229,6 +230,27 @@ const Hero = () => {
             animate={{ opacity: [0.5, 1, 0.5], y: [0, 4, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
+        </motion.div>
+
+        {/* Mobile - Phone Scroll Indicator */}
+        <motion.div 
+          className="sm:hidden flex flex-col items-center"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          {/* Phone Shape */}
+          <div className="w-8 h-14 border-2 border-white/30 rounded-2xl flex flex-col items-center justify-between p-1">
+            {/* Screen */}
+            <div className="w-full h-8 bg-white/10 rounded-lg flex items-center justify-center">
+              <motion.div 
+                className="w-1 h-4 bg-white/50 rounded-full"
+                animate={{ opacity: [0.5, 1, 0.5], y: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+            </div>
+            {/* Home Button */}
+            <div className="w-2 h-2 bg-white/30 rounded-full"></div>
+          </div>
         </motion.div>
       </motion.div>
     </section>
