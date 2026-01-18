@@ -214,19 +214,19 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
       >
         {/* Desktop - Mouse Indicator */}
         <motion.div 
-          className="hidden sm:block w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+          className="hidden sm:flex w-6 h-10 border-2 border-white/40 rounded-full justify-center pt-2 bg-white/5 backdrop-blur-sm"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           <motion.div 
-            className="w-1.5 h-3 bg-white/50 rounded-full"
+            className="w-1.5 h-3 bg-white/70 rounded-full"
             animate={{ opacity: [0.5, 1, 0.5], y: [0, 4, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
