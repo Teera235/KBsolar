@@ -235,27 +235,27 @@ const Hero = () => {
         {/* Mobile - Phone Indicator */}
         <motion.div 
           className="block sm:hidden"
-          animate={{ y: [0, 12, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="relative w-8 h-14 border-2 border-white/40 rounded-lg bg-white/5 backdrop-blur-sm">
+          <div className="relative w-6 h-10 border-2 border-white/40 rounded-md bg-white/5 backdrop-blur-sm">
             {/* Phone Screen */}
-            <div className="absolute top-1 left-1 right-1 bottom-1 bg-white/10 rounded-md">
+            <div className="absolute top-0.5 left-0.5 right-0.5 bottom-0.5 bg-white/10 rounded-sm">
               {/* Screen Content Lines */}
-              <div className="absolute top-2 left-1 right-1 space-y-1">
+              <div className="absolute top-1 left-0.5 right-0.5 space-y-0.5">
                 <div className="h-0.5 bg-white/30 rounded-full"></div>
                 <div className="h-0.5 bg-white/20 rounded-full w-3/4"></div>
                 <div className="h-0.5 bg-white/20 rounded-full w-1/2"></div>
               </div>
               {/* Scroll Indicator Dot */}
               <motion.div 
-                className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-kb-orange rounded-full"
-                animate={{ y: [0, -6, 0], opacity: [0.5, 1, 0.5] }}
+                className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0.5 h-0.5 bg-kb-orange rounded-full"
+                animate={{ y: [0, -4, 0], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>
             {/* Home Button */}
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 border border-white/30 rounded-full bg-white/10"></div>
+            <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 border border-white/30 rounded-full bg-white/10"></div>
           </div>
         </motion.div>
       </motion.div>
