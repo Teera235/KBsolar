@@ -219,9 +219,9 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
       >
-        {/* Desktop - Mouse Scroll Indicator */}
+        {/* Desktop - Mouse Indicator */}
         <motion.div 
-          className="hidden sm:flex w-6 h-10 border-2 border-white/30 rounded-full justify-center pt-2"
+          className="hidden sm:block w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
@@ -232,24 +232,30 @@ const Hero = () => {
           />
         </motion.div>
 
-        {/* Mobile - Phone Scroll Indicator */}
+        {/* Mobile - Phone Indicator */}
         <motion.div 
-          className="sm:hidden flex flex-col items-center"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          className="block sm:hidden"
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
         >
-          {/* Phone Shape */}
-          <div className="w-8 h-14 border-2 border-white/30 rounded-2xl flex flex-col items-center justify-between p-1">
-            {/* Screen */}
-            <div className="w-full h-8 bg-white/10 rounded-lg flex items-center justify-center">
+          <div className="relative w-8 h-14 border-2 border-white/40 rounded-lg bg-white/5 backdrop-blur-sm">
+            {/* Phone Screen */}
+            <div className="absolute top-1 left-1 right-1 bottom-1 bg-white/10 rounded-md">
+              {/* Screen Content Lines */}
+              <div className="absolute top-2 left-1 right-1 space-y-1">
+                <div className="h-0.5 bg-white/30 rounded-full"></div>
+                <div className="h-0.5 bg-white/20 rounded-full w-3/4"></div>
+                <div className="h-0.5 bg-white/20 rounded-full w-1/2"></div>
+              </div>
+              {/* Scroll Indicator Dot */}
               <motion.div 
-                className="w-1 h-4 bg-white/50 rounded-full"
-                animate={{ opacity: [0.5, 1, 0.5], y: [0, 3, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-kb-orange rounded-full"
+                animate={{ y: [0, -6, 0], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
               />
             </div>
             {/* Home Button */}
-            <div className="w-2 h-2 bg-white/30 rounded-full"></div>
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 border border-white/30 rounded-full bg-white/10"></div>
           </div>
         </motion.div>
       </motion.div>
