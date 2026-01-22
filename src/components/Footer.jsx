@@ -55,9 +55,10 @@ const Footer = () => {
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               <span className="hidden sm:inline">Solar Energy Solutions Designed by Data, Not Assumptions. </span>
+              <span className="block sm:hidden">Solar Energy Solutions Designed by Data, Not Assumptions. </span>
               ออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร โดยทีมวิศวกรมืออาชีพ
             </p>
-            <p className="text-gray-500 text-sm italic mb-6 hidden sm:block">
+            <p className="text-gray-500 text-sm italic mb-6">
               "Study, Learn, and Build with Understanding"
             </p>
             
