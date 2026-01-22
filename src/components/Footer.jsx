@@ -51,7 +51,7 @@ const Footer = () => {
                 alt="KB Solar Logo" 
                 className="h-12 w-auto rounded-lg"
               />
-              <span className="font-bold text-xl">KB Solar Energy</span>
+              <span className="font-bold text-xl hidden sm:inline">KB Solar Energy</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               <span className="hidden sm:inline">Solar Energy Solutions Designed by Data, Not Assumptions. </span>
