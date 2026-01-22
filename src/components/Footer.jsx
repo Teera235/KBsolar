@@ -54,7 +54,7 @@ const Footer = () => {
               <span className="font-bold text-xl">KB Solar Energy</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
-              Solar Energy Solutions Designed by Data, Not Assumptions. 
+              <span className="hidden sm:inline">Solar Energy Solutions Designed by Data, Not Assumptions. </span>
               ออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร โดยทีมวิศวกรมืออาชีพ
             </p>
             <p className="text-gray-500 text-sm italic mb-6">
