@@ -142,14 +142,25 @@ const YouTubeVideos = () => {
               </motion.div>
             </div>
 
-            {/* Info */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-10">
-              <span className={`inline-block ${videos[0].tagColor} text-white text-xs font-bold px-3 py-1 rounded-full mb-3`}>
-                {videos[0].tag}
-              </span>
+            {/* Tag - Only show on desktop */}
+            <span className={`absolute top-4 left-4 ${videos[0].tagColor} text-white text-xs font-bold px-3 py-1 rounded-full mb-3 hidden sm:inline-block`}>
+              {videos[0].tag}
+            </span>
+
+            {/* Info - Desktop only */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-10 hidden sm:block">
               <h3 className="text-white text-xl lg:text-3xl font-bold mb-2">{videos[0].title}</h3>
               <p className="text-gray-300 lg:text-lg">{videos[0].description}</p>
             </div>
+          </div>
+
+          {/* Mobile Info - Below video */}
+          <div className="block sm:hidden mt-4 px-2">
+            <span className={`inline-block ${videos[0].tagColor} text-white text-xs font-bold px-3 py-1 rounded-full mb-3`}>
+              {videos[0].tag}
+            </span>
+            <h3 className="text-white text-lg font-bold mb-2 leading-tight">{videos[0].title}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">{videos[0].description}</p>
           </div>
         </motion.div>
 
