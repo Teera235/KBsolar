@@ -57,7 +57,7 @@ const Footer = () => {
               <span className="hidden sm:inline">Solar Energy Solutions Designed by Data, Not Assumptions. </span>
               ออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร โดยทีมวิศวกรมืออาชีพ
             </p>
-            <p className="text-gray-500 text-sm italic mb-6">
+            <p className="text-gray-500 text-sm italic mb-6 hidden sm:block">
               "Study, Learn, and Build with Understanding"
             </p>
             
