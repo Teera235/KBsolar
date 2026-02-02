@@ -1153,9 +1153,10 @@ const Projects = () => {
                         <p className="text-xs text-kb-gray uppercase tracking-wide">Project</p>
                         <p className="text-2xl font-bold text-kb-orange">#{selectedProject.id}</p>
                       </div>
+                      {/* Desktop Close Button - Hidden on Mobile */}
                       <button
                         onClick={closeProject}
-                        className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-all"
+                        className="hidden sm:flex w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full items-center justify-center transition-all"
                       >
                         <X className="w-5 h-5 text-kb-dark" />
                       </button>
