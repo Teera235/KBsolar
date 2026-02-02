@@ -1081,9 +1081,16 @@ const Projects = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[90vh] mobile-project-modal overflow-hidden flex flex-col lg:flex-row"
+                className="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[90vh] mobile-project-modal overflow-hidden flex flex-col lg:flex-row relative"
                 onClick={(e) => e.stopPropagation()}
               >
+                {/* Mobile Close Button - Top Right */}
+                <button
+                  onClick={closeProject}
+                  className="block sm:hidden w-12 h-12 rounded-full flex items-center justify-center transition-all mobile-close-button-top bg-white shadow-lg border border-gray-200 hover:bg-gray-50"
+                >
+                  <X className="w-6 h-6 text-kb-dark" />
+                </button>
                 <div className="lg:w-1/2 bg-gray-100 flex flex-col">
                   <div className="flex-1 relative flex items-center justify-center p-4 min-h-[300px] lg:min-h-0">
                     <motion.img

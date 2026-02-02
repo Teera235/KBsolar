@@ -589,4 +589,21 @@ h1, h2, h3, h4, h5, h6 {
     background: white !important;
     z-index: 10 !important;
   }
+  
+  /* Mobile Close Button Position */
+  .mobile-close-button-top {
+    position: absolute !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    z-index: 20 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .mobile-close-button-top:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    transform: scale(1.05) !important;
+  }
 }
