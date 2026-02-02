@@ -573,19 +573,19 @@ h1, h2, h3, h4, h5, h6 {
   .mobile-project-modal {
     max-height: 95vh !important;
     height: 95vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
   
   .mobile-project-content {
-    max-height: calc(95vh - 120px) !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    max-height: none !important;
+    overflow-y: visible !important;
     padding-bottom: 2rem !important;
   }
   
   .mobile-project-header {
     flex-shrink: 0 !important;
-    position: sticky !important;
-    top: 0 !important;
+    position: relative !important;
     background: white !important;
     z-index: 10 !important;
   }
