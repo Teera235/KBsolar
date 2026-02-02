@@ -1134,7 +1134,7 @@ const Projects = () => {
                 </div>
 
                 <div className="lg:w-1/2 flex flex-col max-h-[90vh] lg:max-h-none">
-                  <div className="flex items-start justify-between p-6 pb-0">
+                  <div className="flex items-start justify-between p-6 pb-0 flex-shrink-0">
                     <div className="flex items-center gap-3">
                       <span className="inline-flex items-center gap-1.5 bg-kb-orange text-white px-3 py-1.5 rounded-full text-sm font-medium">
                         <MapPin className="w-3.5 h-3.5" />
@@ -1155,7 +1155,7 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto p-6 pt-4">
+                  <div className="flex-1 overflow-y-auto p-6 pt-4 modal-scrollbar">
                     <h3 className="text-2xl lg:text-3xl font-bold text-kb-dark mb-3">{selectedProject.title}</h3>
                     <p className="text-kb-gray leading-relaxed mb-6">{selectedProject.description}</p>
 
@@ -1201,7 +1201,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div>
+                    <div className="pb-4">
                       <h4 className="font-bold text-kb-dark mb-3">การรับประกัน</h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.warranty.map((item, idx) => (
