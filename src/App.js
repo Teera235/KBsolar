@@ -7,6 +7,7 @@ import Services from './components/Services';
 import HowItWorks from './components/HowItWorks';
 import WhyUs from './components/WhyUs';
 import Calculator from './components/Calculator';
+import Blog from './components/Blog';
 import Packages from './components/Packages';
 import Projects from './components/Projects';
 import YouTubeVideos from './components/YouTubeVideos';
@@ -29,6 +30,7 @@ function App() {
       <HowItWorks />
       <WhyUs />
       <Calculator />
+      <Blog />
       <Packages />
       <Projects />
       <YouTubeVideos />

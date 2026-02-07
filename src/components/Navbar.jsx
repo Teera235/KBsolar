@@ -13,7 +13,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const sections = ['home', 'services', 'calculator', 'packages', 'projects', 'faq', 'contact'];
+    const sections = ['home', 'services', 'calculator', 'blog', 'packages', 'projects', 'faq', 'contact'];
     
     const observerOptions = {
       root: null,
@@ -52,6 +52,7 @@ const Navbar = () => {
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'Services', href: '#services', id: 'services' },
     { name: 'Calculator', href: '#calculator', id: 'calculator' },
+    { name: 'Blog', href: '#blog', id: 'blog' },
     { name: 'Packages', href: '#packages', id: 'packages' },
     { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'FAQ', href: '#faq', id: 'faq' },
