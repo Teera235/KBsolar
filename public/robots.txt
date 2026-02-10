@@ -1,0 +1,13 @@
+# KB Solar Energy - Robots.txt
+User-agent: *
+Allow: /
+
+# Disallow admin/private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://www.kb-solarenergy.com/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1
