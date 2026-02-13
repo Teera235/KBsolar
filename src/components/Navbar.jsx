@@ -84,9 +84,15 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  // Check if we're on a blog detail page
+  const isBlogDetailPage = location.pathname.startsWith('/blog/');
+  
+  // Always show white background on blog detail pages
+  const shouldShowWhiteBg = scrolled || isBlogDetailPage;
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+      shouldShowWhiteBg ? 'bg-white shadow-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -104,7 +110,7 @@ const Navbar = () => {
               className="h-12 w-auto rounded-lg"
             />
             <div className="hidden sm:block">
-              <span className={`font-bold text-xl ${scrolled ? 'text-kb-dark' : 'text-white'}`}>
+              <span className={`font-bold text-xl ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}>
                 KB Solar Energy
               </span>
             </div>
@@ -118,7 +124,7 @@ const Navbar = () => {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`font-medium transition-all duration-300 hover:text-kb-orange relative ${
-                  scrolled ? 'text-kb-dark' : 'text-white'
+                  shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'
                 } ${
                   activeSection === link.id && location.pathname === '/'
                     ? 'text-kb-orange scale-110 font-bold' 
@@ -143,7 +149,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-lg ${scrolled ? 'text-kb-dark' : 'text-white'}`}
+            className={`md:hidden p-2 rounded-lg ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

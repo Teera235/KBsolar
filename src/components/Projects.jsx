@@ -645,7 +645,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white mobile-full-width bg-section-mobile">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mobile-container-fix">
         <FadeUp>
           <div className="text-center mb-12">
             <span className="inline-block bg-kb-orange/10 text-kb-orange font-semibold text-sm uppercase tracking-wider px-4 py-2 rounded-full mb-4">
@@ -1140,8 +1140,8 @@ const Projects = () => {
                   </div>
                 </div>
 
-                <div className="lg:w-1/2 flex flex-col max-h-[90vh] lg:max-h-none overflow-y-visible">
-                  <div className="flex items-start justify-between p-6 pb-0 flex-shrink-0 mobile-project-header">
+                <div className="lg:w-1/2 flex flex-col max-h-[90vh] overflow-y-auto">
+                  <div className="flex items-start justify-between p-6 pb-0 flex-shrink-0 mobile-project-header sticky top-0 bg-white z-10">
                     <div className="flex items-center gap-3">
                       <span className="inline-flex items-center gap-1.5 bg-kb-orange text-white px-3 py-1.5 rounded-full text-sm font-medium">
                         <MapPin className="w-3.5 h-3.5" />
