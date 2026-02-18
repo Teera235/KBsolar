@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -13,7 +16,10 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const sections = ['home', 'services', 'calculator', 'packages', 'projects', 'faq', 'contact'];
+    // Only observe sections on home page
+    if (location.pathname !== '/') return;
+
+    const sections = ['home', 'services', 'calculator', 'blog', 'projects', 'packages', 'faq', 'contact'];
     
     const observerOptions = {
       root: null,
@@ -46,32 +52,65 @@ const Navbar = () => {
         }
       });
     };
-  }, []);
+  }, [location.pathname]);
 
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'Services', href: '#services', id: 'services' },
     { name: 'Calculator', href: '#calculator', id: 'calculator' },
-    { name: 'Packages', href: '#packages', id: 'packages' },
+    { name: 'Blog', href: '#blog', id: 'blog' },
     { name: 'Projects', href: '#projects', id: 'projects' },
+    { name: 'Packages', href: '#packages', id: 'packages' },
     { name: 'FAQ', href: '#faq', id: 'faq' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsOpen(false);
+  };
+
+  // Check if we're on a blog detail page
+  const isBlogDetailPage = location.pathname.startsWith('/blog/');
+  
+  // Always show white background on blog detail pages
+  const shouldShowWhiteBg = scrolled || isBlogDetailPage;
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+      shouldShowWhiteBg ? 'bg-white shadow-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <a href="#home" className="hidden sm:flex items-center space-x-3">
+          <a 
+            href="/" 
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/');
+            }}
+            className="hidden sm:flex items-center space-x-3"
+          >
             <img 
               src={process.env.PUBLIC_URL + '/logo.webp'} 
               alt="KB Solar Logo" 
               className="h-12 w-auto rounded-lg"
             />
             <div className="hidden sm:block">
-              <span className={`font-bold text-xl ${scrolled ? 'text-kb-dark' : 'text-white'}`}>
+              <span className={`font-bold text-xl ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}>
                 KB Solar Energy
               </span>
             </div>
@@ -83,22 +122,24 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`font-medium transition-all duration-300 hover:text-kb-orange relative ${
-                  scrolled ? 'text-kb-dark' : 'text-white'
+                  shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'
                 } ${
-                  activeSection === link.id 
+                  activeSection === link.id && location.pathname === '/'
                     ? 'text-kb-orange scale-110 font-bold' 
                     : ''
                 }`}
               >
                 {link.name}
-                {activeSection === link.id && (
+                {activeSection === link.id && location.pathname === '/' && (
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-kb-orange rounded-full"></span>
                 )}
               </a>
             ))}
             <a
               href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
               className="bg-kb-orange hover:bg-kb-orange-dark text-white px-6 py-2.5 rounded-full font-semibold transition-all"
             >
               Get Quote
@@ -108,7 +149,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-lg ${scrolled ? 'text-kb-dark' : 'text-white'}`}
+            className={`md:hidden p-2 rounded-lg ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -121,9 +162,9 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`block py-3 px-4 text-kb-dark hover:bg-kb-light rounded-lg font-medium transition-all duration-300 ${
-                  activeSection === link.id 
+                  activeSection === link.id && location.pathname === '/'
                     ? 'bg-kb-orange text-white font-bold scale-105' 
                     : ''
                 }`}
@@ -133,7 +174,7 @@ const Navbar = () => {
             ))}
             <a
               href="#contact"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, '#contact')}
               className="block mt-2 bg-kb-orange text-white text-center py-3 rounded-full font-semibold"
             >
               Get Quote

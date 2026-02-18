@@ -1,58 +1,81 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight, Zap, Battery, Grid } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Battery, Grid, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { FadeUp } from './AnimatedSection';
+import { useState, useEffect } from 'react';
 
 const Blog = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [rotationIndex, setRotationIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const blogPosts = [
     {
       id: 1,
-      title: 'Hybrid Solar System',
-      subtitle: 'ระบบโซล่าเซลล์แบบ Hybrid',
-      description: 'ระบบที่ผสมผสานระหว่าง On-Grid และ Off-Grid ใช้ไฟจากการไฟฟ้าและแบตเตอรี่สำรอง เหมาะสำหรับบ้านที่ต้องการความมั่นคงในการใช้ไฟฟ้า',
-      image: '/blog/hybrid.jpg',
+      title: 'Hybrid Solar System ตอบโจทย์ทุกความต้องการ',
+      subtitle: 'ระบบที่ให้คุณทั้งประหยัดและมีไฟสำรอง',
+      description: 'ระบบโซล่าเซลล์ที่ผสมผสาน (Solar Panels Hybrid) สามารถใช้พลังงานจากโซลาร์เซลล์ แบตเตอรี่ และโครงข่ายการไฟฟ้าร่วมกันได้อย่างยืดหยุ่น เหมาะสำหรับบ้านที่ต้องการความมั่นคงในการใช้ไฟฟ้า มีไฟสำรองตลอด 24 ชั่วโมง',
+      image: '/Blog/hrbrid.png',
       icon: Battery,
-      color: 'from-orange-500 to-red-500',
-      badge: 'Hybrid'
+      color: 'orange',
+      badge: 'Hybrid',
+      slug: 'hybrid-solar-system'
     },
     {
       id: 2,
-      title: 'On-Grid Solar System',
-      subtitle: 'ระบบโซล่าเซลล์แบบ On-Grid',
-      description: 'ระบบที่เชื่อมต่อกับการไฟฟ้า ขายไฟส่วนเกินคืนให้การไฟฟ้า ประหยัดค่าไฟสูงสุด เหมาะสำหรับบ้านและโรงงาน',
-      image: '/blog/ongrid.jpg',
+      title: 'ทำไม On-Grid ถึงเป็นตัวเลือกอันดับ 1 ของคนไทย',
+      subtitle: 'ประหยัดสูงสุด คืนทุนเร็วที่สุด',
+      description: 'ระบบโซล่าเซลล์แบบเชื่อมต่อกับโครงข่าย (Solar Panels On-Grid) สามารถขายไฟส่วนเกินคืนให้การไฟฟ้าได้ ประหยัดค่าไฟสูงสุด 80-95% เหมาะสำหรับบ้านและโรงงานที่ต้องการลดค่าไฟและคืนทุนเร็ว ระยะเวลา 3-5 ปี ไม่ต้องลงทุนแบตเตอรี่ ทำให้ต้นทุนต่ำและบำรุงรักษาง่าย เป็นตัวเลือกที่คุ้มค่าที่สุดสำหรับผู้ที่ต้องการประหยัดค่าไฟฟ้าอย่างจริงจัง',
+      image: '/Blog/0n-grid.png',
       icon: Grid,
-      color: 'from-blue-500 to-cyan-500',
-      badge: 'On-Grid'
+      color: 'blue',
+      badge: 'On-Grid',
+      slug: 'on-grid-solar-system'
     },
     {
       id: 3,
-      title: 'Off-Grid Solar System',
-      subtitle: 'ระบบโซล่าเซลล์แบบ Off-Grid',
-      description: 'ระบบที่ไม่ต้องพึ่งการไฟฟ้า ใช้แบตเตอรี่เก็บพลังงาน เหมาะสำหรับพื้นที่ห่างไกลหรือต้องการความเป็นอิสระทางพลังงาน',
-      image: '/blog/offgrid.jpg',
+      title: 'Off-Grid คือคำตอบสำหรับความเป็นอิสระ',
+      subtitle: 'อิสระเต็มที่ ไม่ต้องพึ่งการไฟฟ้า',
+      description: 'ระบบโซล่าเซลล์แบบอิสระที่ไม่ต้องพึ่งพาการไฟฟ้า (Solar Cell Rooftop Home) มีแบตเตอรี่เก็บพลังงาน เหมาะสำหรับบ้านสวน พื้นที่ห่างไกล หรือต้องการความเป็นอิสระทางพลังงาน ใช้ไฟได้ตลอด 24 ชั่วโมง ประหยัดค่าไฟ 3,000 - 10,000 บาท',
+      image: '/Blog/off-grid.png',
       icon: Zap,
-      color: 'from-green-500 to-emerald-500',
-      badge: 'Off-Grid'
+      color: 'green',
+      badge: 'Off-Grid',
+      slug: 'off-grid-solar-system'
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % blogPosts.length);
+  // Auto rotate every 5 seconds
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(() => {
+        setRotationIndex((prev) => (prev + 1) % blogPosts.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isPaused, blogPosts.length]);
+
+  // Rotate array based on current index
+  const getRotatedPosts = () => {
+    const rotated = [...blogPosts];
+    for (let i = 0; i < rotationIndex; i++) {
+      rotated.push(rotated.shift());
+    }
+    return rotated;
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + blogPosts.length) % blogPosts.length);
+  const colorClasses = {
+    orange: 'from-orange-500 to-red-500',
+    blue: 'from-blue-500 to-cyan-500',
+    green: 'from-green-500 to-emerald-500'
   };
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
+  const borderColors = {
+    orange: 'border-orange-500',
+    blue: 'border-blue-500',
+    green: 'border-green-500'
   };
 
   return (
-    <section id="blog" className="py-16 sm:py-20 bg-gradient-to-b from-white via-orange-50/30 to-gray-50 mobile-full-width bg-section-mobile overflow-hidden">
+    <section id="blog" className="py-16 sm:py-20 bg-gray-50 mobile-full-width bg-section-mobile overflow-hidden">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
         <FadeUp>
           <div className="text-center mb-12">
@@ -68,145 +91,81 @@ const Blog = () => {
           </div>
         </FadeUp>
 
+        {/* Blog Grid with Slide Animation */}
         <FadeUp delay={0.2}>
-          <div className="relative">
-            {/* Main Carousel */}
-            <div className="relative h-[500px] sm:h-[600px] lg:h-[650px] rounded-3xl overflow-hidden shadow-2xl">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <img
-                      src={process.env.PUBLIC_URL + blogPosts[currentSlide].image}
-                      alt={blogPosts[currentSlide].title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${blogPosts[currentSlide].color} opacity-60`}></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative h-full flex flex-col justify-end p-6 sm:p-8 lg:p-12">
-                    {/* Badge */}
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.3, type: "spring" }}
-                      className="absolute top-6 left-6 sm:top-8 sm:left-8"
-                    >
-                      <div className={`bg-gradient-to-r ${blogPosts[currentSlide].color} text-white px-4 py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2`}>
-                        {(() => {
-                          const Icon = blogPosts[currentSlide].icon;
-                          return <Icon className="w-4 h-4 sm:w-5 sm:h-5" />;
-                        })()}
-                        {blogPosts[currentSlide].badge}
-                      </div>
-                    </motion.div>
-
-                    {/* Text Content */}
-                    <motion.div
-                      initial={{ y: 50, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                      className="max-w-3xl"
-                    >
-                      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
-                        {blogPosts[currentSlide].title}
-                      </h3>
-                      <p className="text-lg sm:text-xl text-white/90 mb-4 sm:mb-6 font-medium">
-                        {blogPosts[currentSlide].subtitle}
-                      </p>
-                      <p className="text-base sm:text-lg text-white/80 leading-relaxed mb-6 sm:mb-8">
-                        {blogPosts[currentSlide].description}
-                      </p>
-                      <button className="bg-white text-kb-orange px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base hover:bg-kb-orange hover:text-white transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
-                        อ่านเพิ่มเติม
-                      </button>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl z-10 group"
-              >
-                <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-kb-dark group-hover:text-kb-orange transition-colors" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl z-10 group"
-              >
-                <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-kb-dark group-hover:text-kb-orange transition-colors" />
-              </button>
-
-              {/* Slide Indicators */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-                {blogPosts.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`transition-all ${
-                      index === currentSlide
-                        ? 'w-12 h-3 bg-white rounded-full'
-                        : 'w-3 h-3 bg-white/50 hover:bg-white/75 rounded-full'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Thumbnail Navigation */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
-              {blogPosts.map((post, index) => {
+          <div 
+            className="overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+              layout
+            >
+              {getRotatedPosts().map((post, index) => {
                 const Icon = post.icon;
                 return (
-                  <motion.button
+                  <motion.div
                     key={post.id}
-                    onClick={() => goToSlide(index)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`relative rounded-2xl overflow-hidden transition-all ${
-                      index === currentSlide
-                        ? 'ring-4 ring-kb-orange shadow-xl'
-                        : 'ring-2 ring-gray-200 hover:ring-gray-300 opacity-70 hover:opacity-100'
-                    }`}
+                    layout
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ 
+                      duration: 0.5,
+                      ease: "easeInOut"
+                    }}
+                    className="group"
                   >
-                    <div className="aspect-[4/3] relative">
-                      <img
-                        src={process.env.PUBLIC_URL + post.image}
-                        alt={post.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-t ${post.color} opacity-40`}></div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      
-                      {/* Icon and Badge */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r ${post.color} flex items-center justify-center mb-2 shadow-lg`}>
-                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                        </div>
-                        <span className="text-white font-bold text-xs sm:text-sm">{post.badge}</span>
+                    <div className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 ${borderColors[post.color]}`}>
+                      {/* Image */}
+                      <div className="relative overflow-hidden aspect-[4/3]">
+                        <img
+                          src={process.env.PUBLIC_URL + post.image}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-6">
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-kb-dark mb-3 group-hover:text-kb-orange transition-colors">
+                          {post.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-4">
+                          {post.description}
+                        </p>
+
+                        {/* Read More Button */}
+                        <button
+                          onClick={() => window.location.href = `/blog/${post.slug}`}
+                          className="inline-flex items-center gap-2 bg-kb-dark text-white px-6 py-3 rounded-lg font-semibold hover:bg-kb-orange transition-all group/btn"
+                        >
+                          Read More
+                          <svg 
+                            className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
                       </div>
                     </div>
-                  </motion.button>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </FadeUp>
 
         {/* Coming Soon Section */}
         <FadeUp delay={0.4}>
-          <div className="mt-12 sm:mt-16 text-center bg-gradient-to-r from-orange-50 to-red-50 rounded-3xl p-8 sm:p-12 border border-orange-100">
+          <div className="mt-12 sm:mt-16 text-center bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 shadow-sm">
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-kb-orange/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
               <svg className="w-8 h-8 sm:w-10 sm:h-10 text-kb-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -216,7 +175,7 @@ const Blog = () => {
               บทความเพิ่มเติมกำลังจะมาเร็วๆ นี้
             </h3>
             <p className="text-base sm:text-lg text-kb-gray max-w-2xl mx-auto">
-              เรากำลังเตรียมบทความและข่าวสารที่น่าสนใจเกี่ยวกับพลังงานแสงอาทิตย์ เทคโนโลยีใหม่ๆ และเคล็ดลับการดูแลระบบโซล่าเซลล์ให้กับคุณ
+              เรากำลังเตรียมบทความและข่าวสารที่น่าสนใจเกี่ยวกับพลังงานแสงอาทิตย์ เทคโนโลジีใหม่ๆ และเคล็ดลับการดูแลระบบโซล่าเซลล์ให้กับคุณ
             </p>
           </div>
         </FadeUp>
