@@ -13,7 +13,7 @@ const BlogDetail = () => {
       icon: Battery,
       color: 'orange',
       badge: 'Hybrid',
-      image: '/Blog/hrbrid.png',
+      image: '/Blog/hrbrid.webp',
       sections: [
         {
           title: 'ระบบโซล่าเซลล์แบบไฮบริดจ์ (Hybrid Solar System)',
@@ -43,7 +43,7 @@ const BlogDetail = () => {
             '3. โหมดไฟดับ: ระบบสลับไปใช้พลังงานจากแบตเตอรี่ทันทีภายใน 10-20 มิลลิวินาที รับประกันการจ่ายไฟต่อเนื่องไม่สะดุด',
             '4. โหมดอัจฉริยะ: ระบบบริหารจัดการพลังงานอัตโนมัติ เลือกใช้แหล่งพลังงานที่ประหยัดและมีประสิทธิภาพสูงสุดในแต่ละช่วงเวลา'
           ],
-          image: '/diagrams/Blog Diagrams/3.png'
+          image: '/diagrams/Blog Diagrams/3.webp'
         },
         {
           title: 'ข้อดีของระบบไฮบริด',
@@ -95,7 +95,7 @@ const BlogDetail = () => {
       icon: Grid,
       color: 'blue',
       badge: 'On-Grid',
-      image: '/Blog/0n-grid.png',
+      image: '/Blog/0n-grid.webp',
       sections: [
         {
           title: 'ระบบโซล่าเซลล์แบบออนกริด (On-Grid Solar System)',
@@ -125,7 +125,7 @@ const BlogDetail = () => {
             '3. โหมดไฟดับ: ระบบจะหยุดทำงานทันทีเพื่อความปลอดภัยของช่างซ่อมบำรุงสายไฟ (Anti-Islanding Protection)',
             '4. ระบบ Net Metering: คำนวณหักลบระหว่างพลังงานที่ใช้และพลังงานที่ผลิตได้ เพื่อลดค่าไฟฟ้าในบิลรายเดือน'
           ],
-          image: '/diagrams/Blog Diagrams/2.png'
+          image: '/diagrams/Blog Diagrams/2.webp'
         },
         {
           title: 'ข้อดีของระบบออนกริด',
@@ -178,7 +178,7 @@ const BlogDetail = () => {
       icon: Zap,
       color: 'green',
       badge: 'Off-Grid',
-      image: '/Blog/off-grid.png',
+      image: '/Blog/off-grid.webp',
       sections: [
         {
           title: 'ระบบโซล่าเซลล์แบบออฟกริด (Off-Grid Solar System)',
@@ -209,7 +209,7 @@ const BlogDetail = () => {
             '3. โหมดวันฝน: ระบบใช้พลังงานสำรองจากแบตเตอรี่ที่ชาร์จไว้ในวันที่มีแสงแดดดี',
             '4. ระบบบริหารจัดการอัจฉริยะ: ควบคุมการชาร์จและคายประจุแบตเตอรี่อัตโนมัติเพื่อยืดอายุการใช้งาน'
           ],
-          image: '/diagrams/Blog Diagrams/1.png'
+          image: '/diagrams/Blog Diagrams/1.webp'
         },
         {
           title: 'ข้อดีของระบบออฟกริด',
