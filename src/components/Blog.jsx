@@ -62,12 +62,6 @@ const Blog = () => {
     return rotated;
   };
 
-  const colorClasses = {
-    orange: 'from-orange-500 to-red-500',
-    blue: 'from-blue-500 to-cyan-500',
-    green: 'from-green-500 to-emerald-500'
-  };
-
   const borderColors = {
     orange: 'border-orange-500',
     blue: 'border-blue-500',
@@ -103,7 +97,6 @@ const Blog = () => {
               layout
             >
               {getRotatedPosts().map((post, index) => {
-                const Icon = post.icon;
                 return (
                   <motion.div
                     key={post.id}
