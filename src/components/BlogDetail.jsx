@@ -81,9 +81,9 @@ const BlogDetail = () => {
         {
           title: 'ขนาดระบบที่แนะนำ',
           content: [
-            'บ้านขนาดเล็ก (ค่าไฟ 2,000-3,000 บาท/เดือน): ระบบ 3-5 kW + แบตเตอรี่ 10-15 kWh',
-            'บ้านขนาดกลาง (ค่าไฟ 4,000-6,000 บาท/เดือน): ระบบ 5-8 kW + แบตเตอรี่ 15-20 kWh',
-            'บ้านขนาดใหญ่ (ค่าไฟ 7,000+ บาท/เดือน): ระบบ 8-15 kW + แบตเตอรี่ 20-30 kWh',
+            <>บ้านขนาดเล็ก (ค่าไฟ 2,000-3,000 บาท/เดือน): ระบบ <span className="whitespace-nowrap">3-5 kW</span> + แบตเตอรี่ <span className="whitespace-nowrap">10-15 kWh</span></>,
+            <>บ้านขนาดกลาง (ค่าไฟ 4,000-6,000 บาท/เดือน): ระบบ <span className="whitespace-nowrap">5-8 kW</span> + แบตเตอรี่ <span className="whitespace-nowrap">15-20 kWh</span></>,
+            <>บ้านขนาดใหญ่ (ค่าไฟ 7,000+ บาท/เดือน): ระบบ <span className="whitespace-nowrap">8-15 kW</span> + แบตเตอรี่ <span className="whitespace-nowrap">20-30 kWh</span></>,
             '* ขนาดระบบที่เหมาะสมควรได้รับการประเมินโดยผู้เชี่ยวชาญตามการใช้ไฟฟ้าจริงของแต่ละครัวเรือน'
           ]
         }
@@ -163,10 +163,10 @@ const BlogDetail = () => {
         {
           title: 'ขนาดระบบที่แนะนำ',
           content: [
-            'บ้านขนาดเล็ก (ค่าไฟ 2,000-3,000 บาท/เดือน): ระบบ 3-5 kW',
-            'บ้านขนาดกลาง (ค่าไฟ 4,000-6,000 บาท/เดือน): ระบบ 5-8 kW',
-            'บ้านขนาดใหญ่ (ค่าไฟ 7,000+ บาท/เดือน): ระบบ 8-15 kW',
-            'โรงงานขนาดเล็ก-กลาง: ระบบ 30-100 kW',
+            <>บ้านขนาดเล็ก (ค่าไฟ 2,000-3,000 บาท/เดือน): ระบบ <span className="whitespace-nowrap">3-5 kW</span></>,
+            <>บ้านขนาดกลาง (ค่าไฟ 4,000-6,000 บาท/เดือน): ระบบ <span className="whitespace-nowrap">5-8 kW</span></>,
+            <>บ้านขนาดใหญ่ (ค่าไฟ 7,000+ บาท/เดือน): ระบบ <span className="whitespace-nowrap">8-15 kW</span></>,
+            <>โรงงานขนาดเล็ก-กลาง: ระบบ <span className="whitespace-nowrap">30-100 kW</span></>,
             '* ขนาดระบบที่เหมาะสมควรได้รับการประเมินโดยผู้เชี่ยวชาญตามการใช้ไฟฟ้าจริงของแต่ละสถานที่'
           ]
         }
@@ -246,9 +246,9 @@ const BlogDetail = () => {
         {
           title: 'ขนาดระบบที่แนะนำ',
           content: [
-            'บ้านขนาดเล็ก (ใช้ไฟ 5-10 หน่วย/วัน): ระบบ 3-5 kW + แบตเตอรี่ 15-20 kWh',
-            'บ้านขนาดกลาง (ใช้ไฟ 10-20 หน่วย/วัน): ระบบ 5-8 kW + แบตเตอรี่ 20-30 kWh',
-            'บ้านขนาดใหญ่ (ใช้ไฟ 20+ หน่วย/วัน): ระบบ 8-15 kW + แบตเตอรี่ 30-50 kWh',
+            <>บ้านขนาดเล็ก (ใช้ไฟ 5-10 หน่วย/วัน): ระบบ <span className="whitespace-nowrap">3-5 kW</span> + แบตเตอรี่ <span className="whitespace-nowrap">15-20 kWh</span></>,
+            <>บ้านขนาดกลาง (ใช้ไฟ 10-20 หน่วย/วัน): ระบบ <span className="whitespace-nowrap">5-8 kW</span> + แบตเตอรี่ <span className="whitespace-nowrap">20-30 kWh</span></>,
+            <>บ้านขนาดใหญ่ (ใช้ไฟ 20+ หน่วย/วัน): ระบบ <span className="whitespace-nowrap">8-15 kW</span> + แบตเตอรี่ <span className="whitespace-nowrap">30-50 kWh</span></>,
             '* ขนาดระบบและแบตเตอรี่ควรได้รับการออกแบบโดยผู้เชี่ยวชาญตามรูปแบบการใช้ไฟฟ้าจริง'
           ]
         }
@@ -373,9 +373,9 @@ const BlogDetail = () => {
                         ))}
                       </div>
                     ) : (
-                      <div className="space-y-5">
+                      <div className="space-y-6">
                         {section.content.map((paragraph, idx) => (
-                          <p key={idx} className="text-gray-700 leading-relaxed text-base sm:text-lg indent-8">
+                          <p key={idx} className="text-gray-700 leading-loose text-base sm:text-lg text-justify">
                             {paragraph}
                           </p>
                         ))}

@@ -176,7 +176,7 @@ const Partners = () => {
                 <img
                   src={process.env.PUBLIC_URL + partner.logo}
                   alt={partner.name}
-                  className="h-12 md:h-16 w-auto object-contain grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-300"
+                  className="h-12 md:h-16 w-auto object-contain group-hover:scale-110 transition-all duration-300"
                 />
                 <span className="mt-3 text-xs text-gray-400 group-hover:text-kb-orange transition-colors">
                   {partner.type}
