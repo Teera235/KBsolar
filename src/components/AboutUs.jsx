@@ -60,11 +60,11 @@ const AboutUs = () => {
                   <span className="text-white text-xl font-serif">"</span>
                 </div>
                 <p className="text-kb-dark font-semibold text-xl lg:text-2xl italic leading-relaxed">
-                  "Study, Learn, and Build with Understanding"
+                  "ลงทุนอย่างมั่นใจ ประหยัดอย่างยั่งยืน"
                 </p>
                 <p className="text-kb-gray mt-4 leading-relaxed">
-                  เราเชื่อว่าการติดตั้งโซลาร์เซลล์ที่ดี ต้องเริ่มจากความเข้าใจ 
-                  ไม่ใช่แค่ขายแผงแล้วจบ!
+                  เพราะทุกการตัดสินใจของคุณควรได้รับคำตอบที่ชัดเจน 
+                  และระบบที่คุ้มค่าทุกบาทที่ลงทุน
                 </p>
               </motion.div>
 

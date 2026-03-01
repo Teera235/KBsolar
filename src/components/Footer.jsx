@@ -59,7 +59,7 @@ const Footer = () => {
               ออกแบบ ติดตั้ง และให้คำปรึกษาระบบโซลาร์เซลล์แบบครบวงจร โดยทีมวิศวกรมืออาชีพ
             </p>
             <p className="text-gray-500 text-sm italic mb-6">
-              "Study, Learn, and Build with Understanding"
+              "ลงทุนอย่างมั่นใจ ประหยัดอย่างยั่งยืน"
             </p>
             
             {/* Social Links */}
@@ -138,14 +138,34 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © {currentYear} KB Solar Energy. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4 text-gray-500 text-sm">
-            <span>#KBSOLAR</span>
-            <span>#โซลาร์เซลล์</span>
-            <span>#ติดตั้งโซล่าร์เซลล์</span>
+        <div className="border-t border-gray-800 mt-10 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+            <p className="text-gray-500 text-sm">
+              © {currentYear} KB Solar Energy. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4 text-gray-500 text-sm">
+              <span>#KBSOLAR</span>
+              <span>#โซลาร์เซลล์</span>
+              <span>#ติดตั้งโซล่าร์เซลล์</span>
+            </div>
+          </div>
+          
+          {/* Designed by Credit */}
+          <div className="flex justify-center items-center gap-3 pt-4 border-t border-gray-800/50">
+            <span className="text-gray-600 text-sm">Designed & Developed by</span>
+            <a 
+              href="https://nabha-solar-dashboard.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-gray-400 hover:text-kb-orange transition-colors group"
+            >
+              <img 
+                src="/Teerathap-logo/TEERATHEP SOLUTION.png" 
+                alt="Teerathap Solutions Logo" 
+                className="w-10 h-10 object-contain"
+              />
+              <span className="font-semibold text-sm">Teerathap Solutions</span>
+            </a>
           </div>
         </div>
       </div>
