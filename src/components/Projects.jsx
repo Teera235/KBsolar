@@ -752,7 +752,7 @@ const Projects = () => {
                         
                         <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 flex-shrink-0 relative overflow-hidden">
                           <img
-                            src={process.env.PUBLIC_URL + project.images[0]}
+                            src={project.images[0]}
                             alt={project.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
@@ -892,7 +892,7 @@ const Projects = () => {
                               {/* Thumbnail */}
                               <div className="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
                                 <img
-                                  src={process.env.PUBLIC_URL + project.images[0]}
+                                  src={project.images[0]}
                                   alt={project.title}
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
@@ -1063,7 +1063,7 @@ const Projects = () => {
                               return (
                                 <div className="flex items-center gap-3">
                                   <img
-                                    src={process.env.PUBLIC_URL + project.images[0]}
+                                    src={project.images[0]}
                                     alt={project.title}
                                     className="w-14 h-14 rounded-lg object-cover"
                                   />
@@ -1148,7 +1148,7 @@ const Projects = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      src={process.env.PUBLIC_URL + selectedProject.images[currentImage]}
+                      src={selectedProject.images[currentImage]}
                       alt={selectedProject.title}
                       className="max-w-full max-h-[50vh] lg:max-h-[70vh] w-auto h-auto object-contain rounded-2xl shadow-lg"
                     />
@@ -1183,7 +1183,7 @@ const Projects = () => {
                               : 'border-gray-200 hover:border-gray-400 opacity-70 hover:opacity-100'
                           }`}
                         >
-                          <img src={process.env.PUBLIC_URL + img} alt="" className="w-full h-full object-cover" />
+                          <img src={img} alt="" className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>

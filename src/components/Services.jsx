@@ -112,7 +112,7 @@ const Services = () => {
                     {/* Background Image - Full Height */}
                     <div className="absolute inset-0">
                       <img 
-                        src={process.env.PUBLIC_URL + service.image} 
+                        src={service.image} 
                         alt={service.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />

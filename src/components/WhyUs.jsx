@@ -38,7 +38,7 @@ const WhyUs = () => {
       id="why-us" 
       className="py-20 bg-gradient-to-b from-blue-50 to-white relative overflow-hidden"
       style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}/bg.png)`,
+        backgroundImage: `url(/bg.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

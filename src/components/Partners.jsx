@@ -185,7 +185,7 @@ const Partners = () => {
 
                 <div className="relative z-10 flex flex-col items-center">
                   <img
-                    src={process.env.PUBLIC_URL + partner.logo}
+                    src={partner.logo}
                     alt={partner.name}
                     className="h-12 md:h-16 w-auto object-contain group-hover:scale-110 transition-all duration-300 filter group-hover:brightness-110"
                   />
@@ -223,7 +223,7 @@ const Partners = () => {
                     <div className="flex items-center gap-3 sm:gap-4">
                       <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg">
                         <img 
-                          src={process.env.PUBLIC_URL + selectedPartner.logo} 
+                          src={selectedPartner.logo} 
                           alt={selectedPartner.name} 
                           className="h-8 sm:h-10 w-auto object-contain" 
                         />
@@ -261,7 +261,7 @@ const Partners = () => {
                         <AnimatePresence mode="wait">
                           <motion.img
                             key={currentImageIndex}
-                            src={process.env.PUBLIC_URL + selectedPartner.products[currentImageIndex]}
+                            src={selectedPartner.products[currentImageIndex]}
                             alt={`${selectedPartner.name} Product ${currentImageIndex + 1}`}
                             className="max-h-full max-w-full object-contain drop-shadow-xl"
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -311,7 +311,7 @@ const Partners = () => {
                           }`}
                         >
                           <img
-                            src={process.env.PUBLIC_URL + img}
+                            src={img}
                             alt={`Thumbnail ${idx + 1}`}
                             className="w-full h-full object-contain bg-gray-50 p-1"
                           />

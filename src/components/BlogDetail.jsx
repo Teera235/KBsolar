@@ -400,7 +400,7 @@ const BlogDetail = () => {
                         {section.image && (
                           <div className="my-8 bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-lg overflow-hidden">
                             <img
-                              src={process.env.PUBLIC_URL + section.image}
+                              src={section.image}
                               alt={section.title}
                               className="w-full h-auto rounded-xl"
                             />

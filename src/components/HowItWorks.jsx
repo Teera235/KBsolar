@@ -96,7 +96,7 @@ const HowItWorks = () => {
                 transition={{ duration: 0.5 }}
               >
                 <img
-                  src={process.env.PUBLIC_URL + steps[activeStep].image}
+                  src={steps[activeStep].image}
                   alt={steps[activeStep].title}
                   className="w-full h-full object-cover"
                 />

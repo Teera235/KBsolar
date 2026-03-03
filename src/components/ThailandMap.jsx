@@ -151,7 +151,7 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
 
   // Load SVG content
   useEffect(() => {
-    fetch(process.env.PUBLIC_URL + '/thailand-map.svg')
+    fetch('/thailand-map.svg')
       .then(response => response.text())
       .then(text => {
         setSvgContent(text);

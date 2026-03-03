@@ -135,7 +135,7 @@ const KPISection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/review-bg.png)`,
+            backgroundImage: `url(/review-bg.png)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
