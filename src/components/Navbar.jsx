@@ -123,7 +123,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           <div className="hidden sm:flex items-center space-x-3 cursor-default">
             <img 
-              src={process.env.PUBLIC_URL + '/logo.webp'} 
+              src="/logo.webp" 
               alt="KB Solar Logo" 
               className="h-12 w-auto rounded-lg"
             />

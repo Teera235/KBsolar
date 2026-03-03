@@ -91,7 +91,7 @@ const Blog = () => {
             >
               <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-full overflow-hidden">
                 <img 
-                  src={process.env.PUBLIC_URL + blogPosts[0].image} 
+                  src={blogPosts[0].image} 
                   alt={blogPosts[0].title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -130,7 +130,7 @@ const Blog = () => {
             >
               <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-full overflow-hidden">
                 <img 
-                  src={process.env.PUBLIC_URL + blogPosts[1].image} 
+                  src={blogPosts[1].image} 
                   alt={blogPosts[1].title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -168,7 +168,7 @@ const Blog = () => {
               >
                 <div className="relative h-[180px] sm:h-[190px] overflow-hidden">
                   <img 
-                    src={process.env.PUBLIC_URL + post.image} 
+                    src={post.image} 
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
@@ -216,7 +216,7 @@ const Blog = () => {
                   {/* Image Section */}
                   <div className="relative h-48 overflow-hidden">
                     <img 
-                      src={process.env.PUBLIC_URL + post.image} 
+                      src={post.image} 
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />

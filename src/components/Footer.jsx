@@ -47,7 +47,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <img 
-                src={process.env.PUBLIC_URL + '/logo.webp'} 
+                src="/logo.webp" 
                 alt="KB Solar Logo" 
                 className="h-12 w-auto rounded-lg"
               />
@@ -160,7 +160,7 @@ const Footer = () => {
               className="flex items-center gap-3 text-gray-400 hover:text-kb-orange transition-colors group"
             >
               <img 
-                src={process.env.PUBLIC_URL + '/Teerathap-logo/TEERATHEP SOLUTION.png'} 
+                src="/Teerathap-logo/TEERATHEP SOLUTION.png" 
                 alt="Teerathap Solutions Logo" 
                 className="w-10 h-10 object-contain"
               />
