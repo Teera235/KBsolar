@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Percent, Clock, Leaf, TrendingUp, Shield, Award, Sun, Battery, Wrench, CheckCircle } from 'lucide-react';
+import { Zap, Percent, Clock, Leaf, TrendingUp, Shield, Award, Sun, Battery, Wrench } from 'lucide-react';
 
 const AnimatedNumber = ({ value, suffix = '' }) => {
   const [count, setCount] = useState(0);
@@ -45,6 +45,7 @@ const KPISection = () => {
     { icon: Leaf, value: 85, suffix: '', unit: 'Tons', label: 'ลด CO₂ ต่อปี', mobileLabel: 'ลด CO₂', description: 'Carbon Reduction' }
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const features = [
     { icon: Sun, text: 'ใช้พลังงานสะอาด 100%', mobileText: 'พลังงานสะอาด 100%' },
     { icon: Battery, text: 'สำรองไฟเมื่อไฟดับ' },
@@ -54,6 +55,7 @@ const KPISection = () => {
     { icon: Award, text: 'อุปกรณ์มาตรฐานสากล', mobileText: 'อุปกรณ์มาตรฐาน' },
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const achievements = [
     { number: '50+', label: 'โปรเจกต์สำเร็จ', mobileLabel: 'โปรเจกต์' },
     { number: '100%', label: 'ลูกค้าพึงพอใจ', mobileLabel: 'พึงพอใจ' },

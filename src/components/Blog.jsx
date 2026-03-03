@@ -198,7 +198,6 @@ const Blog = () => {
         {/* Bottom 3 Blog Cards - Simple Style */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.slice(4, 7).map((post, index) => {
-            const Icon = post.icon;
             return (
               <motion.div
                 key={post.id}
