@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Phone, MessageCircle, Youtube, MapPin, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, MessageCircle, Youtube, MapPin, Send, CheckCircle, Loader2, Package } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem } from './AnimatedSection';
 import emailjs from '@emailjs/browser';
@@ -14,11 +14,73 @@ const Contact = () => {
     name: '',
     phone: '',
     email: '',
-    message: ''
+    message: '',
+    selectedPackage: null
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Listen for package selection event
+  useEffect(() => {
+    // Check sessionStorage on mount
+    const savedPackage = sessionStorage.getItem('selectedPackage');
+    if (savedPackage) {
+      try {
+        const packageData = JSON.parse(savedPackage);
+        // Build message with package details
+        let messageText = `สนใจแพ็คเกจ: ${packageData.name}\n\n`;
+        if (packageData.specs) {
+          messageText += `รายละเอียด:\n`;
+          messageText += `- ประหยัด/เดือน: ฿${packageData.specs.saving}\n`;
+          messageText += `- แผงโซลาร์: ${packageData.specs.panels}\n`;
+          messageText += `- พื้นที่ติดตั้ง: ${packageData.specs.area}\n`;
+          messageText += `- ผลิตไฟได้: ${packageData.specs.production}\n`;
+          messageText += `- คืนทุน: ${packageData.specs.payback}\n`;
+          if (packageData.specs.backup) {
+            messageText += `- สำรองไฟได้: ${packageData.specs.backup}\n`;
+          }
+          messageText += `\n`;
+        }
+        setFormData(prev => ({
+          ...prev,
+          selectedPackage: packageData,
+          message: messageText
+        }));
+        // Clear after reading
+        sessionStorage.removeItem('selectedPackage');
+      } catch (e) {
+        console.error('Error parsing package data:', e);
+      }
+    }
+
+    // Listen for custom event
+    const handlePackageSelected = (event) => {
+      const packageData = event.detail;
+      // Build message with package details
+      let messageText = `สนใจแพ็คเกจ: ${packageData.name}\n\n`;
+      if (packageData.specs) {
+        messageText += `รายละเอียด:\n`;
+        messageText += `- ประหยัด/เดือน: ฿${packageData.specs.saving}\n`;
+        messageText += `- แผงโซลาร์: ${packageData.specs.panels}\n`;
+        messageText += `- พื้นที่ติดตั้ง: ${packageData.specs.area}\n`;
+        messageText += `- ผลิตไฟได้: ${packageData.specs.production}\n`;
+        messageText += `- คืนทุน: ${packageData.specs.payback}\n`;
+        if (packageData.specs.backup) {
+          messageText += `- สำรองไฟได้: ${packageData.specs.backup}\n`;
+        }
+        messageText += `\n`;
+      }
+      setFormData(prev => ({
+        ...prev,
+        selectedPackage: packageData,
+        message: messageText
+      }));
+    };
+
+    window.addEventListener('packageSelected', handlePackageSelected);
+    return () => window.removeEventListener('packageSelected', handlePackageSelected);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,14 +95,18 @@ const Contact = () => {
           from_name: formData.name,
           from_phone: formData.phone,
           from_email: formData.email || 'ไม่ได้ระบุ',
-          message: formData.message,
+          message: formData.selectedPackage 
+            ? `แพ็คเกจที่เลือก: ${formData.selectedPackage.name}\n\n${formData.message}`
+            : formData.message,
         },
         EMAILJS_PUBLIC_KEY
       );
       
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000);
-      setFormData({ name: '', phone: '', email: '', message: '' });
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: '', phone: '', email: '', message: '', selectedPackage: null });
+      }, 5000);
     } catch (err) {
       console.error('EmailJS Error:', err);
       setError('ส่งข้อความไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
@@ -158,6 +224,27 @@ const Contact = () => {
               whileHover={{ boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
             >
               <h3 className="text-lg sm:text-xl font-bold text-kb-dark mb-4 sm:mb-6">Request Solar Assessment</h3>
+              
+              {/* Selected Package Display */}
+              {formData.selectedPackage && (
+                <motion.div 
+                  className="mb-4 p-4 bg-gradient-to-r from-kb-orange/10 to-amber-500/10 border-l-4 border-kb-orange rounded-lg"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-kb-orange rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Package className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-kb-dark mb-1">คุณได้เลือกแพ็คเกจ:</p>
+                      <p className="text-lg font-bold text-kb-orange mb-2">{formData.selectedPackage.name}</p>
+                      <p className="text-xs text-gray-600">ทีมงานจะติดต่อกลับเพื่อให้คำปรึกษาและประเมินราคาฟรี</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
               
               {submitted ? (
                 <motion.div 
