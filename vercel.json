@@ -17,6 +17,10 @@
       }
     },
     {
+      "src": "/(.*\\.(png|jpg|jpeg|webp|svg|ico|css|js|json|txt|xml))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
