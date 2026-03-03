@@ -398,18 +398,32 @@ const Packages = () => {
 
               {/* CTA Button */}
               <div className="p-6 pt-2">
-                <motion.a
-                  href="#contact"
+                <motion.button
+                  onClick={() => {
+                    const packageInfo = {
+                      name: `${activeTab.toUpperCase()} - ${plan.name} (${plan.size})`,
+                      specs: plan.specs
+                    };
+                    // Store package info in sessionStorage
+                    sessionStorage.setItem('selectedPackage', JSON.stringify(packageInfo));
+                    // Scroll to contact section
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    // Trigger custom event to update Contact form
+                    window.dispatchEvent(new CustomEvent('packageSelected', { detail: packageInfo }));
+                  }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`block w-full py-3 rounded-lg text-center font-semibold transition-all ${
+                  className={`block w-full py-3 rounded-lg text-center font-semibold transition-all cursor-pointer ${
                     plan.popular
                       ? 'bg-white text-kb-orange hover:bg-gray-100'
                       : 'bg-gray-900 text-white hover:bg-gray-800'
                   }`}
                 >
                   เลือกแพ็คเกจนี้
-                </motion.a>
+                </motion.button>
               </div>
             </motion.div>
           ))}
