@@ -143,60 +143,59 @@ const Partners = () => {
 
   return (
     <>
-      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-6 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-10 -left-20 w-72 h-72 bg-kb-orange/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 -right-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-6"
           >
-            <span className="text-kb-orange font-semibold text-sm uppercase tracking-wider">Our Partners</span>
-            <h3 className="text-xl md:text-2xl font-bold text-gray-800 mt-2">
+            <h3 className="text-2xl lg:text-3xl font-bold text-kb-dark mb-2">
               อุปกรณ์คุณภาพจากแบรนด์ชั้นนำระดับโลก
             </h3>
-            <p className="text-gray-500 text-sm mt-2">คลิกที่โลโก้เพื่อดูรายละเอียด</p>
-          </motion.div>
-
-          {/* Partner Logos Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {partners.map((partner, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleSelectPartner(partner)}
-                className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center border border-gray-100 hover:border-kb-orange/30 cursor-pointer"
-              >
-                <img
-                  src={process.env.PUBLIC_URL + partner.logo}
-                  alt={partner.name}
-                  className="h-12 md:h-16 w-auto object-contain group-hover:scale-110 transition-all duration-300"
-                />
-                <span className="mt-3 text-xs text-gray-400 group-hover:text-kb-orange transition-colors">
-                  {partner.type}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Trust Badge */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-10 text-center"
-          >
-            <p className="text-gray-500 text-sm">
+            <p className="text-kb-gray max-w-2xl mx-auto text-base">
               เราคัดสรรเฉพาะอุปกรณ์คุณภาพสูง มาตรฐานสากล รับประกันยาวนาน
             </p>
           </motion.div>
+
+          {/* Partner Logos Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {partners.map((partner, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleSelectPartner(partner)}
+                className="group bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center border-2 border-gray-100 hover:border-kb-orange/50 cursor-pointer relative overflow-hidden"
+              >
+                {/* Hover Effect Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-kb-orange/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                <div className="relative z-10 flex flex-col items-center">
+                  <img
+                    src={process.env.PUBLIC_URL + partner.logo}
+                    alt={partner.name}
+                    className="h-12 md:h-16 w-auto object-contain group-hover:scale-110 transition-all duration-300 filter group-hover:brightness-110"
+                  />
+                </div>
+
+                {/* Bottom Accent Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-kb-orange to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

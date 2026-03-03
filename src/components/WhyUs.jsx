@@ -34,8 +34,20 @@ const WhyUs = () => {
   ];
 
   return (
-    <section id="why-us" className="py-20 bg-gradient-to-b from-blue-50 to-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="why-us" 
+      className="py-20 bg-gradient-to-b from-blue-50 to-white relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/bg.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <FadeUp>
           <div className="text-center mb-12">

@@ -1,45 +1,53 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
   AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, 
   Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend
 } from 'recharts';
 import { 
   Calculator as CalcIcon, 
-  Zap, 
-  DollarSign, 
-  TrendingUp, 
-  Sun, 
+  Sun,
+  Moon,
+  Info,
+  Zap,
+  DollarSign,
+  TrendingUp,
   BarChart3,
   Target,
   Leaf,
-  Battery,
-  ArrowRight,
   CheckCircle,
-  Info,
-  RefreshCw
+  ArrowRight
 } from 'lucide-react';
 
 const Calculator = () => {
   const [formData, setFormData] = useState({
     monthlyBill: '',
-    phase: '1',
-    dayAC: '1',
-    nightAC: '1',
-    systemType: 'hybrid',
+    buildingType: '',
+    phase: '3',
+    usageRatio: 50,
   });
-  
+
   const [results, setResults] = useState(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const [activeTab, setActiveTab] = useState('summary');
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const COLORS = ['#F97316', '#3B82F6', '#10B981', '#8B5CF6', '#EC4899'];
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSliderChange = (e) => {
+    setFormData({ ...formData, usageRatio: parseInt(e.target.value) });
+  };
+
   const calculateSolar = () => {
-    if (!formData.monthlyBill) return;
+    if (!formData.monthlyBill || !formData.buildingType) {
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+      return;
+    }
+
     setIsCalculating(true);
     
     setTimeout(() => {
@@ -49,30 +57,23 @@ const Calculator = () => {
       const annualConsumption = monthlyConsumption * 12;
       const peakSunHours = 4.5;
       const systemEfficiency = 0.82;
-      const targetCoverage = formData.systemType === 'offgrid' ? 1.0 : 0.85;
+      
+      // Adjust target coverage based on building type
+      let targetCoverage = 0.85;
+      if (formData.buildingType === 'industrial') targetCoverage = 0.9;
+      if (formData.buildingType === 'residential') targetCoverage = 0.8;
       
       let recommendedSize = (monthlyConsumption * targetCoverage) / (peakSunHours * 30 * systemEfficiency);
       recommendedSize = Math.ceil(recommendedSize * 2) / 2;
-      recommendedSize = Math.max(3, Math.min(recommendedSize, 15));
+      recommendedSize = Math.max(3, Math.min(recommendedSize, 20));
 
-      let costPerKW, batteryCost = 0, batterySize = 0;
+      // Cost calculation
+      let costPerKW = recommendedSize <= 5 ? 18000 : 16000;
+      const systemCost = recommendedSize * costPerKW;
       
-      if (formData.systemType === 'ongrid') {
-        costPerKW = recommendedSize <= 5 ? 18000 : 16000; // ลดจาก 23000/21000
-      } else if (formData.systemType === 'hybrid') {
-        costPerKW = recommendedSize <= 5 ? 22000 : 20000; // ลดจาก 27000/25000
-        batterySize = Math.ceil(recommendedSize * 1.2); // ลดจาก 1.5
-        batteryCost = batterySize * 8000; // ลดจาก 10000
-      } else {
-        costPerKW = 25000; // ลดจาก 30000
-        batterySize = Math.ceil(recommendedSize * 2.5); // ลดจาก 3
-        batteryCost = batterySize * 8000; // ลดจาก 10000
-      }
-      
-      const systemCost = (recommendedSize * costPerKW) + batteryCost;
       const annualProduction = recommendedSize * peakSunHours * 365 * systemEfficiency;
-      const selfConsumptionRate = formData.systemType === 'ongrid' ? 0.75 : 0.95; // เพิ่มจาก 0.7/0.9
-      const electricityRateAdjusted = 4.8; // เพิ่มจาก 4.5 (ราคาไฟแพงขึ้น)
+      const selfConsumptionRate = 0.75;
+      const electricityRateAdjusted = 4.8;
       const annualSavings = Math.min(annualProduction * selfConsumptionRate, annualConsumption) * electricityRateAdjusted;
       const monthlySavings = annualSavings / 12;
       const paybackYears = systemCost / annualSavings;
@@ -102,8 +103,6 @@ const Calculator = () => {
       const panelWattage = 550;
       const panelCount = Math.ceil((recommendedSize * 1000) / panelWattage);
       const roofArea = panelCount * 2.2 * 1.2;
-      const avgHourlyConsumption = monthlyConsumption / 30 / 24;
-      const backupHours = batterySize > 0 ? Math.round(batterySize / avgHourlyConsumption) : 0;
 
       // Monthly production data
       const monthlyData = [
@@ -129,13 +128,10 @@ const Calculator = () => {
         { name: 'อุปกรณ์ไฟฟ้า', value: Math.round(systemCost * 0.1) },
         { name: 'อื่นๆ', value: Math.round(systemCost * 0.15) },
       ];
-      if (batteryCost > 0) {
-        costBreakdown.splice(2, 0, { name: 'แบตเตอรี่', value: batteryCost });
-      }
 
       setResults({
-        system: { size: recommendedSize, type: formData.systemType, panelCount, panelWattage, batterySize, roofArea: Math.round(roofArea), backupHours },
-        cost: { total: Math.round(systemCost), perKW: Math.round(systemCost / recommendedSize), battery: batteryCost, breakdown: costBreakdown },
+        system: { size: recommendedSize, panelCount, panelWattage, roofArea: Math.round(roofArea) },
+        cost: { total: Math.round(systemCost), perKW: Math.round(systemCost / recommendedSize), breakdown: costBreakdown },
         production: { annual: Math.round(annualProduction), monthly: Math.round(annualProduction / 12), daily: Math.round(annualProduction / 365) },
         savings: { monthly: Math.round(monthlySavings), annual: Math.round(annualSavings), total25Years: Math.round(totalSavings25Years), billReduction: Math.round((monthlySavings / monthlyBill) * 100) },
         financial: { paybackYears: Math.round(paybackYears * 10) / 10, roi: Math.round(roi), netProfit: Math.round(totalSavings25Years - systemCost) },
@@ -146,127 +142,208 @@ const Calculator = () => {
       });
       
       setIsCalculating(false);
-    }, 1500);
-  };
-
-  const resetCalculator = () => {
-    setFormData({ monthlyBill: '', phase: '1', dayAC: '1', nightAC: '1', systemType: 'hybrid' });
-    setResults(null);
-    setActiveTab('summary');
-  };
-
-  const systemTypeLabels = {
-    ongrid: 'On-Grid (ประหยัดค่าไฟ)',
-    hybrid: 'Hybrid (ประหยัด + สำรองไฟ)',
-    offgrid: 'Off-Grid (อิสระ 100%)'
+    }, 1000);
   };
 
   return (
-    <section id="calculator" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 mobile-full-width bg-section-mobile">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-fix">
-        <div className="text-center mb-12">
-          <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Solar Calculator</span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-4 px-2 sm:px-0">
-            <span className="block sm:hidden">คำนวณความคุ้มค่า<br />โซลาร์เซลล์</span>
-            <span className="hidden sm:block">คำนวณความคุ้มค่าโซลาร์เซลล์</span>
+    <section id="calculator" className="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background Decoration */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-2xl lg:text-4xl font-bold text-kb-dark mb-3">
+            คำนวณความคุ้มค่าโซลาร์เซลล์
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4 sm:px-0 leading-relaxed">
-            <span className="block sm:hidden">กรอกข้อมูลการใช้ไฟฟ้าของคุณ<br />เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน</span>
-            <span className="hidden sm:block">กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน</span>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8">
           {/* Form - 2 columns */}
-          <div className="lg:col-span-2 bg-white rounded-2xl p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <CalcIcon className="w-5 h-5 text-kb-orange" />
-              ข้อมูลการใช้ไฟฟ้า
-            </h3>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">1. ค่าไฟเฉลี่ย/เดือน (บาท) <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input type="number" name="monthlyBill" value={formData.monthlyBill} onChange={handleChange} placeholder="เช่น 3500" className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-kb-orange focus:border-kb-orange" />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">2. มิเตอร์ไฟกี่เฟส</label>
-                <div className="grid grid-cols-2 gap-3">
-                  {['1', '3'].map((phase) => (
-                    <button key={phase} type="button" onClick={() => setFormData({ ...formData, phase })}
-                      className={`py-2.5 px-4 rounded-xl border-2 font-medium transition-all ${formData.phase === phase ? 'border-kb-orange bg-kb-orange/10 text-kb-orange' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
-                      {phase} เฟส
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
+          <div className="lg:col-span-2">
+            <motion.div 
+              className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 sticky top-4"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="space-y-5">
+                {/* Monthly Bill Input */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">3. แอร์กลางวัน</label>
-                  <select name="dayAC" value={formData.dayAC} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-kb-orange">
-                    {[0, 1, 2, 3, 4, 5].map((num) => (<option key={num} value={num}>{num} เครื่อง</option>))}
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    ค่าไฟฟ้าต่อเดือน (บาท)
+                  </label>
+                  <input 
+                    type="text" 
+                    name="monthlyBill" 
+                    value={formData.monthlyBill} 
+                    onChange={handleChange} 
+                    placeholder="กรอกเลขจำนวนเต็มเท่านั้น" 
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-kb-orange focus:border-kb-orange transition-all text-gray-900"
+                  />
+                </div>
+
+                {/* Building Type Dropdown */}
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    ประเภทอาคาร
+                  </label>
+                  <select 
+                    name="buildingType" 
+                    value={formData.buildingType} 
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-kb-orange focus:border-kb-orange transition-all text-gray-900 bg-white"
+                  >
+                    <option value="">Select one...</option>
+                    <option value="residential">บ้านพักอาศัย</option>
+                    <option value="commercial">อาคารพาณิชย์</option>
+                    <option value="industrial">โรงงานอุตสาหกรรม</option>
+                    <option value="agricultural">เกษตรกรรม</option>
                   </select>
                 </div>
+
+                {/* Phase Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">4. แอร์กลางคืน</label>
-                  <select name="nightAC" value={formData.nightAC} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-kb-orange">
-                    {[0, 1, 2, 3, 4, 5].map((num) => (<option key={num} value={num}>{num} เครื่อง</option>))}
-                  </select>
+                  <label className="block text-gray-700 font-semibold mb-3">
+                    ระบบไฟฟ้าของบ้าน
+                  </label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input 
+                        type="radio" 
+                        name="phase" 
+                        value="1" 
+                        checked={formData.phase === '1'}
+                        onChange={handleChange}
+                        className="w-5 h-5 text-kb-orange focus:ring-kb-orange"
+                      />
+                      <span className="text-gray-700">1 เฟส</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input 
+                        type="radio" 
+                        name="phase" 
+                        value="3" 
+                        checked={formData.phase === '3'}
+                        onChange={handleChange}
+                        className="w-5 h-5 text-kb-orange focus:ring-kb-orange"
+                      />
+                      <span className="text-gray-700">3 เฟส</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input 
+                        type="radio" 
+                        name="phase" 
+                        value="unknown" 
+                        checked={formData.phase === 'unknown'}
+                        onChange={handleChange}
+                        className="w-5 h-5 text-kb-orange focus:ring-kb-orange"
+                      />
+                      <span className="text-gray-700">ไม่ทราบ</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">5. ประเภทระบบ</label>
-                <div className="space-y-2">
-                  {Object.entries(systemTypeLabels).map(([key, label]) => (
-                    <button key={key} type="button" onClick={() => setFormData({ ...formData, systemType: key })}
-                      className={`w-full py-2.5 px-4 rounded-xl border-2 text-left text-sm font-medium transition-all ${formData.systemType === key ? 'border-kb-orange bg-kb-orange/10 text-kb-orange' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
-                      {label}
-                    </button>
-                  ))}
+                {/* Usage Ratio Slider */}
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-3">
+                    อัตราส่วนการใช้ไฟฟ้าช่วงกลางวัน (%)
+                  </label>
+                  <div className="relative pt-2">
+                    <input 
+                      type="range" 
+                      min="0" 
+                      max="100" 
+                      value={formData.usageRatio}
+                      onChange={handleSliderChange}
+                      className="w-full h-2 rounded-lg appearance-none cursor-pointer slider"
+                      style={{
+                        background: `linear-gradient(to right, #F97316 0%, #F97316 ${formData.usageRatio}%, #E5E7EB ${formData.usageRatio}%, #E5E7EB 100%)`
+                      }}
+                    />
+                    <div className="absolute left-0 -top-1 flex items-center gap-1 text-kb-orange">
+                      <Sun className="w-5 h-5" />
+                    </div>
+                    <div className="absolute right-0 -top-1 flex items-center gap-1 text-gray-600">
+                      <Moon className="w-5 h-5" />
+                    </div>
+                  </div>
+                  
+                  {/* Display percentages */}
+                  <div className="flex justify-between mt-4 text-center">
+                    <div className="flex-1 border-r border-gray-200">
+                      <p className="text-sm text-gray-500 mb-1">ช่วงกลางวัน</p>
+                      <p className="text-2xl font-bold text-kb-orange">{formData.usageRatio}%</p>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-500 mb-1">ช่วงกลางคืน</p>
+                      <p className="text-2xl font-bold text-gray-600">{100 - formData.usageRatio}%</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex gap-3 pt-2">
-                <button onClick={calculateSolar} disabled={!formData.monthlyBill || isCalculating}
-                  className="flex-1 bg-kb-orange hover:bg-kb-orange-dark disabled:bg-gray-300 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all">
-                  {isCalculating ? (<><RefreshCw className="w-5 h-5 animate-spin" />กำลังคำนวณ...</>) : (<><CalcIcon className="w-5 h-5" />คำนวณ</>)}
+                {/* Notes */}
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+                  <div className="flex items-start gap-2">
+                    <Info className="w-5 h-5 text-kb-orange flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <p className="flex items-start gap-2">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">1</span>
+                        <span>โปรแกรมคำนวณเป็นเพียงการแนะนำเบื้องต้น และหาความคุ้มทุน</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">2</span>
+                        <span>ติดต่อเราเพื่อรับคำปรึกษาฟรีจากทีมงาน และหาโอกาสในสูญเสียที่เหมาะสมกับลูกค้าที่สุด</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Calculate Button */}
+                <button 
+                  onClick={calculateSolar}
+                  disabled={isCalculating}
+                  className="w-full bg-kb-orange hover:bg-orange-600 disabled:bg-gray-300 text-white py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-kb-orange/25 hover:shadow-xl hover:shadow-kb-orange/30 flex items-center justify-center gap-2"
+                >
+                  <CalcIcon className="w-5 h-5" />
+                  {isCalculating ? 'กำลังคำนวณ...' : 'คำนวณ'}
                 </button>
-                {results && (
-                  <button onClick={resetCalculator} className="px-4 py-3 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-all">
-                    <RefreshCw className="w-5 h-5" />
-                  </button>
-                )}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Results - 3 columns */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3">
             {!results ? (
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center min-h-[500px]">
-                <div className="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center min-h-[500px]">
+                <div className="w-24 h-24 bg-kb-orange/10 rounded-full flex items-center justify-center mb-6">
                   <Sun className="w-12 h-12 text-kb-orange" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">พร้อมคำนวณ</h3>
-                <p className="text-gray-400">กรอกข้อมูลด้านซ้ายแล้วกดคำนวณ</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">พร้อมคำนวณ</h3>
+                <p className="text-gray-600">กรอกข้อมูลด้านซ้ายแล้วกดคำนวณ</p>
               </div>
             ) : (
-              <>
+              <div className="space-y-6">
                 {/* Tabs */}
-                <div className="flex gap-2 bg-white/10 p-1 rounded-xl">
+                <div className="flex gap-2 bg-white p-1 rounded-xl shadow-sm">
                   {[
                     { id: 'summary', label: 'สรุป' },
                     { id: 'charts', label: 'กราฟ' },
                     { id: 'projection', label: '25 ปี' },
                   ].map((tab) => (
                     <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                      className={`flex-1 py-2.5 px-4 rounded-lg font-medium transition-all ${activeTab === tab.id ? 'bg-white text-gray-900' : 'text-white hover:bg-white/10'}`}>
+                      className={`flex-1 py-2.5 px-4 rounded-lg font-medium transition-all ${activeTab === tab.id ? 'bg-kb-orange text-white' : 'text-gray-600 hover:bg-gray-50'}`}>
                       {tab.label}
                     </button>
                   ))}
@@ -276,24 +353,18 @@ const Calculator = () => {
                 {activeTab === 'summary' && (
                   <div className="grid md:grid-cols-2 gap-4">
                     {/* System */}
-                    <div className="bg-white rounded-2xl p-5">
+                    <div className="bg-white rounded-2xl p-5 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><Target className="w-5 h-5 text-kb-orange" />ระบบที่แนะนำ</h4>
                       <div className="grid grid-cols-2 gap-3">
                         <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">ขนาดระบบ</p><p className="text-xl font-bold text-gray-900">{results.system.size} kW</p></div>
                         <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">จำนวนแผง</p><p className="text-xl font-bold text-gray-900">{results.system.panelCount} แผง</p></div>
                         <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">พื้นที่หลังคา</p><p className="text-xl font-bold text-gray-900">{results.system.roofArea} ตร.ม.</p></div>
-                        {results.system.batterySize > 0 && <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">แบตเตอรี่</p><p className="text-xl font-bold text-gray-900">{results.system.batterySize} kWh</p></div>}
+                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">กำลังแผง</p><p className="text-xl font-bold text-gray-900">{results.system.panelWattage}W</p></div>
                       </div>
-                      {results.system.backupHours > 0 && (
-                        <div className="mt-3 bg-green-50 rounded-xl p-2.5 flex items-center gap-2">
-                          <Battery className="w-4 h-4 text-green-600" />
-                          <span className="text-green-700 text-sm font-medium">สำรองไฟได้ ~{results.system.backupHours} ชม.</span>
-                        </div>
-                      )}
                     </div>
 
                     {/* Savings */}
-                    <div className="bg-gradient-to-br from-kb-orange to-amber-500 rounded-2xl p-5 text-white">
+                    <div className="bg-gradient-to-br from-kb-orange to-amber-500 rounded-2xl p-5 text-white shadow-lg">
                       <h4 className="font-bold mb-3 flex items-center gap-2"><TrendingUp className="w-5 h-5" />ผลประหยัด</h4>
                       <div className="grid grid-cols-2 gap-3">
                         <div><p className="text-white/70 text-xs">ประหยัด/เดือน</p><p className="text-xl font-bold">฿{results.savings.monthly.toLocaleString()}</p></div>
@@ -304,7 +375,7 @@ const Calculator = () => {
                     </div>
 
                     {/* Investment */}
-                    <div className="bg-white rounded-2xl p-5">
+                    <div className="bg-white rounded-2xl p-5 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><DollarSign className="w-5 h-5 text-kb-orange" />การลงทุน</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between items-center py-2 border-b border-gray-100">
@@ -319,7 +390,7 @@ const Calculator = () => {
                     </div>
 
                     {/* 25 Year */}
-                    <div className="bg-white rounded-2xl p-5">
+                    <div className="bg-white rounded-2xl p-5 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><BarChart3 className="w-5 h-5 text-kb-orange" />สรุป 25 ปี</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between items-center py-2 border-b border-gray-100">
@@ -338,7 +409,7 @@ const Calculator = () => {
                     </div>
 
                     {/* Environmental */}
-                    <div className="md:col-span-2 bg-green-50 rounded-2xl p-5">
+                    <div className="md:col-span-2 bg-green-50 rounded-2xl p-5 shadow-sm">
                       <h4 className="font-bold text-green-800 mb-3 flex items-center gap-2"><Leaf className="w-5 h-5" />ผลกระทบสิ่งแวดล้อม (ต่อปี)</h4>
                       <div className="grid grid-cols-2 gap-4">
                         <div><p className="text-green-600 text-sm">ลด CO₂</p><p className="text-xl font-bold text-green-800">{results.environmental.co2Reduction.toLocaleString()} kg</p></div>
@@ -351,7 +422,7 @@ const Calculator = () => {
                 {activeTab === 'charts' && (
                   <div className="space-y-6">
                     {/* Monthly Production vs Consumption */}
-                    <div className="bg-white rounded-2xl p-6">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <Zap className="w-5 h-5 text-kb-orange" />
                         การผลิตไฟฟ้า vs การใช้ไฟฟ้า (รายเดือน)
@@ -361,7 +432,7 @@ const Calculator = () => {
                           <BarChart data={results.monthlyData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
                             <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-                            <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}`} />
+                            <YAxis tick={{ fontSize: 11 }} />
                             <Tooltip formatter={(value) => [`${value.toLocaleString()} kWh`]} />
                             <Legend />
                             <Bar dataKey="production" name="ผลิตได้" fill="#F97316" radius={[4, 4, 0, 0]} />
@@ -372,7 +443,7 @@ const Calculator = () => {
                     </div>
 
                     {/* Cost Breakdown Pie Chart */}
-                    <div className="bg-white rounded-2xl p-6">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <DollarSign className="w-5 h-5 text-kb-orange" />
                         สัดส่วนต้นทุนระบบ
@@ -404,7 +475,7 @@ const Calculator = () => {
                 {activeTab === 'projection' && (
                   <div className="space-y-6">
                     {/* 25 Year Cash Flow */}
-                    <div className="bg-white rounded-2xl p-6">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-kb-orange" />
                         กระแสเงินสดสะสม 25 ปี
@@ -443,8 +514,8 @@ const Calculator = () => {
                     </div>
 
                     {/* Yearly Savings Table */}
-                    <div className="bg-white rounded-2xl p-6">
-                      <h4 className="font-bold text-gray-900 mb-4">รายละเอียดรายปี</h4>
+                    <div className="bg-white rounded-2xl p-6 shadow-sm">
+                      <h4 className="font-bold text-gray-900 mb-4">รายละเอียดรายปี (10 ปีแรก)</h4>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
@@ -474,21 +545,43 @@ const Calculator = () => {
                 )}
 
                 {/* CTA */}
-                <a href="#contact" className="block w-full bg-kb-orange hover:bg-kb-orange-dark text-white py-4 rounded-xl font-semibold text-center transition-all flex items-center justify-center gap-2">
+                <a href="#contact" className="block w-full bg-kb-orange hover:bg-orange-600 text-white py-4 rounded-xl font-semibold text-center transition-all flex items-center justify-center gap-2 shadow-lg">
                   <CheckCircle className="w-5 h-5" />
                   สนใจติดตั้ง ติดต่อเราเลย
                   <ArrowRight className="w-5 h-5" />
                 </a>
 
-                <div className="flex items-start gap-2 text-gray-400 text-xs">
+                <div className="flex items-start gap-2 text-gray-500 text-xs bg-white/50 p-3 rounded-lg">
                   <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
                   <p>* ผลการคำนวณเป็นการประมาณการเบื้องต้น ราคาและผลประหยัดจริงอาจแตกต่างตามสภาพหน้างาน</p>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #F97316;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+        }
+        
+        .slider::-moz-range-thumb {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #F97316;
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+        }
+      `}</style>
     </section>
   );
 };

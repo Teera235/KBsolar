@@ -1,0 +1,46 @@
+{
+  "short_name": "KB Solar",
+  "name": "KB Solar Energy - Solar Cell Hybrid Thailand",
+  "description": "ผู้เชี่ยวชาญ Solar Cell Hybrid ระบบโซลาร์เซลล์ไฮบริด BESS Battery Storage",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo.webp",
+      "type": "image/webp",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo.webp",
+      "type": "image/webp", 
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#F97316",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "categories": ["business", "utilities", "productivity"],
+  "lang": "th",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "คำนวณโซลาร์เซลล์",
+      "short_name": "Calculator",
+      "description": "คำนวณขนาดระบบโซลาร์เซลล์ไฮบริด",
+      "url": "/#calculator",
+      "icons": [{ "src": "logo.webp", "sizes": "96x96" }]
+    },
+    {
+      "name": "ติดต่อเรา",
+      "short_name": "Contact", 
+      "description": "ติดต่อ KB Solar Energy",
+      "url": "/#contact",
+      "icons": [{ "src": "logo.webp", "sizes": "96x96" }]
+    }
+  ]
+}

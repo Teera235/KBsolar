@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Zap, MapPin, Sun, X, Building2, Home, Factory, Hotel, Eye, ChevronDown, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeUp } from './AnimatedSection';
@@ -643,32 +643,60 @@ const Projects = () => {
     }
   };
 
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject || selectedProvince) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = '0px'; // Prevent layout shift
+    } else {
+      document.body.style.overflow = 'unset';
+      document.body.style.paddingRight = '0px';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.body.style.paddingRight = '0px';
+    };
+  }, [selectedProject, selectedProvince]);
+
   return (
-    <section id="projects" className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white mobile-full-width bg-section-mobile">
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mobile-container-fix">
+    <section id="projects" className="py-16 sm:py-20 bg-gradient-to-b from-white via-gray-50 to-white mobile-full-width bg-section-mobile relative overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mobile-container-fix relative z-10">
         <FadeUp>
-          <div className="text-center mb-12">
-            <span className="inline-block bg-kb-orange/10 text-kb-orange font-semibold text-sm uppercase tracking-wider px-4 py-2 rounded-full mb-4">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-kb-orange/10 via-orange-500/10 to-kb-orange/10 text-kb-orange font-bold text-sm uppercase tracking-wider px-6 py-2.5 rounded-full mb-6 border border-kb-orange/20">
+              <Eye className="w-4 h-4" />
               PORTFOLIO
-            </span>
-            <h2 className="text-3xl lg:text-5xl font-bold text-kb-dark mt-2 mb-4">
+            </div>
+            <h2 className="text-4xl lg:text-6xl font-bold text-kb-dark mb-6 leading-tight">
               Projects & Case Studies
             </h2>
-            <p className="text-kb-gray max-w-2xl mx-auto text-lg">
+            <p className="text-kb-gray max-w-3xl mx-auto text-lg lg:text-xl leading-relaxed">
               ผลงานติดตั้งจริงจากลูกค้าที่ไว้วางใจ พร้อมข้อมูลประสิทธิภาพระบบ
+              <br />
+              <span className="text-kb-orange font-semibold">43+ โปรเจกต์ทั่วประเทศไทยและต่างประเทศ</span>
             </p>
           </div>
         </FadeUp>
 
         <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-start">
           <FadeUp delay={0.1} className="lg:col-span-3 order-2 lg:order-1">
-            <div className="bg-white rounded-2xl lg:rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-              <div className="bg-gradient-to-r from-kb-orange to-orange-500 px-4 lg:px-6 py-3 lg:py-4">
-                <h3 className="text-white font-bold text-base lg:text-lg flex items-center gap-2">
-                  <MapPin className="w-4 h-4 lg:w-5 lg:h-5" />
-                  พื้นที่ติดตั้งทั่วประเทศ
-                </h3>
-                <p className="text-white/80 text-xs lg:text-sm">คลิกที่จังหวัดเพื่อดูโปรเจกต์</p>
+            <div className="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden hover:shadow-3xl transition-shadow duration-300">
+              <div className="bg-gradient-to-r from-kb-orange via-orange-500 to-orange-400 px-4 lg:px-6 py-4 lg:py-5 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-20" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
+                <div className="relative">
+                  <h3 className="text-white font-bold text-base lg:text-xl flex items-center gap-2 mb-1">
+                    <MapPin className="w-5 h-5 lg:w-6 lg:h-6" />
+                    พื้นที่ติดตั้งทั่วประเทศ
+                  </h3>
+                  <p className="text-white/90 text-xs lg:text-sm">คลิกที่จังหวัดเพื่อดูโปรเจกต์ในพื้นที่</p>
+                </div>
               </div>
               <ThailandMap projects={projects} onProvinceClick={handleLocationClick} />
             </div>
@@ -676,24 +704,30 @@ const Projects = () => {
 
           <div className="lg:col-span-2 space-y-3 lg:space-y-4 order-1 lg:order-2">
             <FadeUp delay={0.15}>
-              <div className="flex flex-wrap gap-1 sm:gap-1.5 lg:gap-2 mb-3 lg:mb-4">
-                {categories.map((cat) => {
-                  const Icon = cat.icon;
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => { setActiveCategory(cat.id); setShowAllProjects(false); }}
-                      className={`flex items-center gap-1 lg:gap-1.5 px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 lg:py-2 rounded-full text-[10px] sm:text-xs lg:text-sm font-medium transition-all ${
-                        activeCategory === cat.id
-                          ? 'bg-kb-orange text-white shadow-md'
-                          : 'bg-white text-kb-gray hover:bg-gray-100 border border-gray-200'
-                      }`}
-                    >
-                      <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-                      <span className="whitespace-nowrap">{cat.name}</span>
-                    </button>
-                  );
-                })}
+              <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200">
+                <h4 className="text-sm font-bold text-kb-dark mb-3 flex items-center gap-2">
+                  <div className="w-1 h-5 bg-kb-orange rounded-full"></div>
+                  หมวดหมู่โปรเจกต์
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {categories.map((cat) => {
+                    const Icon = cat.icon;
+                    return (
+                      <button
+                        key={cat.id}
+                        onClick={() => { setActiveCategory(cat.id); setShowAllProjects(false); }}
+                        className={`flex items-center gap-1.5 px-3 lg:px-4 py-2 lg:py-2.5 rounded-xl text-xs lg:text-sm font-semibold transition-all duration-300 ${
+                          activeCategory === cat.id
+                            ? 'bg-gradient-to-r from-kb-orange to-orange-500 text-white shadow-lg shadow-kb-orange/30 scale-105'
+                            : 'bg-gray-50 text-kb-gray hover:bg-gray-100 border border-gray-200 hover:border-kb-orange/30 hover:scale-105'
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+                        <span className="whitespace-nowrap">{cat.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </FadeUp>
 
@@ -712,44 +746,54 @@ const Projects = () => {
                       onClick={() => openProject(project)}
                       className="group cursor-pointer"
                     >
-                      <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex">
-                        <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 flex-shrink-0 relative overflow-hidden">
+                      <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-kb-orange/50 flex relative">
+                        {/* Hover Effect Bar */}
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-kb-orange to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                        
+                        <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 flex-shrink-0 relative overflow-hidden">
                           <img
                             src={process.env.PUBLIC_URL + project.images[0]}
                             alt={project.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          {/* Category Badge on Image */}
+                          <div className="absolute top-2 left-2 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-md">
+                            <CategoryIcon className="w-3 h-3 text-kb-orange" />
+                          </div>
                         </div>
                         
-                        <div className="flex-1 p-2 sm:p-2.5 lg:p-3 flex flex-col justify-between min-w-0">
+                        <div className="flex-1 p-3 sm:p-3.5 lg:p-4 flex flex-col justify-between min-w-0">
                           <div>
-                            <div className="flex items-center gap-1 lg:gap-1.5 text-[9px] sm:text-[10px] lg:text-xs text-kb-gray mb-1">
-                              <CategoryIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 text-kb-orange flex-shrink-0" />
-                              <span className="truncate">{getCategoryName(project.category)}</span>
+                            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-kb-gray mb-1.5">
+                              <span className="font-medium text-kb-orange">{getCategoryName(project.category)}</span>
                               <span>•</span>
-                              <MapPin className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 flex-shrink-0" />
+                              <MapPin className="w-3 h-3 flex-shrink-0" />
                               <span className="truncate">{project.location}</span>
                             </div>
-                            <h4 className="font-bold text-kb-dark text-xs sm:text-sm line-clamp-2 group-hover:text-kb-orange transition-colors leading-tight">
+                            <h4 className="font-bold text-kb-dark text-sm sm:text-base lg:text-lg line-clamp-2 group-hover:text-kb-orange transition-colors leading-tight mb-2">
                               {project.title}
                             </h4>
                           </div>
                           
-                          <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 mt-1.5 lg:mt-2 flex-wrap">
-                            <span className="bg-kb-orange text-white text-[8px] sm:text-[9px] lg:text-[10px] px-1 sm:px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
+                          <div className="flex items-center gap-2 lg:gap-3 flex-wrap">
+                            <span className="bg-gradient-to-r from-kb-orange to-orange-500 text-white text-[10px] sm:text-xs px-2 py-1 rounded-lg font-bold whitespace-nowrap shadow-md">
                               {project.systemSize} kWp
                             </span>
-                            <span className="text-[8px] sm:text-[9px] lg:text-[10px] text-kb-gray whitespace-nowrap">
+                            <span className="text-[10px] sm:text-xs text-kb-gray whitespace-nowrap flex items-center gap-1">
+                              <Zap className="w-3 h-3 text-yellow-500" />
                               {project.annualEnergy} kWh/ปี
                             </span>
-                            <span className="text-[8px] sm:text-[9px] lg:text-[10px] text-green-600 font-medium whitespace-nowrap">
-                              ฿ {project.costSaving.split(' - ')[0]}/เดือน
+                            <span className="text-[10px] sm:text-xs text-green-600 font-bold whitespace-nowrap">
+                              ฿ {project.costSaving.split(' - ')[0]}/ด.
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex items-center pr-1 sm:pr-2 lg:pr-4">
-                          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-gray-300 group-hover:text-kb-orange group-hover:translate-x-1 transition-all" />
+                        <div className="flex items-center pr-2 sm:pr-3 lg:pr-4">
+                          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gray-100 group-hover:bg-kb-orange flex items-center justify-center transition-all duration-300">
+                            <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -764,16 +808,22 @@ const Projects = () => {
                   onClick={() => setShowAllProjects(!showAllProjects)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-3 lg:py-4 bg-gradient-to-r from-kb-orange to-orange-500 text-white rounded-xl lg:rounded-2xl font-semibold shadow-lg shadow-kb-orange/30 hover:shadow-xl hover:shadow-kb-orange/40 transition-all flex items-center justify-center gap-2 text-sm lg:text-base"
+                  className="w-full py-4 lg:py-5 bg-gradient-to-r from-kb-orange via-orange-500 to-orange-400 text-white rounded-xl lg:rounded-2xl font-bold shadow-xl shadow-kb-orange/30 hover:shadow-2xl hover:shadow-kb-orange/40 transition-all flex items-center justify-center gap-2 text-sm lg:text-base relative overflow-hidden group"
                 >
-                  {showAllProjects ? (
-                    <>แสดงน้อยลง</>
-                  ) : (
-                    <>
-                      ดูผลงานทั้งหมด ({filteredProjects.length} โปรเจกต์)
-                      <ChevronDown className="w-4 h-4 lg:w-5 lg:h-5" />
-                    </>
-                  )}
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center gap-2">
+                    {showAllProjects ? (
+                      <>
+                        <ChevronDown className="w-5 h-5 rotate-180 transition-transform" />
+                        แสดงน้อยลง
+                      </>
+                    ) : (
+                      <>
+                        ดูผลงานทั้งหมด ({filteredProjects.length} โปรเจกต์)
+                        <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+                      </>
+                    )}
+                  </span>
                 </motion.button>
               </FadeUp>
             )}
@@ -787,7 +837,7 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99999] flex items-center justify-center p-4"
               onClick={closeProvinceModal}
             >
               <motion.div
@@ -1073,7 +1123,7 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99999] flex items-center justify-center p-4"
               onClick={closeProject}
             >
               <motion.div

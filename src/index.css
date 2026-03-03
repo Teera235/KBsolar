@@ -607,3 +607,21 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.05) !important;
   }
 }
+
+/* Scroll Up Animation for Customer Reviews */
+@keyframes scroll-up-slow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-up-slow {
+  animation: scroll-up-slow 30s linear infinite;
+}
+
+.animate-scroll-up-slow:hover {
+  animation-play-state: paused;
+}

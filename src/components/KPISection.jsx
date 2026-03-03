@@ -39,7 +39,7 @@ const AnimatedNumber = ({ value, suffix = '' }) => {
 
 const KPISection = () => {
   const kpis = [
-    { icon: Zap, value: 150000, suffix: '+', unit: 'kWh/year', label: 'พลังงานที่ผลิต', mobileLabel: 'พลังงานที่ผลิตได้ต่อปี', description: 'Total Energy Generated' },
+    { icon: Zap, value: 150000, suffix: '+', unit: 'kWh', label: 'พลังงานที่ผลิต', mobileLabel: 'พลังงานที่ผลิตได้', description: 'Total Energy Generated' },
     { icon: Percent, value: 70, suffix: '', unit: '%', label: 'ลดค่าไฟฟ้า', description: 'Electricity Cost Reduction' },
     { icon: Clock, value: '4-6', suffix: '', unit: 'ปี', label: 'ระยะเวลาคืนทุน', description: 'Payback Period', isText: true },
     { icon: Leaf, value: 85, suffix: '', unit: 'Tons', label: 'ลด CO₂ ต่อปี', mobileLabel: 'ลด CO₂', description: 'Carbon Reduction' }
@@ -62,10 +62,12 @@ const KPISection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden mobile-full-width bg-section-mobile">
+    <section className="py-12 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden mobile-full-width bg-section-mobile">
       {/* Background Decoration */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-kb-orange/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mobile-container-fix">
         {/* Header */}
@@ -75,18 +77,17 @@ const KPISection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="text-kb-orange font-semibold text-sm uppercase tracking-wider">Why Solar?</span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-2">
+          <h2 className="text-4xl lg:text-6xl font-bold text-kb-dark mb-6">
             ทำไมต้องติดตั้งโซลาร์เซลล์?
           </h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base px-4 sm:px-0 leading-relaxed">
+          <p className="text-kb-gray max-w-3xl mx-auto text-lg lg:text-xl leading-relaxed">
             <span className="block sm:hidden">ประหยัดค่าไฟ สร้างพลังงานสะอาด<br />และคืนทุนได้จริงภายใน 4-6 ปี</span>
             <span className="hidden sm:block">ประหยัดค่าไฟ สร้างพลังงานสะอาด และคืนทุนได้จริงภายใน 4-6 ปี</span>
           </p>
         </motion.div>
 
         {/* Main KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 mb-16 kpi-grid-mobile">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12 kpi-grid-mobile">
           {kpis.map((kpi, index) => (
             <motion.div
               key={index}
@@ -94,114 +95,236 @@ const KPISection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(249, 115, 22, 0.15)' }}
-              className="bg-white rounded-2xl p-3 sm:p-4 lg:p-6 shadow-lg border border-gray-100 cursor-default group kpi-card-mobile mobile-text-container"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-white rounded-2xl p-5 lg:p-8 shadow-xl border-2 border-gray-100 hover:border-kb-orange/50 cursor-default group kpi-card-mobile mobile-text-container relative overflow-hidden min-h-[180px] lg:min-h-[220px]"
             >
-              <motion.div 
-                className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-kb-orange to-amber-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg shadow-kb-orange/20 group-hover:scale-110 transition-transform"
-              >
-                <kpi.icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" />
-              </motion.div>
-              <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 leading-none">
-                  {kpi.isText ? kpi.value : <AnimatedNumber value={kpi.value} suffix={kpi.suffix} />}
-                </span>
-                <span className="text-sm sm:text-base lg:text-lg text-gray-500 font-medium">{kpi.unit}</span>
+              {/* Hover Effect Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-kb-orange/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative z-10 h-full flex flex-col">
+                <motion.div 
+                  className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-kb-orange to-orange-500 rounded-2xl flex items-center justify-center mb-4 lg:mb-5 shadow-lg shadow-kb-orange/30 group-hover:scale-110 transition-transform"
+                >
+                  <kpi.icon className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
+                </motion.div>
+                <div className="flex items-baseline gap-1 mb-3 flex-wrap">
+                  <span className="text-xl lg:text-3xl xl:text-4xl font-bold text-kb-dark leading-none">
+                    {kpi.isText ? kpi.value : <AnimatedNumber value={kpi.value} suffix={kpi.suffix} />}
+                  </span>
+                  <span className="text-sm lg:text-lg text-kb-dark/70 font-bold whitespace-nowrap">{kpi.unit}</span>
+                </div>
+                <p className="text-kb-dark font-bold text-sm lg:text-base break-words leading-snug kpi-label-mobile mobile-break-text mb-2">
+                  <span className="block sm:hidden">{kpi.mobileLabel || kpi.label}</span>
+                  <span className="hidden sm:block">{kpi.label}</span>
+                </p>
+                <p className="text-xs lg:text-sm text-kb-gray break-words leading-relaxed kpi-description-mobile mobile-break-text">{kpi.description}</p>
               </div>
-              <p className="text-gray-900 font-semibold text-sm sm:text-base break-words leading-tight kpi-label-mobile mobile-break-text">
-                <span className="block sm:hidden">{kpi.mobileLabel || kpi.label}</span>
-                <span className="hidden sm:block">{kpi.label}</span>
-              </p>
-              <p className="text-xs sm:text-sm text-gray-400 break-words kpi-description-mobile mobile-break-text">{kpi.description}</p>
+
+              {/* Bottom Accent Line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-kb-orange to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </motion.div>
           ))}
         </div>
 
-        {/* Features Grid */}
+        {/* Customer Reviews & Benefits Section */}
         <motion.div 
-          className="bg-gray-900 rounded-3xl p-8 lg:p-12 mb-16"
+          className="relative rounded-3xl p-8 lg:p-12 mb-0 shadow-2xl overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/review-bg.png)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            {/* Left - Text */}
+          {/* Dark Overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 items-start relative z-10">
+            {/* Left - Customer Reviews Scrolling */}
             <div>
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                ข้อดีของการติดตั้ง<span className="text-kb-orange">โซลาร์เซลล์</span>
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6">
+                เสียงจากลูกค้าจริง
               </h3>
-              <p className="text-gray-400 mb-6">
-                การลงทุนที่คุ้มค่าที่สุดสำหรับบ้านและธุรกิจ ประหยัดค่าไฟได้ทันที และยังช่วยรักษาสิ่งแวดล้อม
-              </p>
-              <div className="grid grid-cols-2 gap-2 sm:gap-4 features-mobile">
-                {features.map((feature, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="flex items-center gap-2 sm:gap-3 feature-item-mobile"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                  >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-kb-orange/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="w-4 h-4 sm:w-5 sm:h-5 text-kb-orange" />
+              
+              {/* Scrolling Reviews Container */}
+              <div className="relative h-[450px] overflow-hidden rounded-2xl">
+                {/* Scrolling Content */}
+                <div className="animate-scroll-up-slow space-y-4">
+                  {[...Array(2)].map((_, setIndex) => (
+                    <div key={setIndex} className="space-y-4">
+                      {/* Review 1 */}
+                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-md border border-gray-200/50">
+                        <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                          "ติดตั้งโซลาร์เซลล์กับ KB Solar มา 1 ปีแล้ว ค่าไฟลดลงเกือบ 70% ทีมงานให้คำปรึกษาดีมาก ติดตั้งเรียบร้อย รวดเร็ว และบริการหลังการขายดีเยี่ยม ประทับใจมากครับ"
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold">
+                              คส
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-kb-dark font-bold text-sm">คุณสมชาย วงศ์ประเสริฐ</p>
+                            <p className="text-gray-500 text-xs">เจ้าของโรงงาน</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Review 2 */}
+                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-md border border-gray-200/50">
+                        <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                          "เลือก KB Solar เพราะเป็นบริษัทที่มีประสบการณ์และมาตรฐาน ทีมช่างมืออาชีพ อุปกรณ์คุณภาพดี ระบบทำงานได้ดีมาก ค่าไฟลดลงชัดเจน คุ้มค่ากับการลงทุนจริงๆ"
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white font-bold">
+                              คว
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-kb-dark font-bold text-sm">คุณวิไล สุขสวัสดิ์</p>
+                            <p className="text-gray-500 text-xs">เจ้าของร้านอาหาร</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Review 3 */}
+                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-md border border-gray-200/50">
+                        <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                          "ใช้ไฟเยอะมากเพราะเปิดแอร์ทั้งวัน ตัดสินใจติดโซลาร์เซลล์กับ KB Solar เป็นการตัดสินใจที่ถูกต้อง ค่าไฟลดลงมาก ทีมงานดูแลดี มีปัญหาอะไรติดต่อได้ตลอด"
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                              คป
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-kb-dark font-bold text-sm">คุณประยุทธ ชัยวัฒน์</p>
+                            <p className="text-gray-500 text-xs">บ้านพักอาศัย</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Review 4 */}
+                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-md border border-gray-200/50">
+                        <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                          "เปรียบเทียบหลายบริษัทแล้วเลือก KB Solar เพราะให้คำปรึกษาละเอียด ราคาเหมาะสม อุปกรณ์คุณภาพดี ติดตั้งมา 6 เดือนแล้ว ระบบทำงานได้ดีมาก แนะนำเลยครับ"
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold">
+                              คอ
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-kb-dark font-bold text-sm">คุณอนุชา ธนาวัฒน์</p>
+                            <p className="text-gray-500 text-xs">เจ้าของโรงแรม</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Review 5 */}
+                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-md border border-gray-200/50">
+                        <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                          "ประทับใจการบริการของ KB Solar มาก ตั้งแต่สำรวจหน้างาน ออกแบบระบบ ติดตั้ง จนถึงบริการหลังการขาย ทุกขั้นตอนเป็นมืออาชีพ ค่าไฟลดลงเห็นได้ชัด"
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white font-bold">
+                              คน
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-kb-dark font-bold text-sm">คุณนิภา จันทร์เพ็ญ</p>
+                            <p className="text-gray-500 text-xs">บ้านพักอาศัย</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Review 6 */}
+                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-md border border-gray-200/50">
+                        <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                          "ใช้งานมา 2 ปีแล้ว ระบบยังทำงานได้ดีมาก ไม่มีปัญหาอะไร ทีม KB Solar ดูแลดีมาก มีการเช็คระบบสม่ำเสมอ ค่าไฟลดลงเกือบ 80% คุ้มค่ามากครับ"
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            <div className="w-full h-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white font-bold">
+                              คท
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-kb-dark font-bold text-sm">คุณธนากร ศรีสุข</p>
+                            <p className="text-gray-500 text-xs">เจ้าของคลังสินค้า</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <span className="text-gray-300 text-xs sm:text-sm break-words leading-tight feature-text-mobile mobile-card-text">
-                      <span className="block sm:hidden">{feature.mobileText || feature.text}</span>
-                      <span className="hidden sm:block">{feature.text}</span>
-                    </span>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Right - Stats */}
-            <div className="grid grid-cols-2 gap-2 sm:gap-4 achievements-mobile">
-              {achievements.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-3 sm:p-4 lg:p-6 text-center border border-white/10 achievement-card-mobile"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(249, 115, 22, 0.1)' }}
-                >
-                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-kb-orange mb-1 achievement-number-mobile">{item.number}</p>
-                  <p className="text-gray-400 text-xs sm:text-sm break-words leading-tight achievement-label-mobile mobile-card-text">
-                    <span className="block sm:hidden">{item.mobileLabel || item.label}</span>
-                    <span className="hidden sm:block">{item.label}</span>
-                  </p>
-                </motion.div>
-              ))}
+            {/* Right - Benefits */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-xl border border-white/20">
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6">
+                ทำไมต้องเลือก KB Solar
+              </h3>
+              
+              <div className="space-y-6">
+                {/* Benefit 1 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                      <Shield className="w-7 h-7 text-kb-orange" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-2">ประสบการณ์กว่า 5 ปี</h4>
+                    <p className="text-white/90 text-sm leading-relaxed">
+                      ติดตั้งโซลาร์เซลล์มากกว่า 50 โครงการ ทั้งบ้านพักอาศัย โรงงาน และอาคารพาณิชย์ ด้วยทีมงานมืออาชีพและอุปกรณ์คุณภาพสูง
+                    </p>
+                  </div>
+                </div>
+
+                {/* Benefit 2 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                      <Award className="w-7 h-7 text-kb-orange" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-2">รับประกันครบวงจร</h4>
+                    <p className="text-white/90 text-sm leading-relaxed">
+                      รับประกันแผงโซลาร์เซลล์ 25 ปี อินเวอร์เตอร์ 10 ปี พร้อมบริการหลังการขายตลอดอายุการใช้งาน ดูแลคุณอย่างใกล้ชิด
+                    </p>
+                  </div>
+                </div>
+
+                {/* Benefit 3 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                      <Wrench className="w-7 h-7 text-kb-orange" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-2">บริการครบวงจร</h4>
+                    <p className="text-white/90 text-sm leading-relaxed">
+                      ฟรีสำรวจหน้างาน ออกแบบระบบ ขออนุญาตการไฟฟ้า ติดตั้งโดยทีมช่างมืออาชีพ และบำรุงรักษาระบบอย่างสม่ำเสมอ
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Trust Badges */}
-        <motion.div 
-          className="flex flex-wrap justify-center items-center gap-6 lg:gap-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center gap-2 text-gray-500">
-            <CheckCircle className="w-5 h-5 text-green-500" />
-            <span className="text-sm">ฟรีสำรวจหน้างาน</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-500">
-            <CheckCircle className="w-5 h-5 text-green-500" />
-            <span className="text-sm">ฟรีออกแบบระบบ</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-500">
-            <CheckCircle className="w-5 h-5 text-green-500" />
-            <span className="text-sm">ฟรีขออนุญาตการไฟฟ้า</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-500">
-            <CheckCircle className="w-5 h-5 text-green-500" />
-            <span className="text-sm">ผ่อน 0% นาน 10 เดือน</span>
-          </div>
-        </motion.div>
+        {/* Trust Badges - REMOVED */}
       </div>
     </section>
   );
