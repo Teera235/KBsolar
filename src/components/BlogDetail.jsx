@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Battery, Grid, Zap, CheckCircle2, AlertCircle, ArrowLeft, Home, Phone, Calculator as CalcIcon, FileText } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Battery, Grid, Zap, ArrowLeft, Home, Phone, Calculator as CalcIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const BlogDetail = () => {
