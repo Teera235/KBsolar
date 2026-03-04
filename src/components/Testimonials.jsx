@@ -174,7 +174,10 @@ const Testimonials = () => {
       if (!isPausedRow1) {
         scrollPosition += scrollSpeed;
         
-        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+        // Get the width of one set of testimonials
+        const singleSetWidth = scrollContainer.scrollWidth / 2;
+        
+        if (scrollPosition >= singleSetWidth) {
           scrollPosition = 0;
         }
         
@@ -183,6 +186,7 @@ const Testimonials = () => {
       animationId = requestAnimationFrame(animate);
     };
 
+    // Start animation
     animationId = requestAnimationFrame(animate);
 
     return () => {
@@ -198,22 +202,27 @@ const Testimonials = () => {
     if (!scrollContainer) return;
 
     let animationId;
-    let scrollPosition = scrollContainer.scrollWidth / 2; // Start from middle
+    let scrollPosition = 0;
     const scrollSpeed = 0.5;
 
     const animate = () => {
       if (!isPausedRow2) {
-        scrollPosition -= scrollSpeed; // Negative for reverse direction
+        scrollPosition += scrollSpeed;
         
-        if (scrollPosition <= 0) {
-          scrollPosition = scrollContainer.scrollWidth / 2;
+        // Get the width of one set of testimonials
+        const singleSetWidth = scrollContainer.scrollWidth / 2;
+        
+        if (scrollPosition >= singleSetWidth) {
+          scrollPosition = 0;
         }
         
-        scrollContainer.scrollLeft = scrollPosition;
+        // For reverse direction, calculate from the end
+        scrollContainer.scrollLeft = singleSetWidth - scrollPosition;
       }
       animationId = requestAnimationFrame(animate);
     };
 
+    // Start animation
     animationId = requestAnimationFrame(animate);
 
     return () => {

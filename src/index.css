@@ -36,6 +36,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.01em;
+  transform: none !important;
+  writing-mode: horizontal-tb !important;
+  direction: ltr !important;
+}
+
+#calculator,
+#calculator * {
+  transform: none !important;
+  writing-mode: horizontal-tb !important;
+  direction: ltr !important;
+  text-orientation: mixed !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -119,6 +130,25 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Fix text orientation issues */
+.text-fix {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  direction: ltr !important;
+  unicode-bidi: normal !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+}
+
+.no-transform {
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
 }
 
 /* Floating animation for decorative elements */

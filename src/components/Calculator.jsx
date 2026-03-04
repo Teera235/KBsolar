@@ -29,28 +29,85 @@ const Calculator = () => {
 
   const [results, setResults] = useState(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [calculationProgress, setCalculationProgress] = useState(0);
   const [activeTab, setActiveTab] = useState('summary');
+  const [errors, setErrors] = useState({});
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showToast, setShowToast] = useState({ show: false, message: '', type: 'success' });
 
   const COLORS = ['#F97316', '#3B82F6', '#10B981', '#8B5CF6', '#EC4899'];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    
+    // Real-time validation for monthlyBill
+    if (name === 'monthlyBill') {
+      // Only allow numbers and decimal point
+      const numericValue = value.replace(/[^\d.]/g, '');
+      setFormData({ ...formData, [name]: numericValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+    
+    // Clear errors when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
+    }
   };
 
   const handleSliderChange = (e) => {
     setFormData({ ...formData, usageRatio: parseInt(e.target.value) });
   };
 
+  const showToastMessage = (message, type = 'success') => {
+    setShowToast({ show: true, message, type });
+    setTimeout(() => {
+      setShowToast({ show: false, message: '', type: 'success' });
+    }, 4000);
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!formData.monthlyBill) {
+      newErrors.monthlyBill = 'กรุณากรอกค่าไฟฟ้าต่อเดือน';
+    } else if (isNaN(formData.monthlyBill) || parseFloat(formData.monthlyBill) <= 0) {
+      newErrors.monthlyBill = 'กรุณากรอกตัวเลขที่มากกว่า 0';
+    } else if (parseFloat(formData.monthlyBill) < 500) {
+      newErrors.monthlyBill = 'ค่าไฟฟ้าต่ำกว่า 500 บาท อาจไม่คุ้มค่าติดตั้งโซลาร์';
+    }
+    
+    if (!formData.buildingType) {
+      newErrors.buildingType = 'กรุณาเลือกประเภทอาคาร';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const calculateSolar = () => {
-    if (!formData.monthlyBill || !formData.buildingType) {
-      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    if (!validateForm()) {
+      showToastMessage('กรุณาตรวจสอบข้อมูลให้ครบถ้วน', 'error');
       return;
     }
 
     setIsCalculating(true);
+    setCalculationProgress(0);
+    
+    // Simulate progress
+    const progressInterval = setInterval(() => {
+      setCalculationProgress(prev => {
+        if (prev >= 90) {
+          clearInterval(progressInterval);
+          return 90;
+        }
+        return prev + 10;
+      });
+    }, 100);
     
     setTimeout(() => {
+      clearInterval(progressInterval);
+      setCalculationProgress(100);
       const monthlyBill = parseFloat(formData.monthlyBill);
       const electricityRate = 4.5;
       const monthlyConsumption = monthlyBill / electricityRate;
@@ -142,11 +199,24 @@ const Calculator = () => {
       });
       
       setIsCalculating(false);
+      setCalculationProgress(0);
+      setActiveTab('summary');
+      
+      // Success notification
+      showToastMessage('คำนวณเสร็จแล้ว! ดูผลลัพธ์ด้านล่าง', 'success');
+      
+      // Success animation
+      setTimeout(() => {
+        const element = document.getElementById('calculator-results');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }, 1000);
   };
 
   return (
-    <section id="calculator" className="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section id="calculator" className="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden no-transform" style={{ transform: 'none !important', writingMode: 'horizontal-tb', direction: 'ltr' }}>
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
@@ -168,11 +238,11 @@ const Calculator = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
           {/* Form - 2 columns */}
           <div className="lg:col-span-2">
             <motion.div 
-              className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 sticky top-4"
+              className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 sticky top-4 h-fit"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -182,35 +252,85 @@ const Calculator = () => {
                 {/* Monthly Bill Input */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    ค่าไฟฟ้าต่อเดือน (บาท)
+                    ค่าไฟฟ้าต่อเดือน (บาท) <span className="text-red-500">*</span>
                   </label>
                   <input 
                     type="text" 
                     name="monthlyBill" 
                     value={formData.monthlyBill} 
                     onChange={handleChange} 
-                    placeholder="กรอกเลขจำนวนเต็มเท่านั้น" 
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-kb-orange focus:border-kb-orange transition-all text-gray-900"
+                    placeholder="เช่น 3000" 
+                    className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-kb-orange transition-all text-gray-900 ${
+                      errors.monthlyBill 
+                        ? 'border-red-300 focus:border-red-500 bg-red-50' 
+                        : 'border-gray-200 focus:border-kb-orange'
+                    }`}
                   />
+                  {!errors.monthlyBill && formData.monthlyBill && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-green-600 text-sm mt-1 flex items-center gap-1"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      ดูดี! ค่าไฟ {parseFloat(formData.monthlyBill).toLocaleString()} บาท/เดือน
+                    </motion.p>
+                  )}
+                  {errors.monthlyBill && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                    >
+                      <Info className="w-4 h-4" />
+                      {errors.monthlyBill}
+                    </motion.p>
+                  )}
                 </div>
 
                 {/* Building Type Dropdown */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    ประเภทอาคาร
+                    ประเภทอาคาร <span className="text-red-500">*</span>
                   </label>
                   <select 
                     name="buildingType" 
                     value={formData.buildingType} 
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-kb-orange focus:border-kb-orange transition-all text-gray-900 bg-white"
+                    className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-kb-orange transition-all text-gray-900 bg-white ${
+                      errors.buildingType 
+                        ? 'border-red-300 focus:border-red-500 bg-red-50' 
+                        : 'border-gray-200 focus:border-kb-orange'
+                    }`}
                   >
-                    <option value="">Select one...</option>
+                    <option value="">เลือกประเภทอาคาร</option>
                     <option value="residential">บ้านพักอาศัย</option>
                     <option value="commercial">อาคารพาณิชย์</option>
                     <option value="industrial">โรงงานอุตสาหกรรม</option>
                     <option value="agricultural">เกษตรกรรม</option>
                   </select>
+                  {!errors.buildingType && formData.buildingType && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-green-600 text-sm mt-1 flex items-center gap-1"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      เลือก{formData.buildingType === 'residential' ? 'บ้านพักอาศัย' : 
+                             formData.buildingType === 'commercial' ? 'อาคารพาณิชย์' : 
+                             formData.buildingType === 'industrial' ? 'โรงงานอุตสาหกรรม' : 'เกษตรกรรม'}แล้ว
+                    </motion.p>
+                  )}
+                  {errors.buildingType && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 text-sm mt-1 flex items-center gap-1"
+                    >
+                      <Info className="w-4 h-4" />
+                      {errors.buildingType}
+                    </motion.p>
+                  )}
                 </div>
 
                 {/* Phase Selection */}
@@ -294,18 +414,25 @@ const Calculator = () => {
                 </div>
 
                 {/* Notes */}
-                <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+                <div className="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4">
                   <div className="flex items-start gap-2">
                     <Info className="w-5 h-5 text-kb-orange flex-shrink-0 mt-0.5" />
-                    <div className="text-sm text-gray-700 space-y-1">
-                      <p className="flex items-start gap-2">
-                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">1</span>
-                        <span>โปรแกรมคำนวณเป็นเพียงการแนะนำเบื้องต้น และหาความคุ้มทุน</span>
-                      </p>
-                      <p className="flex items-start gap-2">
-                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">2</span>
-                        <span>ติดต่อเราเพื่อรับคำปรึกษาฟรีจากทีมงาน และหาโอกาสในสูญเสียที่เหมาะสมกับลูกค้าที่สุด</span>
-                      </p>
+                    <div className="text-sm text-gray-700 space-y-2">
+                      <p className="font-semibold text-kb-orange">💡 เคล็ดลับการใช้งาน</p>
+                      <div className="space-y-1">
+                        <p className="flex items-start gap-2">
+                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">1</span>
+                          <span>ค่าไฟฟ้าต่ำกว่า 500 บาท อาจไม่คุ้มค่าติดตั้ง</span>
+                        </p>
+                        <p className="flex items-start gap-2">
+                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">2</span>
+                          <span>ผลการคำนวณเป็นการประมาณเบื้องต้น</span>
+                        </p>
+                        <p className="flex items-start gap-2">
+                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">3</span>
+                          <span>ติดต่อเราเพื่อรับคำปรึกษาฟรีจากทีมวิศวกร</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -314,27 +441,126 @@ const Calculator = () => {
                 <button 
                   onClick={calculateSolar}
                   disabled={isCalculating}
-                  className="w-full bg-kb-orange hover:bg-orange-600 disabled:bg-gray-300 text-white py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-kb-orange/25 hover:shadow-xl hover:shadow-kb-orange/30 flex items-center justify-center gap-2"
+                  className="w-full bg-kb-orange hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-kb-orange/25 hover:shadow-xl hover:shadow-kb-orange/30 flex items-center justify-center gap-2 relative overflow-hidden"
                 >
-                  <CalcIcon className="w-5 h-5" />
-                  {isCalculating ? 'กำลังคำนวณ...' : 'คำนวณ'}
+                  {/* Progress Bar */}
+                  {isCalculating && (
+                    <div 
+                      className="absolute inset-0 bg-orange-600 transition-all duration-300"
+                      style={{ width: `${calculationProgress}%` }}
+                    />
+                  )}
+                  
+                  <div className="relative z-10 flex items-center gap-2">
+                    {isCalculating ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        กำลังคำนวณ... {calculationProgress}%
+                      </>
+                    ) : (
+                      <>
+                        <CalcIcon className="w-5 h-5" />
+                        คำนวณความคุ้มค่า
+                      </>
+                    )}
+                  </div>
                 </button>
               </div>
             </motion.div>
           </div>
 
           {/* Results - 3 columns */}
-          <div className="lg:col-span-3">
-            {!results ? (
-              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center min-h-[500px]">
-                <div className="w-24 h-24 bg-kb-orange/10 rounded-full flex items-center justify-center mb-6">
-                  <Sun className="w-12 h-12 text-kb-orange" />
+          <div className="lg:col-span-3" id="calculator-results">
+            {isCalculating ? (
+              <motion.div 
+                className="bg-white rounded-2xl p-12 text-center flex flex-col items-center justify-center"
+                style={{ minHeight: '600px' }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div 
+                  className="w-24 h-24 bg-kb-orange/10 rounded-full flex items-center justify-center mb-6"
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <CalcIcon className="w-12 h-12 text-kb-orange" />
+                </motion.div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">กำลังคำนวณ</h3>
+                <p className="text-gray-600 mb-4">กำลังวิเคราะห์ข้อมูลของคุณ...</p>
+                
+                {/* Progress Bar */}
+                <div className="w-full max-w-xs bg-gray-200 rounded-full h-2 mb-2">
+                  <motion.div 
+                    className="bg-kb-orange h-2 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${calculationProgress}%` }}
+                    transition={{ duration: 0.3 }}
+                  />
                 </div>
+                <p className="text-sm text-gray-500">{calculationProgress}% เสร็จแล้ว</p>
+              </motion.div>
+            ) : !results ? (
+              <motion.div 
+                className="bg-white/50 backdrop-blur-sm rounded-2xl p-12 text-center flex flex-col items-center justify-center"
+                style={{ minHeight: '600px' }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div 
+                  className="w-24 h-24 bg-kb-orange/10 rounded-full flex items-center justify-center mb-6"
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Sun className="w-12 h-12 text-kb-orange" />
+                </motion.div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">พร้อมคำนวณ</h3>
                 <p className="text-gray-600">กรอกข้อมูลด้านซ้ายแล้วกดคำนวณ</p>
-              </div>
+              </motion.div>
             ) : (
-              <div className="space-y-6">
+              <motion.div 
+                className="space-y-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                {/* Success Header */}
+                <motion.div 
+                  className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 text-white mb-6"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
+                    >
+                      <CheckCircle className="w-8 h-8" />
+                    </motion.div>
+                    <div>
+                      <h3 className="text-xl font-bold">คำนวณเสร็จแล้ว!</h3>
+                      <p className="text-green-100">ระบบโซลาร์เซลล์ที่เหมาะสมกับคุณ</p>
+                    </div>
+                  </div>
+                </motion.div>
+
                 {/* Tabs */}
                 <div className="flex gap-2 bg-white p-1 rounded-xl shadow-sm">
                   {[
@@ -555,10 +781,90 @@ const Calculator = () => {
                   <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
                   <p>* ผลการคำนวณเป็นการประมาณการเบื้องต้น ราคาและผลประหยัดจริงอาจแตกต่างตามสภาพหน้างาน</p>
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
+
+        {/* Toast Notification */}
+        {showToast.show && (
+          <motion.div 
+            className="fixed top-4 right-4 z-50 max-w-sm"
+            initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 100, scale: 0.8 }}
+          >
+            <div className={`rounded-2xl p-4 shadow-2xl border-l-4 ${
+              showToast.type === 'success' 
+                ? 'bg-green-50 border-green-500 text-green-800' 
+                : 'bg-red-50 border-red-500 text-red-800'
+            }`}>
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  showToast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+                }`}>
+                  {showToast.type === 'success' ? (
+                    <CheckCircle className="w-5 h-5 text-white" />
+                  ) : (
+                    <Info className="w-5 h-5 text-white" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-sm">{showToast.message}</p>
+                </div>
+                <button 
+                  onClick={() => setShowToast({ show: false, message: '', type: 'success' })}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Error Modal - Keep for detailed errors */}
+        {showErrorModal && (
+          <motion.div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowErrorModal(false)}
+          >
+            <motion.div 
+              className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Info className="w-8 h-8 text-red-500" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">ข้อมูลไม่ครบถ้วน</h3>
+                <p className="text-gray-600 mb-6">กรุณาตรวจสอบและแก้ไขข้อมูลที่มีปัญหา</p>
+                
+                <div className="space-y-2 text-left mb-6">
+                  {Object.entries(errors).map(([field, error]) => (
+                    <div key={field} className="flex items-start gap-2 text-sm">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-red-600">{error}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <button
+                  onClick={() => setShowErrorModal(false)}
+                  className="w-full bg-kb-orange hover:bg-orange-600 text-white py-3 rounded-xl font-semibold transition-all"
+                >
+                  เข้าใจแล้ว
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </div>
 
       <style jsx>{`

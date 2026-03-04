@@ -1,47 +1,54 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Battery, Grid, Zap, CheckCircle2, AlertCircle, ArrowLeft, Home, Phone, Calculator as CalcIcon } from 'lucide-react';
+import { Battery, Grid, Zap, CheckCircle2, AlertCircle, ArrowLeft, Home, Phone, Calculator as CalcIcon, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const BlogDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('');
 
   const blogContent = {
     'hybrid-solar-system': {
-      title: 'Hybrid Solar System ตอบโจทย์ทุกความต้องการ',
-      subtitle: 'ระบบที่ให้คุณทั้งประหยัดและมีไฟสำรอง',
+      title: 'ระบบโซลาร์เซลล์แบบไฮบริด (Hybrid Solar System)',
+      subtitle: 'ใช้ไฟโซลาร์ได้ทั้งกลางวัน-กลางคืน พร้อมแบตเตอรี่สำรองไฟเมื่อไฟดับ',
       icon: Battery,
       color: 'orange',
       badge: 'Hybrid',
       image: '/Blog/hrbrid.webp',
       sections: [
         {
-          title: 'ระบบโซล่าเซลล์แบบไฮบริดจ์ (Hybrid Solar System)',
+          title: 'บทนำ',
           content: [
-            'ระบบโซล่าเซลล์แบบไฮบริดจ์ (Hybrid Solar System) คือการผสมผสานจุดเด่นของระบบออนกริด (On-Grid) และออฟกริด (Off-Grid) เข้าด้วยกัน โดยระบบนี้จะเชื่อมต่อกับทั้งแผงโซลาร์เซลล์ (Solar Panel) โครงข่ายไฟฟ้าจากการไฟฟ้า (Grid) และแบตเตอรี่สำรองไฟ (Battery Storage) ทำงานร่วมกันอย่างลงตัว',
-            'หลักการทำงานของระบบไฮบริดจ์เริ่มต้นจากช่วงเวลากลางวัน แผงโซลาร์เซลล์จะผลิตไฟฟ้าเพื่อจ่ายให้กับเครื่องใช้ไฟฟ้าภายในอาคารเป็นอันดับแรก หากมีไฟฟ้าผลิตได้เกินความต้องการใช้งาน ระบบจะนำไฟฟ้าส่วนเกินไปชาร์จแบตเตอรี่เพื่อเก็บสำรองไว้ใช้ในยามค่ำคืน และหากยังมีไฟฟ้าเหลือจากการชาร์จแบตเตอรี่เต็มแล้ว ก็จะส่งคืนให้กับการไฟฟ้าตามระบบ Net Metering',
-            'เมื่อถึงช่วงเวลากลางคืนหรือช่วงที่ไม่มีแสงแดด ระบบจะดึงพลังงานจากแบตเตอรี่ที่กักเก็บไว้มาใช้งานก่อนเป็นอันดับแรก เพื่อประหยัดค่าไฟฟ้าสูงสุด และเมื่อพลังงานในแบตเตอรี่หมดลง ระบบจะสลับไปใช้ไฟฟ้าจากการไฟฟ้าโดยอัตโนมัติอย่างไร้รอยต่อ ทำให้มั่นใจได้ว่าจะมีไฟฟ้าใช้งานตลอดเวลา',
-            'ระบบไฮบริดจ์เหมาะสำหรับผู้ที่ต้องการลดค่าไฟฟ้าได้สูงสุดทั้งกลางวันและกลางคืน พร้อมทั้งมีไฟสำรองใช้ในกรณีไฟดับ อย่างไรก็ตาม ระบบนี้มีต้นทุนการลงทุนเริ่มต้นที่ค่อนข้างสูงเนื่องจากต้องติดตั้งแบตเตอรี่ ซึ่งมีราคาแพงและมีอายุการใช้งานประมาณ 5-10 ปี จึงต้องมีการเปลี่ยนทดแทนในอนาคต ดังนั้นควรพิจารณาคำนวณผลตอบแทนการลงทุนอย่างรอบคอบก่อนตัดสินใจติดตั้ง'
+            'ระบบโซลาร์เซลล์แบบไฮบริด (Hybrid Solar System) คือทางเลือกสำหรับผู้ที่ต้องการ "ลดค่าไฟ" ควบคู่กับ "ความมั่นคงด้านไฟฟ้า" เพราะระบบนี้ผสานการทำงานของโซลาร์เซลล์ + โครงข่ายการไฟฟ้า (Grid) + แบตเตอรี่ (Battery Storage) เข้าด้วยกัน ทำให้สามารถใช้พลังงานที่ผลิตได้ในเวลากลางวัน และเก็บพลังงานไว้ใช้ในเวลากลางคืนหรือช่วงไฟดับได้',
+            'บทความนี้จะอธิบายหลักการทำงาน ส่วนประกอบ ข้อดี-ข้อควรพิจารณา และแนวทางเลือกขนาดแบตเตอรี่/ขนาดระบบให้เหมาะกับการใช้งานจริง'
+          ]
+        },
+        {
+          title: 'ระบบโซลาร์เซลล์แบบไฮบริดคืออะไร',
+          content: [
+            'Hybrid Solar System คือระบบผลิตไฟฟ้าจากพลังงานแสงอาทิตย์ที่เชื่อมต่อกับทั้ง Grid และ Battery โดยมี Hybrid Inverter เป็นหัวใจหลักในการแปลงไฟและบริหารจัดการพลังงาน (Energy Flow) แบบอัตโนมัติ',
+            'หลักการทั่วไป: กลางวัน Solar จ่ายโหลดก่อน → ส่วนเกินชาร์จแบต → ถ้าแบตเต็มอาจส่งเข้ากริด (ขึ้นกับนโยบาย/การตั้งค่า) ส่วนกลางคืน ใช้ไฟจากแบตก่อน → ถ้าแบตต่ำกว่าค่าที่ตั้งไว้ ระบบจึงดึงไฟจากกริด'
           ]
         },
         {
           title: 'ส่วนประกอบหลักของระบบ',
           isList: true,
           content: [
-            'แผงโซลาร์เซลล์ (Solar Panels) - แปลงพลังงานแสงอาทิตย์เป็นไฟฟ้ากระแสตรง',
-            'อินเวอร์เตอร์แบบไฮบริด (Hybrid Inverter) - แปลงไฟ DC เป็น AC และบริหารจัดการพลังงานอัจฉริยะ',
-            'แบตเตอรี่สำรองไฟ (Battery Storage) - กักเก็บพลังงานไฟฟ้าสำหรับใช้งานยามค่ำคืนและเมื่อไฟดับ',
-            'ระบบควบคุมอัจฉริยะ (Smart Energy Management System) - บริหารจัดการการไหลของพลังงานอัตโนมัติ',
-            'มิเตอร์วัดพลังงานแบบสองทาง (Bi-directional Energy Meter) - ติดตามและบันทึกการผลิตและใช้พลังงาน'
+            'แผงโซลาร์เซลล์ (Solar Panels) - ผลิตไฟฟ้ากระแสตรง (DC) จากแสงอาทิตย์ โดยทั่วไปนิยมใช้แผง Monocrystalline ประสิทธิภาพ 18-23%',
+            'อินเวอร์เตอร์แบบไฮบริด (Hybrid Inverter) - แปลงไฟ DC เป็น AC และควบคุมการชาร์จ/คายประจุแบตเตอรี่ รวมถึงกำหนดโหมดการทำงาน เช่น Self-consumption, Backup, Time-of-Use (TOU)',
+            'แบตเตอรี่สำรองไฟ (Battery Storage) - กักเก็บพลังงานไฟฟ้าไว้ใช้ตอนกลางคืน/ไฟดับ มักพบในรูปแบบ Lithium (LFP/NMC) ความจุเป็น kWh',
+            'Smart Energy Management / CT / Meter - อุปกรณ์วัดกระแสและพลังงาน (เช่น CT Clamp / Smart Meter) เพื่อให้ระบบทราบว่าโหลดใช้งานเท่าไร และบริหารพลังงานได้ถูกต้อง',
+            'ระบบป้องกันและความปลอดภัย (Protection System) - เช่น Surge protection, Breaker/Isolator, และมาตรการความปลอดภัยด้านแบตเตอรี่'
           ]
         },
         {
           title: 'หลักการทำงานของระบบ',
           content: [
-            '1. โหมดกลางวัน: แผงโซลาร์เซลล์ผลิตไฟฟ้าจ่ายให้เครื่องใช้ไฟฟ้าภายในอาคาร พลังงานส่วนเกินจะชาร์จแบตเตอรี่ และหากยังเหลือจะส่งคืนการไฟฟ้าตามระบบ Net Metering',
-            '2. โหมดกลางคืน: ระบบดึงพลังงานจากแบตเตอรี่มาใช้งานก่อนเพื่อประหยัดค่าไฟ เมื่อแบตเตอรี่หมดจึงสลับไปใช้ไฟจากการไฟฟ้าโดยอัตโนมัติ',
-            '3. โหมดไฟดับ: ระบบสลับไปใช้พลังงานจากแบตเตอรี่ทันทีภายใน 10-20 มิลลิวินาที รับประกันการจ่ายไฟต่อเนื่องไม่สะดุด',
-            '4. โหมดอัจฉริยะ: ระบบบริหารจัดการพลังงานอัตโนมัติ เลือกใช้แหล่งพลังงานที่ประหยัดและมีประสิทธิภาพสูงสุดในแต่ละช่วงเวลา'
+            '1. โหมดกลางวัน (Daytime Mode): Solar → Load (จ่ายโหลดก่อน) → Solar ส่วนเกิน → Battery (ชาร์จ) → ถ้า Battery เต็ม → ส่งเข้ากริดได้ (ขึ้นกับการตั้งค่า/เงื่อนไข)',
+            '2. โหมดกลางคืน (Night Mode): Battery → Load (จ่ายโหลดก่อน) → เมื่อแบตต่ำกว่า SOC ที่ตั้งไว้ → Grid → Load',
+            '3. โหมดไฟดับ (Backup Mode): เมื่อกริดดับ ระบบสามารถจ่ายไฟให้ "วงจรสำคัญ" ผ่าน Backup/Essential Loads (ตามการออกแบบ) โดยสลับไปใช้แบตเตอรี่แทน ทั้งนี้ขึ้นกับรุ่นอินเวอร์เตอร์และการเดินวงจร',
+            '4. โหมดอัจฉริยะ (Energy Optimization): ระบบสามารถตั้งค่าตามพฤติกรรมการใช้ไฟ เช่น ชาร์จแบตจากโซลาร์ไว้ใช้ช่วงค่าไฟแพง, จำกัดการคายประจุเพื่อยืดอายุแบตเตอรี่, Prioritize self-consumption ลดการซื้อไฟจากกริด'
           ],
           image: '/diagrams/Blog Diagrams/3.webp'
         },
@@ -49,49 +56,78 @@ const BlogDetail = () => {
           title: 'ข้อดีของระบบไฮบริด',
           isAdvantages: true,
           content: [
-            'ประหยัดค่าไฟฟ้าสูงสุดถึง 80-90% ลดค่าใช้จ่ายได้อย่างมีนัยสำคัญ',
-            'มีระบบสำรองไฟฟ้าตลอด 24 ชั่วโมง ไม่ต้องกังวลเรื่องไฟดับ',
-            'สามารถขายไฟฟ้าคืนการไฟฟ้าได้ตามระบบ Net Metering สร้างรายได้เสริม',
-            'ระบบบริหารจัดการพลังงานอัจฉริยะ ทำงานอัตโนมัติเต็มรูปแบบ',
-            'ลดการปล่อยก๊าซคาร์บอนไดออกไซด์ เป็นมิตรต่อสิ่งแวดล้อม',
-            'เพิ่มมูลค่าและความน่าสนใจให้กับอสังหาริมทรัพย์',
-            'ระยะเวลาคืนทุนเร็ว ประมาณ 4-6 ปี'
+            'มีไฟสำรองเมื่อไฟดับ เหมาะกับบ้าน/ธุรกิจที่ต้องการความต่อเนื่อง',
+            'ลดค่าไฟได้ทั้งกลางวันและกลางคืน เพราะใช้แบตเตอรี่ช่วยลดการซื้อไฟช่วงไม่มีแดด',
+            'ควบคุมพลังงานได้ยืดหยุ่น ตั้งค่าโหมดได้หลายแบบ (Self-consumption / Backup / TOU)',
+            'เพิ่มความมั่นคงด้านพลังงาน ลดผลกระทบจากไฟตก/ไฟกระชาก (ตามการออกแบบระบบ)',
+            'รองรับการขยายระบบในอนาคต เพิ่มแบต/เพิ่มแผงได้ (ตามสเปกอินเวอร์เตอร์)'
           ]
         },
         {
           title: 'ข้อควรพิจารณา',
           isWarnings: true,
           content: [
-            'ต้นทุนการลงทุนเริ่มต้นสูงกว่าระบบออนกริดธรรมดา เนื่องจากต้องติดตั้งแบตเตอรี่',
-            'ต้องจัดเตรียมพื้นที่เหมาะสมสำหรับติดตั้งแบตเตอรี่ โดยต้องมีการระบายอากาศที่ดี',
-            'แบตเตอรี่มีอายุการใช้งาน 5-10 ปี ต้องมีการเปลี่ยนทดแทนเมื่อครบอายุการใช้งาน',
-            'ต้องมีการบำรุงรักษาและตรวจสอบสภาพระบบเป็นประจำเพื่อประสิทธิภาพสูงสุด'
+            'ต้นทุนสูงกว่า On-Grid เพราะมีแบตเตอรี่และอุปกรณ์จัดการพลังงาน',
+            'แบตเตอรี่มีอายุการใช้งาน โดยทั่วไปต้องประเมินตามรอบชาร์จ (cycle) และเงื่อนไขการใช้งาน',
+            'ต้องออกแบบวงจร Backup ให้ถูกต้อง วงจรไหนสำรอง/ไม่สำรอง ต้องแยกโหลดชัดเจน',
+            'ต้องมีพื้นที่ติดตั้งแบต และคำนึงเรื่องความร้อน/การระบายอากาศ/ความปลอดภัย'
           ]
         },
         {
-          title: 'เหมาะสำหรับใคร?',
+          title: 'เหมาะสำหรับใคร',
           content: [
-            '✓ บ้านพักอาศัยที่ต้องการความมั่นคงและเสถียรภาพด้านไฟฟ้าสูงสุด',
-            '✓ พื้นที่ที่มีปัญหาไฟฟ้าขัดข้องหรือไฟดับบ่อยครั้ง',
-            '✓ ธุรกิจที่ต้องการความต่อเนื่องในการดำเนินงาน ไม่สามารถหยุดชะงักได้',
-            '✓ สถานพยาบาล คลินิก ศูนย์ดูแลสุขภาพ ที่ต้องการระบบสำรองไฟฟ้าที่เชื่อถือได้',
-            '✓ ผู้ที่ต้องการลดค่าใช้จ่ายด้านไฟฟ้าและมีระบบสำรองไฟฟ้าพร้อมใช้งานตลอดเวลา'
+            '✓ บ้านที่ไฟดับบ่อยหรือมีอุปกรณ์สำคัญ (อินเทอร์เน็ต, กล้อง, ตู้เย็น, ปั๊มน้ำ)',
+            '✓ ธุรกิจที่หยุดไม่ได้ เช่น ร้านค้า, โฮมออฟฟิศ, คลินิกขนาดเล็ก',
+            '✓ ผู้ที่ต้องการใช้ไฟโซลาร์ให้คุ้ม "หลังพระอาทิตย์ตก"',
+            '✓ พื้นที่ที่ต้องการความเสถียรไฟฟ้าสูง'
           ]
         },
         {
           title: 'ขนาดระบบที่แนะนำ',
           content: [
-            'บ้านขนาดเล็ก (ค่าไฟ 2,000-3,000 บาท/เดือน): ระบบ 3-5 kW + แบตเตอรี่ 10-15 kWh',
-            'บ้านขนาดกลาง (ค่าไฟ 4,000-6,000 บาท/เดือน): ระบบ 5-8 kW + แบตเตอรี่ 15-20 kWh',
-            'บ้านขนาดใหญ่ (ค่าไฟ 7,000+ บาท/เดือน): ระบบ 8-15 kW + แบตเตอรี่ 20-30 kWh',
-            '* ขนาดระบบที่เหมาะสมควรได้รับการประเมินโดยผู้เชี่ยวชาญตามการใช้ไฟฟ้าจริงของแต่ละครัวเรือน'
+            'หมายเหตุ: ขนาดจริงต้องดูโหลดสำรอง (Essential Loads), ชั่วโมงสำรองที่ต้องการ, และรูปแบบการใช้ไฟ',
+            '• บ้านขนาดเล็ก (ค่าไฟ 2,000-3,000 บาท/เดือน): ระบบ 3-5 kW + Battery 5-10 kWh (ถ้าต้องการสำรองโหลดสำคัญ)',
+            '• บ้านขนาดกลาง (ค่าไฟ 4,000-6,000 บาท/เดือน): ระบบ 5-8 kW + Battery 10-15 kWh',
+            '• บ้านขนาดใหญ่ (ค่าไฟ 7,000+ บาท/เดือน): ระบบ 8-15 kW + Battery 15-30 kWh'
+          ]
+        },
+        {
+          title: 'เปรียบเทียบ On-Grid, Hybrid และ Off-Grid',
+          content: [
+            'เพื่อช่วยให้คุณตัดสินใจเลือกระบบที่เหมาะสมกับความต้องการ ตารางด้านล่างแสดงการเปรียบเทียบระบบทั้ง 3 แบบ:',
+            '| คุณสมบัติ | On-Grid | Hybrid | Off-Grid |',
+            '|----------|---------|--------|----------|',
+            '| เชื่อมต่อการไฟฟ้า | ✓ | ✓ | ✗ |',
+            '| มีแบตเตอรี่ | ✗ | ✓ | ✓ |',
+            '| ไฟสำรองเมื่อไฟดับ | ✗ | ✓* | ✓ |',
+            '| ต้นทุนเริ่มต้น | ต่ำสุด | สูง | สูงสุด |',
+            '| ความซับซ้อนระบบ | ต่ำ | กลาง-สูง | สูง |',
+            '| เหมาะสำหรับ | ลดค่าไฟ | ลดค่าไฟ + สำรองไฟ | ไม่มีไฟฟ้าเข้าถึง |',
+            '* ขึ้นกับรุ่นอินเวอร์เตอร์และการออกแบบวงจร Backup'
+          ]
+        },
+        {
+          title: 'คำถามที่พบบ่อย (FAQ)',
+          content: [
+            'Q: Hybrid กับ On-Grid ต่างกันยังไง?',
+            'A: Hybrid มีแบตเตอรี่และสามารถสำรองไฟได้ (ตามการออกแบบ) ส่วน On-Grid ไม่มีแบตเตอรี่และหยุดทำงานเมื่อกริดดับ',
+            'Q: ควรเลือกแบตเตอรี่กี่ kWh?',
+            'A: ดูจาก "โหลดสำคัญ (kW)" และ "ชั่วโมงที่ต้องการสำรอง" เช่น 1 kW สำรอง 5 ชม. ต้องใช้ประมาณ 5 kWh (ยังไม่รวมเผื่อการสูญเสียและ DoD)',
+            'Q: Hybrid คืนทุนช้ากว่า On-Grid ไหม?',
+            'A: โดยทั่วไปคืนทุนช้ากว่า เพราะมีต้นทุนแบตเตอรี่ แต่แลกกับความมั่นคงด้านไฟฟ้าและการใช้พลังงานช่วงกลางคืน'
+          ]
+        },
+        {
+          title: 'สรุป',
+          content: [
+            'Hybrid Solar System เหมาะกับผู้ที่ต้องการ "ลดค่าไฟ" และ "มีไฟสำรอง" ในระบบเดียว โดยเฉพาะพื้นที่ไฟดับบ่อยหรือมีโหลดสำคัญ อย่างไรก็ตามต้องประเมินงบประมาณและออกแบบวงจรสำรองให้ถูกต้อง เพื่อให้ระบบมีประสิทธิภาพและคุ้มค่าจริง'
           ]
         }
       ]
     },
     'on-grid-solar-system': {
-      title: 'ทำไม On-Grid ถึงเป็นตัวเลือกอันดับ 1 ของคนไทย',
-      subtitle: 'ประหยัดสูงสุด คืนทุนเร็วที่สุด',
+      title: 'ระบบโซลาร์เซลล์แบบออนกริด (On-Grid Solar System)',
+      subtitle: 'ทำไมถึงเป็นตัวเลือกอันดับ 1 ของคนไทย - ประหยัดสูงสุด คืนทุนเร็วที่สุด',
       icon: Grid,
       color: 'blue',
       badge: 'On-Grid',
@@ -258,6 +294,49 @@ const BlogDetail = () => {
 
   const blog = blogContent[slug];
 
+  // Extract section titles for TOC (must be before conditional return)
+  const tocItems = blog ? blog.sections.map((section, index) => ({
+    id: `section-${index}`,
+    title: section.title
+  })) : [];
+
+  // Track active section on scroll (must be before conditional return)
+  useEffect(() => {
+    if (!blog) return;
+
+    const handleScroll = () => {
+      const sections = blog.sections.map((_, index) => document.getElementById(`section-${index}`));
+      const scrollPosition = window.scrollY + 150;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(`section-${i}`);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [blog]);
+
+  // Scroll to section handler
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setActiveSection(sectionId);
+    }
+  };
+
   if (!blog) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -282,183 +361,325 @@ const BlogDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-200 mt-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button onClick={() => navigate('/')} className="hover:text-kb-orange transition-colors flex items-center gap-1">
-              <Home className="w-4 h-4" />
-              หน้าหลัก
-            </button>
-            <span>/</span>
-            <button onClick={() => navigate('/#blog')} className="hover:text-kb-orange transition-colors">
-              Blog
-            </button>
-            <span>/</span>
-            <span className="text-kb-orange font-medium">{blog.title}</span>
+    <div className="min-h-screen bg-white">
+      {/* Orange Header with Blog Title */}
+      <div className="bg-gradient-to-r from-kb-orange via-orange-500 to-kb-orange mt-20 border-b border-orange-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">Blog</h1>
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-sm text-white/90">
+              <button onClick={() => navigate('/')} className="hover:text-white transition-colors flex items-center gap-1">
+                <Home className="w-4 h-4" />
+                หน้าหลัก
+              </button>
+              <span>/</span>
+              <button onClick={() => navigate('/#blog')} className="hover:text-white transition-colors">
+                Blog
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Header */}
-      <div className={`bg-gradient-to-br ${colorClasses[blog.color]} relative overflow-hidden`}>
-        <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%)'
-        }}></div>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-5 py-2.5 rounded-full font-bold text-sm mb-6 border border-white/30">
-            <Icon className="w-5 h-5" />
-            {blog.badge} SYSTEM
+      {/* Content - Editorial Layout */}
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        {/* Article Header */}
+        <div className="max-w-[820px] mx-auto mb-16">
+          <div className="mb-6">
+            <span className="inline-flex items-center gap-2 text-kb-orange font-semibold text-sm uppercase tracking-wide">
+              <Icon className="w-4 h-4" />
+              {blog.badge} SYSTEM
+            </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-kb-dark mb-6 leading-tight">
             {blog.title}
           </h1>
-          <p className="text-lg sm:text-xl text-white/95 drop-shadow">
+          <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-6">
             {blog.subtitle}
           </p>
+          
+          {/* Author Credit */}
+          <div className="flex flex-col gap-2 text-gray-500 text-sm border-t border-gray-200 pt-6 mt-6">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-gray-700">โดย Anuson Patthaisong</span>
+            </div>
+            <div className="text-gray-500">
+              Solar Energy Specialist – KB Solar Energy
+            </div>
+            <div className="flex items-center gap-3 text-gray-400 text-xs mt-1">
+              <span>เผยแพร่ 12 มีนาคม 2025</span>
+              <span>•</span>
+              <span>อ่าน 5 นาที</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            {/* Single Content Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-              {/* All Sections in One Card */}
-              <div className="p-8 sm:p-10">
-                {blog.sections.map((section, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={index > 0 ? 'mt-8' : ''}
-                  >
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className={`w-1.5 h-8 bg-gradient-to-b ${colorClasses[blog.color]} rounded-full`}></div>
-                      <h2 className="text-2xl sm:text-3xl font-bold text-kb-dark">
-                        {section.title}
-                      </h2>
-                    </div>
-
-                    {section.isList ? (
-                      <ul className="space-y-4 ml-6">
-                        {section.content.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-4 text-gray-700 leading-relaxed text-base">
-                            <CheckCircle2 className="w-6 h-6 text-kb-orange flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-800">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : section.isAdvantages ? (
-                      <div className="grid sm:grid-cols-2 gap-4 ml-6">
-                        {section.content.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                            <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-800 text-base leading-relaxed">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : section.isWarnings ? (
-                      <div className="space-y-4 ml-6">
-                        {section.content.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-orange-50 transition-colors">
-                            <AlertCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-800 text-base leading-relaxed">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div>
-                        {section.content.map((paragraph, idx) => {
-                          // Check if paragraph starts with *
-                          const isNote = typeof paragraph === 'string' && paragraph.startsWith('*');
-                          const displayText = isNote ? paragraph.substring(1).trim() : paragraph;
-                          
-                          return isNote ? (
-                            <div key={idx} className="flex items-start gap-3 mb-4 p-3 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
-                              <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <span className="text-white text-xs font-bold">i</span>
-                              </div>
-                              <p className="text-gray-700 leading-loose text-sm sm:text-base flex-1">
-                                {displayText}
-                              </p>
-                            </div>
-                          ) : (
-                            <p 
-                              key={idx} 
-                              className="text-gray-700 leading-loose text-base sm:text-lg text-justify mb-4"
-                            >
-                              {paragraph}
-                            </p>
-                          );
-                        })}
-                        {section.image && (
-                          <div className="my-8 bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-lg overflow-hidden">
-                            <img
-                              src={section.image}
-                              alt={section.title}
-                              className="w-full h-auto rounded-xl"
-                            />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
+        <div className="grid lg:grid-cols-[220px_1fr_260px] gap-12">
+          
+          {/* Left Column - Table of Contents (220px, Sticky, Minimal) */}
+          <div className="hidden lg:block">
+            <div className="sticky top-24">
+              <div className="py-4">
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">สารบัญ</h3>
+                <nav className="space-y-1">
+                  {tocItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`w-full text-left px-3 py-2 text-sm transition-all border-l-2 ${
+                        activeSection === item.id
+                          ? 'border-kb-orange text-kb-orange font-medium'
+                          : 'border-transparent text-gray-600 hover:text-kb-orange hover:border-gray-300'
+                      }`}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                </nav>
               </div>
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
-              {/* CTA Card */}
-              <div className={`bg-gradient-to-br ${colorClasses[blog.color]} rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black opacity-10"></div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12"></div>
-                <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-3">สนใจติดตั้งระบบ?</h3>
-                  <p className="text-white/95 mb-6 text-sm leading-relaxed">
-                    ปรึกษาฟรี! ทีมงานมืออาชีพพร้อมให้คำแนะนำและประเมินราคาให้คุณ
+          {/* Center Column - Main Article Content (1fr, max 820px) */}
+          <div>
+            <article className="max-w-[820px]">
+              {blog.sections.map((section, index) => (
+                <section
+                  key={index}
+                  id={`section-${index}`}
+                  className={index > 0 ? 'mt-16 pt-16 border-t border-gray-200' : ''}
+                >
+                  <h2 className="text-3xl sm:text-4xl font-bold text-kb-dark mb-8 leading-tight">
+                    {section.title}
+                  </h2>
+
+                  {section.isList ? (
+                    <div className="space-y-6">
+                      {section.content.map((item, idx) => {
+                        const parts = item.split(' - ');
+                        const title = parts[0];
+                        const description = parts[1] || '';
+                        
+                        return (
+                          <div key={idx} className="space-y-2">
+                            <h3 className="text-xl font-bold text-kb-dark">{title}</h3>
+                            {description && (
+                              <p className="text-gray-700 leading-relaxed text-lg">
+                                {description}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : section.isAdvantages ? (
+                    <div className="space-y-4">
+                      {section.content.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-kb-orange flex-shrink-0 mt-2.5"></div>
+                          <p className="text-gray-700 leading-relaxed text-lg flex-1">
+                            {item}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : section.isWarnings ? (
+                    <div className="space-y-4">
+                      {section.content.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-orange-600 flex-shrink-0 mt-2.5"></div>
+                          <p className="text-gray-700 leading-relaxed text-lg flex-1">
+                            {item}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      {(() => {
+                        const renderedIndices = new Set();
+                        return section.content.map((paragraph, idx) => {
+                          // Skip if already rendered as part of a table
+                          if (renderedIndices.has(idx)) {
+                            return null;
+                          }
+
+                          const isNote = typeof paragraph === 'string' && paragraph.startsWith('*');
+                          const displayText = isNote ? paragraph.substring(1).trim() : paragraph;
+                          
+                          // Check if it's a table row (starts with |)
+                          if (typeof paragraph === 'string' && paragraph.trim().startsWith('|')) {
+                            // Skip the separator row (contains only dashes)
+                            if (paragraph.includes('---')) {
+                              renderedIndices.add(idx);
+                              return null;
+                            }
+                            
+                            // Check if this is the start of a table (not preceded by another table row)
+                            const isTableStart = idx === 0 || 
+                                                 !section.content[idx - 1] || 
+                                                 typeof section.content[idx - 1] !== 'string' ||
+                                                 !section.content[idx - 1].trim().startsWith('|');
+                            
+                            // Only render table if this is the start
+                            if (isTableStart) {
+                              // Collect all table rows
+                              const tableRows = [];
+                              let currentIdx = idx;
+                              while (currentIdx < section.content.length && 
+                                     typeof section.content[currentIdx] === 'string' && 
+                                     section.content[currentIdx].trim().startsWith('|')) {
+                                if (!section.content[currentIdx].includes('---')) {
+                                  const rowCells = section.content[currentIdx].split('|').filter(cell => cell.trim() !== '');
+                                  tableRows.push(rowCells);
+                                }
+                                renderedIndices.add(currentIdx);
+                                currentIdx++;
+                              }
+                              
+                              if (tableRows.length === 0) {
+                                return null;
+                              }
+                              
+                              return (
+                                <div key={idx} className="my-8 overflow-x-auto">
+                                  <table className="min-w-full border-collapse border border-gray-300">
+                                    <thead className="bg-orange-50">
+                                      <tr>
+                                        {tableRows[0].map((cell, cellIdx) => (
+                                          <th key={cellIdx} className="border border-gray-300 px-4 py-3 text-left font-bold text-kb-dark">
+                                            {cell.trim()}
+                                          </th>
+                                        ))}
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {tableRows.slice(1).map((row, rowIdx) => (
+                                        <tr key={rowIdx} className="hover:bg-gray-50">
+                                          {row.map((cell, cellIdx) => (
+                                            <td key={cellIdx} className="border border-gray-300 px-4 py-3 text-gray-700">
+                                              {cell.trim()}
+                                            </td>
+                                          ))}
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              );
+                            }
+                            // Skip subsequent table rows as they're already rendered
+                            return null;
+                          }
+                        
+                        // Check if it's a list item (starts with ✓ or number)
+                        if (typeof paragraph === 'string' && (paragraph.startsWith('✓') || /^\d+\./.test(paragraph))) {
+                          return (
+                            <p key={idx} className="text-gray-700 leading-relaxed text-lg pl-6">
+                              {paragraph}
+                            </p>
+                          );
+                        }
+                        
+                        return isNote ? (
+                          <div key={idx} className="my-8 pl-6 border-l-4 border-blue-500 py-2">
+                            <p className="text-gray-700 leading-relaxed text-base italic">
+                              <strong className="text-blue-600">หมายเหตุ:</strong> {displayText}
+                            </p>
+                          </div>
+                        ) : (
+                          <p 
+                            key={idx} 
+                            className="text-gray-700 leading-relaxed text-lg"
+                          >
+                            {paragraph}
+                          </p>
+                        );
+                      });
+                      })()}
+                      {section.image && (
+                        <figure className="my-12">
+                          <img
+                            src={section.image}
+                            alt={section.title}
+                            className="w-full h-auto rounded-lg"
+                          />
+                        </figure>
+                      )}
+                    </div>
+                  )}
+                </section>
+              ))}
+
+              {/* Summary Section */}
+              <section className="mt-16 pt-16 border-t border-gray-200">
+                <div className="bg-orange-50 border-l-4 border-kb-orange p-8 rounded-r-lg">
+                  <h3 className="text-2xl font-bold text-kb-dark mb-4">
+                    สรุป
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed text-lg mb-4">
+                    ระบบ {blog.badge} เหมาะสำหรับผู้ที่มีความต้องการดังต่อไปนี้:
                   </p>
-                  <button
-                    onClick={() => {
-                      navigate('/', { state: { scrollTo: 'contact' } });
-                    }}
-                    className="w-full bg-white text-kb-orange px-6 py-3.5 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2 mb-3 shadow-lg hover:shadow-xl"
-                  >
-                    <Phone className="w-5 h-5" />
-                    ติดต่อเรา
-                  </button>
-                  <button
-                    onClick={() => {
-                      navigate('/', { state: { scrollTo: 'calculator' } });
-                    }}
-                    className="w-full bg-white/20 backdrop-blur text-white px-6 py-3.5 rounded-xl font-bold hover:bg-white/30 transition-all border-2 border-white/50 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
-                  >
-                    <CalcIcon className="w-5 h-5" />
-                    คำนวณค่าไฟ
-                  </button>
+                  <div className="space-y-2 text-gray-700 text-base">
+                    {blog.sections.find(s => s.title.includes('เหมาะสำหรับ'))?.content.map((item, idx) => (
+                      <p key={idx} className="leading-relaxed">{item}</p>
+                    ))}
+                  </div>
                 </div>
+              </section>
+
+              {/* Bottom CTA */}
+              <div className="mt-16 pt-16 border-t border-gray-200 text-center">
+                <h3 className="text-2xl font-bold text-kb-dark mb-4">
+                  พร้อมเริ่มต้นแล้วหรือยัง?
+                </h3>
+                <p className="text-gray-600 mb-8 text-lg">
+                  ปรึกษาฟรีกับทีมผู้เชี่ยวชาญของเรา เราพร้อมช่วยคุณออกแบบระบบที่เหมาะสมที่สุด
+                </p>
+                <button
+                  onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+                  className="bg-kb-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange-600 transition-all inline-flex items-center gap-2 text-lg"
+                >
+                  <Phone className="w-5 h-5" />
+                  ติดต่อเราเลย
+                </button>
+              </div>
+            </article>
+          </div>
+
+          {/* Right Column - CTA Sidebar (260px, Sticky, Minimal) */}
+          <div className="hidden lg:block">
+            <div className="sticky top-24 space-y-8">
+              
+              {/* Main CTA */}
+              <div className="border-l-4 border-kb-orange pl-6 py-4">
+                <h3 className="text-lg font-bold text-kb-dark mb-3">สนใจติดตั้งระบบ?</h3>
+                <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                  ปรึกษาฟรี! ทีมงานมืออาชีพพร้อมให้คำแนะนำและประเมินราคา
+                </p>
+                <button
+                  onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+                  className="w-full bg-kb-orange text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition-all flex items-center justify-center gap-2 mb-3"
+                >
+                  <Phone className="w-5 h-5" />
+                  ติดต่อเรา
+                </button>
+                <button
+                  onClick={() => navigate('/', { state: { scrollTo: 'calculator' } })}
+                  className="w-full border-2 border-kb-orange text-kb-orange px-6 py-3 rounded-lg font-bold hover:bg-orange-50 transition-all flex items-center justify-center gap-2"
+                >
+                  <CalcIcon className="w-5 h-5" />
+                  คำนวณค่าไฟ
+                </button>
               </div>
 
               {/* Related Articles */}
-              <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border-2 border-gray-200 p-8 hover:shadow-2xl transition-all">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-1.5 h-10 bg-gradient-to-b from-kb-orange to-orange-600 rounded-full"></div>
-                  <h3 className="text-2xl font-bold text-kb-dark">
-                    บทความอื่นๆ
-                  </h3>
-                </div>
-                <p className="text-gray-600 text-sm mb-6 ml-6">
-                  เรียนรู้เพิ่มเติมเกี่ยวกับระบบโซล่าเซลล์แต่ละประเภท
-                </p>
+              <div className="pt-8 border-t border-gray-200">
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">
+                  บทความอื่นๆ
+                </h3>
                 <div className="space-y-4">
                   {Object.entries(blogContent)
                     .filter(([key]) => key !== slug)
@@ -468,32 +689,17 @@ const BlogDetail = () => {
                         <button
                           key={key}
                           onClick={() => navigate(`/blog/${key}`)}
-                          className="w-full text-left p-5 rounded-2xl bg-white hover:bg-gradient-to-r hover:from-white hover:to-gray-50 transition-all border-2 border-gray-200 hover:border-kb-orange hover:shadow-lg group relative overflow-hidden"
+                          className="w-full text-left group"
                         >
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-kb-orange/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                          <div className="flex items-center gap-4 relative z-10">
-                            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colorClasses[content.color]} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
-                              <RelatedIcon className="w-8 h-8 text-white" />
+                          <div className="flex items-start gap-3">
+                            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${colorClasses[content.color]} flex items-center justify-center flex-shrink-0`}>
+                              <RelatedIcon className="w-5 h-5 text-white" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className={`text-xs font-bold px-2 py-1 rounded-full bg-gradient-to-r ${colorClasses[content.color]} text-white`}>
-                                  {content.badge}
-                                </span>
-                              </div>
-                              <h4 className="font-bold text-base text-kb-dark group-hover:text-kb-orange transition-colors line-clamp-2 mb-1">
+                              <h4 className="font-semibold text-sm text-kb-dark group-hover:text-kb-orange transition-colors line-clamp-2 leading-snug">
                                 {content.title}
                               </h4>
-                              <p className="text-xs text-gray-500 line-clamp-1">{content.subtitle}</p>
                             </div>
-                            <svg 
-                              className="w-6 h-6 text-gray-400 group-hover:text-kb-orange group-hover:translate-x-1 transition-all flex-shrink-0" 
-                              fill="none" 
-                              stroke="currentColor" 
-                              viewBox="0 0 24 24"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
                           </div>
                         </button>
                       );
@@ -502,13 +708,15 @@ const BlogDetail = () => {
               </div>
 
               {/* Back to Blog */}
-              <button
-                onClick={() => navigate('/#blog')}
-                className="w-full bg-white rounded-2xl shadow-sm border border-gray-200 p-4 hover:border-kb-orange transition-all flex items-center justify-center gap-2 text-kb-orange font-semibold"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                กลับไปดูบทความอื่น
-              </button>
+              <div className="pt-8 border-t border-gray-200">
+                <button
+                  onClick={() => navigate('/#blog')}
+                  className="w-full text-left text-kb-orange font-semibold text-sm hover:text-orange-600 transition-colors flex items-center gap-2"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  กลับไปดูบทความอื่น
+                </button>
+              </div>
             </div>
           </div>
         </div>

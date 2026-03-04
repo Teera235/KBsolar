@@ -205,16 +205,16 @@ const Blog = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
+                className="group h-full"
               >
                 <motion.a
                   href={`/blog/${post.slug}`}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.3 }}
-                  className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 cursor-pointer"
+                  className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 cursor-pointer h-full flex flex-col"
                 >
                   {/* Image Section */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-48 overflow-hidden flex-shrink-0">
                     <img 
                       src={post.image} 
                       alt={post.title}
@@ -223,19 +223,19 @@ const Blog = () => {
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-5">
+                  <div className="p-5 flex-1 flex flex-col">
                     {/* Title */}
                     <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-kb-orange transition-colors">
                       {post.title}
                     </h3>
                     
                     {/* Description */}
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">
                       {post.description}
                     </p>
                     
                     {/* Read More Link */}
-                    <div className="flex items-center gap-2 text-kb-orange font-semibold text-sm">
+                    <div className="flex items-center gap-2 text-kb-orange font-semibold text-sm mt-auto">
                       <span>อ่านเพิ่มเติม</span>
                       <motion.svg 
                         className="w-4 h-4" 
