@@ -1,4 +1,4 @@
-import { Layers, Award, CheckCircle, TrendingUp, Database, Settings, ArrowRight, Phone, Zap } from 'lucide-react';
+import { Layers, Award, CheckCircle, TrendingUp, Database, Settings, ArrowRight, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { AnimatedCounter } from './AnimatedSection';
