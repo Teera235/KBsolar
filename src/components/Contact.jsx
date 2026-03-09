@@ -334,8 +334,9 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/20 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/20 outline-none transition-all resize-none text-sm sm:text-base leading-normal sm:leading-relaxed"
                       placeholder="สนใจติดตั้งระบบโซลาร์เซลล์ / ต้องการคำปรึกษา..."
+                      style={{ minHeight: '150px', wordBreak: 'break-word', overflowWrap: 'break-word' }}
                     />
                   </motion.div>
                   <motion.button
