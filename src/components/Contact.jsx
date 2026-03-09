@@ -144,7 +144,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: 'ที่อยู่',
-      value: '555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา 30000',
+      value: '555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา\u00A030000',
       href: 'https://maps.google.com/?q=14.863002790983064,102.0466041207901',
       color: 'bg-kb-orange'
     }
@@ -187,7 +187,7 @@ const Contact = () => {
                         <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </motion.div>
                       <p className="text-xs sm:text-sm text-kb-gray">{item.label}</p>
-                      <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-all leading-tight">
+                      <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-words leading-snug">
                         {item.value}
                       </p>
                     </motion.a>
