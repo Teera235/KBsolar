@@ -188,7 +188,14 @@ const Contact = () => {
                       </motion.div>
                       <p className="text-xs sm:text-sm text-kb-gray">{item.label}</p>
                       <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-words leading-snug">
-                        {item.value}
+                        {item.label === 'ที่อยู่' ? (
+                          <>
+                            555/270 หมู่ 3 ต.หนองจะบก อ.เมือง<br className="sm:hidden" />
+                            จ.นครราชสีมา{'\u00A0'}30000
+                          </>
+                        ) : (
+                          item.value
+                        )}
                       </p>
                     </motion.a>
                   </StaggerItem>
