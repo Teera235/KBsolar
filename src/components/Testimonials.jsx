@@ -252,11 +252,11 @@ const Testimonials = () => {
         </FadeUp>
 
         {/* Auto-scroll Carousel - Two Rows */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-6">
           {/* Row 1 - Scroll Right (12 items) */}
           <div 
             ref={scrollRef1}
-            className="flex gap-4 overflow-x-hidden pb-3"
+            className="flex gap-3 sm:gap-6 overflow-x-hidden pb-2 sm:pb-4"
             onMouseEnter={() => setIsPausedRow1(true)}
             onMouseLeave={() => setIsPausedRow1(false)}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -264,40 +264,40 @@ const Testimonials = () => {
             {duplicatedRow1.map((item, idx) => (
               <motion.div
                 key={`row1-${idx}`}
-                className="flex-shrink-0 w-[320px] bg-white rounded-xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 relative group"
+                className="flex-shrink-0 w-[280px] sm:w-[380px] bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 relative group"
                 whileHover={{ y: -8, scale: 1.02 }}
               >
                 {/* Quote Icon */}
-                <Quote className="w-8 h-8 text-kb-orange/10 absolute top-3 right-3 group-hover:text-kb-orange/20 transition-colors" />
+                <Quote className="w-8 h-8 sm:w-12 sm:h-12 text-kb-orange/10 absolute top-3 right-3 sm:top-4 sm:right-4 group-hover:text-kb-orange/20 transition-colors" />
                 
                 {/* Rating */}
-                <div className="flex gap-1 mb-2">
+                <div className="flex gap-1 mb-2 sm:mb-4">
                   {[...Array(item.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-amber-400 fill-current" />
                   ))}
                 </div>
 
                 {/* Text */}
-                <p className="text-kb-gray mb-3 leading-relaxed text-xs line-clamp-2">
+                <p className="text-kb-gray mb-3 sm:mb-6 leading-relaxed text-xs sm:text-sm line-clamp-2 sm:line-clamp-4">
                   "{item.text}"
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                  <div className="w-9 h-9 bg-gradient-to-br from-kb-orange to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                    <span className="text-white font-bold text-sm">
+                <div className="flex items-center gap-2 sm:gap-3 pt-2 sm:pt-4 border-t border-gray-100">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-kb-orange to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white font-bold text-xs sm:text-lg">
                       {item.name.charAt(3)}
                     </span>
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-kb-dark truncate text-sm">{item.name}</p>
-                    <p className="text-[10px] text-kb-gray truncate">{item.location}</p>
-                    <p className="text-[10px] text-kb-orange font-medium truncate">{item.system}</p>
+                    <p className="font-bold text-kb-dark truncate text-xs sm:text-base">{item.name}</p>
+                    <p className="text-[9px] sm:text-xs text-kb-gray truncate">{item.location}</p>
+                    <p className="text-[9px] sm:text-xs text-kb-orange font-medium truncate">{item.system}</p>
                   </div>
                 </div>
 
                 {/* Hover Effect Border */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-kb-orange to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-xl"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-kb-orange to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-xl sm:rounded-b-2xl"></div>
               </motion.div>
             ))}
           </div>
@@ -305,7 +305,7 @@ const Testimonials = () => {
           {/* Row 2 - Scroll Left (8 items) */}
           <div 
             ref={scrollRef2}
-            className="flex gap-4 overflow-x-hidden pb-3"
+            className="flex gap-3 sm:gap-6 overflow-x-hidden pb-2 sm:pb-4"
             onMouseEnter={() => setIsPausedRow2(true)}
             onMouseLeave={() => setIsPausedRow2(false)}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -313,40 +313,40 @@ const Testimonials = () => {
             {duplicatedRow2.map((item, idx) => (
               <motion.div
                 key={`row2-${idx}`}
-                className="flex-shrink-0 w-[320px] bg-white rounded-xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 relative group"
+                className="flex-shrink-0 w-[280px] sm:w-[380px] bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 relative group"
                 whileHover={{ y: -8, scale: 1.02 }}
               >
                 {/* Quote Icon */}
-                <Quote className="w-8 h-8 text-kb-orange/10 absolute top-3 right-3 group-hover:text-kb-orange/20 transition-colors" />
+                <Quote className="w-8 h-8 sm:w-12 sm:h-12 text-kb-orange/10 absolute top-3 right-3 sm:top-4 sm:right-4 group-hover:text-kb-orange/20 transition-colors" />
                 
                 {/* Rating */}
-                <div className="flex gap-1 mb-2">
+                <div className="flex gap-1 mb-2 sm:mb-4">
                   {[...Array(item.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-amber-400 fill-current" />
                   ))}
                 </div>
 
                 {/* Text */}
-                <p className="text-kb-gray mb-3 leading-relaxed text-xs line-clamp-2">
+                <p className="text-kb-gray mb-3 sm:mb-6 leading-relaxed text-xs sm:text-sm line-clamp-2 sm:line-clamp-4">
                   "{item.text}"
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                  <div className="w-9 h-9 bg-gradient-to-br from-orange-500 to-kb-orange rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                    <span className="text-white font-bold text-sm">
+                <div className="flex items-center gap-2 sm:gap-3 pt-2 sm:pt-4 border-t border-gray-100">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-kb-orange rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white font-bold text-xs sm:text-lg">
                       {item.name.charAt(3)}
                     </span>
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-kb-dark truncate text-sm">{item.name}</p>
-                    <p className="text-[10px] text-kb-gray truncate">{item.location}</p>
-                    <p className="text-[10px] text-kb-orange font-medium truncate">{item.system}</p>
+                    <p className="font-bold text-kb-dark truncate text-xs sm:text-base">{item.name}</p>
+                    <p className="text-[9px] sm:text-xs text-kb-gray truncate">{item.location}</p>
+                    <p className="text-[9px] sm:text-xs text-kb-orange font-medium truncate">{item.system}</p>
                   </div>
                 </div>
 
                 {/* Hover Effect Border */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-kb-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right rounded-b-xl"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-kb-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right rounded-b-xl sm:rounded-b-2xl"></div>
               </motion.div>
             ))}
           </div>
