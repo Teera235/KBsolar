@@ -145,7 +145,7 @@ const AboutUs = () => {
 
           {/* RIGHT - Stats + Mini CTA (5 cols) */}
           <motion.div 
-            className="lg:col-span-5 space-y-3"
+            className="lg:col-span-5"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -165,22 +165,6 @@ const AboutUs = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-
-            {/* Mini CTA */}
-            <div className="bg-gradient-to-br from-kb-orange to-amber-500 rounded-xl p-4 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-grid-white/10"></div>
-              <div className="relative">
-                <p className="text-sm font-bold text-white mb-2">พร้อมเริ่มต้นแล้ว?</p>
-                <p className="text-xs text-white/90 mb-3">ปรึกษาฟรี ประเมินระบบให้เหมาะสม</p>
-                <button
-                  onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
-                  className="inline-flex items-center justify-center gap-2 bg-white text-kb-orange px-4 py-2 rounded-lg font-bold text-xs hover:bg-gray-50 transition-all shadow-xl w-full"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  ติดต่อเราเลย
-                </button>
               </div>
             </div>
           </motion.div>
