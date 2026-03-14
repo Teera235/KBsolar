@@ -28,11 +28,11 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-8 sm:py-12">
+    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-6 sm:py-12">
       <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6">
         
         {/* ROW 1 - Top Section */}
-        <div className="grid lg:grid-cols-12 gap-4 sm:gap-6 mb-4 sm:mb-6">
+        <div className="grid lg:grid-cols-12 gap-3 sm:gap-6 mb-3 sm:mb-6">
           
           {/* LEFT - Hero Content (7 cols) */}
           <motion.div 
@@ -46,15 +46,15 @@ const AboutUs = () => {
               About Us
             </div>
             
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2 leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 leading-tight">
               KB Solar Energy
             </h1>
             
-            <p className="text-xl text-gray-600 font-medium mb-3">
+            <p className="text-lg sm:text-xl text-gray-600 font-medium mb-2 sm:mb-3">
               "ลงทุนอย่างมั่นใจ ประหยัดอย่างยั่งยืน"
             </p>
             
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6 max-w-xl">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed mb-3 sm:mb-6 max-w-xl">
               ช่วยบ้านและธุรกิจลดค่าไฟฟ้าด้วยระบบโซลาร์เซลล์ที่ออกแบบโดยทีมวิศวกรผู้เชี่ยวชาญ 
               วิเคราะห์จากข้อมูลจริง ติดตั้งตามมาตรฐานสากล
             </p>
@@ -108,7 +108,7 @@ const AboutUs = () => {
         </div>
 
         {/* ROW 2 - Bottom Section */}
-        <div className="grid lg:grid-cols-12 gap-4 sm:gap-6">
+        <div className="grid lg:grid-cols-12 gap-3 sm:gap-6">
           
           {/* LEFT - Why Choose Us (7 cols) */}
           <motion.div 
