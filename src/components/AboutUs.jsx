@@ -28,7 +28,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-4 sm:py-12">
+    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-4 sm:py-8 lg:py-12">
       <div className="w-full max-w-[1100px] mx-auto px-3 sm:px-6">
         
         {/* ROW 1 - Top Section */}
@@ -59,17 +59,17 @@ const AboutUs = () => {
               วิเคราะห์จากข้อมูลจริง ติดตั้งตามมาตรฐานสากล
             </p>
             
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button
                 onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
-                className="inline-flex items-center gap-2 bg-kb-orange text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-kb-orange text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 text-sm w-full sm:w-auto"
               >
                 ขอใบเสนอราคา
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => navigate('/', { state: { scrollTo: 'services' } })}
-                className="inline-flex items-center gap-2 bg-white text-gray-700 px-5 py-2.5 rounded-lg font-semibold border-2 border-gray-200 hover:border-kb-orange hover:text-kb-orange transition-all text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-5 py-2.5 rounded-lg font-semibold border-2 border-gray-200 hover:border-kb-orange hover:text-kb-orange transition-all text-sm w-full sm:w-auto"
               >
                 ดูบริการ
               </button>
