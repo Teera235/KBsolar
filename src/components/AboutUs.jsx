@@ -28,11 +28,11 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-4 sm:py-8 lg:py-12">
+    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-3 sm:py-8 lg:py-12">
       <div className="w-full max-w-[1100px] mx-auto px-3 sm:px-6">
         
         {/* ROW 1 - Top Section */}
-        <div className="grid lg:grid-cols-12 gap-3 sm:gap-6 mb-3 sm:mb-6">
+        <div className="grid lg:grid-cols-12 gap-2 sm:gap-6 mb-2 sm:mb-6">
           
           {/* LEFT - Hero Content (7 cols) */}
           <motion.div 
@@ -41,20 +41,20 @@ const AboutUs = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-orange-50 text-kb-orange px-3 py-1 rounded-full text-xs font-semibold mb-3 w-fit">
+            <div className="inline-flex items-center gap-2 bg-orange-50 text-kb-orange px-3 py-1 rounded-full text-xs font-semibold mb-2 sm:mb-3 w-fit">
               <Award className="w-3 h-3" />
               About Us
             </div>
             
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 leading-tight">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
               KB Solar Energy
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-600 font-medium mb-2 sm:mb-3">
+            <p className="text-base sm:text-xl text-gray-600 font-medium mb-1 sm:mb-3">
               "ลงทุนอย่างมั่นใจ ประหยัดอย่างยั่งยืน"
             </p>
             
-            <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed mb-3 sm:mb-6 max-w-xl">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed mb-2 sm:mb-6 max-w-xl">
               ช่วยบ้านและธุรกิจลดค่าไฟฟ้าด้วยระบบโซลาร์เซลล์ที่ออกแบบโดยทีมวิศวกรผู้เชี่ยวชาญ 
               วิเคราะห์จากข้อมูลจริง ติดตั้งตามมาตรฐานสากล
             </p>
@@ -83,23 +83,23 @@ const AboutUs = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-100 shadow-lg h-full">
-              <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <Zap className="w-4 h-4 text-kb-orange" />
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-lg h-full">
+              <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-kb-orange" />
                 หลักการทำงาน
               </h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 {features.map((feature, idx) => (
                   <motion.div
                     key={idx}
-                    className="bg-white rounded-lg p-3 border border-gray-100 hover:border-kb-orange/30 hover:shadow-md transition-all"
+                    className="bg-white rounded-lg p-2 sm:p-3 border border-gray-100 hover:border-kb-orange/30 hover:shadow-md transition-all"
                     whileHover={{ y: -2 }}
                   >
-                    <div className={`w-9 h-9 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center mb-2`}>
-                      <feature.icon className="w-5 h-5 text-white" />
+                    <div className={`w-8 h-8 sm:w-9 sm:h-9 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center mb-1 sm:mb-2`}>
+                      <feature.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
-                    <h4 className="text-xs font-bold text-gray-900 mb-1">{feature.title}</h4>
-                    <p className="text-[10px] text-gray-600 leading-tight">{feature.desc}</p>
+                    <h4 className="text-[10px] sm:text-xs font-bold text-gray-900 mb-0.5 sm:mb-1">{feature.title}</h4>
+                    <p className="text-[9px] sm:text-[10px] text-gray-600 leading-tight">{feature.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -108,7 +108,7 @@ const AboutUs = () => {
         </div>
 
         {/* ROW 2 - Bottom Section */}
-        <div className="grid lg:grid-cols-12 gap-3 sm:gap-6">
+        <div className="grid lg:grid-cols-12 gap-2 sm:gap-6">
           
           {/* LEFT - Why Choose Us (7 cols) */}
           <motion.div 
@@ -117,8 +117,8 @@ const AboutUs = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 sm:p-5 border border-blue-100 h-full">
-              <div className="flex items-center gap-2 mb-3">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-3 sm:p-5 border border-blue-100 h-full">
+              <div className="flex items-center gap-2 mb-2 sm:mb-3">
                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
                   <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
@@ -151,17 +151,17 @@ const AboutUs = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             {/* Stats Cards */}
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-4 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-3 sm:p-4 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-kb-orange/10 rounded-full blur-2xl"></div>
               <div className="relative">
-                <h3 className="text-xs font-bold text-white mb-3 opacity-80">ตัวเลขที่พูดแทนเรา</h3>
-                <div className="grid grid-cols-3 gap-2">
+                <h3 className="text-[10px] sm:text-xs font-bold text-white mb-2 sm:mb-3 opacity-80">ตัวเลขที่พูดแทนเรา</h3>
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   {stats.map((stat, idx) => (
-                    <div key={idx} className="text-center p-2 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
-                      <p className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                    <div key={idx} className="text-center p-1.5 sm:p-2 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
+                      <p className={`text-xl sm:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
                         <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                       </p>
-                      <p className="text-gray-400 text-[9px] font-medium mt-0.5">{stat.label}</p>
+                      <p className="text-gray-400 text-[8px] sm:text-[9px] font-medium mt-0.5">{stat.label}</p>
                     </div>
                   ))}
                 </div>
