@@ -28,78 +28,78 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="min-h-screen bg-white overflow-hidden flex items-center py-4 md:py-8 lg:py-12">
-      <div className="w-full max-w-[1100px] mx-auto px-3 md:px-6">
+    <section id="about" className="py-12 md:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* ROW 1 - Top Section */}
-        <div className="grid lg:grid-cols-12 gap-3 md:gap-6 mb-3 md:mb-6">
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           
-          {/* LEFT - Hero Content (7 cols) */}
+          {/* LEFT - Hero Content */}
           <motion.div 
-            className="lg:col-span-7 flex flex-col justify-center md:order-1"
+            className="flex flex-col justify-center"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-orange-50 text-kb-orange px-3 py-1 rounded-full text-xs font-semibold mb-2 md:mb-3 w-fit">
-              <Award className="w-3 h-3" />
+            <div className="inline-flex items-center gap-2 bg-orange-50 text-kb-orange px-3 py-1.5 rounded-full text-xs font-semibold mb-4 w-fit">
+              <Award className="w-3.5 h-3.5" />
               About Us
             </div>
             
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 leading-tight">
               KB Solar Energy
             </h1>
             
-            <p className="text-base md:text-xl text-gray-600 font-medium mb-2 md:mb-3">
+            <p className="text-lg md:text-xl text-gray-600 font-medium mb-4">
               "ลงทุนอย่างมั่นใจ ประหยัดอย่างยั่งยืน"
             </p>
             
-            <p className="text-xs md:text-sm lg:text-base text-gray-600 leading-relaxed mb-3 md:mb-6 max-w-xl">
+            <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
               ช่วยบ้านและธุรกิจลดค่าไฟฟ้าด้วยระบบโซลาร์เซลล์ที่ออกแบบโดยทีมวิศวกรผู้เชี่ยวชาญ 
               วิเคราะห์จากข้อมูลจริง ติดตั้งตามมาตรฐานสากล
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
-                className="inline-flex items-center justify-center gap-2 bg-kb-orange text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25 text-sm w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 bg-kb-orange text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/25"
               >
                 ขอใบเสนอราคา
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-5 h-5" />
               </button>
               <button
                 onClick={() => navigate('/', { state: { scrollTo: 'services' } })}
-                className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-5 py-2.5 rounded-lg font-semibold border-2 border-gray-200 hover:border-kb-orange hover:text-kb-orange transition-all text-sm w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-6 py-3 rounded-lg font-semibold border-2 border-gray-200 hover:border-kb-orange hover:text-kb-orange transition-all"
               >
                 ดูบริการ
               </button>
             </div>
           </motion.div>
 
-          {/* RIGHT - Feature Cards 2x2 (5 cols) */}
+          {/* RIGHT - Feature Cards (Hidden on mobile) */}
           <motion.div 
-            className="lg:col-span-5 hidden md:block"
+            className="hidden lg:block"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-2 md:p-4 border border-gray-100 shadow-lg h-full">
-              <h3 className="text-[10px] md:text-sm font-bold text-gray-900 mb-1.5 md:mb-3 flex items-center gap-1 md:gap-2">
-                <Zap className="w-3 h-3 md:w-4 md:h-4 text-kb-orange" />
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 shadow-lg h-full">
+              <h3 className="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-kb-orange" />
                 หลักการทำงาน
               </h3>
-              <div className="grid grid-cols-2 gap-1.5 md:gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 {features.map((feature, idx) => (
                   <motion.div
                     key={idx}
-                    className="bg-white rounded-lg p-1.5 md:p-3 border border-gray-100 hover:border-kb-orange/30 hover:shadow-md transition-all"
+                    className="bg-white rounded-xl p-4 border border-gray-100 hover:border-kb-orange/30 hover:shadow-md transition-all"
                     whileHover={{ y: -2 }}
                   >
-                    <div className={`w-7 h-7 md:w-9 md:h-9 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center mb-1 md:mb-2`}>
-                      <feature.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-white" />
+                    <div className={`w-10 h-10 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center mb-3`}>
+                      <feature.icon className="w-5 h-5 text-white" />
                     </div>
-                    <h4 className="text-[9px] md:text-xs font-bold text-gray-900 mb-0.5 md:mb-1">{feature.title}</h4>
-                    <p className="text-[8px] md:text-[10px] text-gray-600 leading-tight">{feature.desc}</p>
+                    <h4 className="text-sm font-bold text-gray-900 mb-1">{feature.title}</h4>
+                    <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -107,61 +107,59 @@ const AboutUs = () => {
           </motion.div>
         </div>
 
-        {/* ROW 2 - Bottom Section */}
-        <div className="grid lg:grid-cols-12 gap-3 md:gap-6">
+        {/* Bottom Section */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           
-          {/* LEFT - Why Choose Us (7 cols) */}
+          {/* Why Choose Us */}
           <motion.div 
-            className="lg:col-span-7 md:order-2"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 md:p-5 border border-blue-100 h-full">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 text-white" />
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100 h-full">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
+                  <CheckCircle className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-base font-bold text-gray-900">ทำไมต้องเลือกเรา</h2>
+                <h2 className="text-xl font-bold text-gray-900">ทำไมต้องเลือกเรา</h2>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {highlights.map((item, idx) => (
                   <motion.li
                     key={idx}
-                    className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed"
+                    className="flex items-start gap-3 text-sm md:text-base text-gray-700"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 + idx * 0.1 }}
                   >
-                    <div className="w-4 h-4 bg-gradient-to-br from-kb-orange to-amber-500 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <CheckCircle className="w-2.5 h-2.5 text-white" />
+                    <div className="w-5 h-5 bg-gradient-to-br from-kb-orange to-amber-500 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <CheckCircle className="w-3 h-3 text-white" />
                     </div>
-                    <span className="flex-1">{item}</span>
+                    <span>{item}</span>
                   </motion.li>
                 ))}
               </ul>
             </div>
           </motion.div>
 
-          {/* RIGHT - Stats + Mini CTA (5 cols) */}
+          {/* Stats (Hidden on mobile) */}
           <motion.div 
-            className="lg:col-span-5 hidden md:block"
+            className="hidden lg:block"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            {/* Stats Cards */}
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-2 md:p-4 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-kb-orange/10 rounded-full blur-2xl"></div>
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 relative overflow-hidden h-full">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-kb-orange/10 rounded-full blur-3xl"></div>
               <div className="relative">
-                <h3 className="text-[9px] md:text-xs font-bold text-white mb-1.5 md:mb-3 opacity-80">ตัวเลขที่พูดแทนเรา</h3>
-                <div className="grid grid-cols-3 gap-1 md:gap-2">
+                <h3 className="text-sm font-bold text-white mb-4 opacity-80">ตัวเลขที่พูดแทนเรา</h3>
+                <div className="grid grid-cols-3 gap-3">
                   {stats.map((stat, idx) => (
-                    <div key={idx} className="text-center p-1 md:p-2 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
-                      <p className={`text-lg md:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                    <div key={idx} className="text-center p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+                      <p className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
                         <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                       </p>
-                      <p className="text-gray-400 text-[7px] md:text-[9px] font-medium mt-0.5">{stat.label}</p>
+                      <p className="text-gray-400 text-xs font-medium mt-1">{stat.label}</p>
                     </div>
                   ))}
                 </div>
