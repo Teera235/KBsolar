@@ -60,40 +60,7 @@ const AboutUs = () => {
           </div>
         </motion.div>
 
-        {/* Why Choose Us */}
-        <motion.div 
-          className="mt-10 md:mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 md:p-8 border border-blue-100">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="w-6 h-6 text-white" />
-              </div>
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800">
-                ทำไมต้องเลือกเรา
-              </h2>
-            </div>
-            <ul className="space-y-3">
-              {highlights.map((item, idx) => (
-                <motion.li
-                  key={idx}
-                  className="flex items-start gap-3 text-sm md:text-base text-gray-700"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + idx * 0.1 }}
-                >
-                  <div className="w-6 h-6 bg-gradient-to-br from-orange-500 to-yellow-400 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="flex-1">{item}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
+
 
       </div>
     </section>
