@@ -19,7 +19,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "vercel-build": "npm run build"
+    "vercel-build": "npm run build",
+    "images:convert": "node scripts/convert-to-webp.js",
+    "images:rewrite": "node scripts/update-to-webp.js"
   },
   "eslintConfig": {
     "extends": [
