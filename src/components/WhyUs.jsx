@@ -1,29 +1,29 @@
 import React from 'react';
-import { ClipboardCheck, ShieldCheck, Award, HeadphonesIcon } from 'lucide-react';
+import { Calculator, FileSearch, Smartphone, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeUp, StaggerContainer, StaggerItem, AnimatedCounter } from './AnimatedSection';
 
 const WhyUs = () => {
   const features = [
     {
-      icon: ClipboardCheck,
-      title: 'ออกแบบเฉพาะบ้านคุณ',
-      description: 'ทีมวิศวกรของ KB SOLAR สำรวจหน้างานจริง คำนวณปริมาณการใช้ไฟฟ้า ทิศทางหลังคา และแสงแดดในแต่ละพื้นที่ เพื่อออกแบบระบบโซลาร์ให้เหมาะสมกับบ้านของคุณโดยเฉพาะ ไม่ใช่แพ็กเกจสำเร็จรูปที่ใช้เหมือนกันทุกหลัง',
+      icon: Calculator,
+      title: 'ประหยัดค่าไฟแบบคำนวณได้จริง',
+      description: 'ก่อนเริ่มงาน KB SOLAR จัดทำรายงานคาดการณ์ผลผลิตไฟฟ้ารายเดือนและจุดคืนทุนจากบิลค่าไฟจริงของคุณ ทุกตัวเลขตรวจสอบย้อนกลับได้ ไม่ใช้คำกว้างว่า “ประหยัดได้ถึง” โดยไม่มีที่มา',
     },
     {
-      icon: ShieldCheck,
-      title: 'ติดตั้งโดยทีมช่างมืออาชีพ',
-      description: 'ช่างติดตั้งของเราผ่านการอบรมและมีประสบการณ์ตรง ทำงานตามมาตรฐาน วสท. ใช้อุปกรณ์ยึดโครงสร้างและสายไฟที่ทนต่อสภาพอากาศไทย เพื่อให้ระบบทำงานได้ต่อเนื่องและไม่มีปัญหารั่วซึมภายหลัง',
+      icon: FileSearch,
+      title: 'ทำงานเป็นขั้นตอน ตรวจสอบได้ทุกสเต็ป',
+      description: 'สำรวจหน้างาน ออกแบบระบบ ยื่นขออนุญาต กฟน./กฟภ. ติดตั้ง และทดสอบระบบ ทุกขั้นตอนมีรูปถ่ายหน้างานและเอกสารส่งถึงเจ้าของบ้าน เพื่อให้คุณรู้สถานะงานได้ตลอดโครงการ',
     },
     {
-      icon: Award,
-      title: 'แผงและอินเวอร์เตอร์แบรนด์ชั้นนำ',
-      description: 'KB SOLAR คัดเลือกแผงโซลาร์และอินเวอร์เตอร์จากผู้ผลิต Tier 1 ที่ผ่านมาตรฐาน IEC และขึ้นทะเบียนกับ กฟน./กฟภ. พร้อมเอกสารรับรองครบถ้วน เพื่อให้ขออนุญาตและขายไฟคืนได้จริง',
+      icon: Smartphone,
+      title: 'มอนิเตอร์ผลผลิตไฟผ่านแอปมือถือ',
+      description: 'ทุกระบบของ KB SOLAR เชื่อมแอปอินเวอร์เตอร์ให้พร้อมใช้งานตั้งแต่วันส่งมอบ คุณดูกำลังการผลิต ค่าไฟที่ประหยัดได้ และรับแจ้งเตือนเมื่อระบบผิดปกติได้ทันที ไม่ต้องรอบิลค่าไฟหลายเดือนถึงจะรู้',
     },
     {
-      icon: HeadphonesIcon,
-      title: 'ดูแลระยะยาวหลังติดตั้ง',
-      description: 'หลังจบงานติดตั้ง ทีม KB SOLAR ยังพร้อมให้บริการตรวจเช็กระบบ แจ้งเตือนผ่านแอป และเข้าซ่อมเมื่อเกิดปัญหา ครอบคลุมตลอดอายุการรับประกันแผงและอินเวอร์เตอร์ของแต่ละแบรนด์',
+      icon: MessageCircle,
+      title: 'ทีมซัพพอร์ตคนไทย ตอบไวทุกช่องทาง',
+      description: 'แจ้งปัญหาผ่าน LINE โทรศัพท์ หรืออีเมลถึงทีมเทคนิคของ KB SOLAR รับเรื่องภายในวันทำการและนัดเข้าหน้างานตามระยะเวลาในสัญญาบริการ ดูแลโดยทีมงานในประเทศทุกสายงาน',
     },
   ];
 
@@ -51,9 +51,9 @@ const WhyUs = () => {
         {/* Header */}
         <FadeUp>
           <div className="text-center mb-12">
-            <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">Why Us?</span>
+            <span className="text-kb-orange font-semibold text-sm tracking-wider uppercase">The KB SOLAR Way</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-              ทำไมต้อง KB SOLAR
+              สิ่งที่คุณจะได้รับเมื่อเลือก KB SOLAR
             </h2>
           </div>
         </FadeUp>
