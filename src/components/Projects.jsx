@@ -680,7 +680,7 @@ const Projects = () => {
             <p className="text-kb-gray max-w-3xl mx-auto text-lg lg:text-xl leading-relaxed">
               ผลงานติดตั้งจริงจากลูกค้าที่ไว้วางใจ พร้อมข้อมูลประสิทธิภาพระบบ
               <br />
-              <span className="text-kb-orange font-semibold">43+ โปรเจกต์ทั่วประเทศไทยและต่างประเทศ</span>
+              <span className="text-kb-orange font-semibold">41+ โปรเจกต์ทั่วประเทศไทยและต่างประเทศ</span>
             </p>
           </div>
         </FadeUp>
