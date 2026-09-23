@@ -540,8 +540,8 @@ const Projects = () => {
     },
     {
       id: 41, category: 'residential', date: '17-12-2025',
-      title: 'Sigenergy 5kW + Battery 18kWh', location: 'ปทุมธานี',
-      description: 'ระบบ Sigenergy 5kW พร้อมแบตเตอรี่ 18kWh ระบบ Full Backup สลับไฟ 0ms',
+      title: 'Sigenergy 5kW + Battery 16kWh', location: 'ปทุมธานี',
+      description: 'ระบบ Sigenergy 5kW พร้อมแบตเตอรี่ 16kWh ระบบ Full Backup สลับไฟ 0ms',
       systemSize: '6.15', annualEnergy: '9,225', costSaving: '3,200 - 3,800', payback: '4-5',
       images: ['/projects/17-12-2025/1.webp', '/projects/17-12-2025/2.webp', '/projects/17-12-2025/3.webp', '/projects/17-12-2025/4.webp', '/projects/17-12-2025/5.webp'],
       equipment: [
