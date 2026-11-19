@@ -14,7 +14,7 @@ const Projects = () => {
     { id: 'international', name: 'ต่างประเทศ', icon: Globe },
   ];
 
-  const projects = [
+  const rawProjects = [
     {
       id: 1, category: 'residential', date: '21-02-2025',
       title: 'Hybrid 5kW + Smart Optimizer', location: 'อุตรดิตถ์',
@@ -583,6 +583,14 @@ const Projects = () => {
       warranty: ['งานติดตั้ง 3 ปี', 'Controller 10 ปี', 'แบตเตอรี่ 10 ปี', 'Gateway 2 ปี', 'EV Charger 2 ปี']
     },
   ];
+
+  // Each post's first image is its promo poster and the rest carry a contact strip along the
+  // bottom; show the job's own photographs instead, with the strip cropped off
+  // (public/media/work, built by `npm run media`).
+  const projects = rawProjects.map((p) => ({
+    ...p,
+    images: p.images.slice(1).map((_, i) => `/media/work/${p.date}-${i + 2}.webp`),
+  }));
 
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);

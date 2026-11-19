@@ -84,6 +84,7 @@ npm start
 | `npm test` | รัน test suite (CRA default) |
 | `npm run images:convert` | แปลงรูป jpg/png ภายใต้ `public/` เป็น `.webp` |
 | `npm run images:rewrite` | อัปเดต reference ในโค้ดให้ชี้ไฟล์ `.webp` |
+| `npm run media` | สร้างรูปผลงาน (ตัดแถบติดต่อท้ายรูปโพสต์ออก) และรูปพื้นหลัง hero ขนาดเว็บ ลง `public/media/` — รันทุกครั้งที่เพิ่มผลงานใหม่ใน `Projects.jsx` |
 
 หลังเพิ่มรูปใหม่: รัน `npm run images:convert` แล้วค่อย commit
 ทั้งไฟล์ต้นฉบับและ `.webp` (หรือจะเก็บเฉพาะ `.webp` ก็ได้)
