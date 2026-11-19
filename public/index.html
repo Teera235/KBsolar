@@ -255,7 +255,7 @@
     </script>
     
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="%PUBLIC_URL%/hero-bg.webp" as="image" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/media/hero-2000.webp" imagesrcset="%PUBLIC_URL%/media/hero-1200.webp 1200w, %PUBLIC_URL%/media/hero-2000.webp 2000w" imagesizes="100vw" fetchpriority="high" />
     <link rel="preload" href="%PUBLIC_URL%/logo.webp" as="image" />
     <link rel="preload" href="%PUBLIC_URL%/teacher.webp" as="image" />
     
@@ -373,39 +373,21 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     
-    <!-- Hide loading screen when app loads -->
+    <!-- Hide the loading screen once the app has drawn its first frame. Waiting for "load" meant
+         waiting for every image on the page, which held the site back on a slow phone line. -->
     <script>
-      window.addEventListener('load', function() {
-        // Faster loading screen hide for mobile
-        const isMobile = window.innerWidth <= 640;
-        const delay = isMobile ? 500 : 1000;
-        
-        setTimeout(function() {
-          const loadingScreen = document.getElementById('loading-screen');
-          if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            // Remove from DOM after animation
-            setTimeout(function() {
-              if (loadingScreen.parentNode) {
-                loadingScreen.parentNode.removeChild(loadingScreen);
-              }
-            }, 500);
-          }
-        }, delay);
-      });
-      
-      // Also hide on DOMContentLoaded for faster response
-      document.addEventListener('DOMContentLoaded', function() {
-        const isMobile = window.innerWidth <= 640;
-        if (isMobile) {
-          setTimeout(function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-              loadingScreen.classList.add('hidden');
-            }
-          }, 300);
+      (function () {
+        function hide() {
+          var el = document.getElementById('loading-screen');
+          if (!el || el.classList.contains('hidden')) return;
+          el.classList.add('hidden');
+          setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 500);
         }
-      });
+        document.addEventListener('DOMContentLoaded', function () {
+          requestAnimationFrame(function () { requestAnimationFrame(hide); });
+        });
+        window.addEventListener('load', hide);
+      })();
     </script>
   </body>
 </html>

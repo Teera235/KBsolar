@@ -121,14 +121,14 @@ const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="hidden sm:flex items-center space-x-3 cursor-default">
+          <div className="flex items-center space-x-3 cursor-default">
             <img 
               src="/logo.webp" 
               alt="KB Solar Logo" 
-              className="h-12 w-auto rounded-lg"
+              className="h-10 sm:h-12 w-auto rounded-lg"
             />
-            <div className="hidden sm:block">
-              <span className={`font-bold text-xl ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}>
+            <div>
+              <span className={`font-bold text-lg sm:text-xl ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}>
                 KB Solar Energy
               </span>
             </div>
@@ -145,7 +145,7 @@ const Navbar = () => {
                   shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'
                 } ${
                   activeSection === link.id && location.pathname === '/'
-                    ? 'text-kb-orange scale-110 font-bold' 
+                    ? 'text-kb-orange' 
                     : ''
                 }`}
               >
@@ -167,6 +167,8 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'ปิดเมนู' : 'เปิดเมนู'}
+            aria-expanded={isOpen}
             className={`md:hidden p-2 rounded-lg ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -183,7 +185,7 @@ const Navbar = () => {
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`block py-3 px-4 text-kb-dark hover:bg-kb-light rounded-lg font-medium transition-all duration-300 ${
                   activeSection === link.id && location.pathname === '/'
-                    ? 'bg-kb-orange text-white font-bold scale-105' 
+                    ? 'bg-kb-orange text-white font-bold' 
                     : ''
                 }`}
               >

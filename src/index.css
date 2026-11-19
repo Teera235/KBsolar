@@ -567,10 +567,10 @@ h1, h2, h3, h4, h5, h6 {
     box-sizing: border-box !important;
   }
   
-  /* Fix for images that might cause overflow (exclude hero background) */
+  /* Images never run past the screen; their height stays what each component sets
+     (a blanket height:auto stretched the footer logo to full width and emptied cover images) */
   img:not(#home .absolute.inset-0 img) {
     max-width: 100% !important;
-    height: auto !important;
   }
   
   /* Mobile Hero Background Image Fix */

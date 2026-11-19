@@ -105,10 +105,9 @@ const Services = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: (index % services.length) * 0.1 }}
-                  className="group"
-                  style={{ width: '600px', flexShrink: 0 }}
+                  className="group w-[85vw] max-w-[600px] flex-shrink-0"
                 >
-                  <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-[500px] bg-white border border-gray-100">
+                  <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-[440px] sm:h-[500px] bg-white border border-gray-100">
                     {/* Background Image - Full Height */}
                     <div className="absolute inset-0">
                       <img 

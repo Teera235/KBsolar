@@ -40,8 +40,11 @@ const Hero = () => {
         transition={{ duration: 1.5, ease: 'easeOut' }}
       >
         <img 
-          src="/hero-bg.webp" 
-          alt="Solar Panel Background" 
+          src="/media/hero-2000.webp"
+          srcSet="/media/hero-1200.webp 1200w, /media/hero-2000.webp 2000w"
+          sizes="100vw"
+          fetchpriority="high"
+          alt="" 
           className="w-full h-full object-cover sm:object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
