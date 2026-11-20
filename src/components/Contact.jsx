@@ -154,7 +154,6 @@ const Contact = () => {
     <section id="contact" className="py-20 lg:py-28 bg-white mobile-full-width bg-section-mobile">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-fix">
         <SectionHeading
-          eyebrow={t('ติดต่อเรา', 'Contact Us')}
           title={t('', 'Get in')}
           highlight={t('ติดต่อเรา', 'Touch')}
           subtitle={t('สนใจติดตั้งระบบโซลาร์เซลล์หรือต้องการคำปรึกษา ติดต่อเราได้เลย', 'Interested in a solar system or need advice? Get in touch with us.')}
@@ -219,7 +218,7 @@ const Contact = () => {
           {/* Contact Form */}
           <SlideRight>
             <div className="card-kb hover:translate-y-0 relative overflow-hidden p-6 sm:p-8 lg:p-10">
-              <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-kb-orange to-amber-400" />
+              <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-kb-orange" />
               <h3 className="text-xl sm:text-2xl font-bold text-kb-dark mb-5 sm:mb-7">{t('ขอรับการประเมินระบบโซลาร์', 'Request Solar Assessment')}</h3>
               
               {/* Selected Package Display */}

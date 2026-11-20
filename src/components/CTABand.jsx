@@ -22,7 +22,7 @@ const CTABand = () => {
       >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white">
           {t('พร้อม', 'Ready to ')}
-          <span className="text-kb-gradient">{t('ลดค่าไฟ', 'cut your power bill')}</span>
+          <span className="text-kb-accent">{t('ลดค่าไฟ', 'cut your power bill')}</span>
           {t('แล้วหรือยัง?', '?')}
         </h2>
         <p className="mt-5 text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">

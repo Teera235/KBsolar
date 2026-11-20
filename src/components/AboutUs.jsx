@@ -47,7 +47,6 @@ const AboutUs = () => {
             <SectionHeading
               align="left"
               className="!mb-4"
-              eyebrow={t('เกี่ยวกับเรา', 'About Us')}
               title="KB Solar"
               highlight="Energy"
             />
@@ -124,7 +123,7 @@ const AboutUs = () => {
           >
             <div className="card-kb hover:translate-y-0 p-6 h-full">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-9 h-9 bg-gradient-to-br from-kb-orange to-amber-500 rounded-xl flex items-center justify-center">
+                <div className="w-9 h-9 bg-kb-orange rounded-xl flex items-center justify-center">
                   <CheckCircle className="w-5 h-5 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">{t('ทำไมต้องเลือกเรา', 'Why choose us')}</h3>
@@ -139,7 +138,7 @@ const AboutUs = () => {
             viewport={{ once: true }}
                     transition={{ delay: 0.2 + idx * 0.08 }}
                   >
-                    <div className="w-4 h-4 bg-gradient-to-br from-kb-orange to-amber-500 rounded flex items-center justify-center flex-shrink-0">
+                    <div className="w-4 h-4 bg-kb-orange rounded flex items-center justify-center flex-shrink-0">
                       <CheckCircle className="w-2.5 h-2.5 text-white" />
                     </div>
                     <span>{item}</span>
@@ -159,14 +158,13 @@ const AboutUs = () => {
           >
             {/* Stats Cards */}
             <div className="bg-[#0B0F17] rounded-[1.25rem] p-5 relative overflow-hidden">
-              <div className="absolute -top-6 -right-6 w-40 h-40 bg-kb-orange/20 rounded-full blur-3xl"></div>
               <div className="relative">
                 <h3 className="text-xs font-bold text-white mb-3 opacity-80">{t('ตัวเลขที่พูดแทนเรา', 'Our numbers speak for us')}</h3>
                 <div className="grid grid-cols-3 gap-2">
                   {stats.map((stat, idx) => (
-                    <div key={idx} className="text-center p-2 sm:p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+                    <div key={idx} className="text-center p-2 sm:p-3 bg-white/5 rounded-xl border border-white/10">
                       <p className="text-2xl sm:text-3xl font-bold">
-                        <CountUp value={`${stat.value}${stat.suffix}`} className="text-kb-gradient" />
+                        <CountUp value={`${stat.value}${stat.suffix}`} className="text-kb-accent" />
                       </p>
                       <p className="text-gray-400 text-[11px] sm:text-xs font-medium mt-0.5">{stat.label}</p>
                     </div>
@@ -176,7 +174,7 @@ const AboutUs = () => {
             </div>
 
             {/* Mini CTA */}
-            <div className="bg-gradient-to-br from-kb-orange to-amber-500 rounded-[1.25rem] p-5 text-center relative overflow-hidden shadow-lg shadow-orange-500/25">
+            <div className="bg-kb-orange rounded-[1.25rem] p-5 text-center relative overflow-hidden shadow-lg">
               <div className="absolute inset-0 bg-grid-white/10"></div>
               <div className="relative">
                 <p className="text-sm font-bold text-white mb-2">{t('พร้อมเริ่มต้นแล้ว?', 'Ready to get started?')}</p>

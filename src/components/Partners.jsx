@@ -152,13 +152,10 @@ const Partners = () => {
       <section className="py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-10 -left-20 w-72 h-72 bg-kb-orange/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 -right-20 w-72 h-72 bg-amber-400/5 rounded-full blur-3xl"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionHeading
-            eyebrow={t('แบรนด์พันธมิตร', 'Our Partners')}
             title={t('อุปกรณ์คุณภาพจาก', 'Quality Equipment from')}
             highlight={t('แบรนด์ชั้นนำระดับโลก', 'World-Leading Brands')}
             subtitle={t('เราคัดสรรเฉพาะอุปกรณ์คุณภาพสูง มาตรฐานสากล รับประกันยาวนาน', 'We select only high-quality, internationally certified equipment with long warranties.')}
@@ -194,7 +191,7 @@ const Partners = () => {
         {selectedPartner && (
           <div className="fixed inset-0 z-[9999]">
             <motion.div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+              className="absolute inset-0 bg-black/60 flex items-center justify-center p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

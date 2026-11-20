@@ -255,7 +255,7 @@ const Testimonials = () => {
 
       {/* Author */}
       <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-        <div className="w-12 h-12 bg-gradient-to-br from-kb-orange to-amber-400 rounded-full flex items-center justify-center flex-shrink-0 shadow-md shadow-orange-500/30 ring-2 ring-white">
+        <div className="w-12 h-12 bg-kb-orange rounded-full flex items-center justify-center flex-shrink-0 shadow-md ring-2 ring-white">
           <span className="text-white font-bold text-lg">
             {item.name.charAt(lang === 'en' ? 5 : 3)}
           </span>
@@ -273,7 +273,6 @@ const Testimonials = () => {
     <section id="testimonials" className="py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow={t('รีวิว', 'Testimonials')}
           title={t('รีวิว', 'Customer')}
           highlight={t('จากลูกค้า', 'Reviews')}
           subtitle={t('ความไว้วางใจจากลูกค้ากว่า 50+ โปรเจกต์ คือความภูมิใจของเรา', 'The trust of customers across 50+ projects is our pride.')}

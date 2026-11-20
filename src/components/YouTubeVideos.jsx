@@ -70,7 +70,6 @@ const YouTubeVideos = () => {
         {/* Header */}
         <SectionHeading
           dark
-          eyebrow={t('ช่อง YouTube', 'YouTube Channel')}
           title={t('วิดีโอรีวิว', 'Project Review')}
           highlight={t('ผลงาน', 'Videos')}
           subtitle={t('รวมวิดีโอรีวิวการติดตั้งจริง พร้อมอธิบายระบบอย่างละเอียด จากช่อง i am teacher', 'Reviews of real installations with detailed system explanations, from the i am teacher channel')}
@@ -116,7 +115,7 @@ const YouTubeVideos = () => {
           viewport={{ once: true }}
         >
           <div 
-            className="card-kb-img relative aspect-video rounded-[1.25rem] cursor-pointer group ring-1 ring-white/10 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:ring-kb-orange/50 hover:shadow-[0_32px_64px_-28px_rgba(249,115,22,.6)]"
+            className="card-kb-img relative aspect-video rounded-[1.25rem] cursor-pointer group ring-1 ring-white/10 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)]"
             onClick={() => setActiveVideo(videos[0].id)}
           >
             <img 
@@ -128,7 +127,7 @@ const YouTubeVideos = () => {
             
             {/* Play Button */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-kb-orange to-kb-orange-dark rounded-full flex items-center justify-center ring-1 ring-white/20 shadow-[0_12px_32px_-8px_rgba(249,115,22,.6)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_0_10px_rgba(249,115,22,.18),0_16px_48px_-6px_rgba(249,115,22,.85)] motion-reduce:group-hover:scale-100">
+              <div className="w-20 h-20 lg:w-24 lg:h-24 bg-kb-orange rounded-full flex items-center justify-center ring-1 ring-white/20 transition-all duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100">
                 <Play className="w-8 h-8 lg:w-10 lg:h-10 text-white fill-white ml-1" />
               </div>
             </div>
@@ -177,7 +176,7 @@ const YouTubeVideos = () => {
                 
                 {/* Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-14 h-14 bg-gradient-to-br from-kb-orange to-kb-orange-dark rounded-full flex items-center justify-center ring-1 ring-white/20 opacity-90 shadow-[0_8px_24px_-8px_rgba(249,115,22,.6)] transition-all duration-500 group-hover:opacity-100 group-hover:scale-105 group-hover:shadow-[0_0_0_8px_rgba(249,115,22,.18),0_12px_36px_-4px_rgba(249,115,22,.85)] motion-reduce:group-hover:scale-100">
+                  <div className="w-14 h-14 bg-kb-orange rounded-full flex items-center justify-center ring-1 ring-white/20 opacity-90 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105 motion-reduce:group-hover:scale-100">
                     <Play className="w-6 h-6 text-white fill-white ml-0.5" />
                   </div>
                 </div>
