@@ -14,6 +14,7 @@ import YouTubeVideos from '../components/YouTubeVideos';
 import Testimonials from '../components/Testimonials';
 import AboutUs from '../components/AboutUs';
 import FAQ from '../components/FAQ';
+import CTABand from '../components/CTABand';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import FloatingContact from '../components/FloatingContact';
@@ -49,6 +50,7 @@ const HomePage = () => {
       <Testimonials />
       <AboutUs />
       <FAQ />
+      <CTABand />
       <Contact />
       <Footer />
       <FloatingContact />

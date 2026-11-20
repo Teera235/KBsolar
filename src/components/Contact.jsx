@@ -1,15 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Phone, MessageCircle, Youtube, MapPin, Send, CheckCircle, Loader2, Package } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FadeUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem } from './AnimatedSection';
+import { SlideLeft, SlideRight, StaggerContainer, StaggerItem } from './AnimatedSection';
 import emailjs from '@emailjs/browser';
+import { useLang } from '../i18n';
+import { SectionHeading } from './ui';
 
 // EmailJS Configuration
 const EMAILJS_SERVICE_ID = 'service_wq7tzqn';
 const EMAILJS_TEMPLATE_ID = 'template_ogtjk99';
 const EMAILJS_PUBLIC_KEY = 'y2FtE_VnYEDX04vbG';
 
+// Prefill text for the message box when a package is picked (visitor-editable, so shown in the visitor's language)
+const buildPackageMessage = (packageData, tr) => {
+  let messageText = `${tr('สนใจแพ็คเกจ:', 'Interested in package:')} ${packageData.name}\n\n`;
+  if (packageData.specs) {
+    const sp = packageData.specs;
+    messageText += `${tr('รายละเอียด:', 'Details:')}\n`;
+    messageText += `- ${tr('ประหยัด/เดือน:', 'Savings/month:')} ฿${sp.saving}\n`;
+    messageText += `- ${tr('แผงโซลาร์:', 'Solar panels:')} ${sp.panels}\n`;
+    messageText += `- ${tr('พื้นที่ติดตั้ง:', 'Installation area:')} ${sp.area}\n`;
+    messageText += `- ${tr('ผลิตไฟได้:', 'Generation:')} ${sp.production}\n`;
+    messageText += `- ${tr('คืนทุน:', 'Payback:')} ${sp.payback}\n`;
+    if (sp.backup) {
+      messageText += `- ${tr('สำรองไฟได้:', 'Backup power:')} ${sp.backup}\n`;
+    }
+    messageText += `\n`;
+  }
+  return messageText;
+};
+
 const Contact = () => {
+  const { t, lang } = useLang();
+  // The package-prefill effect runs once; read the current language through a ref
+  const tRef = useRef(t);
+  tRef.current = t;
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -19,7 +44,7 @@ const Contact = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
 
   // Listen for package selection event
   useEffect(() => {
@@ -28,20 +53,7 @@ const Contact = () => {
     if (savedPackage) {
       try {
         const packageData = JSON.parse(savedPackage);
-        // Build message with package details
-        let messageText = `สนใจแพ็คเกจ: ${packageData.name}\n\n`;
-        if (packageData.specs) {
-          messageText += `รายละเอียด:\n`;
-          messageText += `- ประหยัด/เดือน: ฿${packageData.specs.saving}\n`;
-          messageText += `- แผงโซลาร์: ${packageData.specs.panels}\n`;
-          messageText += `- พื้นที่ติดตั้ง: ${packageData.specs.area}\n`;
-          messageText += `- ผลิตไฟได้: ${packageData.specs.production}\n`;
-          messageText += `- คืนทุน: ${packageData.specs.payback}\n`;
-          if (packageData.specs.backup) {
-            messageText += `- สำรองไฟได้: ${packageData.specs.backup}\n`;
-          }
-          messageText += `\n`;
-        }
+        const messageText = buildPackageMessage(packageData, tRef.current);
         setFormData(prev => ({
           ...prev,
           selectedPackage: packageData,
@@ -57,20 +69,7 @@ const Contact = () => {
     // Listen for custom event
     const handlePackageSelected = (event) => {
       const packageData = event.detail;
-      // Build message with package details
-      let messageText = `สนใจแพ็คเกจ: ${packageData.name}\n\n`;
-      if (packageData.specs) {
-        messageText += `รายละเอียด:\n`;
-        messageText += `- ประหยัด/เดือน: ฿${packageData.specs.saving}\n`;
-        messageText += `- แผงโซลาร์: ${packageData.specs.panels}\n`;
-        messageText += `- พื้นที่ติดตั้ง: ${packageData.specs.area}\n`;
-        messageText += `- ผลิตไฟได้: ${packageData.specs.production}\n`;
-        messageText += `- คืนทุน: ${packageData.specs.payback}\n`;
-        if (packageData.specs.backup) {
-          messageText += `- สำรองไฟได้: ${packageData.specs.backup}\n`;
-        }
-        messageText += `\n`;
-      }
+      const messageText = buildPackageMessage(packageData, tRef.current);
       setFormData(prev => ({
         ...prev,
         selectedPackage: packageData,
@@ -85,7 +84,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError(false);
 
     try {
       await emailjs.send(
@@ -109,7 +108,7 @@ const Contact = () => {
       }, 5000);
     } catch (err) {
       console.error('EmailJS Error:', err);
-      setError('ส่งข้อความไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -122,7 +121,7 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Phone,
-      label: 'โทรศัพท์',
+      label: t('โทรศัพท์', 'Phone'),
       value: '087-250-0566',
       href: 'tel:0872500566',
       color: 'bg-blue-500'
@@ -143,82 +142,75 @@ const Contact = () => {
     },
     {
       icon: MapPin,
-      label: 'ที่อยู่',
-      value: '555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา\u00A030000',
+      label: t('ที่อยู่', 'Address'),
+      isAddress: true,
+      value: t('555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา\u00A030000', '555/270 Moo 3, Nong Chabok, Mueang, Nakhon Ratchasima\u00A030000'),
       href: 'https://maps.google.com/?q=14.863002790983064,102.0466041207901',
       color: 'bg-kb-orange'
     }
   ];
 
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-white mobile-full-width bg-section-mobile">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 mobile-container-fix">
-        <FadeUp>
-          <div className="text-center mb-16">
-            <span className="text-kb-orange font-semibold text-sm uppercase tracking-wider">Contact Us</span>
-            <h2 className="text-3xl lg:text-4xl font-bold text-kb-dark mt-2 mb-4">
-              ติดต่อเรา
-            </h2>
-            <p className="text-kb-gray max-w-2xl mx-auto">
-              สนใจติดตั้งระบบโซลาร์เซลล์หรือต้องการคำปรึกษา ติดต่อเราได้เลย
-            </p>
-          </div>
-        </FadeUp>
+    <section id="contact" className="py-20 lg:py-28 bg-white mobile-full-width bg-section-mobile">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-fix">
+        <SectionHeading
+          eyebrow={t('ติดต่อเรา', 'Contact Us')}
+          title={t('', 'Get in')}
+          highlight={t('ติดต่อเรา', 'Touch')}
+          subtitle={t('สนใจติดตั้งระบบโซลาร์เซลล์หรือต้องการคำปรึกษา ติดต่อเราได้เลย', 'Interested in a solar system or need advice? Get in touch with us.')}
+        />
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12">
           {/* Contact Info & Map */}
           <SlideLeft>
             <div>
               <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-6 sm:mb-8" staggerDelay={0.1}>
                 {contactInfo.map((item, index) => (
                   <StaggerItem key={index}>
-                    <motion.a
+                    <a
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-kb-light hover:bg-gray-100 rounded-xl p-3 sm:p-4 transition-colors group block"
-                      whileHover={{ scale: 1.03, y: -3 }}
-                      whileTap={{ scale: 0.98 }}
+                      className="card-kb p-4 sm:p-5 group block h-full"
                     >
-                      <motion.div 
-                        className={`w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 ${item.color} rounded-lg flex items-center justify-center mb-2 sm:mb-3`}
-                        whileHover={{ rotate: 10 }}
+                      <div
+                        className={`w-9 h-9 lg:w-10 lg:h-10 ${item.color} rounded-xl flex items-center justify-center mb-2 sm:mb-3 shadow-md`}
                       >
                         <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                      </motion.div>
+                      </div>
                       <p className="text-xs sm:text-sm text-kb-gray">{item.label}</p>
                       <p className="text-kb-dark font-semibold text-sm sm:text-base group-hover:text-kb-orange transition-colors break-words leading-snug">
-                        {item.label === 'ที่อยู่' ? (
+                        {item.isAddress ? (
                           <>
-                            555/270 หมู่ 3 ต.หนองจะบก อ.เมือง<br className="sm:hidden" />
-                            จ.นครราชสีมา{'\u00A0'}30000
+                            {t('555/270 หมู่ 3 ต.หนองจะบก อ.เมือง', '555/270 Moo 3, Nong Chabok, Mueang,')}<br className="sm:hidden" />
+                            {t('จ.นครราชสีมา', ' Nakhon Ratchasima')}{'\u00A0'}30000
                           </>
                         ) : (
                           item.value
                         )}
                       </p>
-                    </motion.a>
+                    </a>
                   </StaggerItem>
                 ))}
               </StaggerContainer>
 
               {/* Google Map - Mobile Responsive */}
               <motion.div 
-                className="rounded-2xl overflow-hidden h-48 sm:h-64 lg:h-80 shadow-lg"
+                className="rounded-[1.25rem] overflow-hidden h-48 sm:h-64 lg:h-80 border border-gray-900/[.06] shadow-[0_8px_24px_-12px_rgba(17,24,39,.18)]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
                 <iframe
-                  src="https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=th&z=18&t=k&output=embed&markers=14.863002790983064,102.0466041207901"
+                  src={`https://maps.google.com/maps?q=14.863002790983064,102.0466041207901&hl=${lang}&z=18&t=k&output=embed&markers=14.863002790983064,102.0466041207901`}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="KB Solar Energy Location - 555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา 30000"
+                  title={t('ที่ตั้ง KB Solar Energy - 555/270 หมู่ 3 ต.หนองจะบก อ.เมือง จ.นครราชสีมา 30000', 'KB Solar Energy location - 555/270 Moo 3, Nong Chabok, Mueang, Nakhon Ratchasima 30000')}
                 />
               </motion.div>
             </div>
@@ -226,11 +218,9 @@ const Contact = () => {
 
           {/* Contact Form */}
           <SlideRight>
-            <motion.div 
-              className="bg-kb-light rounded-2xl p-4 sm:p-5 lg:p-8"
-              whileHover={{ boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
-            >
-              <h3 className="text-lg sm:text-xl font-bold text-kb-dark mb-4 sm:mb-6">Request Solar Assessment</h3>
+            <div className="card-kb hover:translate-y-0 relative overflow-hidden p-6 sm:p-8 lg:p-10">
+              <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-kb-orange to-amber-400" />
+              <h3 className="text-xl sm:text-2xl font-bold text-kb-dark mb-5 sm:mb-7">{t('ขอรับการประเมินระบบโซลาร์', 'Request Solar Assessment')}</h3>
               
               {/* Selected Package Display */}
               {formData.selectedPackage && (
@@ -245,9 +235,9 @@ const Contact = () => {
                       <Package className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-semibold text-kb-dark mb-1">คุณได้เลือกแพ็คเกจ:</p>
+                      <p className="text-sm font-semibold text-kb-dark mb-1">{t('คุณได้เลือกแพ็คเกจ:', 'You selected the package:')}</p>
                       <p className="text-lg font-bold text-kb-orange mb-2">{formData.selectedPackage.name}</p>
-                      <p className="text-xs text-gray-600">ทีมงานจะติดต่อกลับเพื่อให้คำปรึกษาและประเมินราคาฟรี</p>
+                      <p className="text-xs text-gray-600">{t('ทีมงานจะติดต่อกลับเพื่อให้คำปรึกษาและประเมินราคาฟรี', 'Our team will contact you for a free consultation and quote.')}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -267,8 +257,8 @@ const Contact = () => {
                   >
                     <CheckCircle className="w-8 h-8 text-green-500" />
                   </motion.div>
-                  <p className="text-kb-dark font-semibold text-lg">ส่งข้อความสำเร็จ!</p>
-                  <p className="text-kb-gray">เราจะติดต่อกลับโดยเร็วที่สุด</p>
+                  <p className="text-kb-dark font-semibold text-lg">{t('ส่งข้อความสำเร็จ!', 'Message sent!')}</p>
+                  <p className="text-kb-gray">{t('เราจะติดต่อกลับโดยเร็วที่สุด', 'We will get back to you as soon as possible.')}</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -278,15 +268,15 @@ const Contact = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
                   >
-                    <label className="block text-sm font-medium text-kb-dark mb-1">ชื่อ-นามสกุล</label>
+                    <label className="block text-sm font-medium text-kb-dark mb-1">{t('ชื่อ-นามสกุล', 'Full name')}</label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/20 outline-none transition-all"
-                      placeholder="กรุณากรอกชื่อ"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/40 outline-none transition"
+                      placeholder={t('กรุณากรอกชื่อ', 'Enter your name')}
                     />
                   </motion.div>
                   <motion.div
@@ -295,14 +285,14 @@ const Contact = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.15 }}
                   >
-                    <label className="block text-sm font-medium text-kb-dark mb-1">เบอร์โทรศัพท์</label>
+                    <label className="block text-sm font-medium text-kb-dark mb-1">{t('เบอร์โทรศัพท์', 'Phone number')}</label>
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/40 outline-none transition"
                       placeholder="08X-XXX-XXXX"
                     />
                   </motion.div>
@@ -312,13 +302,13 @@ const Contact = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
                   >
-                    <label className="block text-sm font-medium text-kb-dark mb-1">อีเมล (ไม่บังคับ)</label>
+                    <label className="block text-sm font-medium text-kb-dark mb-1">{t('อีเมล (ไม่บังคับ)', 'Email (optional)')}</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/40 outline-none transition"
                       placeholder="email@example.com"
                     />
                   </motion.div>
@@ -328,45 +318,39 @@ const Contact = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.25 }}
                   >
-                    <label className="block text-sm font-medium text-kb-dark mb-1">ข้อความ</label>
+                    <label className="block text-sm font-medium text-kb-dark mb-1">{t('ข้อความ', 'Message')}</label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/20 outline-none transition-all resize-none"
-                      placeholder="สนใจติดตั้งระบบโซลาร์เซลล์ / ต้องการคำปรึกษา..."
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-kb-orange focus:ring-2 focus:ring-kb-orange/40 outline-none transition resize-none"
+                      placeholder={t('สนใจติดตั้งระบบโซลาร์เซลล์ / ต้องการคำปรึกษา...', 'Interested in a solar system / need advice...')}
                     />
                   </motion.div>
-                  <motion.button
+                  <button
                     type="submit"
                     disabled={loading}
-                    whileHover={{ scale: loading ? 1 : 1.02 }}
-                    whileTap={{ scale: loading ? 1 : 0.98 }}
-                    className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
-                      loading 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-kb-orange hover:bg-kb-orange-dark text-white'
-                    }`}
+                    className={`btn-kb w-full py-4 ${loading ? 'opacity-70 cursor-not-allowed hover:translate-y-0' : ''}`}
                   >
                     {loading ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        กำลังส่ง...
+                        {t('กำลังส่ง...', 'Sending...')}
                       </>
                     ) : (
                       <>
                         <Send className="w-5 h-5" />
-                        ส่งข้อความ
+                        {t('ส่งข้อความ', 'Send Message')}
                       </>
                     )}
-                  </motion.button>
+                  </button>
                   {error && (
-                    <p className="text-red-500 text-sm text-center mt-2">{error}</p>
+                    <p className="text-red-500 text-sm text-center mt-2">{t('ส่งข้อความไม่สำเร็จ กรุณาลองใหม่อีกครั้ง', 'Your message could not be sent. Please try again.')}</p>
                   )}
                 </form>
               )}
-            </motion.div>
+            </div>
           </SlideRight>
         </div>
       </div>

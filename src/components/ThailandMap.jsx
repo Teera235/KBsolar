@@ -1,44 +1,40 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { CountUp } from './ui';
 
-// Province ID mapping (Thai name to SVG ID)
-const provinceIdMap = {
-  'ปทุมธานี': 'TH13',
-  'นนทบุรี': 'TH12', 
-  'อุดรธานี': 'TH41',
-  'สมุทรปราการ': 'TH11',
-  'นครราชสีมา': 'TH30',
-  'ชลบุรี': 'TH20',
-  'กรุงเทพมหานคร': 'TH10',
-  'นครปฐม': 'TH73',
-  'ขอนแก่น': 'TH40',
-  'ลพบุรี': 'TH16',
-  'มหาสารคาม': 'TH44',
-  'สิงห์บุรี': 'TH17',
-  'ราชบุรี': 'TH70',
-  'ตรัง': 'TH92',
-  'นครพนม': 'TH48',
-  'อุตรดิตถ์': 'TH53',
+import { useLang } from '../i18n';
+
+// Provinces we have worked in, by SVG id. Project `location` fields use the Thai name as the key.
+const provinces = {
+  TH13: { th: 'ปทุมธานี', en: 'Pathum Thani' },
+  TH12: { th: 'นนทบุรี', en: 'Nonthaburi' },
+  TH41: { th: 'อุดรธานี', en: 'Udon Thani' },
+  TH11: { th: 'สมุทรปราการ', en: 'Samut Prakan' },
+  TH30: { th: 'นครราชสีมา', en: 'Nakhon Ratchasima' },
+  TH20: { th: 'ชลบุรี', en: 'Chonburi' },
+  TH10: { th: 'กรุงเทพมหานคร', en: 'Bangkok' },
+  TH73: { th: 'นครปฐม', en: 'Nakhon Pathom' },
+  TH40: { th: 'ขอนแก่น', en: 'Khon Kaen' },
+  TH16: { th: 'ลพบุรี', en: 'Lopburi' },
+  TH44: { th: 'มหาสารคาม', en: 'Maha Sarakham' },
+  TH17: { th: 'สิงห์บุรี', en: 'Sing Buri' },
+  TH70: { th: 'ราชบุรี', en: 'Ratchaburi' },
+  TH92: { th: 'ตรัง', en: 'Trang' },
+  TH48: { th: 'นครพนม', en: 'Nakhon Phanom' },
+  TH53: { th: 'อุตรดิตถ์', en: 'Uttaradit' },
 };
 
-// SVG ID to Thai name mapping
-const svgIdToThaiMap = {
-  'TH13': 'ปทุมธานี',
-  'TH12': 'นนทบุรี',
-  'TH41': 'อุดรธานี',
-  'TH11': 'สมุทรปราการ',
-  'TH30': 'นครราชสีมา',
-  'TH20': 'ชลบุรี',
-  'TH10': 'กรุงเทพมหานคร',
-  'TH73': 'นครปฐม',
-  'TH40': 'ขอนแก่น',
-  'TH16': 'ลพบุรี',
-  'TH44': 'มหาสารคาม',
-  'TH17': 'สิงห์บุรี',
-  'TH70': 'ราชบุรี',
-  'TH92': 'ตรัง',
-  'TH48': 'นครพนม',
-  'TH53': 'อุตรดิตถ์',
+// Thai name -> SVG id
+const provinceIdMap = Object.fromEntries(Object.entries(provinces).map(([id, n]) => [n.th, id]));
+
+// Thai location key -> { th, en } display name (also covers locations outside Thailand)
+const placeNames = {
+  ...Object.fromEntries(Object.values(provinces).map((n) => [n.th, n])),
+  'ประเทศลาว': { th: 'ประเทศลาว', en: 'Laos' },
 };
+export const placeName = (location) => placeNames[location] || { th: location, en: location };
+
+// SVG English names that read oddly on their own
+const englishFixes = { 'Bangkok Metropolis': 'Bangkok', Phatthaya: 'Pattaya', Phangnga: 'Phang Nga' };
 
 // English to Thai province names
 const englishToThaiMap = {
@@ -123,6 +119,7 @@ const englishToThaiMap = {
 };
 
 const ThailandMap = ({ projects, onProvinceClick }) => {
+  const { t, lang } = useLang();
   const [hoveredProvince, setHoveredProvince] = useState(null);
   const [svgContent, setSvgContent] = useState(null);
   const containerRef = useRef(null);
@@ -139,14 +136,11 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
     return projects.filter(p => p.location === thaiName).length;
   }, [projects]);
 
-  // Get Thai name from path
-  const getThaiName = (path) => {
-    const id = path.getAttribute('id');
-    const englishName = path.getAttribute('name');
-    
-    if (svgIdToThaiMap[id]) return svgIdToThaiMap[id];
-    if (englishToThaiMap[englishName]) return englishToThaiMap[englishName];
-    return englishName;
+  // Display name for a map path, in the current language
+  const getProvinceName = (id, englishName) => {
+    if (provinces[id]) return t(provinces[id]);
+    if (lang === 'en') return englishFixes[englishName] || englishName;
+    return englishToThaiMap[englishName] || englishName;
   };
 
   // Load SVG content
@@ -169,28 +163,28 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
 
     paths.forEach(path => {
       const id = path.getAttribute('id');
-      const thaiName = svgIdToThaiMap[id];
+      const thaiName = provinces[id]?.th;
       const hasProjects = provinceIdsWithProjects.includes(id);
 
-      // Set initial styles
-      path.style.fill = hasProjects ? '#EA580C' : '#FB923C';
+      // Set initial styles: provinces with projects in brand orange, the rest a pale peach
+      path.style.fill = hasProjects ? '#F97316' : '#FFEDD5';
       path.style.stroke = '#FFFFFF';
       path.style.strokeWidth = '1';
       path.style.transition = 'fill 0.2s ease';
       if (hasProjects) path.style.cursor = 'pointer';
 
       const handleMouseEnter = () => {
-        path.style.fill = hasProjects ? '#C2410C' : '#F97316';
-        const displayName = getThaiName(path);
+        path.style.fill = hasProjects ? '#EA580C' : '#FED7AA';
         setHoveredProvince({
-          name: displayName,
+          id,
+          englishName: path.getAttribute('name'),
           hasProjects,
           count: hasProjects ? getProjectCount(thaiName) : 0
         });
       };
 
       const handleMouseLeave = () => {
-        path.style.fill = hasProjects ? '#EA580C' : '#FB923C';
+        path.style.fill = hasProjects ? '#F97316' : '#FFEDD5';
         setHoveredProvince(null);
       };
 
@@ -222,6 +216,39 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
     };
   }, [svgContent, provinceIdsWithProjects, onProvinceClick, getProjectCount]);
 
+  // Pulsing orange markers at the centre of each province with projects.
+  // Drawn straight into the loaded SVG so they share its coordinates; clicks pass through to the path.
+  const markerKey = provinceIdsWithProjects.join(',');
+  useEffect(() => {
+    const svg = svgContainerRef.current?.querySelector('svg');
+    if (!svgContent || !svg) return;
+    const NS = 'http://www.w3.org/2000/svg';
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const layer = document.createElementNS(NS, 'g');
+    layer.setAttribute('pointer-events', 'none');
+    const make = (tag, attrs) => {
+      const el = document.createElementNS(NS, tag);
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      return el;
+    };
+    markerKey.split(',').filter(Boolean).forEach((id) => {
+      const path = svg.querySelector(`path[id="${id}"]`);
+      if (!path) return;
+      const b = path.getBBox();
+      const cx = b.x + b.width / 2;
+      const cy = b.y + b.height / 2;
+      if (!reduce) {
+        const ring = make('circle', { cx, cy, r: 6, fill: 'none', stroke: '#F97316', 'stroke-width': 2 });
+        ring.appendChild(make('animate', { attributeName: 'r', from: 6, to: 18, dur: '2s', repeatCount: 'indefinite' }));
+        ring.appendChild(make('animate', { attributeName: 'opacity', from: 0.8, to: 0, dur: '2s', repeatCount: 'indefinite' }));
+        layer.appendChild(ring);
+      }
+      layer.appendChild(make('circle', { cx, cy, r: 6, fill: '#F97316', stroke: '#FFFFFF', 'stroke-width': 2 }));
+    });
+    svg.appendChild(layer);
+    return () => layer.remove();
+  }, [svgContent, markerKey]);
+
   return (
     <div 
       ref={containerRef}
@@ -243,41 +270,41 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
 
       {/* Hover Info - Hidden on mobile (touch devices) */}
       {hoveredProvince && (
-        <div className="hidden lg:block absolute top-4 left-4 bg-white rounded-xl px-5 py-4 shadow-xl border-2 border-kb-orange">
-          <p className="font-bold text-kb-dark text-lg">{hoveredProvince.name}</p>
+        <div className="card-kb hidden lg:block absolute top-4 left-4 px-5 py-4 pointer-events-none">
+          <p className="font-bold text-kb-dark text-lg">{getProvinceName(hoveredProvince.id, hoveredProvince.englishName)}</p>
           {hoveredProvince.hasProjects ? (
             <>
-              <p className="text-kb-orange font-semibold">{hoveredProvince.count} โปรเจกต์</p>
-              <p className="text-kb-gray text-sm mt-1">คลิกเพื่อดูรายละเอียด</p>
+              <p className="text-kb-orange font-semibold">{hoveredProvince.count} {t('โปรเจกต์', hoveredProvince.count === 1 ? 'project' : 'projects')}</p>
+              <p className="text-kb-gray text-sm mt-1">{t('คลิกเพื่อดูรายละเอียด', 'Click for details')}</p>
             </>
           ) : (
-            <p className="text-kb-gray text-sm">ยังไม่มีโปรเจกต์ในพื้นที่นี้</p>
+            <p className="text-kb-gray text-sm">{t('ยังไม่มีโปรเจกต์ในพื้นที่นี้', 'No projects in this area yet')}</p>
           )}
         </div>
       )}
 
       {/* Legend - Compact on mobile */}
-      <div className="absolute bottom-2 left-2 lg:bottom-4 lg:left-4 bg-white/95 backdrop-blur-sm rounded-lg lg:rounded-xl p-2 lg:p-4 shadow-lg border border-orange-200">
-        <p className="text-xs lg:text-sm font-bold text-kb-dark mb-1.5 lg:mb-3">พื้นที่ให้บริการ</p>
+      <div className="absolute bottom-2 left-2 lg:bottom-4 lg:left-4 bg-white/95 backdrop-blur-sm rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 shadow-lg ring-1 ring-black/5">
+        <p className="text-xs lg:text-sm font-bold text-kb-dark mb-1.5 lg:mb-3">{t('พื้นที่ให้บริการ', 'Service area')}</p>
         <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-sm text-kb-gray mb-1 lg:mb-2">
-          <span className="w-3 h-3 lg:w-4 lg:h-4 rounded bg-orange-700"></span>
-          <span>มีโปรเจกต์</span>
+          <span className="w-3 h-3 lg:w-4 lg:h-4 rounded-full bg-kb-orange ring-2 ring-white shadow"></span>
+          <span>{t('มีโปรเจกต์', 'Has projects')}</span>
         </div>
         <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-sm text-kb-gray">
-          <span className="w-3 h-3 lg:w-4 lg:h-4 rounded bg-orange-400"></span>
-          <span>พื้นที่อื่นๆ</span>
+          <span className="w-3 h-3 lg:w-4 lg:h-4 rounded bg-orange-100 border border-orange-200"></span>
+          <span>{t('พื้นที่อื่นๆ', 'Other areas')}</span>
         </div>
       </div>
 
       {/* Stats - Compact on mobile */}
-      <div className="absolute top-2 right-2 lg:top-4 lg:right-4 bg-white/95 backdrop-blur-sm rounded-lg lg:rounded-xl p-2 lg:p-4 shadow-lg border border-orange-200">
+      <div className="absolute top-2 right-2 lg:top-4 lg:right-4 bg-white/95 backdrop-blur-sm rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 shadow-lg ring-1 ring-black/5">
         <div className="text-center">
-          <p className="text-xl lg:text-3xl font-bold text-kb-orange">{projects.length}+</p>
-          <p className="text-[10px] lg:text-sm text-kb-gray">โปรเจกต์</p>
+          <p className="text-xl lg:text-3xl font-bold"><CountUp value={`${projects.length}+`} className="text-kb-gradient" /></p>
+          <p className="text-[10px] lg:text-sm text-kb-gray">{t('โปรเจกต์', 'Projects')}</p>
         </div>
         <div className="border-t border-gray-200 mt-1.5 lg:mt-3 pt-1.5 lg:pt-3 text-center">
-          <p className="text-lg lg:text-2xl font-bold text-kb-dark">{provincesWithProjects.length}</p>
-          <p className="text-[10px] lg:text-sm text-kb-gray">จังหวัด</p>
+          <p className="text-lg lg:text-2xl font-bold"><CountUp value={provincesWithProjects.length} className="text-kb-gradient" /></p>
+          <p className="text-[10px] lg:text-sm text-kb-gray">{t('จังหวัด', 'Provinces')}</p>
         </div>
       </div>
     </div>

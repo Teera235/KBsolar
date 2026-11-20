@@ -1,20 +1,19 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { Battery, Grid, Zap, ArrowLeft, Home, Phone, Calculator as CalcIcon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useLang } from '../i18n';
 
-const BlogDetail = () => {
-  const { slug } = useParams();
-  const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState('');
-
-  const blogContent = {
+// Each article keeps shared fields (icon, color, badge, image) at the top level
+// and its text per language under `th` / `en` with the same structure.
+const blogContent = {
     'hybrid-solar-system': {
-      title: 'ระบบโซลาร์เซลล์แบบไฮบริด (Hybrid Solar System)',
-      subtitle: 'ใช้ไฟโซลาร์ได้ทั้งกลางวัน-กลางคืน พร้อมแบตเตอรี่สำรองไฟเมื่อไฟดับ',
       icon: Battery,
       color: 'orange',
       badge: 'Hybrid',
       image: '/Blog/hrbrid.webp',
+      th: {
+      title: 'ระบบโซลาร์เซลล์แบบไฮบริด (Hybrid Solar System)',
+      subtitle: 'ใช้ไฟโซลาร์ได้ทั้งกลางวัน-กลางคืน พร้อมแบตเตอรี่สำรองไฟเมื่อไฟดับ',
       sections: [
         {
           title: 'บทนำ',
@@ -123,14 +122,128 @@ const BlogDetail = () => {
           ]
         }
       ]
+      },
+      en: {
+      title: 'Hybrid Solar System',
+      subtitle: 'Use solar power day and night, with battery backup when the grid goes down',
+      sections: [
+        {
+          title: 'Introduction',
+          content: [
+            'A Hybrid Solar System is the choice for people who want to "cut their power bill" and also have "reliable electricity". It combines solar panels, the utility grid and battery storage in one system, so you can use the energy produced during the day and store some of it for the evening or for power outages.',
+            'This article explains how the system works, its main components, its advantages and trade-offs, and how to choose the right battery and system size for real-world use.'
+          ]
+        },
+        {
+          title: 'What Is a Hybrid Solar System?',
+          content: [
+            'A Hybrid Solar System generates electricity from sunlight and is connected to both the grid and a battery. The Hybrid Inverter is the heart of the system: it converts power and automatically manages the energy flow.',
+            'How it works in general: during the day, solar power supplies your loads first → any surplus charges the battery → once the battery is full, power may be exported to the grid (depending on policy and settings). At night, the system draws from the battery first → when the battery drops below the set level, it switches to grid power.'
+          ]
+        },
+        {
+          title: 'Main System Components',
+          isList: true,
+          content: [
+            'Solar Panels - Produce direct current (DC) electricity from sunlight. Monocrystalline panels with 18-23% efficiency are the most common choice.',
+            'Hybrid Inverter - Converts DC to AC, controls battery charging and discharging, and sets the operating mode, such as Self-consumption, Backup or Time-of-Use (TOU).',
+            'Battery Storage - Stores electricity for use at night or during outages. Usually lithium (LFP/NMC), with capacity measured in kWh.',
+            'Smart Energy Management / CT / Meter - Current and energy measuring devices (such as a CT Clamp or Smart Meter) that tell the system how much your loads are using, so it can manage energy correctly.',
+            'Protection System - Surge protection, breakers/isolators and battery safety measures.'
+          ]
+        },
+        {
+          title: 'How the System Works',
+          content: [
+            '1. Daytime Mode: Solar → Load (supplies loads first) → surplus solar → Battery (charging) → when the battery is full → export to the grid (depending on settings and conditions)',
+            '2. Night Mode: Battery → Load (supplies loads first) → when the battery falls below the set SOC → Grid → Load',
+            '3. Backup Mode (power outage): when the grid goes down, the system can keep "essential circuits" running through Backup/Essential Loads (as designed) by switching to the battery. This depends on the inverter model and how the circuits are wired.',
+            '4. Energy Optimization Mode: the system can be set up around how you use electricity, for example charging the battery from solar for use when power rates are high, limiting discharge to extend battery life, or prioritizing self-consumption to buy less power from the grid.'
+          ],
+          image: '/diagrams/Blog Diagrams/3.webp'
+        },
+        {
+          title: 'Advantages of a Hybrid System',
+          isAdvantages: true,
+          content: [
+            'Backup power during outages, ideal for homes and businesses that need continuity',
+            'Lower power bills day and night, as the battery reduces grid purchases when there is no sun',
+            'Flexible energy control with several modes (Self-consumption / Backup / TOU)',
+            'Greater energy security, with less impact from voltage drops and surges (depending on system design)',
+            'Ready for future expansion: add batteries or panels later (within the inverter specifications)'
+          ]
+        },
+        {
+          title: 'Things to Consider',
+          isWarnings: true,
+          content: [
+            'Higher cost than On-Grid because of the battery and energy management equipment',
+            'Batteries have a limited lifespan, which should be assessed by charge cycles and operating conditions',
+            'The backup circuit must be designed correctly, with a clear split between backed-up and non-backed-up loads',
+            'You need space for the battery and must consider heat, ventilation and safety'
+          ]
+        },
+        {
+          title: 'Who Is It For?',
+          content: [
+            '✓ Homes with frequent outages or critical equipment (internet, cameras, refrigerator, water pump)',
+            '✓ Businesses that cannot stop, such as shops, home offices and small clinics',
+            '✓ People who want to get full value from solar power "after sunset"',
+            '✓ Areas that need highly stable electricity'
+          ]
+        },
+        {
+          title: 'Recommended System Sizes',
+          content: [
+            'Note: the actual size depends on your essential loads, the backup hours you need and how you use electricity.',
+            '• Small home (power bill 2,000-3,000 THB/month): 3-5 kW system + 5-10 kWh battery (if you want to back up essential loads)',
+            '• Medium home (power bill 4,000-6,000 THB/month): 5-8 kW system + 10-15 kWh battery',
+            '• Large home (power bill 7,000+ THB/month): 8-15 kW system + 15-30 kWh battery'
+          ]
+        },
+        {
+          title: 'On-Grid vs Hybrid vs Off-Grid',
+          content: [
+            'To help you choose the system that fits your needs, the table below compares all three types:',
+            '| Feature | On-Grid | Hybrid | Off-Grid |',
+            '|----------|---------|--------|----------|',
+            '| Grid connection | ✓ | ✓ | ✗ |',
+            '| Battery | ✗ | ✓ | ✓ |',
+            '| Backup during outages | ✗ | ✓* | ✓ |',
+            '| Upfront cost | Lowest | High | Highest |',
+            '| System complexity | Low | Medium-High | High |',
+            '| Best for | Lower bills | Lower bills + backup | No grid access |',
+            '* Depends on the inverter model and the backup circuit design'
+          ]
+        },
+        {
+          title: 'Frequently Asked Questions (FAQ)',
+          content: [
+            'Q: What is the difference between Hybrid and On-Grid?',
+            'A: Hybrid has a battery and can provide backup power (as designed). On-Grid has no battery and stops working when the grid goes down.',
+            'Q: How many kWh of battery should I choose?',
+            'A: Look at your "essential load (kW)" and the "hours of backup you need". For example, backing up 1 kW for 5 hours needs about 5 kWh (before allowing for losses and DoD).',
+            'Q: Does Hybrid take longer to pay back than On-Grid?',
+            'A: Generally yes, because of the battery cost, but in return you get more reliable power and can use solar energy at night.'
+          ]
+        },
+        {
+          title: 'Summary',
+          content: [
+            'A Hybrid Solar System suits people who want to "cut their power bill" and "have backup power" in one system, especially in areas with frequent outages or critical loads. You still need to assess your budget and design the backup circuit correctly so the system performs well and is truly worth the investment.'
+          ]
+        }
+      ]
+      }
     },
     'on-grid-solar-system': {
-      title: 'ระบบโซลาร์เซลล์แบบออนกริด (On-Grid Solar System)',
-      subtitle: 'ทำไมถึงเป็นตัวเลือกอันดับ 1 ของคนไทย - ประหยัดสูงสุด คืนทุนเร็วที่สุด',
       icon: Grid,
       color: 'blue',
       badge: 'On-Grid',
       image: '/Blog/0n-grid.webp',
+      th: {
+      title: 'ระบบโซลาร์เซลล์แบบออนกริด (On-Grid Solar System)',
+      subtitle: 'ทำไมถึงเป็นตัวเลือกอันดับ 1 ของคนไทย - ประหยัดสูงสุด คืนทุนเร็วที่สุด',
       sections: [
         {
           title: 'ระบบโซล่าเซลล์แบบออนกริด (On-Grid Solar System)',
@@ -206,14 +319,95 @@ const BlogDetail = () => {
           ]
         }
       ]
+      },
+      en: {
+      title: 'On-Grid Solar System',
+      subtitle: 'Why it is the No. 1 choice in Thailand - the biggest savings and the fastest payback',
+      sections: [
+        {
+          title: 'On-Grid Solar System',
+          content: [
+            'An On-Grid Solar System generates electricity from sunlight and connects directly to the utility grid, with no battery for energy storage. Solar panels convert sunlight into direct current (DC), which an inverter then converts into alternating current (AC) for use in your home or building.',
+            'During the day, when there is sunlight, the solar panels first supply the electrical appliances in the building. If the system produces more power than you need, the surplus is sent back to the grid (feed-in) under a Net Metering scheme, which helps reduce your monthly electricity bill.',
+            'When the system does not produce enough power, or at night when there is no sunlight, it automatically draws electricity from the grid as usual, so you always have a continuous power supply.',
+            'On-Grid is the most popular type of system today because it has many advantages: lower installation cost than other systems since there is no expensive battery to buy, simple and low-cost maintenance, high generation efficiency, and the ability to sell surplus electricity back to the utility. This lets users cut their electricity costs effectively, with an average payback period of about 3-5 years, depending on system size and electricity usage.'
+          ]
+        },
+        {
+          title: 'Main System Components',
+          isList: true,
+          content: [
+            'Solar Panels - Convert sunlight into direct current electricity',
+            'Grid-Tie Inverter - Converts DC to AC and synchronizes with the utility grid',
+            'Bi-directional Meter - Measures and records the electricity you use and export',
+            'Protection System - Protects against surges and electrical faults',
+            'Mounting Structure - Supports and secures the solar panels firmly'
+          ]
+        },
+        {
+          title: 'How the System Works',
+          content: [
+            '1. Daytime mode: the solar panels supply the appliances in the building first, and surplus energy is automatically sent back to the grid.',
+            '2. Night mode: the system draws electricity from the grid as usual.',
+            '3. Power outage mode: the system shuts down immediately to protect line maintenance workers (Anti-Islanding Protection).',
+            '4. Net Metering: offsets the energy you use against the energy you produce to reduce your monthly electricity bill.'
+          ],
+          image: '/diagrams/Blog Diagrams/2.webp'
+        },
+        {
+          title: 'Advantages of an On-Grid System',
+          isAdvantages: true,
+          content: [
+            'Save up to 80-95% on electricity and cut costs effectively',
+            'The lowest upfront investment, since no battery is needed',
+            'Sell electricity back to the utility under Net Metering for extra income',
+            'Easy maintenance, with few components and low upkeep costs',
+            'The fastest payback, in just 3-5 years',
+            'High generation efficiency, with no energy lost to battery charging',
+            'Long service life of 25-30 years, backed by manufacturer warranties'
+          ]
+        },
+        {
+          title: 'Things to Consider',
+          isWarnings: true,
+          content: [
+            'No backup power during outages: the system shuts down immediately for safety',
+            'Requires a stable, good-quality grid supply at the installation site',
+            'Requires permits and an inspection by the utility before it can be used',
+            'Output depends on the amount and quality of sunlight each day'
+          ]
+        },
+        {
+          title: 'Who Is It For?',
+          content: [
+            '✓ Homes with high electricity bills that want to cut costs',
+            '✓ Factories that mainly use electricity during the day',
+            '✓ Commercial buildings, shops and offices that open during the day',
+            '✓ Schools, hospitals and government agencies',
+            '✓ Anyone who wants to cut their power bill with the fastest payback and does not need backup power'
+          ]
+        },
+        {
+          title: 'Recommended System Sizes',
+          content: [
+            'Small home (power bill 2,000-3,000 THB/month): 3-5 kW system',
+            'Medium home (power bill 4,000-6,000 THB/month): 5-8 kW system',
+            'Large home (power bill 7,000+ THB/month): 8-15 kW system',
+            'Small to medium factory: 30-100 kW system',
+            '* The right system size should be assessed by a specialist based on each site\'s actual electricity use'
+          ]
+        }
+      ]
+      }
     },
     'off-grid-solar-system': {
-      title: 'Off-Grid คือคำตอบสำหรับความเป็นอิสระ',
-      subtitle: 'อิสระเต็มที่ ไม่ต้องพึ่งการไฟฟ้า',
       icon: Zap,
       color: 'green',
       badge: 'Off-Grid',
       image: '/Blog/off-grid.webp',
+      th: {
+      title: 'Off-Grid คือคำตอบสำหรับความเป็นอิสระ',
+      subtitle: 'อิสระเต็มที่ ไม่ต้องพึ่งการไฟฟ้า',
       sections: [
         {
           title: 'ระบบโซล่าเซลล์แบบออฟกริด (Off-Grid Solar System)',
@@ -288,10 +482,99 @@ const BlogDetail = () => {
           ]
         }
       ]
+      },
+      en: {
+      title: 'Off-Grid: The Answer for Energy Independence',
+      subtitle: 'Fully independent, no need to rely on the utility',
+      sections: [
+        {
+          title: 'Off-Grid Solar System',
+          content: [
+            'An Off-Grid Solar System generates electricity from sunlight and runs completely independently, with no connection to the utility grid at all. It is designed to produce, store and supply its own electricity 24 hours a day, using batteries to store the power produced during the day for use at night or when there is no sunlight.',
+            'Solar panels collect sunlight and convert it into direct current (DC). The power then passes through a Charge Controller, which manages battery charging and prevents overcharging or over-discharging to extend battery life.',
+            'The electricity stored in the batteries is converted into alternating current (AC) by an inverter to power the appliances in your home or building. The system runs continuously around the clock, using solar energy during the day and stored battery power at night.',
+            'Off-Grid systems are ideal for remote areas without access to the utility grid, such as rural homes, farmhouses, mountain cabins, islands or water pumping stations on farms. They also suit people who want energy independence and do not want to rely on the utility.',
+            'Although the upfront cost is higher than an On-Grid system because of the large battery bank, it saves a great deal on electricity in the long run, since there is no monthly power bill at all. It is also environmentally friendly, reducing greenhouse gas emissions and helping keep our planet sustainable.'
+          ]
+        },
+        {
+          title: 'Main System Components',
+          isList: true,
+          content: [
+            'Solar Panels - Convert sunlight into direct current electricity',
+            'Off-Grid Inverter - Converts DC from the batteries into AC for your appliances',
+            'Battery Bank - Stores electricity for use around the clock',
+            'Charge Controller - Manages battery charging and discharging efficiently',
+            'Protection System - Protects the batteries from overcharging and over-discharging'
+          ]
+        },
+        {
+          title: 'How the System Works',
+          content: [
+            '1. Daytime mode: the solar panels power the appliances in the building and charge the batteries for use at night.',
+            '2. Night mode: the system draws on the stored battery energy to keep running.',
+            '3. Rainy day mode: the system uses backup energy stored in the batteries on sunny days.',
+            '4. Smart management: automatically controls battery charging and discharging to extend battery life.'
+          ],
+          image: '/diagrams/Blog Diagrams/1.webp'
+        },
+        {
+          title: 'Advantages of an Off-Grid System',
+          isAdvantages: true,
+          content: [
+            '100% energy independence, with no reliance on the utility grid',
+            'Ideal for remote areas the grid cannot reach',
+            'No monthly electricity bill, saving money in the long run',
+            'Unaffected by grid power outages',
+            'Environmentally friendly, reducing greenhouse gas emissions',
+            'The system can be expanded to meet future needs'
+          ]
+        },
+        {
+          title: 'Things to Consider',
+          isWarnings: true,
+          content: [
+            'High upfront investment, since large batteries are needed and they are expensive',
+            'Electricity use must be calculated and planned to match the installed system size',
+            'Batteries last 5-10 years and must be replaced at the end of their life',
+            'In the rainy season with little sunlight, you may need to limit power use or have a backup generator'
+          ]
+        },
+        {
+          title: 'Who Is It For?',
+          content: [
+            '✓ Homes in remote areas the grid cannot reach',
+            '✓ Farmhouses, cabins and resorts that want energy independence',
+            '✓ Water pumping stations and telecom stations in remote areas',
+            '✓ Anyone who wants energy independence without relying on the utility grid',
+            '✓ Renewable energy projects in rural areas or on islands'
+          ]
+        },
+        {
+          title: 'Recommended System Sizes',
+          content: [
+            'Small home (uses 5-10 kWh/day): 3-5 kW system + 15-20 kWh battery',
+            'Medium home (uses 10-20 kWh/day): 5-8 kW system + 20-30 kWh battery',
+            'Large home (uses 20+ kWh/day): 8-15 kW system + 30-50 kWh battery',
+            '* System and battery size should be designed by a specialist based on your actual electricity use'
+          ]
+        }
+      ]
+      }
     }
   };
 
-  const blog = blogContent[slug];
+const BlogDetail = () => {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('');
+  const { t, lang } = useLang();
+
+  const article = blogContent[slug];
+  const blog = useMemo(
+    () => (article ? { ...article, ...(article[lang] || article.th) } : undefined),
+    [article, lang]
+  );
 
   // Extract section titles for TOC (must be before conditional return)
   const tocItems = blog ? blog.sections.map((section, index) => ({
@@ -340,12 +623,12 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-kb-dark mb-4">ไม่พบบทความ</h1>
+          <h1 className="text-4xl font-bold text-kb-dark mb-4">{t('ไม่พบบทความ', 'Article not found')}</h1>
           <button
             onClick={() => navigate('/')}
             className="bg-kb-orange text-white px-6 py-3 rounded-full font-semibold hover:bg-kb-orange-dark transition-all"
           >
-            กลับหน้าหลัก
+            {t('กลับหน้าหลัก', 'Back to Home')}
           </button>
         </div>
       </div>
@@ -365,16 +648,16 @@ const BlogDetail = () => {
       <div className="bg-gradient-to-r from-kb-orange via-orange-500 to-kb-orange mt-20 border-b border-orange-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">Blog</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">{t('บทความ', 'Blog')}</h1>
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm text-white/90">
               <button onClick={() => navigate('/')} className="hover:text-white transition-colors flex items-center gap-1">
                 <Home className="w-4 h-4" />
-                หน้าหลัก
+                {t('หน้าหลัก', 'Home')}
               </button>
               <span>/</span>
               <button onClick={() => navigate('/#blog')} className="hover:text-white transition-colors">
-                Blog
+                {t('บทความ', 'Blog')}
               </button>
             </div>
           </div>
@@ -389,7 +672,7 @@ const BlogDetail = () => {
           <div className="mb-6">
             <span className="inline-flex items-center gap-2 text-kb-orange font-semibold text-sm uppercase tracking-wide">
               <Icon className="w-4 h-4" />
-              {blog.badge} SYSTEM
+              {t(`ระบบ ${blog.badge}`, `${blog.badge} SYSTEM`)}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-kb-dark mb-6 leading-tight">
@@ -402,15 +685,15 @@ const BlogDetail = () => {
           {/* Author Credit */}
           <div className="flex flex-col gap-2 text-gray-500 text-sm border-t border-gray-200 pt-6 mt-6">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-gray-700">โดย Anuson Patthaisong</span>
+              <span className="font-medium text-gray-700">{t('โดย Anuson Patthaisong', 'By Anuson Patthaisong')}</span>
             </div>
             <div className="text-gray-500">
-              Solar Energy Specialist – KB Solar Energy
+              {t('ผู้เชี่ยวชาญด้านพลังงานแสงอาทิตย์ – KB Solar Energy', 'Solar Energy Specialist – KB Solar Energy')}
             </div>
             <div className="flex items-center gap-3 text-gray-400 text-xs mt-1">
-              <span>เผยแพร่ 12 มีนาคม 2025</span>
+              <span>{t('เผยแพร่ 12 มีนาคม 2025', 'Published March 12, 2025')}</span>
               <span>•</span>
-              <span>อ่าน 5 นาที</span>
+              <span>{t('อ่าน 5 นาที', '5 min read')}</span>
             </div>
           </div>
         </div>
@@ -421,7 +704,7 @@ const BlogDetail = () => {
           <div className="hidden lg:block">
             <div className="sticky top-24">
               <div className="py-4">
-                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">สารบัญ</h3>
+                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">{t('สารบัญ', 'Contents')}</h3>
                 <nav className="space-y-1">
                   {tocItems.map((item) => (
                     <button
@@ -585,7 +868,7 @@ const BlogDetail = () => {
                         return isNote ? (
                           <div key={idx} className="my-8 pl-6 border-l-4 border-blue-500 py-2">
                             <p className="text-gray-700 leading-relaxed text-base italic">
-                              <strong className="text-blue-600">หมายเหตุ:</strong> {displayText}
+                              <strong className="text-blue-600">{t('หมายเหตุ:', 'Note:')}</strong> {displayText}
                             </p>
                           </div>
                         ) : (
@@ -616,13 +899,13 @@ const BlogDetail = () => {
               <section className="mt-16 pt-16 border-t border-gray-200">
                 <div className="bg-orange-50 border-l-4 border-kb-orange p-8 rounded-r-lg">
                   <h3 className="text-2xl font-bold text-kb-dark mb-4">
-                    สรุป
+                    {t('สรุป', 'Summary')}
                   </h3>
                   <p className="text-gray-700 leading-relaxed text-lg mb-4">
-                    ระบบ {blog.badge} เหมาะสำหรับผู้ที่มีความต้องการดังต่อไปนี้:
+                    {t(`ระบบ ${blog.badge} เหมาะสำหรับผู้ที่มีความต้องการดังต่อไปนี้:`, `A ${blog.badge} system is a good fit if you are:`)}
                   </p>
                   <div className="space-y-2 text-gray-700 text-base">
-                    {blog.sections.find(s => s.title.includes('เหมาะสำหรับ'))?.content.map((item, idx) => (
+                    {blog.sections.find(s => s.title.includes(t('เหมาะสำหรับ', 'Who Is It For')))?.content.map((item, idx) => (
                       <p key={idx} className="leading-relaxed">{item}</p>
                     ))}
                   </div>
@@ -632,17 +915,17 @@ const BlogDetail = () => {
               {/* Bottom CTA */}
               <div className="mt-16 pt-16 border-t border-gray-200 text-center">
                 <h3 className="text-2xl font-bold text-kb-dark mb-4">
-                  พร้อมเริ่มต้นแล้วหรือยัง?
+                  {t('พร้อมเริ่มต้นแล้วหรือยัง?', 'Ready to get started?')}
                 </h3>
                 <p className="text-gray-600 mb-8 text-lg">
-                  ปรึกษาฟรีกับทีมผู้เชี่ยวชาญของเรา เราพร้อมช่วยคุณออกแบบระบบที่เหมาะสมที่สุด
+                  {t('ปรึกษาฟรีกับทีมผู้เชี่ยวชาญของเรา เราพร้อมช่วยคุณออกแบบระบบที่เหมาะสมที่สุด', 'Get a free consultation with our specialists. We will help you design the system that suits you best.')}
                 </p>
                 <button
                   onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
                   className="bg-kb-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange-600 transition-all inline-flex items-center gap-2 text-lg"
                 >
                   <Phone className="w-5 h-5" />
-                  ติดต่อเราเลย
+                  {t('ติดต่อเราเลย', 'Contact Us Now')}
                 </button>
               </div>
             </article>
@@ -654,30 +937,30 @@ const BlogDetail = () => {
               
               {/* Main CTA */}
               <div className="border-l-4 border-kb-orange pl-6 py-4">
-                <h3 className="text-lg font-bold text-kb-dark mb-3">สนใจติดตั้งระบบ?</h3>
+                <h3 className="text-lg font-bold text-kb-dark mb-3">{t('สนใจติดตั้งระบบ?', 'Interested in a system?')}</h3>
                 <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-                  ปรึกษาฟรี! ทีมงานมืออาชีพพร้อมให้คำแนะนำและประเมินราคา
+                  {t('ปรึกษาฟรี! ทีมงานมืออาชีพพร้อมให้คำแนะนำและประเมินราคา', 'Free consultation! Our professional team is ready to advise you and give you a quote.')}
                 </p>
                 <button
                   onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
                   className="w-full bg-kb-orange text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition-all flex items-center justify-center gap-2 mb-3"
                 >
                   <Phone className="w-5 h-5" />
-                  ติดต่อเรา
+                  {t('ติดต่อเรา', 'Contact Us')}
                 </button>
                 <button
                   onClick={() => navigate('/', { state: { scrollTo: 'calculator' } })}
                   className="w-full border-2 border-kb-orange text-kb-orange px-6 py-3 rounded-lg font-bold hover:bg-orange-50 transition-all flex items-center justify-center gap-2"
                 >
                   <CalcIcon className="w-5 h-5" />
-                  คำนวณค่าไฟ
+                  {t('คำนวณค่าไฟ', 'Electricity Calculator')}
                 </button>
               </div>
 
               {/* Related Articles */}
               <div className="pt-8 border-t border-gray-200">
                 <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">
-                  บทความอื่นๆ
+                  {t('บทความอื่นๆ', 'Other Articles')}
                 </h3>
                 <div className="space-y-4">
                   {Object.entries(blogContent)
@@ -696,7 +979,7 @@ const BlogDetail = () => {
                             </div>
                             <div className="flex-1 min-w-0">
                               <h4 className="font-semibold text-sm text-kb-dark group-hover:text-kb-orange transition-colors line-clamp-2 leading-snug">
-                                {content.title}
+                                {(content[lang] || content.th).title}
                               </h4>
                             </div>
                           </div>
@@ -713,7 +996,7 @@ const BlogDetail = () => {
                   className="w-full text-left text-kb-orange font-semibold text-sm hover:text-orange-600 transition-colors flex items-center gap-2"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  กลับไปดูบทความอื่น
+                  {t('กลับไปดูบทความอื่น', 'Back to all articles')}
                 </button>
               </div>
             </div>
