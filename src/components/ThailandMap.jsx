@@ -284,7 +284,7 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
       )}
 
       {/* Legend - Compact on mobile */}
-      <div className="absolute bottom-2 left-2 lg:bottom-4 lg:left-4 bg-white/95 backdrop-blur-sm rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 shadow-lg ring-1 ring-black/5">
+      <div className="absolute bottom-2 left-2 lg:bottom-4 lg:left-4 bg-white/95 rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 shadow-lg ring-1 ring-black/5">
         <p className="text-xs lg:text-sm font-bold text-kb-dark mb-1.5 lg:mb-3">{t('พื้นที่ให้บริการ', 'Service area')}</p>
         <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-sm text-kb-gray mb-1 lg:mb-2">
           <span className="w-3 h-3 lg:w-4 lg:h-4 rounded-full bg-kb-orange ring-2 ring-white shadow"></span>
@@ -297,13 +297,13 @@ const ThailandMap = ({ projects, onProvinceClick }) => {
       </div>
 
       {/* Stats - Compact on mobile */}
-      <div className="absolute top-2 right-2 lg:top-4 lg:right-4 bg-white/95 backdrop-blur-sm rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 shadow-lg ring-1 ring-black/5">
+      <div className="absolute top-2 right-2 lg:top-4 lg:right-4 bg-white/95 rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 shadow-lg ring-1 ring-black/5">
         <div className="text-center">
-          <p className="text-xl lg:text-3xl font-bold"><CountUp value={`${projects.length}+`} className="text-kb-gradient" /></p>
+          <p className="text-xl lg:text-3xl font-bold"><CountUp value={`${projects.length}+`} className="text-kb-accent" /></p>
           <p className="text-[10px] lg:text-sm text-kb-gray">{t('โปรเจกต์', 'Projects')}</p>
         </div>
         <div className="border-t border-gray-200 mt-1.5 lg:mt-3 pt-1.5 lg:pt-3 text-center">
-          <p className="text-lg lg:text-2xl font-bold"><CountUp value={provincesWithProjects.length} className="text-kb-gradient" /></p>
+          <p className="text-lg lg:text-2xl font-bold"><CountUp value={provincesWithProjects.length} className="text-kb-accent" /></p>
           <p className="text-[10px] lg:text-sm text-kb-gray">{t('จังหวัด', 'Provinces')}</p>
         </div>
       </div>

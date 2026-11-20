@@ -58,7 +58,6 @@ const Hero = () => {
           className="w-full h-full object-cover sm:object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
-        <div className="hero-sweep" />
       </motion.div>
 
       {/* Teacher Image with slide animation - Mobile Responsive */}
@@ -69,7 +68,6 @@ const Hero = () => {
         transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         {/* Soft orange glow behind Kru Ball */}
-        <div aria-hidden="true" className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-kb-orange/30 blur-3xl rounded-full pointer-events-none" />
         <img
           src="/teacher.webp"
           alt={t('ผู้เชี่ยวชาญ KB Solar', 'KB Solar Expert')}
@@ -85,7 +83,7 @@ const Hero = () => {
         transition={{ duration: 0.8, delay: 1.2 }}
       >
         <motion.div 
-          className="bg-white/10 backdrop-blur-xl rounded-2xl px-4 py-3 sm:px-6 sm:py-5 border border-white/20 shadow-2xl"
+          className="bg-white/10 rounded-2xl px-4 py-3 sm:px-6 sm:py-5 border border-white/20 shadow-2xl"
           whileHover={{ scale: 1.02, y: -5 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
@@ -110,7 +108,7 @@ const Hero = () => {
           >
             {/* Badge */}
             <motion.div variants={itemVariants}>
-              <div className="inline-flex items-center gap-2 bg-kb-orange/20 backdrop-blur-sm px-4 py-2 rounded-full border border-kb-orange/30">
+              <div className="inline-flex items-center gap-2 bg-kb-orange/20 px-4 py-2 rounded-full border border-kb-orange/30">
                 <Sun className="w-4 h-4 text-kb-orange" />
                 <span className="text-kb-orange text-sm font-semibold">KB Solar Energy</span>
               </div>
@@ -122,7 +120,7 @@ const Hero = () => {
               variants={itemVariants}
             >
               <motion.span 
-                className="bg-gradient-to-r from-kb-orange to-amber-400 bg-clip-text text-transparent inline-block pb-1 sm:pb-2"
+                className="bg-kb-orange bg-clip-text text-transparent inline-block pb-1 sm:pb-2"
                 animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
@@ -159,7 +157,7 @@ const Hero = () => {
 
             {/* Feature Checklist - Mobile Responsive */}
             <motion.div 
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-3 sm:p-4 lg:p-5 border border-white/10 mx-1 sm:mx-0"
+              className="bg-white/5 rounded-2xl p-3 sm:p-4 lg:p-5 border border-white/10 mx-1 sm:mx-0"
               variants={itemVariants}
             >
               <div className="grid grid-cols-1 gap-y-2 sm:gap-y-3">

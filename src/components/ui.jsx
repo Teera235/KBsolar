@@ -4,12 +4,12 @@ import { useLang } from '../i18n';
 
 /**
  * Section heading used by every section, so they all read as one set:
- *   <SectionHeading eyebrow="บริการ" title="บริการ" highlight="ครบวงจร" subtitle="..." />
- * `highlight` is drawn in the orange gradient after `title` (pass `highlightFirst` to put it first);
+ *   <SectionHeading title="บริการ" highlight="ครบวงจร" subtitle="..." />
+ * `highlight` is drawn in the accent orange after `title` (pass `highlightFirst` to put it first);
  * a space goes between them in English, and in Thai only next to Latin text.
  * `dark` switches text colours for use on .section-dark. `align="left"` for side-by-side layouts.
  */
-export function SectionHeading({ eyebrow, title, highlight, highlightFirst = false, subtitle, dark = false, align = 'center', className = '' }) {
+export function SectionHeading({ title, highlight, highlightFirst = false, subtitle, dark = false, align = 'center', className = '' }) {
   const { lang } = useLang();
   // Thai runs words together, but still spaces before/after Latin text ("เลือก KB SOLAR")
   const first = highlightFirst ? highlight : title;
@@ -17,7 +17,7 @@ export function SectionHeading({ eyebrow, title, highlight, highlightFirst = fal
   const latinEdge = /[A-Za-z0-9]$/.test(String(first || '')) || /^[A-Za-z0-9]/.test(String(second || ''));
   const gap = lang === 'en' || latinEdge ? ' ' : '';
   const center = align === 'center';
-  const hl = highlight ? <span className="text-kb-gradient">{highlight}</span> : null;
+  const hl = highlight ? <span className="text-kb-accent">{highlight}</span> : null;
   return (
     <motion.div
       className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 lg:mb-14 ${className}`}
@@ -26,14 +26,6 @@ export function SectionHeading({ eyebrow, title, highlight, highlightFirst = fal
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      {eyebrow && (
-        <span className={`inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full mb-4 ${
-          dark ? 'bg-white/10 text-orange-300 border border-white/10' : 'bg-orange-50 text-kb-orange-dark border border-orange-100'
-        }`}>
-          <span className="w-1.5 h-1.5 rounded-full bg-kb-orange" />
-          {eyebrow}
-        </span>
-      )}
       <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight ${dark ? 'text-white' : 'text-kb-dark'}`}>
         {highlightFirst && hl}{highlightFirst && title && hl ? gap : ''}{title}{!highlightFirst && title && hl ? gap : ''}{!highlightFirst && hl}
       </h2>

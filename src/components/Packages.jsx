@@ -345,7 +345,6 @@ const Packages = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           dark
-          eyebrow={t('แพ็คเกจ', 'Packages')}
           title={t('เลือกแพ็คเกจ', 'Choose the package')}
           highlight={t('ที่เหมาะกับคุณ', 'that fits you')}
           subtitle={t('แพ็คเกจโซลาร์เซลล์ครบชุด พร้อมติดตั้งและรับประกัน', 'Complete solar packages, with installation and warranty included')}
@@ -354,7 +353,7 @@ const Packages = () => {
         {/* Tabs */}
         <FadeUp delay={0.1}>
           <div className="flex justify-center mb-14">
-            <div role="tablist" className="inline-flex max-w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-full p-1.5 overflow-x-auto">
+            <div role="tablist" className="inline-flex max-w-full bg-white/5 border border-white/10 rounded-full p-1.5 overflow-x-auto">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -364,7 +363,7 @@ const Packages = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4 sm:px-7 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
                     activeTab === tab.id
-                      ? 'bg-gradient-to-r from-kb-orange to-amber-500 text-white shadow-[0_8px_24px_-8px_rgba(249,115,22,.8)]'
+                      ? 'bg-kb-orange text-white'
                       : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -396,11 +395,11 @@ const Packages = () => {
                 {plan.popular ? (
                   <div className="relative h-full lg:scale-105 transition-transform duration-300 hover:-translate-y-1.5">
                     {/* Popular Badge */}
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1 whitespace-nowrap px-4 py-1.5 rounded-full bg-gradient-to-r from-kb-orange to-amber-400 text-white text-xs sm:text-sm font-bold shadow-[0_8px_20px_-6px_rgba(249,115,22,.8)]">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1 whitespace-nowrap px-4 py-1.5 rounded-full bg-kb-orange text-white text-xs sm:text-sm font-bold">
                       <Star className="w-3.5 h-3.5 fill-current" />
                       {plan.popularLabel}
                     </div>
-                    <div className="h-full p-[1.5px] rounded-[1.35rem] bg-gradient-to-b from-kb-orange to-amber-400 shadow-[0_30px_80px_-30px_rgba(249,115,22,.7)]">
+                    <div className="h-full p-[1.5px] rounded-[1.35rem] bg-kb-orange">
                       <div className="h-full flex flex-col rounded-[1.25rem] bg-[#111827] overflow-hidden pt-3">
                         {cardBody(plan)}
                       </div>

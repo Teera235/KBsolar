@@ -123,12 +123,10 @@ const Blog = () => {
           <SectionHeading
             align="left"
             className="!mb-0 lg:!mb-0"
-            eyebrow={t('ข่าวสาร', 'News')}
             title={t('', 'Featured')}
             highlight={t('ข่าวเด่น', 'News')}
           />
           <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-orange-100 shadow-sm">
-            <span className="pulse-dot w-2 h-2 rounded-full bg-kb-orange" />
             <span className="text-gray-600 text-sm font-semibold">{t('เผยแพร่ล่าสุด', 'Recently Published')}</span>
           </div>
         </div>
@@ -139,7 +137,7 @@ const Blog = () => {
           {/* Left - Main Large Feature (5 columns) */}
           <div className="md:col-span-2 lg:col-span-5">
             <motion.div
-              className="group relative overflow-hidden cursor-pointer bg-black h-full rounded-[1.25rem] ring-1 ring-black/5 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 hover:ring-kb-orange/40 hover:shadow-[0_24px_48px_-20px_rgba(249,115,22,.45)] motion-reduce:hover:translate-y-0"
+              className="group relative overflow-hidden cursor-pointer bg-black h-full rounded-[1.25rem] ring-1 ring-black/5 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 motion-reduce:hover:translate-y-0"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -153,7 +151,7 @@ const Blog = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/5" />
                 
-                <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kb-orange/90 backdrop-blur-sm text-white text-[11px] font-semibold uppercase tracking-wider shadow-[0_6px_16px_-6px_rgba(249,115,22,.7)]">
+                <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kb-orange/90 text-white text-[11px] font-semibold uppercase tracking-wider">
                   <span className="w-1.5 h-1.5 rounded-full bg-white" />
                   {t(blogPosts[0].badge)}
                 </span>
@@ -176,7 +174,7 @@ const Blog = () => {
           {/* Middle - Medium Feature (4 columns) */}
           <div className="md:col-span-2 lg:col-span-4">
             <motion.div
-              className="group relative overflow-hidden cursor-pointer bg-black h-full rounded-[1.25rem] ring-1 ring-black/5 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 hover:ring-kb-orange/40 hover:shadow-[0_24px_48px_-20px_rgba(249,115,22,.45)] motion-reduce:hover:translate-y-0"
+              className="group relative overflow-hidden cursor-pointer bg-black h-full rounded-[1.25rem] ring-1 ring-black/5 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 motion-reduce:hover:translate-y-0"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -190,7 +188,7 @@ const Blog = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/5" />
                 
-                <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kb-orange/90 backdrop-blur-sm text-white text-[11px] font-semibold uppercase tracking-wider shadow-[0_6px_16px_-6px_rgba(249,115,22,.7)]">
+                <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kb-orange/90 text-white text-[11px] font-semibold uppercase tracking-wider">
                   <span className="w-1.5 h-1.5 rounded-full bg-white" />
                   {t(blogPosts[1].badge)}
                 </span>
@@ -212,7 +210,7 @@ const Blog = () => {
             {blogPosts.slice(2, 4).map((post, index) => (
               <motion.div
                 key={post.id}
-                className="group relative overflow-hidden cursor-pointer bg-black rounded-[1.25rem] ring-1 ring-black/5 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 hover:ring-kb-orange/40 hover:shadow-[0_24px_48px_-20px_rgba(249,115,22,.45)] motion-reduce:hover:translate-y-0"
+                className="group relative overflow-hidden cursor-pointer bg-black rounded-[1.25rem] ring-1 ring-black/5 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 motion-reduce:hover:translate-y-0"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -226,7 +224,7 @@ const Blog = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/5" />
                   
-                  <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kb-orange/90 backdrop-blur-sm text-white text-[11px] font-semibold uppercase tracking-wider shadow-[0_6px_16px_-6px_rgba(249,115,22,.7)]">
+                  <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kb-orange/90 text-white text-[11px] font-semibold uppercase tracking-wider">
                   <span className="w-1.5 h-1.5 rounded-full bg-white" />
                   {t(post.badge)}
                 </span>

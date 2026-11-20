@@ -121,7 +121,6 @@ const KPISection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mobile-container-fix">
         <SectionHeading
           dark
-          eyebrow={t('ผลลัพธ์ที่วัดได้', 'Measured results')}
           title={t('ทำไมต้องติดตั้ง', 'Why Go')}
           highlight={t('โซลาร์เซลล์?', 'Solar?')}
           subtitle={
@@ -144,11 +143,11 @@ const KPISection = () => {
               className="h-full"
             >
               <div className="card-kb-dark h-full p-5 lg:p-6 cursor-default kpi-card-mobile mobile-text-container relative overflow-hidden min-h-[180px] lg:min-h-[240px] flex flex-col">
-                <div className="w-11 h-11 lg:w-14 lg:h-14 bg-gradient-to-br from-kb-orange to-orange-500 rounded-2xl flex items-center justify-center mb-5 lg:mb-6 shadow-lg shadow-kb-orange/30">
+                <div className="w-11 h-11 lg:w-14 lg:h-14 bg-kb-orange rounded-2xl flex items-center justify-center mb-5 lg:mb-6 shadow-lg">
                   <kpi.icon className="w-5 h-5 lg:w-7 lg:h-7 text-white" />
                 </div>
                 <div className="flex items-baseline gap-1.5 mb-3 flex-wrap">
-                  <CountUp value={kpi.value} className="text-[1.75rem] sm:text-5xl lg:text-4xl xl:text-5xl font-bold leading-none tracking-tight text-kb-gradient" />
+                  <CountUp value={kpi.value} className="text-[1.75rem] sm:text-5xl lg:text-4xl xl:text-5xl font-bold leading-none tracking-tight text-kb-accent" />
                   <span className="text-sm lg:text-lg text-white/70 font-semibold whitespace-nowrap">{kpi.unit}</span>
                 </div>
                 <p className="text-white font-bold text-sm lg:text-base break-words leading-snug kpi-label-mobile mobile-break-text mb-1.5">
@@ -197,13 +196,13 @@ const KPISection = () => {
                   onMouseLeave={() => setIsPaused(false)}
                 >
                   {duplicatedReviews.map((review, index) => (
-                    <div key={`${review.id}-${index}`} className="rounded-2xl p-5 mb-4 bg-white/[0.06] border border-white/10 backdrop-blur-sm">
+                    <div key={`${review.id}-${index}`} className="rounded-2xl p-5 mb-4 bg-white/[0.06] border border-white/10">
                       <p className="text-gray-200 text-sm leading-relaxed mb-4">
                         "{review.text}"
                       </p>
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
-                          <div className="w-full h-full bg-gradient-to-br from-kb-orange to-amber-500 flex items-center justify-center text-white font-bold">
+                          <div className="w-full h-full bg-kb-orange flex items-center justify-center text-white font-bold">
                             {review.avatar}
                           </div>
                         </div>
@@ -228,7 +227,7 @@ const KPISection = () => {
                 {/* Benefit 1 */}
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-kb-orange to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-kb-orange/30">
+                    <div className="w-14 h-14 bg-kb-orange rounded-2xl flex items-center justify-center shadow-lg">
                       <Shield className="w-7 h-7 text-white" />
                     </div>
                   </div>
@@ -243,7 +242,7 @@ const KPISection = () => {
                 {/* Benefit 2 */}
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-kb-orange to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-kb-orange/30">
+                    <div className="w-14 h-14 bg-kb-orange rounded-2xl flex items-center justify-center shadow-lg">
                       <Award className="w-7 h-7 text-white" />
                     </div>
                   </div>
@@ -258,7 +257,7 @@ const KPISection = () => {
                 {/* Benefit 3 */}
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-kb-orange to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-kb-orange/30">
+                    <div className="w-14 h-14 bg-kb-orange rounded-2xl flex items-center justify-center shadow-lg">
                       <Wrench className="w-7 h-7 text-white" />
                     </div>
                   </div>

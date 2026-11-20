@@ -48,11 +48,10 @@ const WhyUs = () => {
       }}
     >
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-white/80"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          eyebrow={t('แนวทางการทำงานของ KB SOLAR', 'The KB SOLAR Way')}
           title={t('สิ่งที่คุณจะได้รับเมื่อเลือก', 'What you get when you choose')}
           highlight="KB SOLAR"
         />
@@ -63,7 +62,7 @@ const WhyUs = () => {
             <StaggerItem key={idx} className="h-full">
               <div className="card-kb flex gap-4 p-6 lg:p-7 h-full">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-kb-orange to-orange-500 flex items-center justify-center shadow-lg shadow-kb-orange/30">
+                  <div className="w-12 h-12 rounded-2xl bg-kb-orange flex items-center justify-center shadow-lg">
                     <feature.icon className="w-6 h-6 text-white" />
                   </div>
                 </div>
@@ -93,7 +92,7 @@ const WhyUs = () => {
                     <CountUp
                       value={item.years}
                       duration={1.5}
-                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-none text-kb-gradient warranty-number-mobile"
+                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-none text-kb-accent warranty-number-mobile"
                     />
                     <span className="text-gray-500 text-xs sm:text-sm uppercase tracking-wider warranty-years-mobile">
                       <span className="block sm:hidden">{t('ปี', 'YR')}</span>

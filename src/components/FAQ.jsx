@@ -48,7 +48,6 @@ const FAQ = () => {
     <section id="faq" className="py-20 lg:py-28 bg-gray-50 mobile-full-width bg-section-mobile">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-fix">
         <SectionHeading
-          eyebrow={t('ถาม-ตอบ', 'FAQ')}
           title={t('คำถาม', 'Frequently Asked')}
           highlight={t('ที่พบบ่อย', 'Questions')}
           subtitle={t('รวมคำตอบสำหรับข้อสงสัยเกี่ยวกับการติดตั้งโซลาร์เซลล์', 'Answers to common questions about solar installation')}
@@ -63,14 +62,14 @@ const FAQ = () => {
                 <div
                   className={`relative bg-white rounded-[1.25rem] overflow-hidden border transition-[border-color,box-shadow] duration-300 ${
                     open
-                      ? 'border-kb-orange/40 shadow-[0_0_0_1px_rgba(249,115,22,.12),0_18px_40px_-22px_rgba(249,115,22,.45)]'
+                      ? 'border-kb-orange/40'
                       : 'border-gray-900/[.06] shadow-[0_1px_2px_rgba(17,24,39,.04),0_8px_24px_-12px_rgba(17,24,39,.12)] hover:border-kb-orange/25'
                   }`}
                 >
                   {/* Orange left accent when open */}
                   <span
                     aria-hidden="true"
-                    className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-kb-orange to-amber-400 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute left-0 top-0 bottom-0 w-1 bg-kb-orange transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`}
                   />
                   <button
                     onClick={() => setOpenIndex(open ? -1 : idx)}

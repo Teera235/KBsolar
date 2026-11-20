@@ -221,12 +221,9 @@ const Calculator = () => {
   return (
     <section id="calculator" className="py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden no-transform" style={{ transform: 'none !important', writingMode: 'horizontal-tb', direction: 'ltr' }}>
       {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          eyebrow={t('ประเมินฟรี', 'Free estimate')}
           title={t('คำนวณความคุ้มค่า', 'Solar Savings')}
           highlight={t('โซลาร์เซลล์', 'Calculator')}
           subtitle={t('กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน', 'Enter your electricity usage to find the right system size and see how quickly it pays for itself')}
@@ -503,7 +500,7 @@ const Calculator = () => {
               </motion.div>
             ) : !results ? (
               <motion.div 
-                className="bg-white/50 backdrop-blur-sm rounded-2xl p-12 text-center flex flex-col items-center justify-center"
+                className="bg-white/50 rounded-2xl p-12 text-center flex flex-col items-center justify-center"
                 style={{ minHeight: '600px' }}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -576,7 +573,7 @@ const Calculator = () => {
                     <div className="bg-white rounded-2xl p-5 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><Target className="w-5 h-5 text-kb-orange" />{t('ระบบที่แนะนำ', 'Recommended system')}</h4>
                       <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('ขนาดระบบ', 'System size')}</p><p className="text-xl font-bold text-kb-gradient">{results.system.size} kW</p></div>
+                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('ขนาดระบบ', 'System size')}</p><p className="text-xl font-bold text-kb-accent">{results.system.size} kW</p></div>
                         <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('จำนวนแผง', 'Number of panels')}</p><p className="text-xl font-bold text-gray-900">{results.system.panelCount} {t('แผง', 'panels')}</p></div>
                         <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('พื้นที่หลังคา', 'Roof area')}</p><p className="text-xl font-bold text-gray-900">{results.system.roofArea} {t('ตร.ม.', 'm²')}</p></div>
                         <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('กำลังแผง', 'Panel wattage')}</p><p className="text-xl font-bold text-gray-900">{results.system.panelWattage}W</p></div>
@@ -584,7 +581,7 @@ const Calculator = () => {
                     </div>
 
                     {/* Savings */}
-                    <div className="bg-gradient-to-br from-kb-orange to-amber-500 rounded-2xl p-5 text-white shadow-lg">
+                    <div className="bg-kb-orange rounded-2xl p-5 text-white shadow-lg">
                       <h4 className="font-bold mb-3 flex items-center gap-2"><TrendingUp className="w-5 h-5" />{t('ผลประหยัด', 'Savings')}</h4>
                       <div className="grid grid-cols-2 gap-3">
                         <div><p className="text-white/70 text-xs">{t('ประหยัด/เดือน', 'Savings/month')}</p><p className="text-xl font-bold">฿{results.savings.monthly.toLocaleString()}</p></div>
@@ -600,7 +597,7 @@ const Calculator = () => {
                       <div className="space-y-2">
                         <div className="flex justify-between items-center py-2 border-b border-gray-100">
                           <span className="text-gray-600 text-sm">{t('ราคาระบบ', 'System price')}</span>
-                          <span className="text-lg font-bold text-kb-gradient">฿{results.cost.total.toLocaleString()}</span>
+                          <span className="text-lg font-bold text-kb-accent">฿{results.cost.total.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center py-2">
                           <span className="text-gray-600 text-sm">{t('ราคาต่อ kW', 'Price per kW')}</span>
@@ -623,7 +620,7 @@ const Calculator = () => {
                         </div>
                         <div className="flex justify-between items-center py-2">
                           <span className="text-gray-600 text-sm">ROI</span>
-                          <span className="text-lg font-bold text-kb-gradient">{results.financial.roi}%</span>
+                          <span className="text-lg font-bold text-kb-accent">{results.financial.roi}%</span>
                         </div>
                       </div>
                     </div>
@@ -720,7 +717,7 @@ const Calculator = () => {
                       <div className="mt-4 grid grid-cols-3 gap-4 text-center">
                         <div className="bg-gray-50 rounded-xl p-3">
                           <p className="text-xs text-gray-500">{t('จุดคุ้มทุน', 'Break-even')}</p>
-                          <p className="text-lg font-bold text-kb-gradient">{t('ปีที่', 'Year')} {results.financial.paybackYears}</p>
+                          <p className="text-lg font-bold text-kb-accent">{t('ปีที่', 'Year')} {results.financial.paybackYears}</p>
                         </div>
                         <div className="bg-gray-50 rounded-xl p-3">
                           <p className="text-xs text-gray-500">{t('กำไรปีที่ 25', 'Profit by year 25')}</p>
@@ -728,7 +725,7 @@ const Calculator = () => {
                         </div>
                         <div className="bg-gray-50 rounded-xl p-3">
                           <p className="text-xs text-gray-500">ROI</p>
-                          <p className="text-lg font-bold text-kb-gradient">{results.financial.roi}%</p>
+                          <p className="text-lg font-bold text-kb-accent">{results.financial.roi}%</p>
                         </div>
                       </div>
                     </div>
@@ -820,7 +817,7 @@ const Calculator = () => {
         {/* Error Modal - Keep for detailed errors */}
         {showErrorModal && (
           <motion.div 
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -89,13 +89,10 @@ const Services = () => {
   return (
     <section id="services" className="py-20 lg:py-28 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={t('บริการ', 'Services')}
             title={t('บริการครบวงจร', 'End-to-End')}
             highlight={t('ด้านโซลาร์เซลล์', 'Solar Services')}
           />
@@ -121,7 +118,7 @@ const Services = () => {
                   transition={{ duration: 0.5, delay: (index % services.length) * 0.1 }}
                   className="group w-[85vw] max-w-[600px] flex-shrink-0"
                 >
-                  <div className="relative rounded-[1.25rem] overflow-hidden h-[440px] sm:h-[500px] bg-kb-dark ring-1 ring-black/5 shadow-[0_8px_24px_-12px_rgba(17,24,39,.25)] transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 hover:ring-kb-orange/40 hover:shadow-[0_24px_48px_-20px_rgba(249,115,22,.45)] motion-reduce:hover:translate-y-0">
+                  <div className="relative rounded-[1.25rem] overflow-hidden h-[440px] sm:h-[500px] bg-kb-dark ring-1 ring-black/5 shadow-[0_8px_24px_-12px_rgba(17,24,39,.25)] transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 motion-reduce:hover:translate-y-0">
                     {/* Background Image - Full Height */}
                     <div className="absolute inset-0 card-kb-img">
                       <img 
@@ -133,7 +130,7 @@ const Services = () => {
                       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/80" />
                       
                       {/* Icon Badge */}
-                      <div className="absolute top-4 right-4 w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex items-center justify-center shadow-[0_8px_24px_-8px_rgba(249,115,22,.5)]">
+                      <div className="absolute top-4 right-4 w-14 h-14 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center">
                         <service.icon className="w-7 h-7 text-orange-300" />
                       </div>
                     </div>
@@ -169,7 +166,7 @@ const Services = () => {
                     </div>
 
                     {/* Hover Effect - Bottom Bar */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-kb-orange to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-kb-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   </div>
                 </motion.div>
               ))}

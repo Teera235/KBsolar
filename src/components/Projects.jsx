@@ -899,13 +899,10 @@ const Projects = () => {
     <section id="projects" className="py-20 lg:py-28 bg-gradient-to-b from-white via-gray-50 to-white mobile-full-width bg-section-mobile relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-fix relative z-10">
         <SectionHeading
-          eyebrow={t('ผลงาน', 'PORTFOLIO')}
           title={t('ผลงานและ', 'Projects &')}
           highlight={t('กรณีศึกษา', 'Case Studies')}
           subtitle={
@@ -930,7 +927,7 @@ const Projects = () => {
                 onClick={() => { setActiveCategory(cat.id); setShowAllProjects(false); }}
                 className={`inline-flex items-center gap-1.5 px-4 py-2 lg:px-5 lg:py-2.5 rounded-full text-xs lg:text-sm font-semibold transition-all duration-300 ${
                   active
-                    ? 'bg-gradient-to-br from-kb-orange to-kb-orange-dark text-white shadow-[0_10px_30px_-10px_rgba(249,115,22,0.65)]'
+                    ? 'bg-kb-orange text-white'
                     : 'bg-white text-kb-gray border border-gray-200 hover:border-kb-orange hover:text-kb-orange-dark'
                 }`}
               >
@@ -957,7 +954,7 @@ const Projects = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.4, delay: (idx % 10) * 0.04 }}
                   onClick={() => openProject(project)}
-                  className={`group relative block w-full h-full text-left rounded-[1.25rem] overflow-hidden ring-1 ring-black/5 bg-gray-100 transition-shadow duration-500 hover:ring-2 hover:ring-kb-orange/70 hover:shadow-[0_24px_48px_-20px_rgba(249,115,22,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kb-orange ${
+                  className={`group relative block w-full h-full text-left rounded-[1.25rem] overflow-hidden ring-1 ring-black/5 bg-gray-100 transition-shadow duration-500 hover:ring-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kb-orange ${
                     big ? `lg:col-span-2 lg:row-span-2 ${bigRight ? 'lg:col-start-3' : ''}` : ''
                   }`}
                 >
@@ -976,16 +973,16 @@ const Projects = () => {
                       {tx(project.title)}
                     </h4>
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="inline-flex items-center gap-1 bg-gradient-to-br from-kb-orange to-kb-orange-dark text-white text-[11px] lg:text-xs px-2.5 py-1 rounded-full font-bold shadow-md">
+                      <span className="inline-flex items-center gap-1 bg-kb-orange text-white text-[11px] lg:text-xs px-2.5 py-1 rounded-full font-bold shadow-md">
                         <Zap className="w-3 h-3" />
                         {project.systemSize} kW
                       </span>
-                      <span className="inline-flex items-center gap-1 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-[11px] lg:text-xs px-2.5 py-1 rounded-full font-medium min-w-0">
+                      <span className="inline-flex items-center gap-1 bg-white/15 border border-white/20 text-white text-[11px] lg:text-xs px-2.5 py-1 rounded-full font-medium min-w-0">
                         <MapPin className="w-3 h-3 flex-shrink-0" />
                         <span className="truncate">{t(placeName(project.location))}</span>
                       </span>
                       {big && (
-                        <span className="hidden sm:inline-flex items-center bg-white/15 backdrop-blur-sm border border-white/20 text-white text-[11px] lg:text-xs px-2.5 py-1 rounded-full font-medium">
+                        <span className="hidden sm:inline-flex items-center bg-white/15 border border-white/20 text-white text-[11px] lg:text-xs px-2.5 py-1 rounded-full font-medium">
                           {getCategoryName(project.category)}
                         </span>
                       )}
@@ -1021,7 +1018,7 @@ const Projects = () => {
         {/* Map */}
         <FadeUp delay={0.1} className="mt-14 lg:mt-20 max-w-xl mx-auto">
           <div className="bg-white rounded-[1.25rem] shadow-[0_8px_24px_-12px_rgba(17,24,39,0.12)] ring-1 ring-black/5 overflow-hidden">
-            <div className="bg-gradient-to-r from-kb-orange via-orange-500 to-orange-400 px-4 lg:px-6 py-4 lg:py-5 relative overflow-hidden">
+            <div className="bg-kb-orange px-4 lg:px-6 py-4 lg:py-5 relative overflow-hidden">
               <div className="absolute inset-0 opacity-20" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
               <div className="relative">
                 <h3 className="text-white font-bold text-base lg:text-xl flex items-center gap-2 mb-1">
@@ -1042,7 +1039,7 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99999] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 z-[99999] flex items-center justify-center p-4"
               onClick={closeProvinceModal}
             >
               <motion.div
@@ -1054,11 +1051,11 @@ const Projects = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header */}
-                <div className="bg-gradient-to-r from-kb-orange via-orange-500 to-orange-400 px-6 py-4 relative overflow-hidden">
+                <div className="bg-kb-orange px-6 py-4 relative overflow-hidden">
                   <div className="absolute inset-0 opacity-20" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
                   <div className="relative flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                      <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                         <MapPin className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -1068,7 +1065,7 @@ const Projects = () => {
                     </div>
                     <button 
                       onClick={closeProvinceModal} 
-                      className="w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur rounded-full flex items-center justify-center transition-all"
+                      className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all"
                     >
                       <X className="w-5 h-5 text-white" />
                     </button>
@@ -1294,7 +1291,7 @@ const Projects = () => {
                     )}
                     
                     {/* Legend */}
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur rounded-lg px-3 py-2 shadow-md">
+                    <div className="absolute top-4 right-4 bg-white/90 rounded-lg px-3 py-2 shadow-md">
                       <p className="text-xs font-bold text-kb-dark mb-1">{t('คำแนะนำ', 'Tip')}</p>
                       <p className="text-[10px] text-kb-gray">{t('คลิกที่จุดเพื่อดูโปรเจกต์', 'Click a dot to view a project')}</p>
                     </div>
@@ -1328,7 +1325,7 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99999] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 z-[99999] flex items-center justify-center p-4"
               onClick={closeProject}
             >
               <motion.div
@@ -1376,7 +1373,7 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <div className="bg-white/80 backdrop-blur py-4 px-4 border-t border-gray-200">
+                  <div className="bg-white/80 py-4 px-4 border-t border-gray-200">
                     <div className="flex gap-2 overflow-x-auto pb-1">
                       {selectedProject.images.map((img, idx) => (
                         <button

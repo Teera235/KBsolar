@@ -64,7 +64,6 @@ const HowItWorks = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <SectionHeading
-          eyebrow={t('ขั้นตอน', 'Process')}
           title={t('ขั้นตอน', 'How We')}
           highlight={t('การทำงาน', 'Work')}
           subtitle={t('กระบวนการทำงานแบบวิศวกรรม ทุกขั้นตอนมีข้อมูลรองรับ', 'An engineering-led process, with data behind every step')}
@@ -196,7 +195,7 @@ const HowItWorks = () => {
                   aria-label={`${t('ขั้นตอนที่', 'Step')} ${idx + 1}`}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     idx === activeStep 
-                      ? 'w-10 bg-gradient-to-r from-kb-orange to-amber-400 shadow-[0_0_12px_rgba(249,115,22,.55)]' 
+                      ? 'w-10 bg-kb-orange' 
                       : 'w-2 bg-gray-300 hover:bg-gray-400'
                   }`}
                 />
