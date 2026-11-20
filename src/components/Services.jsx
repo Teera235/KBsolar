@@ -1,71 +1,83 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Home, Building2, Factory, BarChart3, Wrench, Monitor } from 'lucide-react';
+import { useLang } from '../i18n';
+import { SectionHeading } from './ui';
 
 const Services = () => {
+  const { t } = useLang();
   const scrollRef = useRef(null);
+  const pausedRef = useRef(false);
 
   const services = [
     { 
       icon: Home, 
-      title: 'Solar Rooftop - Residential', 
-      description: 'ระบบโซลาร์เซลล์สำหรับบ้านพักอาศัย ออกแบบให้เหมาะกับการใช้งานของครอบครัว ประหยัดค่าไฟได้ทั้งกลางวันและกลางคืน', 
-      features: ['On-Grid / Hybrid System', 'Battery Storage Option', '3-5 kWp Typical Size'],
+      title: t('โซลาร์รูฟท็อป - บ้านพักอาศัย', 'Solar Rooftop - Residential'), 
+      description: t('ระบบโซลาร์เซลล์สำหรับบ้านพักอาศัย ออกแบบให้เหมาะกับการใช้งานของครอบครัว ประหยัดค่าไฟได้ทั้งกลางวันและกลางคืน', 'Solar systems for homes, designed around how your family uses power, saving on electricity bills both day and night.'), 
+      features: [t('ระบบ On-Grid / Hybrid', 'On-Grid / Hybrid System'), t('เลือกติดตั้งแบตเตอรี่ได้', 'Battery Storage Option'), t('ขนาดทั่วไป 3-5 kWp', '3-5 kWp Typical Size')],
       image: '/services/Solar Rooftop - Residential.webp'
     },
     { 
       icon: Building2, 
-      title: 'Solar Rooftop - Commercial', 
-      description: 'ระบบโซลาร์เซลล์สำหรับอาคารพาณิชย์ ร้านค้า สำนักงาน ลดต้นทุนค่าไฟฟ้าอย่างมีประสิทธิภาพ', 
-      features: ['Peak Shaving', 'Demand Charge Reduction', '10-100 kWp Systems'],
+      title: t('โซลาร์รูฟท็อป - อาคารพาณิชย์', 'Solar Rooftop - Commercial'), 
+      description: t('ระบบโซลาร์เซลล์สำหรับอาคารพาณิชย์ ร้านค้า สำนักงาน ลดต้นทุนค่าไฟฟ้าอย่างมีประสิทธิภาพ', 'Solar systems for commercial buildings, shops and offices that cut electricity costs efficiently.'), 
+      features: [t('ลดค่าไฟช่วงพีค (Peak Shaving)', 'Peak Shaving'), t('ลดค่าความต้องการพลังไฟฟ้า (Demand Charge)', 'Demand Charge Reduction'), t('ระบบขนาด 10-100 kWp', '10-100 kWp Systems')],
       image: '/services/Solar Rooftop - Commercial.webp'
     },
     { 
       icon: Factory, 
-      title: 'Solar Rooftop - Industrial', 
-      description: 'ระบบโซลาร์เซลล์ขนาดใหญ่สำหรับโรงงานอุตสาหกรรม ออกแบบตามโหลดการใช้งานจริง', 
-      features: ['Large Scale Systems', 'Grid-Tied Solutions', '100+ kWp Capacity'],
+      title: t('โซลาร์รูฟท็อป - โรงงานอุตสาหกรรม', 'Solar Rooftop - Industrial'), 
+      description: t('ระบบโซลาร์เซลล์ขนาดใหญ่สำหรับโรงงานอุตสาหกรรม ออกแบบตามโหลดการใช้งานจริง', 'Large-scale solar systems for factories, designed around the actual load.'), 
+      features: [t('ระบบขนาดใหญ่', 'Large Scale Systems'), t('ระบบเชื่อมต่อสายส่ง (Grid-Tied)', 'Grid-Tied Solutions'), t('กำลังผลิต 100+ kWp', '100+ kWp Capacity')],
       image: '/services/Solar Rooftop - Industrial.webp'
     },
     { 
       icon: BarChart3, 
-      title: 'Energy Analysis & System Design', 
-      description: 'วิเคราะห์การใช้พลังงานและออกแบบระบบที่เหมาะสมที่สุด ใช้ข้อมูลจริงในการคำนวณ', 
-      features: ['Load Profile Analysis', 'ROI Calculation', 'System Simulation'],
+      title: t('วิเคราะห์พลังงานและออกแบบระบบ', 'Energy Analysis & System Design'), 
+      description: t('วิเคราะห์การใช้พลังงานและออกแบบระบบที่เหมาะสมที่สุด ใช้ข้อมูลจริงในการคำนวณ', 'We analyse your energy use and design the best-fit system, calculated from real data.'), 
+      features: [t('วิเคราะห์รูปแบบการใช้ไฟ (Load Profile)', 'Load Profile Analysis'), t('คำนวณ ROI', 'ROI Calculation'), t('จำลองการทำงานของระบบ', 'System Simulation')],
       image: '/services/Energy Analysis & System Design.webp'
     },
     { 
       icon: Wrench, 
-      title: 'Installation & Commissioning', 
-      description: 'ติดตั้งโดยทีมช่างมืออาชีพ พร้อมทดสอบระบบให้ทำงานได้เต็มประสิทธิภาพ', 
-      features: ['Professional Team', 'Safety Standards', 'Quality Assurance'],
+      title: t('ติดตั้งและทดสอบระบบ', 'Installation & Commissioning'), 
+      description: t('ติดตั้งโดยทีมช่างมืออาชีพ พร้อมทดสอบระบบให้ทำงานได้เต็มประสิทธิภาพ', 'Installed by a professional technician team and tested so the system runs at full performance.'), 
+      features: [t('ทีมงานมืออาชีพ', 'Professional Team'), t('มาตรฐานความปลอดภัย', 'Safety Standards'), t('ควบคุมคุณภาพงาน', 'Quality Assurance')],
       image: '/services/Installation & Commissioning.webp'
     },
     { 
       icon: Monitor, 
-      title: 'Monitoring & Maintenance', 
-      description: 'ระบบติดตามการผลิตไฟฟ้าแบบ Real-time พร้อมบริการดูแลรักษาตลอดอายุการใช้งาน', 
-      features: ['24/7 Monitoring', 'Preventive Maintenance', 'Performance Reports'],
+      title: t('ติดตามระบบและบำรุงรักษา', 'Monitoring & Maintenance'), 
+      description: t('ระบบติดตามการผลิตไฟฟ้าแบบ Real-time พร้อมบริการดูแลรักษาตลอดอายุการใช้งาน', 'Real-time monitoring of power generation, with maintenance service for the life of the system.'), 
+      features: [t('ติดตามระบบตลอด 24/7', '24/7 Monitoring'), t('บำรุงรักษาเชิงป้องกัน', 'Preventive Maintenance'), t('รายงานประสิทธิภาพการผลิต', 'Performance Reports')],
       image: '/services/Monitoring & Maintenance.webp'
     }
   ];
 
-  // Auto scroll effect
+  // Auto scroll effect (pauses while the pointer is over the carousel)
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let scrollAmount = 0;
+    let scrollAmount = scrollContainer.scrollLeft;
     const scrollSpeed = 1;
-    const cardWidth = 604; // 600px card + 4px gap
-    
+
     const scroll = () => {
-      scrollAmount += scrollSpeed;
-      
-      if (scrollAmount >= cardWidth * services.length) {
-        scrollAmount = 0;
+      if (pausedRef.current) {
+        scrollAmount = scrollContainer.scrollLeft;
+        return;
       }
-      
+      // Width of one full set of cards (card + gap) = where the duplicate set starts
+      const track = scrollContainer.firstElementChild;
+      const first = track?.children[0];
+      const dup = track?.children[services.length];
+      const loopWidth = first && dup ? dup.offsetLeft - first.offsetLeft : 0;
+
+      scrollAmount += scrollSpeed;
+      if (loopWidth > 0 && scrollAmount >= loopWidth) {
+        scrollAmount -= loopWidth;
+      }
+
       scrollContainer.scrollLeft = scrollAmount;
     };
 
@@ -75,27 +87,29 @@ const Services = () => {
   }, [services.length]);
 
   return (
-    <section id="services" className="py-12 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+    <section id="services" className="py-20 lg:py-28 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-2xl lg:text-4xl font-bold text-kb-dark">บริการครบวงจรด้านโซลาร์เซลล์</h2>
-          </motion.div>
+          <SectionHeading
+            eyebrow={t('บริการ', 'Services')}
+            title={t('บริการครบวงจร', 'End-to-End')}
+            highlight={t('ด้านโซลาร์เซลล์', 'Solar Services')}
+          />
         </div>
 
         {/* Horizontal Scrolling Carousel - Full Width */}
         <div className="relative">
-          <div ref={scrollRef} className="overflow-x-auto scrollbar-hide pb-4 px-4" style={{ scrollBehavior: 'auto' }}>
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto scrollbar-hide pt-3 pb-12 px-4"
+            style={{ scrollBehavior: 'auto' }}
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+          >
             <div className="flex gap-4" style={{ width: 'max-content' }}>
               {/* Duplicate services for infinite scroll effect */}
               {[...services, ...services].map((service, index) => (
@@ -107,31 +121,27 @@ const Services = () => {
                   transition={{ duration: 0.5, delay: (index % services.length) * 0.1 }}
                   className="group w-[85vw] max-w-[600px] flex-shrink-0"
                 >
-                  <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-[440px] sm:h-[500px] bg-white border border-gray-100">
+                  <div className="relative rounded-[1.25rem] overflow-hidden h-[440px] sm:h-[500px] bg-kb-dark ring-1 ring-black/5 shadow-[0_8px_24px_-12px_rgba(17,24,39,.25)] transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1.5 hover:ring-kb-orange/40 hover:shadow-[0_24px_48px_-20px_rgba(249,115,22,.45)] motion-reduce:hover:translate-y-0">
                     {/* Background Image - Full Height */}
-                    <div className="absolute inset-0">
+                    <div className="absolute inset-0 card-kb-img">
                       <img 
                         src={service.image} 
                         alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover"
                       />
                       {/* Gradient Overlay - Stronger */}
                       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/80" />
                       
                       {/* Icon Badge */}
-                      <motion.div 
-                        className="absolute top-4 right-4 w-14 h-14 bg-white/95 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg"
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <service.icon className="w-7 h-7 text-kb-orange" />
-                      </motion.div>
+                      <div className="absolute top-4 right-4 w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex items-center justify-center shadow-[0_8px_24px_-8px_rgba(249,115,22,.5)]">
+                        <service.icon className="w-7 h-7 text-orange-300" />
+                      </div>
                     </div>
 
                     {/* Content Overlay */}
                     <div className="relative h-full flex flex-col justify-end p-6">
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-kb-orange transition-colors">
+                      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-300 transition-colors">
                         {service.title}
                       </h3>
                       
@@ -169,13 +179,13 @@ const Services = () => {
 
         {/* CTA Section */}
         <motion.div
-          className="mt-16 text-center"
+          className="mt-4 text-center px-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <p className="text-gray-600 mb-6">ต้องการปรึกษาหรือสอบถามข้อมูลเพิ่มเติม?</p>
+          <p className="text-gray-600 mb-6">{t('ต้องการปรึกษาหรือสอบถามข้อมูลเพิ่มเติม?', 'Need advice or more information?')}</p>
           <a
             href="#contact"
             onClick={(e) => {
@@ -185,19 +195,12 @@ const Services = () => {
                 block: 'start'
               });
             }}
-            className="inline-flex items-center gap-2 bg-kb-orange hover:bg-orange-600 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg shadow-kb-orange/25 hover:shadow-xl hover:shadow-kb-orange/30 group"
+            className="btn-kb"
           >
-            ติดต่อเราเลย
-            <motion.svg 
-              className="w-5 h-5" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
+            {t('ติดต่อเราเลย', 'Contact us')}
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </motion.svg>
+            </svg>
           </a>
         </motion.div>
       </div>

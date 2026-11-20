@@ -655,3 +655,159 @@ h1, h2, h3, h4, h5, h6 {
 .animate-scroll-up-slow:hover {
   animation-play-state: paused;
 }
+
+/* ===== KB look kit: shared pieces used by every section (see src/components/ui.jsx) ===== */
+@layer components {
+  /* Orange-to-gold text, as in the hero */
+  .text-kb-gradient {
+    background: linear-gradient(90deg, #F97316 0%, #FBBF24 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Pill buttons with a light sweep on hover */
+  .btn-kb, .btn-kb-ghost {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    padding: 0.875rem 1.75rem;
+    transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease;
+  }
+  .btn-kb {
+    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    color: #fff;
+    box-shadow: 0 10px 30px -10px rgba(249, 115, 22, .65);
+  }
+  .btn-kb:hover { box-shadow: 0 16px 40px -12px rgba(249, 115, 22, .8); transform: translateY(-2px); }
+  .btn-kb-ghost {
+    border: 1.5px solid rgba(249, 115, 22, .5);
+    color: #EA580C;
+    background: rgba(255, 255, 255, .6);
+  }
+  .btn-kb-ghost:hover { border-color: #F97316; background: rgba(249, 115, 22, .08); transform: translateY(-2px); }
+  .on-dark .btn-kb-ghost { color: #fff; border-color: rgba(255, 255, 255, .35); background: rgba(255, 255, 255, .06); }
+  .on-dark .btn-kb-ghost:hover { border-color: #FBBF24; background: rgba(255, 255, 255, .12); }
+  .btn-kb::after, .btn-kb-ghost::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .7s ease;
+  }
+  .btn-kb:hover::after, .btn-kb-ghost:hover::after { transform: translateX(120%); }
+
+  /* Cards: one radius and shadow, lift + orange glow on hover */
+  .card-kb {
+    border-radius: 1.25rem;
+    background: #fff;
+    border: 1px solid rgba(17, 24, 39, .06);
+    box-shadow: 0 1px 2px rgba(17, 24, 39, .04), 0 8px 24px -12px rgba(17, 24, 39, .12);
+    transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, border-color .35s ease;
+  }
+  .card-kb:hover {
+    transform: translateY(-6px);
+    border-color: rgba(249, 115, 22, .35);
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, .15), 0 24px 48px -20px rgba(249, 115, 22, .45);
+  }
+  .card-kb-img { overflow: hidden; }
+  .card-kb-img img { transition: transform 1.2s cubic-bezier(.22, 1, .36, 1); }
+  .card-kb:hover .card-kb-img img, .group:hover .card-kb-img img { transform: scale(1.07); }
+
+  /* Dark band with soft orange light behind, same family as the hero */
+  .section-dark {
+    position: relative;
+    isolation: isolate;
+    background-color: #0B0F17;
+    color: #fff;
+  }
+  .section-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 55% at 15% 10%, rgba(249, 115, 22, .22), transparent 70%),
+      radial-gradient(35% 50% at 90% 90%, rgba(251, 191, 36, .14), transparent 70%);
+  }
+  .section-dark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .07;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, .6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .6) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+    -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+  }
+  /* Glass card for use on .section-dark */
+  .card-kb-dark {
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .09);
+    backdrop-filter: blur(6px);
+    transition: transform .35s cubic-bezier(.22, 1, .36, 1), border-color .35s ease, box-shadow .35s ease;
+  }
+  .card-kb-dark:hover {
+    transform: translateY(-6px);
+    border-color: rgba(249, 115, 22, .45);
+    box-shadow: 0 24px 48px -24px rgba(249, 115, 22, .55);
+  }
+
+  /* Pulsing orange dot (map pins, live badges) */
+  .pulse-dot { position: relative; }
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 2px solid rgba(249, 115, 22, .6);
+    animation: kb-pulse 2s ease-out infinite;
+  }
+}
+
+@keyframes kb-pulse {
+  0% { transform: scale(.6); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Light sweep across the hero panels */
+@keyframes kb-sweep {
+  0% { transform: translateX(-60%) skewX(-20deg); opacity: 0; }
+  15% { opacity: 1; }
+  60%, 100% { transform: translateX(160%) skewX(-20deg); opacity: 0; }
+}
+.hero-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-sweep::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 220, 160, .14), transparent);
+  animation: kb-sweep 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-kb, .btn-kb-ghost, .card-kb, .card-kb-dark, .card-kb-img img { transition: none; }
+  .card-kb:hover, .card-kb-dark:hover, .btn-kb:hover, .btn-kb-ghost:hover { transform: none; }
+  .pulse-dot::after, .hero-sweep::before { animation: none; display: none; }
+}

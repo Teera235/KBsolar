@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useLang } from '../i18n';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
   const navigate = useNavigate();
+  const { lang, setLang, t } = useLang();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,14 +80,14 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'Services', href: '#services', id: 'services' },
-    { name: 'Calculator', href: '#calculator', id: 'calculator' },
-    { name: 'Blog', href: '#blog', id: 'blog' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Packages', href: '#packages', id: 'packages' },
+    { name: t('หน้าแรก', 'Home'), href: '#home', id: 'home' },
+    { name: t('บริการ', 'Services'), href: '#services', id: 'services' },
+    { name: t('คำนวณ', 'Calculator'), href: '#calculator', id: 'calculator' },
+    { name: t('บทความ', 'Blog'), href: '#blog', id: 'blog' },
+    { name: t('ผลงาน', 'Projects'), href: '#projects', id: 'projects' },
+    { name: t('แพ็คเกจ', 'Packages'), href: '#packages', id: 'packages' },
     { name: 'FAQ', href: '#faq', id: 'faq' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: t('ติดต่อ', 'Contact'), href: '#contact', id: 'contact' },
   ];
 
   const handleNavClick = (e, href) => {
@@ -113,6 +115,20 @@ const Navbar = () => {
   // Always show white background on blog detail pages
   const shouldShowWhiteBg = scrolled || isBlogDetailPage;
 
+  const langToggle = (
+    <button
+      onClick={() => setLang(lang === 'th' ? 'en' : 'th')}
+      aria-label={lang === 'th' ? 'Switch to English' : 'เปลี่ยนเป็นภาษาไทย'}
+      className={`text-sm font-semibold whitespace-nowrap px-3 py-1.5 rounded-full border transition-colors ${
+        shouldShowWhiteBg ? 'border-gray-300 text-kb-dark hover:border-kb-orange' : 'border-white/40 text-white hover:border-white'
+      }`}
+    >
+      <span className={lang === 'th' ? 'text-kb-orange' : 'opacity-60'}>TH</span>
+      <span className="opacity-40 mx-1">/</span>
+      <span className={lang === 'en' ? 'text-kb-orange' : 'opacity-60'}>EN</span>
+    </button>
+  );
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       shouldShowWhiteBg ? 'bg-white shadow-lg' : 'bg-transparent'
@@ -128,20 +144,20 @@ const Navbar = () => {
               className="h-10 sm:h-12 w-auto rounded-lg"
             />
             <div>
-              <span className={`font-bold text-lg sm:text-xl ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}>
+              <span className={`font-bold text-lg sm:text-xl whitespace-nowrap ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}>
                 KB Solar Energy
               </span>
             </div>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden xl:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.id}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`font-medium transition-all duration-300 hover:text-kb-orange relative ${
+                className={`font-medium whitespace-nowrap transition-all duration-300 hover:text-kb-orange relative ${
                   shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'
                 } ${
                   activeSection === link.id && location.pathname === '/'
@@ -155,32 +171,36 @@ const Navbar = () => {
                 )}
               </a>
             ))}
+            {langToggle}
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="bg-kb-orange hover:bg-kb-orange-dark text-white px-6 py-2.5 rounded-full font-semibold transition-all"
+              className="btn-kb !px-5 !py-2.5 whitespace-nowrap"
             >
-              Get Quote
+              {t('ขอใบเสนอราคา', 'Get Quote')}
             </a>
           </div>
 
           {/* Mobile Menu Button */}
+          <div className="xl:hidden flex items-center gap-2">
+          {langToggle}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? 'ปิดเมนู' : 'เปิดเมนู'}
+            aria-label={isOpen ? t('ปิดเมนู', 'Close menu') : t('เปิดเมนู', 'Open menu')}
             aria-expanded={isOpen}
-            className={`md:hidden p-2 rounded-lg ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}
+            className={`p-2 rounded-lg ${shouldShowWhiteBg ? 'text-kb-dark' : 'text-white'}`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden bg-white rounded-2xl shadow-xl mt-2 p-4">
+          <div className="xl:hidden bg-white rounded-2xl shadow-xl mt-2 p-4">
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.id}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`block py-3 px-4 text-kb-dark hover:bg-kb-light rounded-lg font-medium transition-all duration-300 ${
@@ -195,9 +215,9 @@ const Navbar = () => {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="block mt-2 bg-kb-orange text-white text-center py-3 rounded-full font-semibold"
+              className="btn-kb w-full mt-2 !py-3"
             >
-              Get Quote
+              {t('ขอใบเสนอราคา', 'Get Quote')}
             </a>
           </div>
         )}

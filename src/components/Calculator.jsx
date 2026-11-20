@@ -18,8 +18,11 @@ import {
   CheckCircle,
   ArrowRight
 } from 'lucide-react';
+import { useLang } from '../i18n';
+import { SectionHeading } from './ui';
 
 const Calculator = () => {
+  const { t } = useLang();
   const [formData, setFormData] = useState({
     monthlyBill: '',
     buildingType: '',
@@ -70,15 +73,15 @@ const Calculator = () => {
     const newErrors = {};
     
     if (!formData.monthlyBill) {
-      newErrors.monthlyBill = 'กรุณากรอกค่าไฟฟ้าต่อเดือน';
+      newErrors.monthlyBill = { th: 'กรุณากรอกค่าไฟฟ้าต่อเดือน', en: 'Please enter your monthly electricity bill' };
     } else if (isNaN(formData.monthlyBill) || parseFloat(formData.monthlyBill) <= 0) {
-      newErrors.monthlyBill = 'กรุณากรอกตัวเลขที่มากกว่า 0';
+      newErrors.monthlyBill = { th: 'กรุณากรอกตัวเลขที่มากกว่า 0', en: 'Please enter a number greater than 0' };
     } else if (parseFloat(formData.monthlyBill) < 500) {
-      newErrors.monthlyBill = 'ค่าไฟฟ้าต่ำกว่า 500 บาท อาจไม่คุ้มค่าติดตั้งโซลาร์';
+      newErrors.monthlyBill = { th: 'ค่าไฟฟ้าต่ำกว่า 500 บาท อาจไม่คุ้มค่าติดตั้งโซลาร์', en: 'Bills under 500 THB may not justify a solar installation' };
     }
     
     if (!formData.buildingType) {
-      newErrors.buildingType = 'กรุณาเลือกประเภทอาคาร';
+      newErrors.buildingType = { th: 'กรุณาเลือกประเภทอาคาร', en: 'Please select a building type' };
     }
     
     setErrors(newErrors);
@@ -87,7 +90,7 @@ const Calculator = () => {
 
   const calculateSolar = () => {
     if (!validateForm()) {
-      showToastMessage('กรุณาตรวจสอบข้อมูลให้ครบถ้วน', 'error');
+      showToastMessage({ th: 'กรุณาตรวจสอบข้อมูลให้ครบถ้วน', en: 'Please check that all fields are complete' }, 'error');
       return;
     }
 
@@ -147,7 +150,7 @@ const Calculator = () => {
         totalSavings25Years += year === 0 ? 0 : yearSavings;
         
         yearlyData.push({
-          year: `ปี ${year}`,
+          year: { th: `ปี ${year}`, en: `Year ${year}` },
           yearNum: year,
           production: Math.round(yearProduction),
           savings: Math.round(yearSavings),
@@ -163,27 +166,27 @@ const Calculator = () => {
 
       // Monthly production data
       const monthlyData = [
-        { month: 'ม.ค.', production: Math.round(annualProduction / 12 * 0.85), consumption: Math.round(monthlyConsumption * 0.9) },
-        { month: 'ก.พ.', production: Math.round(annualProduction / 12 * 0.9), consumption: Math.round(monthlyConsumption * 0.85) },
-        { month: 'มี.ค.', production: Math.round(annualProduction / 12 * 1.0), consumption: Math.round(monthlyConsumption * 0.95) },
-        { month: 'เม.ย.', production: Math.round(annualProduction / 12 * 1.1), consumption: Math.round(monthlyConsumption * 1.1) },
-        { month: 'พ.ค.', production: Math.round(annualProduction / 12 * 1.05), consumption: Math.round(monthlyConsumption * 1.05) },
-        { month: 'มิ.ย.', production: Math.round(annualProduction / 12 * 0.95), consumption: Math.round(monthlyConsumption * 1.0) },
-        { month: 'ก.ค.', production: Math.round(annualProduction / 12 * 0.9), consumption: Math.round(monthlyConsumption * 1.0) },
-        { month: 'ส.ค.', production: Math.round(annualProduction / 12 * 0.9), consumption: Math.round(monthlyConsumption * 1.0) },
-        { month: 'ก.ย.', production: Math.round(annualProduction / 12 * 0.95), consumption: Math.round(monthlyConsumption * 0.95) },
-        { month: 'ต.ค.', production: Math.round(annualProduction / 12 * 1.0), consumption: Math.round(monthlyConsumption * 0.9) },
-        { month: 'พ.ย.', production: Math.round(annualProduction / 12 * 0.95), consumption: Math.round(monthlyConsumption * 0.85) },
-        { month: 'ธ.ค.', production: Math.round(annualProduction / 12 * 0.85), consumption: Math.round(monthlyConsumption * 0.85) },
+        { month: { th: 'ม.ค.', en: 'Jan' }, production: Math.round(annualProduction / 12 * 0.85), consumption: Math.round(monthlyConsumption * 0.9) },
+        { month: { th: 'ก.พ.', en: 'Feb' }, production: Math.round(annualProduction / 12 * 0.9), consumption: Math.round(monthlyConsumption * 0.85) },
+        { month: { th: 'มี.ค.', en: 'Mar' }, production: Math.round(annualProduction / 12 * 1.0), consumption: Math.round(monthlyConsumption * 0.95) },
+        { month: { th: 'เม.ย.', en: 'Apr' }, production: Math.round(annualProduction / 12 * 1.1), consumption: Math.round(monthlyConsumption * 1.1) },
+        { month: { th: 'พ.ค.', en: 'May' }, production: Math.round(annualProduction / 12 * 1.05), consumption: Math.round(monthlyConsumption * 1.05) },
+        { month: { th: 'มิ.ย.', en: 'Jun' }, production: Math.round(annualProduction / 12 * 0.95), consumption: Math.round(monthlyConsumption * 1.0) },
+        { month: { th: 'ก.ค.', en: 'Jul' }, production: Math.round(annualProduction / 12 * 0.9), consumption: Math.round(monthlyConsumption * 1.0) },
+        { month: { th: 'ส.ค.', en: 'Aug' }, production: Math.round(annualProduction / 12 * 0.9), consumption: Math.round(monthlyConsumption * 1.0) },
+        { month: { th: 'ก.ย.', en: 'Sep' }, production: Math.round(annualProduction / 12 * 0.95), consumption: Math.round(monthlyConsumption * 0.95) },
+        { month: { th: 'ต.ค.', en: 'Oct' }, production: Math.round(annualProduction / 12 * 1.0), consumption: Math.round(monthlyConsumption * 0.9) },
+        { month: { th: 'พ.ย.', en: 'Nov' }, production: Math.round(annualProduction / 12 * 0.95), consumption: Math.round(monthlyConsumption * 0.85) },
+        { month: { th: 'ธ.ค.', en: 'Dec' }, production: Math.round(annualProduction / 12 * 0.85), consumption: Math.round(monthlyConsumption * 0.85) },
       ];
 
       // Cost breakdown for pie chart
       const costBreakdown = [
-        { name: 'แผงโซลาร์', value: Math.round(systemCost * 0.4) },
-        { name: 'Inverter', value: Math.round(systemCost * 0.15) },
-        { name: 'ติดตั้ง', value: Math.round(systemCost * 0.2) },
-        { name: 'อุปกรณ์ไฟฟ้า', value: Math.round(systemCost * 0.1) },
-        { name: 'อื่นๆ', value: Math.round(systemCost * 0.15) },
+        { name: { th: 'แผงโซลาร์', en: 'Solar panels' }, value: Math.round(systemCost * 0.4) },
+        { name: { th: 'Inverter', en: 'Inverter' }, value: Math.round(systemCost * 0.15) },
+        { name: { th: 'ติดตั้ง', en: 'Installation' }, value: Math.round(systemCost * 0.2) },
+        { name: { th: 'อุปกรณ์ไฟฟ้า', en: 'Electrical equipment' }, value: Math.round(systemCost * 0.1) },
+        { name: { th: 'อื่นๆ', en: 'Other' }, value: Math.round(systemCost * 0.15) },
       ];
 
       setResults({
@@ -203,7 +206,7 @@ const Calculator = () => {
       setActiveTab('summary');
       
       // Success notification
-      showToastMessage('คำนวณเสร็จแล้ว! ดูผลลัพธ์ด้านล่าง', 'success');
+      showToastMessage({ th: 'คำนวณเสร็จแล้ว! ดูผลลัพธ์ด้านล่าง', en: 'Calculation complete! See the results below' }, 'success');
       
       // Success animation
       setTimeout(() => {
@@ -216,27 +219,18 @@ const Calculator = () => {
   };
 
   return (
-    <section id="calculator" className="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden no-transform" style={{ transform: 'none !important', writingMode: 'horizontal-tb', direction: 'ltr' }}>
+    <section id="calculator" className="py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden no-transform" style={{ transform: 'none !important', writingMode: 'horizontal-tb', direction: 'ltr' }}>
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-kb-orange/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <motion.div 
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-2xl lg:text-4xl font-bold text-kb-dark mb-3">
-            คำนวณความคุ้มค่าโซลาร์เซลล์
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน
-          </p>
-        </motion.div>
+        <SectionHeading
+          eyebrow={t('ประเมินฟรี', 'Free estimate')}
+          title={t('คำนวณความคุ้มค่า', 'Solar Savings')}
+          highlight={t('โซลาร์เซลล์', 'Calculator')}
+          subtitle={t('กรอกข้อมูลการใช้ไฟฟ้าของคุณ เพื่อวิเคราะห์ระบบที่เหมาะสมและความคุ้มทุน', 'Enter your electricity usage to find the right system size and see how quickly it pays for itself')}
+        />
 
         <div className="grid lg:grid-cols-5 gap-8 items-start">
           {/* Form - 2 columns */}
@@ -252,14 +246,14 @@ const Calculator = () => {
                 {/* Monthly Bill Input */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    ค่าไฟฟ้าต่อเดือน (บาท) <span className="text-red-500">*</span>
+                    {t('ค่าไฟฟ้าต่อเดือน (บาท)', 'Monthly electricity bill (THB)')} <span className="text-red-500">*</span>
                   </label>
                   <input 
                     type="text" 
                     name="monthlyBill" 
                     value={formData.monthlyBill} 
                     onChange={handleChange} 
-                    placeholder="เช่น 3000" 
+                    placeholder={t('เช่น 3000', 'e.g. 3000')} 
                     className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-kb-orange transition-all text-gray-900 ${
                       errors.monthlyBill 
                         ? 'border-red-300 focus:border-red-500 bg-red-50' 
@@ -273,7 +267,7 @@ const Calculator = () => {
                       className="text-green-600 text-sm mt-1 flex items-center gap-1"
                     >
                       <CheckCircle className="w-4 h-4" />
-                      ดูดี! ค่าไฟ {parseFloat(formData.monthlyBill).toLocaleString()} บาท/เดือน
+                      {t(`ดูดี! ค่าไฟ ${parseFloat(formData.monthlyBill).toLocaleString()} บาท/เดือน`, `Looks good! Bill: ${parseFloat(formData.monthlyBill).toLocaleString()} THB/month`)}
                     </motion.p>
                   )}
                   {errors.monthlyBill && (
@@ -283,7 +277,7 @@ const Calculator = () => {
                       className="text-red-500 text-sm mt-1 flex items-center gap-1"
                     >
                       <Info className="w-4 h-4" />
-                      {errors.monthlyBill}
+                      {t(errors.monthlyBill)}
                     </motion.p>
                   )}
                 </div>
@@ -291,7 +285,7 @@ const Calculator = () => {
                 {/* Building Type Dropdown */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    ประเภทอาคาร <span className="text-red-500">*</span>
+                    {t('ประเภทอาคาร', 'Building type')} <span className="text-red-500">*</span>
                   </label>
                   <select 
                     name="buildingType" 
@@ -303,11 +297,11 @@ const Calculator = () => {
                         : 'border-gray-200 focus:border-kb-orange'
                     }`}
                   >
-                    <option value="">เลือกประเภทอาคาร</option>
-                    <option value="residential">บ้านพักอาศัย</option>
-                    <option value="commercial">อาคารพาณิชย์</option>
-                    <option value="industrial">โรงงานอุตสาหกรรม</option>
-                    <option value="agricultural">เกษตรกรรม</option>
+                    <option value="">{t('เลือกประเภทอาคาร', 'Select building type')}</option>
+                    <option value="residential">{t('บ้านพักอาศัย', 'Residential home')}</option>
+                    <option value="commercial">{t('อาคารพาณิชย์', 'Commercial building')}</option>
+                    <option value="industrial">{t('โรงงานอุตสาหกรรม', 'Industrial factory')}</option>
+                    <option value="agricultural">{t('เกษตรกรรม', 'Agriculture')}</option>
                   </select>
                   {!errors.buildingType && formData.buildingType && (
                     <motion.p 
@@ -316,9 +310,9 @@ const Calculator = () => {
                       className="text-green-600 text-sm mt-1 flex items-center gap-1"
                     >
                       <CheckCircle className="w-4 h-4" />
-                      เลือก{formData.buildingType === 'residential' ? 'บ้านพักอาศัย' : 
-                             formData.buildingType === 'commercial' ? 'อาคารพาณิชย์' : 
-                             formData.buildingType === 'industrial' ? 'โรงงานอุตสาหกรรม' : 'เกษตรกรรม'}แล้ว
+                      {formData.buildingType === 'residential' ? t('เลือกบ้านพักอาศัยแล้ว', 'Selected: Residential home') : 
+                       formData.buildingType === 'commercial' ? t('เลือกอาคารพาณิชย์แล้ว', 'Selected: Commercial building') : 
+                       formData.buildingType === 'industrial' ? t('เลือกโรงงานอุตสาหกรรมแล้ว', 'Selected: Industrial factory') : t('เลือกเกษตรกรรมแล้ว', 'Selected: Agriculture')}
                     </motion.p>
                   )}
                   {errors.buildingType && (
@@ -328,7 +322,7 @@ const Calculator = () => {
                       className="text-red-500 text-sm mt-1 flex items-center gap-1"
                     >
                       <Info className="w-4 h-4" />
-                      {errors.buildingType}
+                      {t(errors.buildingType)}
                     </motion.p>
                   )}
                 </div>
@@ -336,7 +330,7 @@ const Calculator = () => {
                 {/* Phase Selection */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-3">
-                    ระบบไฟฟ้าของบ้าน
+                    {t('ระบบไฟฟ้าของบ้าน', 'Electrical supply')}
                   </label>
                   <div className="flex gap-4">
                     <label className="flex items-center gap-2 cursor-pointer">
@@ -348,7 +342,7 @@ const Calculator = () => {
                         onChange={handleChange}
                         className="w-5 h-5 text-kb-orange focus:ring-kb-orange"
                       />
-                      <span className="text-gray-700">1 เฟส</span>
+                      <span className="text-gray-700">{t('1 เฟส', '1-phase')}</span>
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input 
@@ -359,7 +353,7 @@ const Calculator = () => {
                         onChange={handleChange}
                         className="w-5 h-5 text-kb-orange focus:ring-kb-orange"
                       />
-                      <span className="text-gray-700">3 เฟส</span>
+                      <span className="text-gray-700">{t('3 เฟส', '3-phase')}</span>
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input 
@@ -370,7 +364,7 @@ const Calculator = () => {
                         onChange={handleChange}
                         className="w-5 h-5 text-kb-orange focus:ring-kb-orange"
                       />
-                      <span className="text-gray-700">ไม่ทราบ</span>
+                      <span className="text-gray-700">{t('ไม่ทราบ', 'Not sure')}</span>
                     </label>
                   </div>
                 </div>
@@ -378,7 +372,7 @@ const Calculator = () => {
                 {/* Usage Ratio Slider */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-3">
-                    อัตราส่วนการใช้ไฟฟ้าช่วงกลางวัน (%)
+                    {t('อัตราส่วนการใช้ไฟฟ้าช่วงกลางวัน (%)', 'Share of electricity used during the day (%)')}
                   </label>
                   <div className="relative pt-2">
                     <input 
@@ -403,11 +397,11 @@ const Calculator = () => {
                   {/* Display percentages */}
                   <div className="flex justify-between mt-4 text-center">
                     <div className="flex-1 border-r border-gray-200">
-                      <p className="text-sm text-gray-500 mb-1">ช่วงกลางวัน</p>
+                      <p className="text-sm text-gray-500 mb-1">{t('ช่วงกลางวัน', 'Daytime')}</p>
                       <p className="text-2xl font-bold text-kb-orange">{formData.usageRatio}%</p>
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-gray-500 mb-1">ช่วงกลางคืน</p>
+                      <p className="text-sm text-gray-500 mb-1">{t('ช่วงกลางคืน', 'Nighttime')}</p>
                       <p className="text-2xl font-bold text-gray-600">{100 - formData.usageRatio}%</p>
                     </div>
                   </div>
@@ -418,19 +412,19 @@ const Calculator = () => {
                   <div className="flex items-start gap-2">
                     <Info className="w-5 h-5 text-kb-orange flex-shrink-0 mt-0.5" />
                     <div className="text-sm text-gray-700 space-y-2">
-                      <p className="font-semibold text-kb-orange">💡 เคล็ดลับการใช้งาน</p>
+                      <p className="font-semibold text-kb-orange">💡 {t('เคล็ดลับการใช้งาน', 'Tips')}</p>
                       <div className="space-y-1">
                         <p className="flex items-start gap-2">
                           <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">1</span>
-                          <span>ค่าไฟฟ้าต่ำกว่า 500 บาท อาจไม่คุ้มค่าติดตั้ง</span>
+                          <span>{t('ค่าไฟฟ้าต่ำกว่า 500 บาท อาจไม่คุ้มค่าติดตั้ง', 'Bills under 500 THB may not be worth installing for')}</span>
                         </p>
                         <p className="flex items-start gap-2">
                           <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">2</span>
-                          <span>ผลการคำนวณเป็นการประมาณเบื้องต้น</span>
+                          <span>{t('ผลการคำนวณเป็นการประมาณเบื้องต้น', 'Results are preliminary estimates')}</span>
                         </p>
                         <p className="flex items-start gap-2">
                           <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-kb-orange text-white text-xs font-bold flex-shrink-0">3</span>
-                          <span>ติดต่อเราเพื่อรับคำปรึกษาฟรีจากทีมวิศวกร</span>
+                          <span>{t('ติดต่อเราเพื่อรับคำปรึกษาฟรีจากทีมวิศวกร', 'Contact us for a free consultation with our engineers')}</span>
                         </p>
                       </div>
                     </div>
@@ -441,7 +435,7 @@ const Calculator = () => {
                 <button 
                   onClick={calculateSolar}
                   disabled={isCalculating}
-                  className="w-full bg-kb-orange hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-kb-orange/25 hover:shadow-xl hover:shadow-kb-orange/30 flex items-center justify-center gap-2 relative overflow-hidden"
+                  className="btn-kb w-full py-4 text-lg disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {/* Progress Bar */}
                   {isCalculating && (
@@ -455,12 +449,12 @@ const Calculator = () => {
                     {isCalculating ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        กำลังคำนวณ... {calculationProgress}%
+                        {t('กำลังคำนวณ...', 'Calculating...')} {calculationProgress}%
                       </>
                     ) : (
                       <>
                         <CalcIcon className="w-5 h-5" />
-                        คำนวณความคุ้มค่า
+                        {t('คำนวณความคุ้มค่า', 'Calculate savings')}
                       </>
                     )}
                   </div>
@@ -493,8 +487,8 @@ const Calculator = () => {
                 >
                   <CalcIcon className="w-12 h-12 text-kb-orange" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">กำลังคำนวณ</h3>
-                <p className="text-gray-600 mb-4">กำลังวิเคราะห์ข้อมูลของคุณ...</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('กำลังคำนวณ', 'Calculating')}</h3>
+                <p className="text-gray-600 mb-4">{t('กำลังวิเคราะห์ข้อมูลของคุณ...', 'Analyzing your data...')}</p>
                 
                 {/* Progress Bar */}
                 <div className="w-full max-w-xs bg-gray-200 rounded-full h-2 mb-2">
@@ -505,7 +499,7 @@ const Calculator = () => {
                     transition={{ duration: 0.3 }}
                   />
                 </div>
-                <p className="text-sm text-gray-500">{calculationProgress}% เสร็จแล้ว</p>
+                <p className="text-sm text-gray-500">{calculationProgress}% {t('เสร็จแล้ว', 'complete')}</p>
               </motion.div>
             ) : !results ? (
               <motion.div 
@@ -529,8 +523,8 @@ const Calculator = () => {
                 >
                   <Sun className="w-12 h-12 text-kb-orange" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">พร้อมคำนวณ</h3>
-                <p className="text-gray-600">กรอกข้อมูลด้านซ้ายแล้วกดคำนวณ</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('พร้อมคำนวณ', 'Ready to calculate')}</h3>
+                <p className="text-gray-600">{t('กรอกข้อมูลด้านซ้ายแล้วกดคำนวณ', 'Fill in the form and press Calculate')}</p>
               </motion.div>
             ) : (
               <motion.div 
@@ -555,8 +549,8 @@ const Calculator = () => {
                       <CheckCircle className="w-8 h-8" />
                     </motion.div>
                     <div>
-                      <h3 className="text-xl font-bold">คำนวณเสร็จแล้ว!</h3>
-                      <p className="text-green-100">ระบบโซลาร์เซลล์ที่เหมาะสมกับคุณ</p>
+                      <h3 className="text-xl font-bold">{t('คำนวณเสร็จแล้ว!', 'Calculation complete!')}</h3>
+                      <p className="text-green-100">{t('ระบบโซลาร์เซลล์ที่เหมาะสมกับคุณ', 'The right solar system for you')}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -564,9 +558,9 @@ const Calculator = () => {
                 {/* Tabs */}
                 <div className="flex gap-2 bg-white p-1 rounded-xl shadow-sm">
                   {[
-                    { id: 'summary', label: 'สรุป' },
-                    { id: 'charts', label: 'กราฟ' },
-                    { id: 'projection', label: '25 ปี' },
+                    { id: 'summary', label: t('สรุป', 'Summary') },
+                    { id: 'charts', label: t('กราฟ', 'Charts') },
+                    { id: 'projection', label: t('25 ปี', '25 years') },
                   ].map((tab) => (
                     <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                       className={`flex-1 py-2.5 px-4 rounded-lg font-medium transition-all ${activeTab === tab.id ? 'bg-kb-orange text-white' : 'text-gray-600 hover:bg-gray-50'}`}>
@@ -580,36 +574,36 @@ const Calculator = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     {/* System */}
                     <div className="bg-white rounded-2xl p-5 shadow-sm">
-                      <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><Target className="w-5 h-5 text-kb-orange" />ระบบที่แนะนำ</h4>
+                      <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><Target className="w-5 h-5 text-kb-orange" />{t('ระบบที่แนะนำ', 'Recommended system')}</h4>
                       <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">ขนาดระบบ</p><p className="text-xl font-bold text-gray-900">{results.system.size} kW</p></div>
-                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">จำนวนแผง</p><p className="text-xl font-bold text-gray-900">{results.system.panelCount} แผง</p></div>
-                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">พื้นที่หลังคา</p><p className="text-xl font-bold text-gray-900">{results.system.roofArea} ตร.ม.</p></div>
-                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">กำลังแผง</p><p className="text-xl font-bold text-gray-900">{results.system.panelWattage}W</p></div>
+                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('ขนาดระบบ', 'System size')}</p><p className="text-xl font-bold text-kb-gradient">{results.system.size} kW</p></div>
+                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('จำนวนแผง', 'Number of panels')}</p><p className="text-xl font-bold text-gray-900">{results.system.panelCount} {t('แผง', 'panels')}</p></div>
+                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('พื้นที่หลังคา', 'Roof area')}</p><p className="text-xl font-bold text-gray-900">{results.system.roofArea} {t('ตร.ม.', 'm²')}</p></div>
+                        <div className="bg-gray-50 rounded-xl p-3"><p className="text-xs text-gray-500">{t('กำลังแผง', 'Panel wattage')}</p><p className="text-xl font-bold text-gray-900">{results.system.panelWattage}W</p></div>
                       </div>
                     </div>
 
                     {/* Savings */}
                     <div className="bg-gradient-to-br from-kb-orange to-amber-500 rounded-2xl p-5 text-white shadow-lg">
-                      <h4 className="font-bold mb-3 flex items-center gap-2"><TrendingUp className="w-5 h-5" />ผลประหยัด</h4>
+                      <h4 className="font-bold mb-3 flex items-center gap-2"><TrendingUp className="w-5 h-5" />{t('ผลประหยัด', 'Savings')}</h4>
                       <div className="grid grid-cols-2 gap-3">
-                        <div><p className="text-white/70 text-xs">ประหยัด/เดือน</p><p className="text-xl font-bold">฿{results.savings.monthly.toLocaleString()}</p></div>
-                        <div><p className="text-white/70 text-xs">ประหยัด/ปี</p><p className="text-xl font-bold">฿{results.savings.annual.toLocaleString()}</p></div>
-                        <div><p className="text-white/70 text-xs">ลดค่าไฟได้</p><p className="text-xl font-bold">{results.savings.billReduction}%</p></div>
-                        <div><p className="text-white/70 text-xs">คืนทุน</p><p className="text-xl font-bold">{results.financial.paybackYears} ปี</p></div>
+                        <div><p className="text-white/70 text-xs">{t('ประหยัด/เดือน', 'Savings/month')}</p><p className="text-xl font-bold">฿{results.savings.monthly.toLocaleString()}</p></div>
+                        <div><p className="text-white/70 text-xs">{t('ประหยัด/ปี', 'Savings/year')}</p><p className="text-xl font-bold">฿{results.savings.annual.toLocaleString()}</p></div>
+                        <div><p className="text-white/70 text-xs">{t('ลดค่าไฟได้', 'Bill reduction')}</p><p className="text-xl font-bold">{results.savings.billReduction}%</p></div>
+                        <div><p className="text-white/70 text-xs">{t('คืนทุน', 'Payback')}</p><p className="text-xl font-bold">{results.financial.paybackYears} {t('ปี', 'years')}</p></div>
                       </div>
                     </div>
 
                     {/* Investment */}
                     <div className="bg-white rounded-2xl p-5 shadow-sm">
-                      <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><DollarSign className="w-5 h-5 text-kb-orange" />การลงทุน</h4>
+                      <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><DollarSign className="w-5 h-5 text-kb-orange" />{t('การลงทุน', 'Investment')}</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                          <span className="text-gray-600 text-sm">ราคาระบบ</span>
-                          <span className="text-lg font-bold text-gray-900">฿{results.cost.total.toLocaleString()}</span>
+                          <span className="text-gray-600 text-sm">{t('ราคาระบบ', 'System price')}</span>
+                          <span className="text-lg font-bold text-kb-gradient">฿{results.cost.total.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600 text-sm">ราคาต่อ kW</span>
+                          <span className="text-gray-600 text-sm">{t('ราคาต่อ kW', 'Price per kW')}</span>
                           <span className="font-semibold text-gray-700">฿{results.cost.perKW.toLocaleString()}</span>
                         </div>
                       </div>
@@ -617,29 +611,29 @@ const Calculator = () => {
 
                     {/* 25 Year */}
                     <div className="bg-white rounded-2xl p-5 shadow-sm">
-                      <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><BarChart3 className="w-5 h-5 text-kb-orange" />สรุป 25 ปี</h4>
+                      <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2"><BarChart3 className="w-5 h-5 text-kb-orange" />{t('สรุป 25 ปี', '25-year summary')}</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                          <span className="text-gray-600 text-sm">ประหยัดรวม</span>
+                          <span className="text-gray-600 text-sm">{t('ประหยัดรวม', 'Total savings')}</span>
                           <span className="text-lg font-bold text-green-600">฿{results.savings.total25Years.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                          <span className="text-gray-600 text-sm">กำไรสุทธิ</span>
+                          <span className="text-gray-600 text-sm">{t('กำไรสุทธิ', 'Net profit')}</span>
                           <span className="text-lg font-bold text-green-600">฿{results.financial.netProfit.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center py-2">
                           <span className="text-gray-600 text-sm">ROI</span>
-                          <span className="text-lg font-bold text-kb-orange">{results.financial.roi}%</span>
+                          <span className="text-lg font-bold text-kb-gradient">{results.financial.roi}%</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Environmental */}
                     <div className="md:col-span-2 bg-green-50 rounded-2xl p-5 shadow-sm">
-                      <h4 className="font-bold text-green-800 mb-3 flex items-center gap-2"><Leaf className="w-5 h-5" />ผลกระทบสิ่งแวดล้อม (ต่อปี)</h4>
+                      <h4 className="font-bold text-green-800 mb-3 flex items-center gap-2"><Leaf className="w-5 h-5" />{t('ผลกระทบสิ่งแวดล้อม (ต่อปี)', 'Environmental impact (per year)')}</h4>
                       <div className="grid grid-cols-2 gap-4">
-                        <div><p className="text-green-600 text-sm">ลด CO₂</p><p className="text-xl font-bold text-green-800">{results.environmental.co2Reduction.toLocaleString()} kg</p></div>
-                        <div><p className="text-green-600 text-sm">เทียบเท่าปลูกต้นไม้</p><p className="text-xl font-bold text-green-800">{results.environmental.treesEquivalent} ต้น</p></div>
+                        <div><p className="text-green-600 text-sm">{t('ลด CO₂', 'CO₂ reduction')}</p><p className="text-xl font-bold text-green-800">{results.environmental.co2Reduction.toLocaleString()} kg</p></div>
+                        <div><p className="text-green-600 text-sm">{t('เทียบเท่าปลูกต้นไม้', 'Equivalent trees planted')}</p><p className="text-xl font-bold text-green-800">{results.environmental.treesEquivalent} {t('ต้น', 'trees')}</p></div>
                       </div>
                     </div>
                   </div>
@@ -651,18 +645,18 @@ const Calculator = () => {
                     <div className="bg-white rounded-2xl p-6 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <Zap className="w-5 h-5 text-kb-orange" />
-                        การผลิตไฟฟ้า vs การใช้ไฟฟ้า (รายเดือน)
+                        {t('การผลิตไฟฟ้า vs การใช้ไฟฟ้า (รายเดือน)', 'Generation vs. consumption (monthly)')}
                       </h4>
                       <div className="h-72">
                         <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={results.monthlyData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                          <BarChart data={results.monthlyData.map(d => ({ ...d, month: t(d.month) }))} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
                             <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                             <YAxis tick={{ fontSize: 11 }} />
                             <Tooltip formatter={(value) => [`${value.toLocaleString()} kWh`]} />
                             <Legend />
-                            <Bar dataKey="production" name="ผลิตได้" fill="#F97316" radius={[4, 4, 0, 0]} />
-                            <Bar dataKey="consumption" name="ใช้ไป" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+                            <Bar dataKey="production" name={t('ผลิตได้', 'Generated')} fill="#F97316" radius={[4, 4, 0, 0]} />
+                            <Bar dataKey="consumption" name={t('ใช้ไป', 'Consumed')} fill="#3B82F6" radius={[4, 4, 0, 0]} />
                           </BarChart>
                         </ResponsiveContainer>
                       </div>
@@ -672,12 +666,12 @@ const Calculator = () => {
                     <div className="bg-white rounded-2xl p-6 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <DollarSign className="w-5 h-5 text-kb-orange" />
-                        สัดส่วนต้นทุนระบบ
+                        {t('สัดส่วนต้นทุนระบบ', 'System cost breakdown')}
                       </h4>
                       <div className="h-72">
                         <ResponsiveContainer width="100%" height="100%">
                           <PieChart>
-                            <Pie data={results.cost.breakdown} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
+                            <Pie data={results.cost.breakdown.map(d => ({ ...d, name: t(d.name) }))} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                               {results.cost.breakdown.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                               ))}
@@ -690,7 +684,7 @@ const Calculator = () => {
                         {results.cost.breakdown.map((item, idx) => (
                           <div key={idx} className="flex items-center gap-2">
                             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }}></div>
-                            <span className="text-sm text-gray-600">{item.name}</span>
+                            <span className="text-sm text-gray-600">{t(item.name)}</span>
                           </div>
                         ))}
                       </div>
@@ -704,11 +698,11 @@ const Calculator = () => {
                     <div className="bg-white rounded-2xl p-6 shadow-sm">
                       <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-kb-orange" />
-                        กระแสเงินสดสะสม 25 ปี
+                        {t('กระแสเงินสดสะสม 25 ปี', 'Cumulative cash flow over 25 years')}
                       </h4>
                       <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart data={results.yearlyData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                          <AreaChart data={results.yearlyData.map(d => ({ ...d, year: t(d.year) }))} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                             <defs>
                               <linearGradient id="colorCumulative" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor="#F97316" stopOpacity={0.3}/>
@@ -719,37 +713,37 @@ const Calculator = () => {
                             <XAxis dataKey="year" tick={{ fontSize: 10 }} interval={4} />
                             <YAxis tick={{ fontSize: 10 }} tickFormatter={(v) => `${(v / 1000000).toFixed(1)}M`} />
                             <Tooltip formatter={(value) => [`฿${value.toLocaleString()}`]} labelFormatter={(label) => label} />
-                            <Area type="monotone" dataKey="cumulative" name="เงินสดสะสม" stroke="#F97316" strokeWidth={2} fillOpacity={1} fill="url(#colorCumulative)" />
+                            <Area type="monotone" dataKey="cumulative" name={t('เงินสดสะสม', 'Cumulative cash')} stroke="#F97316" strokeWidth={2} fillOpacity={1} fill="url(#colorCumulative)" />
                           </AreaChart>
                         </ResponsiveContainer>
                       </div>
                       <div className="mt-4 grid grid-cols-3 gap-4 text-center">
                         <div className="bg-gray-50 rounded-xl p-3">
-                          <p className="text-xs text-gray-500">จุดคุ้มทุน</p>
-                          <p className="text-lg font-bold text-kb-orange">ปีที่ {results.financial.paybackYears}</p>
+                          <p className="text-xs text-gray-500">{t('จุดคุ้มทุน', 'Break-even')}</p>
+                          <p className="text-lg font-bold text-kb-gradient">{t('ปีที่', 'Year')} {results.financial.paybackYears}</p>
                         </div>
                         <div className="bg-gray-50 rounded-xl p-3">
-                          <p className="text-xs text-gray-500">กำไรปีที่ 25</p>
+                          <p className="text-xs text-gray-500">{t('กำไรปีที่ 25', 'Profit by year 25')}</p>
                           <p className="text-lg font-bold text-green-600">฿{results.financial.netProfit.toLocaleString()}</p>
                         </div>
                         <div className="bg-gray-50 rounded-xl p-3">
                           <p className="text-xs text-gray-500">ROI</p>
-                          <p className="text-lg font-bold text-kb-orange">{results.financial.roi}%</p>
+                          <p className="text-lg font-bold text-kb-gradient">{results.financial.roi}%</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Yearly Savings Table */}
                     <div className="bg-white rounded-2xl p-6 shadow-sm">
-                      <h4 className="font-bold text-gray-900 mb-4">รายละเอียดรายปี (10 ปีแรก)</h4>
+                      <h4 className="font-bold text-gray-900 mb-4">{t('รายละเอียดรายปี (10 ปีแรก)', 'Year-by-year details (first 10 years)')}</h4>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
                             <tr className="border-b border-gray-200">
-                              <th className="py-2 px-3 text-left text-gray-500 font-medium">ปี</th>
-                              <th className="py-2 px-3 text-right text-gray-500 font-medium">ผลิตได้ (kWh)</th>
-                              <th className="py-2 px-3 text-right text-gray-500 font-medium">ประหยัด (฿)</th>
-                              <th className="py-2 px-3 text-right text-gray-500 font-medium">สะสม (฿)</th>
+                              <th className="py-2 px-3 text-left text-gray-500 font-medium">{t('ปี', 'Year')}</th>
+                              <th className="py-2 px-3 text-right text-gray-500 font-medium">{t('ผลิตได้ (kWh)', 'Generated (kWh)')}</th>
+                              <th className="py-2 px-3 text-right text-gray-500 font-medium">{t('ประหยัด (฿)', 'Savings (฿)')}</th>
+                              <th className="py-2 px-3 text-right text-gray-500 font-medium">{t('สะสม (฿)', 'Cumulative (฿)')}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -771,15 +765,15 @@ const Calculator = () => {
                 )}
 
                 {/* CTA */}
-                <a href="#contact" className="block w-full bg-kb-orange hover:bg-orange-600 text-white py-4 rounded-xl font-semibold text-center transition-all flex items-center justify-center gap-2 shadow-lg">
+                <a href="#contact" className="btn-kb w-full py-4">
                   <CheckCircle className="w-5 h-5" />
-                  สนใจติดตั้ง ติดต่อเราเลย
+                  {t('สนใจติดตั้ง ติดต่อเราเลย', 'Interested? Contact us')}
                   <ArrowRight className="w-5 h-5" />
                 </a>
 
                 <div className="flex items-start gap-2 text-gray-500 text-xs bg-white/50 p-3 rounded-lg">
                   <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                  <p>* ผลการคำนวณเป็นการประมาณการเบื้องต้น ราคาและผลประหยัดจริงอาจแตกต่างตามสภาพหน้างาน</p>
+                  <p>{t('* ผลการคำนวณเป็นการประมาณการเบื้องต้น ราคาและผลประหยัดจริงอาจแตกต่างตามสภาพหน้างาน', '* These results are preliminary estimates. Actual prices and savings may vary depending on site conditions.')}</p>
                 </div>
               </motion.div>
             )}
@@ -810,7 +804,7 @@ const Calculator = () => {
                   )}
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-sm">{showToast.message}</p>
+                  <p className="font-semibold text-sm">{t(showToast.message)}</p>
                 </div>
                 <button 
                   onClick={() => setShowToast({ show: false, message: '', type: 'success' })}
@@ -843,23 +837,23 @@ const Calculator = () => {
                 <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Info className="w-8 h-8 text-red-500" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">ข้อมูลไม่ครบถ้วน</h3>
-                <p className="text-gray-600 mb-6">กรุณาตรวจสอบและแก้ไขข้อมูลที่มีปัญหา</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{t('ข้อมูลไม่ครบถ้วน', 'Incomplete information')}</h3>
+                <p className="text-gray-600 mb-6">{t('กรุณาตรวจสอบและแก้ไขข้อมูลที่มีปัญหา', 'Please review and correct the fields below')}</p>
                 
                 <div className="space-y-2 text-left mb-6">
                   {Object.entries(errors).map(([field, error]) => (
                     <div key={field} className="flex items-start gap-2 text-sm">
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-red-600">{error}</span>
+                      <span className="text-red-600">{t(error)}</span>
                     </div>
                   ))}
                 </div>
                 
                 <button
                   onClick={() => setShowErrorModal(false)}
-                  className="w-full bg-kb-orange hover:bg-orange-600 text-white py-3 rounded-xl font-semibold transition-all"
+                  className="btn-kb w-full"
                 >
-                  เข้าใจแล้ว
+                  {t('เข้าใจแล้ว', 'Got it')}
                 </button>
               </div>
             </motion.div>
